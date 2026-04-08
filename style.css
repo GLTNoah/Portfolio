@@ -1,0 +1,71 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+@font-face {
+    font-family: "Cinzel";
+    src: url(./font/Cinzel-Regular.ttf);
+}
+
+.video-background {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -1;
+}
+
+.Top-Inventaire {
+    display: flex;
+    position: absolute;
+    right: 200px;
+    top: 0;
+    bottom: 0;
+    flex-direction: column;
+    align-items: center;
+    background: linear-gradient( to bottom, rgba(27, 27, 27, 0.9) 10%, rgba(0, 0, 0, 0.9) 12%, transparent 15%),
+                linear-gradient( to top, rgba(27, 27, 27, 0.9) 10%, rgba(0, 0, 0, 0.9) 12%, transparent 15%);
+    backdrop-filter: blur(5px);
+    color: white;
+    width: 500px;
+}
+
+.Top-Bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    width: 100%;
+    padding: 20px 80px;
+}
+
+.Titre-Principal {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.Nav-Bouton {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+}
+
+.Top-Inventaire h1, .Top-Inventaire h2 {
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+    font-family: "Cinzel", serif;
+}
+
+.Top-Inventaire h1 {
+    font-size: 20px;
+    position: absolute;
+    top: 30px;
+}
+
+.Top-Inventaire h2 {
+    font-size: 30px;
+    position: absolute;
+    top: 40px;
+}
