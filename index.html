@@ -11,7 +11,6 @@
     
     <main>
         <nav class="Top-Inventaire">
-            
             <header class="Top-Bar">
                 <div class="Nav-Bouton">
                     <span><img src="./Image/bouton_gauche.png"  alt=""></span>
@@ -29,19 +28,41 @@
                 </div>
             </header>
                 <div class="Grille-Inventaire">
-                    <div class="Inventaire-Slot" onmouseover="document.getElementById('myaudio').play()"><span><img src="./Image/Icone-Projet.png" alt=""></span></div>
-                    <div class="Inventaire-Slot" onmouseover="document.getElementById('myaudio').play()"><span><img src="./Image/Icone-CV.png" alt=""></span></div>
-                    <div class="Inventaire-Slot" onmouseover="document.getElementById('myaudio').play()"><span>Veille</span></div>
-                    <div class="Inventaire-Slot" onmouseover="document.getElementById('myaudio').play()"><span>???</span></div>
-                    <div class="Inventaire-Slot" onmouseover="document.getElementById('myaudio').play()"><span>???</span></div>
-                    <div class="Inventaire-Slot" onmouseover="document.getElementById('myaudio').play()"><span>???</span></div>
+                    <div class="Inventaire-Slot" id="slot-projet" tabindex="0" onmouseenter="document.getElementById('myaudio').play()"><span><img src="./Image/Icone-Projet.png" alt=""></span></div>
+                    <div class="Inventaire-Slot" id="slot-cv" tabindex="0" onmouseenter="document.getElementById('myaudio').play()"><span><img src="./Image/Icone-CV.png" alt=""></span></div>
+                    <div class="Inventaire-Slot" id="slot-veille" tabindex="0" onmouseenter="document.getElementById('myaudio').play()"><span><img src="./Image/Icone-Veille.png" alt=""></span></div>
+                    <div class="Inventaire-Slot" tabindex="0" onmouseenter="document.getElementById('myaudio').play()"><span>???</span></div>
+                    <div class="Inventaire-Slot" tabindex="0" onmouseenter="document.getElementById('myaudio').play()"><span>???</span></div>
+                    <div class="Inventaire-Slot" tabindex="0" onmouseenter="document.getElementById('myaudio').play()"><span>???</span></div>
+                    <div class="Inventaire-Slot" tabindex="0" onmouseenter="document.getElementById('myaudio').play()"><span>???</span></div>
+                    <div class="Inventaire-Slot" tabindex="0" onmouseenter="document.getElementById('myaudio').play()"><span>???</span></div>
+                </div>
+
+                <div Class="Description-Projet">
+                    <h3 id="description-titre-projet">Note "Projets"</h3>
+                    <hr>
+                    <p id="description-texte-projet"> Document détaillant les projets d'un individu...</p>
+                </div>
+                <div Class="Description-CV">
+                    <h3 id="description-titre-cv">Badge "CV"</h3>
+                    <hr>
+                    <p id="description-texte-cv">Un mystérieux badge. Un homme y est décris au dos...  </p>
+                </div>
+                <div Class="Description-Veille">
+                    <h3 id="description-titre-veille">Intercepteur Tactique</h3>
+                    <hr>
+                    <p id="description-texte-veille"> Appareil utilisé par le S.T.A.R.S pour surveiller les activités d'un secteur</p>
                 </div>
             </div>
         </nav>
-
+        <nav class="Visu-Objet">
+            <div class="Projet-Slot-Aggrandit"><span><img src="./Image/Icone-Projet.png" alt=""></span></div>
+            <div class="CV-Slot-Aggrandit"><span><img src="./Image/Icone-CV.png" alt=""></span></div>
+            <div class="Veille-Slot-Aggrandit"><span><img src="./Image/Icone-Veille.png" alt=""></span></div>
+        </nav>
     </main>
 
-<audio id="myaudio" src="./son/Son-inventaire.mp3"></audio>
+<audio id="myaudio" src="./son/Son-inventaire.mp3" oncanplay="this.volume=0.01"></audio>
 
 </body>
 </html>

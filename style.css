@@ -20,9 +20,9 @@
 .Top-Inventaire {
     display: flex;
     position: absolute;
-    right: 200px;
-    top: 0;
-    bottom: 0;
+    right: 10%;
+    top: 0%;
+    bottom: 0%;
     flex-direction: column;
     align-items: center;
     background: linear-gradient( to bottom, rgba(27, 27, 27, 0.9) 10%, rgba(0, 0, 0, 0.9) 12%, transparent 15%),
@@ -100,4 +100,70 @@
     max-height: 90%;
 }
 
+.Description-Projet, .Description-CV, .Description-Veille {
+    display: none;
+    position: absolute;
+    bottom: 50px;
+    left: 20px;
+    color: rgb(255, 255, 255);
+    font-size: 18px;
+    font-family: "Cinzel", serif;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
+}
 
+.Description-Projet hr, .Description-CV hr, .Description-Veille hr {
+    border: 0;
+    height: 1px;
+    background: rgba(255, 255, 255, 0.5);
+    margin: 10px 0;
+}
+
+.Description-CV p, .Description-Projet p, .Description-Veille p {
+    max-width: 400px;
+}
+
+.Top-Inventaire:has(#slot-projet:hover) .Description-Projet {
+    display: block;
+}
+
+.Top-Inventaire:has(#slot-cv:hover) .Description-CV {
+    display: block;
+}
+
+.Top-Inventaire:has(#slot-veille:hover) .Description-Veille {
+    display: block;
+}
+
+/*-----VISUALISATION DES OBJETS-----*/
+
+.Projet-Slot-Aggrandit, .CV-Slot-Aggrandit, .Veille-Slot-Aggrandit {
+    display: none;
+    position: absolute;
+    left:15%;
+    top: 10%;
+    bottom: 10%;
+    width: 40%;
+    backdrop-filter: blur(15px);
+}
+
+.Projet-Slot-Aggrandit img, .CV-Slot-Aggrandit img, .Veille-Slot-Aggrandit img { 
+    display : flex;
+    position: absolute;
+    justify-content: center;
+    align-items: center;
+    width:100%;
+    height:100%;
+    object-fit: contain;
+}
+
+main:has(#slot-projet:focus) .Projet-Slot-Aggrandit {
+    display: flex;
+}
+
+main:has(#slot-cv:focus) .CV-Slot-Aggrandit {
+    display: flex;
+}
+
+main:has(#slot-veille:focus) .Veille-Slot-Aggrandit {
+    display: flex;
+}
