@@ -1,3 +1,5 @@
+/*-----STYLES GENERAUX-----*/
+
 * {
     margin: 0;
     padding: 0;
@@ -16,6 +18,8 @@
     object-fit: cover;
     z-index: -1;
 }
+
+/*-----INVENTAIRE-----*/
 
 .Top-Inventaire {
     display: flex;
@@ -156,14 +160,14 @@
     object-fit: contain;
 }
 
-main:has(#slot-projet:focus) .Projet-Slot-Aggrandit {
+main:has(#slot-projet:hover) .Projet-Slot-Aggrandit {
     display: flex;
 }
 
-main:has(#slot-cv:focus) .CV-Slot-Aggrandit {
+main:has(#slot-cv:hover) .CV-Slot-Aggrandit {
     display: flex;
 }
 
-main:has(#slot-veille:focus) .Veille-Slot-Aggrandit {
+main:has(#slot-veille:hover) .Veille-Slot-Aggrandit {
     display: flex;
 }
