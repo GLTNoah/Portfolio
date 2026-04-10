@@ -124,6 +124,39 @@ body::before {
     transform: scale(1.05);
 }
 
+.Inventaire-Slot.empty {
+    position: relative;
+    background: rgba(0,  0, 0, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    overflow: hidden;
+}
+
+.Inventaire-Slot.empty::before,
+.Inventaire-Slot.empty::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 142%;
+    height: 2px; 
+    background: rgba(255, 255, 255, 0.15);
+    transform-origin: center;
+}
+
+.Inventaire-Slot.empty::before {
+    transform: translate(-50%, -50%) rotate(45deg);
+}
+
+.Inventaire-Slot.empty::after {
+    transform: translate(-50%, -50%) rotate(-45deg);
+}
+
+.Inventaire-Slot.empty:hover::before,
+.Inventaire-Slot.empty:hover::after {
+    background: rgba(255, 255, 255, 0.3); 
+    transition: background 0.3s ease;
+}
+
 .Description-Projet, .Description-CV, .Description-Veille {
     display: none;
     position: absolute;
@@ -190,7 +223,8 @@ main:has(#slot-projet:hover) .Projet-Slot-Aggrandit,
 main:has(#slot-cv:hover) .CV-Slot-Aggrandit,
 main:has(#slot-veille:hover) .Veille-Slot-Aggrandit {
     display: flex;
-    animation: glitch-apparition 1.3s linear forwards;    
+    animation: glitch-apparition 1.3s linear forwards;
+
 }
 
 /*-----ANIMATION-----*/
@@ -211,16 +245,111 @@ main:has(#slot-veille:hover) .Veille-Slot-Aggrandit {
     100% { transform: translate(0, 0); }
 }
 
-/*-----BOITE DE DIALOGUE-----*/
+@keyframes cycleDialogue {
+    0%, 15% { 
+        opacity: 0; 
+        visibility: hidden; 
+        transform: translateX(-50%) translateY(10px);
+    }
+    22% {
+        opacity: 1;
+        visibility: visible;
+        transform: translateX(-50%) translateY(0);
+    }
+    85% {
+        opacity: 1;
+        visibility: visible;
+        transform: translateX(-50%) translateY(-5px);
+    }
+    92% { 
+        opacity: 0; 
+        visibility: hidden; 
+        transform: translateX(-50%) translateY(10px);
+    }
+    100% { 
+        opacity: 0; 
+    }
+}
 
+@keyframes radioNoise {
+    0% {
+        transform: translateX(-50%) translateY(0);
+        filter: blur(0.5px) drop-shadow(1px 0 red) drop-shadow(-1px 0 blue);
+    }
+    5% {
+        transform: translateX(-50%) translateY(-2px);
+        filter: blur(0px) drop-shadow(0px 0 transparent);
+    }
+    10% {
+        transform: translateX(-50%) translateY(0px);
+    }
+    30%, 35%, 65%, 68% {
+        opacity: 0.9;
+    }
+    32%, 36%, 66%, 69% {
+        opacity: 0.2; 
+    }
+    34%, 38%, 67%, 70% {
+        opacity: 0.9;
+    }
+    80% {
+        transform: translateX(-50%) translateY(1px) rotate(0.2deg);
+        filter: blur(0px) drop-shadow(2px 0 cyan) drop-shadow(-2px 0 magenta);
+    }
+    90% {
+        transform: translateX(-50%) translateY(0px);
+        filter: blur(0px) drop-shadow(0px 0 transparent);
+    }
+    100% {
+        transform: translateX(-50%) translateY(0px);
+    }
+}
+
+/*-----BOITE DE DIALOGUE-----*/
 
 .Dialogue-JILL-Container {
     position: absolute;
+    opacity: 0;
     bottom: 40%; 
     left: 22%;
     transform: translateX(-50%);
     width: 800px;
     height: 150px;
+    z-index: 5; 
+    pointer-events: none;    
+    animation: cycleDialogue 18s infinite, radioNoise 3s linear infinite;
+    -webkit-mask-image: url("./Image/Boite-Dialogue.png");
+    mask-image: none;
+    -webkit-mask-image: none;
+} 
+
+.Dialogue-JILL-Container::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: url("./Image/Boite-Dialogue.png") no-repeat center;
+    background-size: contain;
+    z-index: 1;
+}
+
+.Dialogue-JILL-Container::after {
+    content: "";
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: linear-gradient(rgba(0, 0, 0, 0) 50%, rgba(0, 0, 0, 0.2) 50%);
+    background-size: 100% 4px; 
+    z-index: 2; 
+}
+
+.Dialogue-JILL-Container::before, .Dialogue-JILL-Container::after {
+    -webkit-mask-image: url("./Image/Boite-Dialogue.png");
+    -webkit-mask-size: contain;
+    -webkit-mask-repeat: no-repeat;
+    -webkit-mask-position: center;
+    mask-image: url("./Image/Boite-Dialogue.png");
+    mask-size: contain;
+    mask-repeat: no-repeat;
+    mask-position: center;    
 }
 
 .Dialogue-JILL-Container img {
@@ -237,18 +366,26 @@ main:has(#slot-veille:hover) .Veille-Slot-Aggrandit {
     position: absolute;
     top: 17%; 
     left: 10%;
-    z-index: 2; 
-    display: flex; 
-    align-items: center;
-    justify-content: flex-start;
     width: 80%; 
     height: 60%;
-}   
+    z-index: 10; 
+    display: flex; 
+    align-items: center;
+}
 
 .TexteJILL {
     font-family: 'VT323', monospace;
+    opacity: 0.9;
     font-size: 24px; 
     color: #efefef;
     letter-spacing: 1px;
     text-shadow: 2px 2px 0px #000; 
+    overflow: hidden;
+    animation: radioNoise 15s steps (40, end) infinite;
+}
+
+main:has(#slot-projet:hover) .Dialogue-JILL-Container, 
+main:has(#slot-cv:hover) .Dialogue-JILL-Container, 
+main:has(#slot-veille:hover) .Dialogue-JILL-Container {
+    display: none !important;        
 }
