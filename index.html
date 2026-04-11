@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Portfolio</title>
     <link rel="stylesheet" href="style.css">
+    <script src="animation.js" defer></script>
     <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
 </head>
 <body>
@@ -28,49 +29,55 @@
                     <span>FILES</span>
                 </div>
             </header>
-                <div class="Grille-Inventaire">
-                    <div class="Inventaire-Slot" id="slot-projet" tabindex="0" onmouseenter="document.getElementById('myaudio').play()"><span><img src="./Image/Icone-Projet.png" alt=""></span></div>
-                    <div class="Inventaire-Slot" id="slot-cv" tabindex="0" onmouseenter="document.getElementById('myaudio').play()"><span><img src="./Image/Icone-CV.png" alt=""></span></div>
-                    <div class="Inventaire-Slot" id="slot-veille" tabindex="0" onmouseenter="document.getElementById('myaudio').play()"><span><img src="./Image/Icone-Veille.png" alt=""></span></div>
-                    <div class="Inventaire-Slot empty" tabindex="0" onmouseenter="document.getElementById('myaudio').play()"></div>
-                    <div class="Inventaire-Slot empty" tabindex="0" onmouseenter="document.getElementById('myaudio').play()"></div>
-                    <div class="Inventaire-Slot empty" tabindex="0" onmouseenter="document.getElementById('myaudio').play()"></div>
-                    <div class="Inventaire-Slot empty" tabindex="0" onmouseenter="document.getElementById('myaudio').play()"></div>
-                    <div class="Inventaire-Slot empty" tabindex="0" onmouseenter="document.getElementById('myaudio').play()"></div>
-                </div>
 
-                <div Class="Description-Projet">
-                    <h3 id="description-titre-projet">Note "Projets"</h3>
-                    <hr>
-                    <p id="description-texte-projet"> Document détaillant les projets d'un individu...</p>
-                </div>
-                <div Class="Description-CV">
-                    <h3 id="description-titre-cv">Badge "CV"</h3>
-                    <hr>
-                    <p id="description-texte-cv">Un mystérieux badge. Un homme y est décris au dos...  </p>
-                </div>
-                <div Class="Description-Veille">
-                    <h3 id="description-titre-veille">Intercepteur Tactique</h3>
-                    <hr>
-                    <p id="description-texte-veille"> Appareil utilisé par le S.T.A.R.S pour surveiller les activités d'un secteur</p>
+            <div class="Grille-Inventaire">
+                <div class="Inventaire-Slot" id="slot-projet" tabindex="0" onmouseenter="document.getElementById('myaudio').play()"><span><img src="./Image/Icone-Projet.png" alt=""></span></div>
+                <div class="Inventaire-Slot" id="slot-cv" tabindex="0" onmouseenter="document.getElementById('myaudio').play()"><span><img src="./Image/Icone-CV.png" alt=""></span></div>
+                <div class="Inventaire-Slot" id="slot-veille" tabindex="0" onmouseenter="document.getElementById('myaudio').play()"><span><img src="./Image/Icone-Veille.png" alt=""></span></div>
+                <div class="Inventaire-Slot empty" tabindex="0" onmouseenter="document.getElementById('myaudio').play()"></div>
+                <div class="Inventaire-Slot empty" tabindex="0" onmouseenter="document.getElementById('myaudio').play()"></div>
+                <div class="Inventaire-Slot empty" tabindex="0" onmouseenter="document.getElementById('myaudio').play()"></div>
+                <div class="Inventaire-Slot empty" tabindex="0" onmouseenter="document.getElementById('myaudio').play()"></div>
+                <div class="Inventaire-Slot empty" tabindex="0" onmouseenter="document.getElementById('myaudio').play()"></div>
+            </div>
+
+            <div class="Description-Projet">
+                <h3 id="description-titre-projet">DOSSIER "PROJET"</h3>
+                <hr>
+                <p id="description-texte-projet"> Contient les archives de mes travaux récents. Les données semblent cryptées mais accessibles via un lien externe.</p>
+            </div>
+            <div class="Description-CV">
+                <h3 id="description-titre-cv">BADGE D'IDENTIFICATION</h3>
+                <hr>
+                <p id="description-texte-cv">Un badge au nom de GUILLOT. Le matricule indique une future expertise en développement web.</p>
+            </div>
+            <div class="Description-Veille">
+                <h3 id="description-titre-veille">INTERCEPTEUR TACTIQUE</h3>
+                <hr>
+                <p id="description-texte-veille"> Analyse les flux technologiques constants du secteur. Utile pour rester à jour.</p>
+            </div>
+            <div id="ecran-examen" class="overlay-examen">
+                <div class="ExaminerIcone">
+                    <ul>
+                        <li id="bouton-inspecter" tabindex="0"><p>Inspecter cet objet ?</p></li>
+                    </ul>
                 </div>
             </div>
         </nav>
+
         <nav class="Visu-Objet">
             <div class="Projet-Slot-Aggrandit"><span><img src="./Image/Icone-Projet.png" alt=""></span></div>
             <div class="CV-Slot-Aggrandit"><span><img src="./Image/Icone-CV.png" alt=""></span></div>
             <div class="Veille-Slot-Aggrandit"><span><img src="./Image/Icone-Veille.png" alt=""></span></div>
         </nav>
+
         <nav class="Dialogue-JILL-Container">
             <div class="TexteJILLWrapper">
-                <p class="TexteJILL">J'ai rassemblé mon équipement et mes documents dans cet inventaire.Un simple clic sur l'icône d'un élément me permettra de l'étudier de plus près avant de poursuivre.</p>
+                <p class="TexteJILL">J'ai rassemblé mon équipement et mes documents dans cet inventaire. Un simple clic sur l'icône d'un élément me permettra de l'étudier de plus près avant de poursuivre.</p>
             </div>
         </nav>
     </main>
 
-<audio id="myaudio" src="./son/Son-inventaire.mp3" oncanplay="this.volume=0.02"></audio>
-
+    <audio id="myaudio" src="./son/Son-inventaire.mp3" oncanplay="this.volume=0.02"></audio>
 </body>
 </html>
-
-

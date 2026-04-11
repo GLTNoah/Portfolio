@@ -4,6 +4,12 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    list-style-type: none;
+}
+
+button {
+    background-color: transparent;
+    border: none;
 }
 
 body::before {
@@ -117,13 +123,6 @@ body::before {
     max-height: 90%;
 }
 
-.Inventaire-Slot:hover {
-    border-color: #00ff41; 
-    background: rgba(0, 255, 65, 0.1);
-    box-shadow: inset 0 0 15px rgba(0, 255, 65, 0.2);
-    transform: scale(1.05);
-}
-
 .Inventaire-Slot.empty {
     position: relative;
     background: rgba(0,  0, 0, 0.4);
@@ -156,6 +155,12 @@ body::before {
     background: rgba(255, 255, 255, 0.3); 
     transition: background 0.3s ease;
 }
+#slot-veille:hover,#slot-cv:hover,#slot-projet:hover {
+    border-color: #00ff41; 
+    background: rgba(0, 255, 65, 0.1);
+    box-shadow: inset 0 0 15px rgba(0, 255, 65, 0.2);
+    transform: scale(1.05);
+}
 
 .Description-Projet, .Description-CV, .Description-Veille {
     display: none;
@@ -179,16 +184,42 @@ body::before {
     max-width: 400px;
 }
 
-.Top-Inventaire:has(#slot-projet:hover) .Description-Projet {
-    display: block;
-}
-
-.Top-Inventaire:has(#slot-cv:hover) .Description-CV {
-    display: block;
-}
-
+.Top-Inventaire:has(#slot-projet:hover) .Description-Projet,
+.Top-Inventaire:has(#slot-cv:hover) .Description-CV,
 .Top-Inventaire:has(#slot-veille:hover) .Description-Veille {
     display: block;
+}
+
+/*-----MENU EXAMINER-----*/
+
+.ExaminerIcone {
+    position: fixed;
+    top: 400px; left: 50px;
+    width: 300px; height: 50px;
+    background-color: rgba(0, 0, 0, 0.9);
+    z-index:150;
+    display:none;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.ExaminerIcone p {
+    font-family: 'VT323', monospace;
+    color: white;
+    font-size: 24px;
+    cursor: pointer;
+    transition: color 0.2s;
+    padding: 10px 0px 0px 50px;
+}
+
+.ExaminerIcone p:hover {
+    color: #00ff41; 
+    transform: scale(1.02);
+}
+
+main:has(#slot-projet:focus) .ExaminerIcone,
+main:has(#slot-cv:focus) .ExaminerIcone,
+main:has(#slot-veille:focus) .ExaminerIcone {
+    display: flex;
 }
 
 /*-----VISUALISATION DES OBJETS-----*/
