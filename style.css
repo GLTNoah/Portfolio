@@ -180,7 +180,6 @@ body::before {
     max-width: 400px;
 }
 
-/* Affichage des descriptions au simple survol de la souris */
 .Top-Inventaire:has(#slot-projet:hover) .Description-Projet,
 .Top-Inventaire:has(#slot-cv:hover) .Description-CV,
 .Top-Inventaire:has(#slot-veille:hover) .Description-Veille {
@@ -264,25 +263,13 @@ body:has(#radio-veille:checked) .ecran-noir {
 
 body:has(input[name="examen"]:not(#fermer-examen):checked) .Top-Bar,
 body:has(input[name="examen"]:not(#fermer-examen):checked) .Grille-Inventaire,
-body:has(input[name="examen"]:not(#fermer-examen):checked) .Dialogue-JILL-Container {
-    display: none !important;
-}
-
+body:has(input[name="examen"]:not(#fermer-examen):checked) .Dialogue-JILL-Container,
 body:has(input[name="examen"]:not(#fermer-examen):checked) .Top-Inventaire {
     display: none !important;
 }
 
-body:has(#radio-projet:checked) .Description-Projet,
-body:has(#radio-cv:checked) .Description-CV,
-body:has(#radio-veille:checked) .Description-Veille {
-    display: block !important;
-    position: fixed;
-    z-index: 2100;
-    bottom: 15%; left: 50%;
-    transform: translateX(-50%);
-    text-align: center;
-    width: 800px;
-}
+/*-----IMAGES AGGRANDITES-----*/
+
 
 .Projet-Slot-Aggrandit, .CV-Slot-Aggrandit, .Veille-Slot-Aggrandit {
     display: none;
@@ -482,3 +469,4 @@ main:has(#slot-cv:hover) .Dialogue-JILL-Container,
 main:has(#slot-veille:hover) .Dialogue-JILL-Container {
     display: none !important;        
 }
+
