@@ -151,11 +151,6 @@ body::before {
     transform: translate(-50%, -50%) rotate(-45deg);
 }
 
-.Inventaire-Slot.empty:hover::before,
-.Inventaire-Slot.empty:hover::after {
-    background: rgba(255, 255, 255, 0.3); 
-    transition: background 0.3s ease;
-}
 #slot-veille:hover,#slot-cv:hover,#slot-projet:hover {
     border-color: #00ff41; 
     background: rgba(0, 255, 65, 0.1);
@@ -185,6 +180,7 @@ body::before {
     max-width: 400px;
 }
 
+/* Affichage des descriptions au simple survol de la souris */
 .Top-Inventaire:has(#slot-projet:hover) .Description-Projet,
 .Top-Inventaire:has(#slot-cv:hover) .Description-CV,
 .Top-Inventaire:has(#slot-veille:hover) .Description-Veille {
@@ -195,59 +191,109 @@ body::before {
 
 .ExaminerIcone {
     position: absolute;
-    top:400px;
+    top: 400px;
     width: 300px; 
     height: 50px;
     background-color: rgba(0, 0, 0, 0.9);
-    z-index:150;
-    display:none;
+    z-index: 150;
+    display: none;
     border: 1px solid rgba(255, 255, 255, 0.3);
 }
 
-.ExaminerIcone p {
+.ExaminerIcone label {
+    display: block;
+    width: 100%;
+    height: 100%;
     font-family: 'VT323', monospace;
     color: white;
     font-size: 24px;
     cursor: pointer;
-    transition: color 0.2s;
+    transition: color 0.2s, transform 0.2s;
     padding: 10px 0px 0px 50px;
 }
 
-.ExaminerIcone p:hover {
+.ExaminerIcone label:hover {
     color: #00ff41; 
     transform: scale(1.02);
 }
 
-main:has(#slot-projet:focus) .ExaminerIcone{
+#slot-projet:focus + .ExaminerIcone,
+#slot-projet + .ExaminerIcone:hover {
     display: flex;
-    left:-10%;
+    left: -10%;
 }
 
-main:has(#slot-cv:focus) .ExaminerIcone{
+#slot-cv:focus + .ExaminerIcone,
+#slot-cv + .ExaminerIcone:hover {
     display: flex;
-    left:20%;
+    left: 20%;
 }
 
-main:has(#slot-veille:focus) .ExaminerIcone {
+#slot-veille:focus + .ExaminerIcone,
+#slot-veille + .ExaminerIcone:hover {
     display: flex;
-    left:55%;
+    left: 55%;
 }
 
-/*-----VISUALISATION DES OBJETS-----*/
+/*----- L'ÉCRAN NOIR & RADIO HACK -----*/
+
+.ecran-noir {
+    display: none; 
+    position: fixed;
+    top: 0; left: 0;
+    width: 100vw; height: 100vh;
+    background: rgba(0, 0, 0, 0.95); 
+    z-index: 2000; 
+    cursor: pointer;
+}
+
+.texte-quitter {
+    position: absolute;
+    bottom: 40px; right: 50px;
+    color: rgba(255, 255, 255, 0.5);
+    font-family: "Cinzel", serif;
+    font-size: 18px;
+    animation: clignotement 2s infinite ease-in-out;
+}
+
+body:has(#radio-projet:checked) .ecran-noir,
+body:has(#radio-cv:checked) .ecran-noir,
+body:has(#radio-veille:checked) .ecran-noir {
+    display: block;
+}
+
+body:has(input[name="examen"]:not(#fermer-examen):checked) .Top-Bar,
+body:has(input[name="examen"]:not(#fermer-examen):checked) .Grille-Inventaire,
+body:has(input[name="examen"]:not(#fermer-examen):checked) .Dialogue-JILL-Container {
+    display: none !important;
+}
+
+body:has(input[name="examen"]:not(#fermer-examen):checked) .Top-Inventaire {
+    display: none !important;
+}
+
+body:has(#radio-projet:checked) .Description-Projet,
+body:has(#radio-cv:checked) .Description-CV,
+body:has(#radio-veille:checked) .Description-Veille {
+    display: block !important;
+    position: fixed;
+    z-index: 2100;
+    bottom: 15%; left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    width: 800px;
+}
 
 .Projet-Slot-Aggrandit, .CV-Slot-Aggrandit, .Veille-Slot-Aggrandit {
     display: none;
     position: absolute;
-    left:15%;
+    left: 15%;
     top: 10%;
     bottom: 10%;
     width: 40%;
     backdrop-filter: blur(15px);
 
     -webkit-mask-image: linear-gradient(to right, rgba(0,0,0,0.2) 5%, black 15%, black 85%, rgba(0,0,0,0.5) 100%);
-    mask-image: linear-gradient(to right, rgba(0,0,0,0.2) 5%, black 15%, black 85%, rgba(0,0,0,0.5) 100%);
-
-    -moz-mask-image: linear-gradient(to right, rgba(0,0,0,0.2) 5%, black 15%, black 85%, rgba(0,0,0,0.5) 100%);
     mask-image: linear-gradient(to right, rgba(0,0,0,0.2) 5%, black 15%, black 85%, rgba(0,0,0,0.5) 100%);
 }
 
@@ -256,8 +302,8 @@ main:has(#slot-veille:focus) .ExaminerIcone {
     position: absolute;
     justify-content: center;
     align-items: center;
-    width:100%;
-    height:100%;
+    width: 100%;
+    height: 100%;
     object-fit: contain;
 }
 
@@ -266,7 +312,6 @@ main:has(#slot-cv:hover) .CV-Slot-Aggrandit,
 main:has(#slot-veille:hover) .Veille-Slot-Aggrandit {
     display: flex;
     animation: glitch-apparition 1.3s linear forwards;
-
 }
 
 /*-----ANIMATION-----*/
@@ -345,6 +390,12 @@ main:has(#slot-veille:hover) .Veille-Slot-Aggrandit {
     100% {
         transform: translateX(-50%) translateY(0px);
     }
+}
+
+@keyframes clignotement {
+    0%   { opacity: 0.2; } 
+    50%  { opacity: 0.8; } 
+    100% { opacity: 0.2; }
 }
 
 /*-----BOITE DE DIALOGUE-----*/
