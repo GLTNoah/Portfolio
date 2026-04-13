@@ -80,16 +80,10 @@ body::before {
     font-family: "Cinzel", serif;
 }
 
-.Top-Inventaire h1 {
+.Top-Inventaire h1, .Top-Inventaire h2 {
     font-size: 20px;
     position: absolute;
     top: 40px;
-}
-
-.Top-Inventaire h2 {
-    font-size: 30px;
-    position: absolute;
-    top: 50px;
 }
 
 .Grille-Inventaire {
@@ -267,6 +261,12 @@ body:has(input[name="examen"]:not(#fermer-examen):checked) .Dialogue-JILL-Contai
 body:has(input[name="examen"]:not(#fermer-examen):checked) .Top-Inventaire {
     display: none !important;
 }
+
+/*-----DONNEES ECRAN NOIR-----*/
+
+
+
+
 
 /*-----IMAGES AGGRANDITES-----*/
 
