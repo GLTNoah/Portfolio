@@ -33,7 +33,7 @@ body::before {
     z-index: 1000;
     pointer-events: none;
     background-size: 100% 4px, 3px 100%;
-}
+} /* Correction : accolade fermée ici */
 
 @font-face {
     font-family: "Cinzel";
@@ -359,7 +359,6 @@ body:has(#radio-cv:checked) .Document-CV-Reel {
     bottom: 10%;
     width: 40%;
     backdrop-filter: blur(15px);
-
     -webkit-mask-image: linear-gradient(to right, rgba(0,0,0,0.2) 5%, black 15%, black 85%, rgba(0,0,0,0.5) 100%);
     mask-image: linear-gradient(to right, rgba(0,0,0,0.2) 5%, black 15%, black 85%, rgba(0,0,0,0.5) 100%);
 }
