@@ -466,7 +466,7 @@ main:has(#slot-veille:hover) .Dialogue-JILL-Container {
 
 .ecg-monitor {
     position: absolute;
-    bottom: 250px;
+    bottom: 185px;
     right: 12.75%;
     width: 400px;
     height: 120px;
