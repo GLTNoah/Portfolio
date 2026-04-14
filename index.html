@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portfolio</title>
+    <title>Portfolio - Resident Evil Style</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
 </head>
@@ -66,23 +66,42 @@
             </div>
 
             <div class="Description-Projet">
-                <h3 id="description-titre-projet">DOSSIER "PROJET"</h3>
+                <h3>DOSSIER "PROJET"</h3>
                 <hr>
-                <p id="description-texte-projet"> Contient les archives de mes travaux récents. Les données semblent cryptées mais accessibles via un lien externe.</p>
+                <p>Archives de travaux récents. Données accessibles via lien externe.</p>
             </div>
 
             <div class="Description-CV">
-                <h3 id="description-titre-cv">BADGE D'IDENTIFICATION</h3>
+                <h3>BADGE D'IDENTIFICATION</h3>
                 <hr>
-                <p id="description-texte-cv">Un badge au nom de GUILLOT. Le matricule indique une future expertise en développement web.</p>
+                <p>Badge au nom de GUILLOT. Indique une expertise en développement web.</p>
             </div>
 
             <div class="Description-Veille">
-                <h3 id="description-titre-veille">INTERCEPTEUR TACTIQUE</h3>
+                <h3>INTERCEPTEUR TACTIQUE</h3>
                 <hr>
-                <p id="description-texte-veille"> Analyse les flux technologiques constants du secteur. Utile pour rester à jour.</p>
+                <p>Analyse les flux technologiques constants. Utile pour rester à jour.</p>
             </div>
         </nav>
+
+        <div class="ecg-monitor">
+            <div class="ecg-container">
+                <div class="grid-ecg"></div>
+                <div class="baseline"></div>
+                <div class="svg-container">
+                    <svg class="ecg-svg" viewBox="0 0 1000 150" preserveAspectRatio="none">
+                        <path class="heartbeat-line" d="
+                            M 0 75 L 50 75 L 60 15 L 75 135 L 90 75 L 150 75
+                            L 350 75 L 360 5 L 375 135 L 390 75
+                            L 650 75 L 660 15 L 675 135 L 690 75
+                            L 1000 75
+                        "/>
+                    </svg>
+                </div>
+                <div class="bpm">72</div>
+                <div class="status-label">CONDITION: FINE</div>
+            </div>
+        </div>
 
         <nav class="Visu-Objet">
             <div class="Projet-Slot-Aggrandit"><span><img src="./Image/Icone-Projet.png" alt=""></span></div>
@@ -92,30 +111,16 @@
 
         <nav class="Dialogue-JILL-Container">
             <div class="TexteJILLWrapper">
-                <p class="TexteJILL">J'ai rassemblé mon équipement et mes documents dans cet inventaire. Un simple clic sur l'icône d'un élément me permettra de l'étudier de plus près avant de poursuivre.</p>
+                <p class="TexteJILL">J'ai rassemblé mon équipement. Un clic sur l'icône me permettra d'étudier un élément de plus près.</p>
             </div>
         </nav>
 
         <label for="fermer-examen" id="ecran-noir-examen" class="ecran-noir">
-            <p class="texte-quitter">Cliquez pour quitter</p>
+            <p class="texte-quitter">Cliquez pour quitter l'examen</p>
         </label>
-
-        <div class="Document-CV-Reel">
-            <div class="Carte-CV-Container">
-                <div class="Face-Carte Recto">
-                    <img src="./Image/Icone-CV.png" alt="Badge d'identification">
-                    <p class="Instruction-Flip">Survoler pour retourner</p>
-                </div>
-                <div class="Face-Carte Verso">
-                    <img src="./Documents/CV GuillotNoah_page-0001.jpg" alt="Mon CV">
-                </div>
-            </div>
-            <div class="Effet-Scanlines"></div> 
-        </div>
 
     </main>
 
     <audio id="myaudio" src="./son/Son-inventaire.mp3" oncanplay="this.volume=0.02"></audio>
 </body>
-
 </html>

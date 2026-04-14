@@ -1,3 +1,5 @@
+@import url(./KeyFrames.css);
+
 /*-----STYLES GENERAUX-----*/
 
 * {
@@ -10,6 +12,15 @@
 button {
     background-color: transparent;
     border: none;
+}
+
+body {
+    background: #0a0a0a;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    overflow: hidden;
 }
 
 body::before {
@@ -264,16 +275,79 @@ body:has(#radio-veille:checked) .ecran-noir {
 }
 
 body:has(input[name="examen"]:not(#fermer-examen):checked) .Top-Inventaire,
-body:has(input[name="examen"]:not(#fermer-examen):checked) .Dialogue-JILL-Container {
+body:has(input[name="examen"]:not(#fermer-examen):checked) .Dialogue-JILL-Container,
+body:has(input[name="examen"]:not(#fermer-examen):checked) .ecg-monitor {
     display: none !important;
 }
 
-/*-----ECRAN NOIR INFORMATION-----*/
+/*-----ECRAN NOIR INFORMATION (EXAMEN 3D)-----*/
 
-.Carte-CV-Container {
+.Document-CV-Reel {
     display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    height: 80vh;
+    z-index: 3000 !important;
+    perspective: 2000px;
 }
 
+body:has(#radio-cv:checked) .Document-CV-Reel {
+    display: block;
+}
+
+.Carte-CV-Container {
+    height: 100%;
+    position: relative;
+    transform-style: preserve-3d;
+    transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.Carte-CV-Container:hover {
+    transform: rotateY(180deg);
+}
+
+.Face-Carte {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    backface-visibility: hidden !important;
+    -webkit-backface-visibility: hidden !important;
+}
+
+.Face-Carte.Recto {
+    position: relative;
+    z-index: 2;
+    transform: rotateY(0deg);
+}
+
+.Face-Carte.Recto img {
+    height: 80vh;
+    width: auto;
+    display: block;
+    filter: drop-shadow(0 10px 20px rgba(0,0,0,0.8));
+}
+
+.Face-Carte.Verso {
+    z-index: 1;
+    transform: rotateY(180deg);
+    background: white !important;
+}
+
+.Face-Carte.Verso img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.Effet-Scanlines {
+    position: absolute;
+    inset: 0;
+    z-index: 3001;
+    pointer-events: none;
+    background: repeating-linear-gradient(rgba(0,0,0,0.1) 0px, rgba(0,0,0,0.1) 1px, transparent 1px, transparent 2px);
+}
 
 /*-----IMAGES AGGRANDIES-----*/
 
@@ -307,90 +381,6 @@ main:has(#slot-veille:hover) .Veille-Slot-Aggrandit {
     animation: glitch-apparition 1.3s linear forwards;
 }
 
-/*-----ANIMATIONS-----*/
-
-@keyframes glitch-apparition {
-    0% {
-        opacity: 0;
-        transform: scale(0.98) translate(-5px, 2px);
-        filter: blur(2px) drop-shadow(2px 0 red) drop-shadow(-2px 0 blue);
-    }
-    10% {
-        opacity: 1;
-        transform: scale(1) translate(0, 0);
-        filter: blur(0) drop-shadow(0 0 transparent);
-    }
-    15% { transform: translate(2px, -1px); }
-    20% { transform: translate(0, 0); }
-    100% { transform: translate(0, 0); }
-}
-
-@keyframes cycleDialogue {
-    0%, 15% { 
-        opacity: 0; 
-        visibility: hidden; 
-        transform: translateX(-50%) translateY(10px);
-    }
-    22% {
-        opacity: 1;
-        visibility: visible;
-        transform: translateX(-50%) translateY(0);
-    }
-    85% {
-        opacity: 1;
-        visibility: visible;
-        transform: translateX(-50%) translateY(-5px);
-    }
-    92% { 
-        opacity: 0; 
-        visibility: hidden; 
-        transform: translateX(-50%) translateY(10px);
-    }
-    100% { 
-        opacity: 0; 
-    }
-}
-
-@keyframes radioNoise {
-    0% {
-        transform: translateX(-50%) translateY(0);
-        filter: blur(0.5px) drop-shadow(1px 0 red) drop-shadow(-1px 0 blue);
-    }
-    5% {
-        transform: translateX(-50%) translateY(-2px);
-        filter: blur(0px) drop-shadow(0px 0 transparent);
-    }
-    10% {
-        transform: translateX(-50%) translateY(0px);
-    }
-    30%, 35%, 65%, 68% {
-        opacity: 0.9;
-    }
-    32%, 36%, 66%, 69% {
-        opacity: 0.2; 
-    }
-    34%, 38%, 67%, 70% {
-        opacity: 0.9;
-    }
-    80% {
-        transform: translateX(-50%) translateY(1px) rotate(0.2deg);
-        filter: blur(0px) drop-shadow(2px 0 cyan) drop-shadow(-2px 0 magenta);
-    }
-    90% {
-        transform: translateX(-50%) translateY(0px);
-        filter: blur(0px) drop-shadow(0px 0 transparent);
-    }
-    100% {
-        transform: translateX(-50%) translateY(0px);
-    }
-}
-
-@keyframes clignotement {
-    0%   { opacity: 0.2; } 
-    50%  { opacity: 0.8; } 
-    100% { opacity: 0.2; }
-}
-
 /*-----BOITE DE DIALOGUE-----*/
 
 .Dialogue-JILL-Container {
@@ -404,9 +394,6 @@ main:has(#slot-veille:hover) .Veille-Slot-Aggrandit {
     z-index: 5; 
     pointer-events: none;    
     animation: cycleDialogue 18s infinite, radioNoise 3s linear infinite;
-    -webkit-mask-image: url("./Image/Boite-Dialogue.png");
-    mask-image: none;
-    -webkit-mask-image: none;
 } 
 
 .Dialogue-JILL-Container::before {
@@ -474,4 +461,104 @@ main:has(#slot-projet:hover) .Dialogue-JILL-Container,
 main:has(#slot-cv:hover) .Dialogue-JILL-Container, 
 main:has(#slot-veille:hover) .Dialogue-JILL-Container {
     display: none !important;        
+}
+
+/*-----MONITEUR RYTHME CARDIAQUE-----*/
+
+.ecg-monitor {
+    position: absolute;
+    bottom: 250px;
+    right: 10%;
+    width: 500px;
+    height: 120px;
+    z-index: 10;
+    pointer-events: none;
+}
+
+.ecg-container {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    background: rgba(0, 20, 10, 0.6);
+    border: 1px solid rgba(0, 255, 136, 0.3);
+    border-radius: 5px;
+    overflow: hidden;
+    backdrop-filter: blur(5px);
+}
+
+.grid {
+    position: absolute;
+    inset: 0;
+    background-image: 
+        linear-gradient(rgba(0, 255, 136, 0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 255, 136, 0.05) 1px, transparent 1px);
+    background-size: 25px 25px;
+}
+
+.baseline {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: rgba(0, 255, 136, 0.1);
+    transform: translateY(-50%);
+}        
+
+.svg-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+}
+
+.ecg-svg {
+    width: 100%;
+    height: 80px; 
+    overflow: visible;
+}
+
+.heartbeat-line {
+    fill: none;
+    stroke: #00ff88;
+    stroke-width: 4;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    filter: drop-shadow(0 0 5px #00ff88) drop-shadow(0 0 15px #00d9ff);
+    stroke-dasharray: 1620;
+    stroke-dashoffset: 0;
+    animation: draw-ecg 3s linear infinite;
+}
+
+.bpm {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    color: #00ff88;
+    font-family: 'VT323', monospace;
+    font-size: 28px;
+    font-weight: bold;
+    text-shadow: 0 0 10px #00ff88;
+    animation: pulse 1s ease-in-out infinite;
+}
+
+.bpm::after {
+    content: ' BPM';
+    font-size: 14px;
+    opacity: 0.7;
+}
+
+.status-label {
+    position: absolute;
+    bottom: 5px;
+    left: 10px;
+    color: #00ff88;
+    font-family: 'VT323', monospace;
+    font-size: 16px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
 }
