@@ -1,18 +1,19 @@
 @media screen and (max-width: 768px) {
     
+    /*----- 1. L'INVENTAIRE -----*/
     .Top-Inventaire {
         right: auto;
         left: 50%;
         transform: translateX(-50%);
         width: 95%; 
         height: auto;
-        top: 5%; 
+        top: 2%; 
         bottom: auto; 
         border: 1px solid rgba(255, 255, 255, 0.1);
         background: linear-gradient( to bottom, rgba(27, 27, 27, 0.9) 10%, rgba(0, 0, 0, 0.9) 20%, transparent 25%),
                     linear-gradient( to top, rgba(27, 27, 27, 0.9) 10%, rgba(0, 0, 0, 0.9) 20%, transparent 25%);
         border-radius: 5px;
-        padding-bottom: 110px; 
+        padding-bottom: 130px;
     }
 
     .Top-Bar {
@@ -30,49 +31,55 @@
     }
 
     .Grille-Inventaire {
+        margin-bottom: 0;
         margin-top: 10px; 
         grid-template-columns: repeat(4, 1fr); 
         gap: 8px;
         padding: 0 15px;
     }
 
+    /*----- 2. DESCRIPTIONS & BOUTON -----*/
     .Description-Projet, .Description-CV, .Description-Veille {
         position: absolute;
-        bottom: 20px;
+        bottom: 25px;
         left: 0;
         right: 0;
+        margin-top: 0;
         padding: 0 20px;
-        font-size: 14px;
+        font-size: 15px;
+        display: none; 
     }
 
     .ExaminerIcone {
         width: 280px;
-        top: 105%; 
+        top: 102%;
         left: 50% !important;
         transform: translateX(-50%);
+        justify-content: center;
+        align-items: center;
+        display: none; 
     }
 
     .ExaminerIcone label {
-        font-size: 18px;
+        font-size: 20px;
         padding: 0;
         display: flex;
         justify-content: center;
         align-items: center;
         width: 100%;
         height: 100%;
+        white-space: nowrap;
     }
 
-    .Projet-Slot-Aggrandit, .CV-Slot-Aggrandit, .Veille-Slot-Aggrandit {
-        display: none !important;
-    }
-
+    /*----- 3. DIALOGUE & ECG (CALÉS EN BAS POUR SAFARI) -----*/
     .Dialogue-JILL-Container {
         width: 95%;
         left: 50%;
         transform: translateX(-50%);
-        bottom: 320px; 
+        bottom: calc(env(safe-area-inset-bottom) + 140px);
         height: auto;
         min-height: 80px;
+        opacity: 0.9;
     }
 
     .TexteJILLWrapper {
@@ -93,34 +100,36 @@
         right: auto; 
         left: 50%;
         transform: translateX(-50%);
-        bottom: 85px; 
+        bottom: calc(env(safe-area-inset-bottom) + 55px); 
         height: 75px;
     }
 
-    .ecg-svg {
-        height: 45px;
-    }
+    .ecg-svg { height: 45px; }
+    .bpm { font-size: 18px; top: 5px; right: 10px; }
+    .status-label { font-size: 12px; bottom: 5px; }
 
-    .bpm {
-        font-size: 18px;
-        top: 5px;
-        right: 10px;
-    }
-
-    .status-label {
-        font-size: 12px;
-        bottom: 5px;
-    }
-
+    /*----- 4. EXAMEN & QUITTER -----*/
     .texte-quitter {
         right: auto;
         left: 50%;
         transform: translateX(-50%);
         width: 100%;
         text-align: center;
-        bottom: calc(env(safe-area-inset-bottom) + 20px);
-        white-space: nowrap; 
-        font-size: 14px; 
+        bottom: calc(env(safe-area-inset-bottom) + 25px);
+        white-space: nowrap;
+        font-size: 14px;
+    }
+
+    .Projet-Slot-Aggrandit, .CV-Slot-Aggrandit, .Veille-Slot-Aggrandit {
+        display: none !important;
+    }
+
+    /*----- 5. GESTION DU FOCUS (POUR TACTILE) -----*/
+    
+    .Top-Inventaire:has(.Inventaire-Slot:hover) .Description-Projet,
+    .Top-Inventaire:has(.Inventaire-Slot:hover) .Description-CV,
+    .Top-Inventaire:has(.Inventaire-Slot:hover) .Description-Veille {
+        display: none;
     }
 
     .Top-Inventaire:has(#slot-projet:focus) .Description-Projet,
@@ -129,7 +138,13 @@
         display: block !important;
     }
 
-    main:has(:focus) .Dialogue-JILL-Container {
-        display: none !important;
+    #slot-projet:focus + .ExaminerIcone,
+    #slot-cv:focus + .ExaminerIcone,
+    #slot-veille:focus + .ExaminerIcone {
+        display: flex;
+    }
+
+    main:has(.Inventaire-Slot:focus) .Dialogue-JILL-Container {
+        display: none !important;        
     }
 }
