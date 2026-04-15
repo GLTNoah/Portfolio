@@ -72,26 +72,47 @@
         width: 95%;
         left: 50%;
         transform: translateX(-50%);
-        bottom: 37%; 
+        bottom: 28vh; 
         height: auto;
         min-height: 80px;
     }
 
+    .TexteJILLWrapper {
+        top: 10%; 
+        left: 50%;
+        transform: translateX(-50%);
+        width: 90%; 
+    }
+
     .TexteJILL {
         font-size: 15px;
+        padding: 10px;
         text-align: center;
     }
 
     .ecg-monitor {
         width: 90%; 
+        right: auto; 
         left: 50%;
         transform: translateX(-50%);
-        bottom: calc(env(safe-area-inset-bottom) + 60px); 
-        height: 70px;
+        bottom: 12vh; 
+        height: 75px;
     }
 
-    .ecg-svg { height: 40px; }
-    .bpm { font-size: 18px; }
+    .ecg-svg {
+        height: 45px;
+    }
+
+    .bpm {
+        font-size: 18px;
+        top: 5px;
+        right: 10px;
+    }
+
+    .status-label {
+        font-size: 12px;
+        bottom: 5px;
+    }
 
     .texte-quitter {
         right: auto;
