@@ -13,6 +13,7 @@
                     linear-gradient( to top, rgba(27, 27, 27, 0.9) 10%, rgba(0, 0, 0, 0.9) 20%, transparent 25%);
         border-radius: 5px;
         padding-bottom: 130px;
+        top: calc(env(safe-area-inset-top) + 2%);
     }
 
     .Top-Bar {
