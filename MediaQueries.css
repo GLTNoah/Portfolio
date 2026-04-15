@@ -1,6 +1,5 @@
 @media screen and (max-width: 768px) {
     
-    /* 1. L'INVENTAIRE */
     .Top-Inventaire {
         right: auto;
         left: 50%;
@@ -13,7 +12,7 @@
         background: linear-gradient( to bottom, rgba(27, 27, 27, 0.9) 10%, rgba(0, 0, 0, 0.9) 20%, transparent 25%),
                     linear-gradient( to top, rgba(27, 27, 27, 0.9) 10%, rgba(0, 0, 0, 0.9) 20%, transparent 25%);
         border-radius: 5px;
-        padding-bottom: 90px;
+        padding-bottom: 130px;
     }
 
     .Top-Bar {
@@ -39,26 +38,40 @@
     }
 
     .Description-Projet, .Description-CV, .Description-Veille {
-        position: relative;
-        bottom: auto;
+        position: absolute;
+        bottom: 25px;
         left: 0;
-        margin-top: 10px;
+        right: 0;
+        margin-top: 0;
         padding: 0 20px;
         font-size: 15px;
     }
 
     .ExaminerIcone {
-        width: 250px;
+        width: 280px;
+        top: 102%;
         left: 50% !important;
         transform: translateX(-50%);
+        justify-content: center;
+        align-items: center;
     }
 
-    /* 2. LA BOITE DE DIALOGUE JILL */
+    .ExaminerIcone label {
+        font-size: 20px;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        height: 100%;
+        white-space: nowrap;
+    }
+
     .Dialogue-JILL-Container {
         width: 95%;
         left: 50%;
         transform: translateX(-50%);
-        bottom: 40%; 
+        bottom: 35%; 
         height: auto;
         min-height: 100px;
     }
@@ -76,7 +89,6 @@
         text-align: center;
     }
 
-    /* 3. LE MONITEUR ECG */
     .ecg-monitor {
         width: 90%; 
         right: auto; 
@@ -99,5 +111,57 @@
     .status-label {
         font-size: 12px;
         bottom: 5px;
+    }
+
+    .Projet-Slot-Aggrandit, .CV-Slot-Aggrandit, .Veille-Slot-Aggrandit {
+        width: 95%;
+        left: 50% !important;
+        transform: translateX(-50%) !important;
+        bottom: 180px !important; 
+        top: auto !important;
+        height: 180px;
+        -webkit-mask-image: none; 
+        mask-image: none;
+    }
+
+    .Top-Inventaire:has(#slot-projet:hover) .Description-Projet,
+    .Top-Inventaire:has(#slot-cv:hover) .Description-CV,
+    .Top-Inventaire:has(#slot-veille:hover) .Description-Veille {
+        display: none;
+    }
+
+    .Top-Inventaire:has(#slot-projet:focus) .Description-Projet,
+    .Top-Inventaire:has(#slot-cv:focus) .Description-CV,
+    .Top-Inventaire:has(#slot-veille:focus) .Description-Veille {
+        display: block !important;
+    }
+
+    main:has(#slot-projet:hover) .Projet-Slot-Aggrandit, 
+    main:has(#slot-cv:hover) .CV-Slot-Aggrandit,
+    main:has(#slot-veille:hover) .Veille-Slot-Aggrandit {
+        display: none;
+    }
+
+    main:has(#slot-projet:focus) .Projet-Slot-Aggrandit, 
+    main:has(#slot-cv:focus) .CV-Slot-Aggrandit,
+    main:has(#slot-veille:focus) .Veille-Slot-Aggrandit {
+        display: flex !important;
+        position: absolute;
+        animation: glitch-apparition 1.3s linear forwards;
+    }
+
+    main:has(#slot-projet:focus) .Dialogue-JILL-Container, 
+    main:has(#slot-cv:focus) .Dialogue-JILL-Container, 
+    main:has(#slot-veille:focus) .Dialogue-JILL-Container {
+        display: none !important;        
+    }
+
+    .texte-quitter {
+        right: auto;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 100%;
+        text-align: center;
+        bottom: 30px;
     }
 }
