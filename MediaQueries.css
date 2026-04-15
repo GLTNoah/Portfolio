@@ -1,35 +1,103 @@
-/*-----MODE MOBILE-----*/
-
 @media screen and (max-width: 768px) {
     
+    /* 1. L'INVENTAIRE */
     .Top-Inventaire {
-        right: 50%;
-        transform: translateX(50%); 
-        padding-bottom: 20px;
+        right: auto;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 95%; 
+        height: auto;
+        top: 2%; 
+        bottom: auto; 
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        background: linear-gradient( to bottom, rgba(27, 27, 27, 0.9) 10%, rgba(0, 0, 0, 0.9) 20%, transparent 25%),
+                    linear-gradient( to top, rgba(27, 27, 27, 0.9) 10%, rgba(0, 0, 0, 0.9) 20%, transparent 25%);
+        border-radius: 5px;
+        padding-bottom: 90px;
     }
 
     .Top-Bar {
-        padding: 20px 40px;
+        padding: 20px 50px; 
+    }
+    
+    .Top-Inventaire h1 {
+        top: 20px;
+        font-size: 16px;
+    }
+    
+    .Top-Inventaire h2 {
+        top: 30px;
+        font-size: 22px;
     }
 
     .Grille-Inventaire {
-        margin-top: 80px;
-        gap: 10px; 
-        padding: 10px;
+        margin-bottom: 0;
+        margin-top: 10px; 
+        grid-template-columns: repeat(4, 1fr); 
+        gap: 8px;
+        padding: 0 15px;
     }
 
     .Description-Projet, .Description-CV, .Description-Veille {
-        position: relative; 
-        bottom: 0;
+        position: relative;
+        bottom: auto;
         left: 0;
-        margin-top: 20px;
+        margin-top: 10px;
         padding: 0 20px;
-        font-size: 16px;
+        font-size: 15px;
     }
 
     .ExaminerIcone {
         width: 250px;
-        left: 50% !important; 
+        left: 50% !important;
         transform: translateX(-50%);
+    }
+
+    /* 2. LA BOITE DE DIALOGUE JILL */
+    .Dialogue-JILL-Container {
+        width: 95%;
+        left: 50%;
+        transform: translateX(-50%);
+        bottom: 40%; 
+        height: auto;
+        min-height: 100px;
+    }
+
+    .TexteJILLWrapper {
+        top: 10%; 
+        left: 50%;
+        transform: translateX(-50%);
+        width: 90%; 
+    }
+
+    .TexteJILL {
+        font-size: 16px;
+        padding: 10px;
+        text-align: center;
+    }
+
+    /* 3. LE MONITEUR ECG */
+    .ecg-monitor {
+        width: 90%; 
+        right: auto; 
+        left: 50%;
+        transform: translateX(-50%);
+        bottom: 20px;
+        height: 80px;
+    }
+
+    .ecg-svg {
+        height: 50px;
+    }
+
+    .bpm {
+        font-size: 20px;
+        top: 5px;
+        right: 10px;
+    }
+
+    .status-label {
+        font-size: 12px;
+        bottom: 5px;
     }
 }
