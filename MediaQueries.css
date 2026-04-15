@@ -1,0 +1,35 @@
+/*-----MODE MOBILE-----*/
+
+@media screen and (max-width: 768px) {
+    
+    .Top-Inventaire {
+        right: 50%;
+        transform: translateX(50%); 
+        padding-bottom: 20px;
+    }
+
+    .Top-Bar {
+        padding: 20px 40px;
+    }
+
+    .Grille-Inventaire {
+        margin-top: 80px;
+        gap: 10px; 
+        padding: 10px;
+    }
+
+    .Description-Projet, .Description-CV, .Description-Veille {
+        position: relative; 
+        bottom: 0;
+        left: 0;
+        margin-top: 20px;
+        padding: 0 20px;
+        font-size: 16px;
+    }
+
+    .ExaminerIcone {
+        width: 250px;
+        left: 50% !important; 
+        transform: translateX(-50%);
+    }
+}
