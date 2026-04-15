@@ -6,14 +6,13 @@
         transform: translateX(-50%);
         width: 95%; 
         height: auto;
-        top: 2%; 
+        top: 5%; 
         bottom: auto; 
         border: 1px solid rgba(255, 255, 255, 0.1);
         background: linear-gradient( to bottom, rgba(27, 27, 27, 0.9) 10%, rgba(0, 0, 0, 0.9) 20%, transparent 25%),
                     linear-gradient( to top, rgba(27, 27, 27, 0.9) 10%, rgba(0, 0, 0, 0.9) 20%, transparent 25%);
         border-radius: 5px;
-        padding-bottom: 130px;
-        top: calc(env(safe-area-inset-top) + 2%);
+        padding-bottom: 110px; 
     }
 
     .Top-Bar {
@@ -31,7 +30,6 @@
     }
 
     .Grille-Inventaire {
-        margin-bottom: 0;
         margin-top: 10px; 
         grid-template-columns: repeat(4, 1fr); 
         gap: 8px;
@@ -40,17 +38,16 @@
 
     .Description-Projet, .Description-CV, .Description-Veille {
         position: absolute;
-        bottom: 25px;
+        bottom: 20px;
         left: 0;
         right: 0;
-        margin-top: 0;
         padding: 0 20px;
-        font-size: 15px;
+        font-size: 14px;
     }
 
     .ExaminerIcone {
         width: 280px;
-        top: 102%;
+        top: 102%; 
         left: 50% !important;
         transform: translateX(-50%);
         justify-content: center;
@@ -58,104 +55,43 @@
     }
 
     .ExaminerIcone label {
-        font-size: 20px;
+        font-size: 18px;
         padding: 0;
         display: flex;
         justify-content: center;
         align-items: center;
         width: 100%;
         height: 100%;
-        white-space: nowrap;
+    }
+
+    .Projet-Slot-Aggrandit, .CV-Slot-Aggrandit, .Veille-Slot-Aggrandit {
+        display: none !important;
     }
 
     .Dialogue-JILL-Container {
         width: 95%;
         left: 50%;
         transform: translateX(-50%);
-        bottom: 35%; 
+        bottom: 37%; 
         height: auto;
-        min-height: 100px;
-    }
-
-    .TexteJILLWrapper {
-        top: 10%; 
-        left: 50%;
-        transform: translateX(-50%);
-        width: 90%; 
+        min-height: 80px;
     }
 
     .TexteJILL {
-        font-size: 16px;
-        padding: 10px;
+        font-size: 15px;
         text-align: center;
     }
 
     .ecg-monitor {
         width: 90%; 
-        right: auto; 
         left: 50%;
         transform: translateX(-50%);
-        bottom: calc(env(safe-area-inset-bottom) + 10px); 
-        height: 80px;
+        bottom: calc(env(safe-area-inset-bottom) + 60px); 
+        height: 70px;
     }
 
-    .ecg-svg {
-        height: 50px;
-    }
-
-    .bpm {
-        font-size: 20px;
-        top: 5px;
-        right: 10px;
-    }
-
-    .status-label {
-        font-size: 12px;
-        bottom: 5px;
-    }
-
-    .Projet-Slot-Aggrandit, .CV-Slot-Aggrandit, .Veille-Slot-Aggrandit {
-        width: 95%;
-        left: 50% !important;
-        transform: translateX(-50%) !important;
-        bottom: 180px !important; 
-        top: auto !important;
-        height: 180px;
-        -webkit-mask-image: none; 
-        mask-image: none;
-    }
-
-    .Top-Inventaire:has(#slot-projet:hover) .Description-Projet,
-    .Top-Inventaire:has(#slot-cv:hover) .Description-CV,
-    .Top-Inventaire:has(#slot-veille:hover) .Description-Veille {
-        display: none;
-    }
-
-    .Top-Inventaire:has(#slot-projet:focus) .Description-Projet,
-    .Top-Inventaire:has(#slot-cv:focus) .Description-CV,
-    .Top-Inventaire:has(#slot-veille:focus) .Description-Veille {
-        display: block !important;
-    }
-
-    main:has(#slot-projet:hover) .Projet-Slot-Aggrandit, 
-    main:has(#slot-cv:hover) .CV-Slot-Aggrandit,
-    main:has(#slot-veille:hover) .Veille-Slot-Aggrandit {
-        display: none;
-    }
-
-    main:has(#slot-projet:focus) .Projet-Slot-Aggrandit, 
-    main:has(#slot-cv:focus) .CV-Slot-Aggrandit,
-    main:has(#slot-veille:focus) .Veille-Slot-Aggrandit {
-        display: flex !important;
-        position: absolute;
-        animation: glitch-apparition 1.3s linear forwards;
-    }
-
-    main:has(#slot-projet:focus) .Dialogue-JILL-Container, 
-    main:has(#slot-cv:focus) .Dialogue-JILL-Container, 
-    main:has(#slot-veille:focus) .Dialogue-JILL-Container {
-        display: none !important;        
-    }
+    .ecg-svg { height: 40px; }
+    .bpm { font-size: 18px; }
 
     .texte-quitter {
         right: auto;
@@ -164,6 +100,17 @@
         width: 100%;
         text-align: center;
         bottom: calc(env(safe-area-inset-bottom) + 20px);
+        white-space: nowrap; 
+        font-size: 14px; 
+    }
+
+    .Top-Inventaire:has(#slot-projet:focus) .Description-Projet,
+    .Top-Inventaire:has(#slot-cv:focus) .Description-CV,
+    .Top-Inventaire:has(#slot-veille:focus) .Description-Veille {
+        display: block !important;
+    }
+
+    main:has(:focus) .Dialogue-JILL-Container {
+        display: none !important;
     }
 }
-
