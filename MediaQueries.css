@@ -16,22 +16,11 @@
         padding-bottom: 130px;
     }
 
-    .Top-Bar {
-        padding: 20px 50px; 
-    }
-    
-    .Top-Inventaire h1 {
-        top: 20px;
-        font-size: 16px;
-    }
-    
-    .Top-Inventaire h2 {
-        top: 30px;
-        font-size: 22px;
-    }
+    .Top-Bar { padding: 20px 50px; }
+    .Top-Inventaire h1 { top: 20px; font-size: 16px; }
+    .Top-Inventaire h2 { top: 30px; font-size: 22px; }
 
     .Grille-Inventaire {
-        margin-bottom: 0;
         margin-top: 10px; 
         grid-template-columns: repeat(4, 1fr); 
         gap: 8px;
@@ -44,10 +33,9 @@
         bottom: 25px;
         left: 0;
         right: 0;
-        margin-top: 0;
         padding: 0 20px;
-        font-size: 15px;
-        display: none; 
+        font-size: 14px;
+        display: none;
     }
 
     .ExaminerIcone {
@@ -57,79 +45,77 @@
         transform: translateX(-50%);
         justify-content: center;
         align-items: center;
-        display: none; 
+        display: none;
+        background-color: rgba(0, 0, 0, 0.9);
+        border: 1px solid rgba(255, 255, 255, 0.3);
     }
 
     .ExaminerIcone label {
-        font-size: 20px;
-        padding: 0;
+        font-size: 18px;
         display: flex;
         justify-content: center;
         align-items: center;
         width: 100%;
         height: 100%;
-        white-space: nowrap;
+        color: white;
     }
 
-    /*----- 3. DIALOGUE & ECG (CALÉS EN BAS POUR SAFARI) -----*/
+    /*----- 3. DIALOGUE JILL (RESTAURATION DU CONTENEUR) -----*/
     .Dialogue-JILL-Container {
+        display: block !important; /* Force l'affichage */
+        opacity: 1 !important;
         width: 95%;
         left: 50%;
         transform: translateX(-50%);
-        bottom: calc(env(safe-area-inset-bottom) + 140px);
-        height: auto;
-        min-height: 80px;
-        opacity: 0.9;
+        bottom: 160px; /* Redescendu au dessus de l'ECG */
+        height: 100px;
+        background: url("./Image/Boite-Dialogue.png") no-repeat center;
+        background-size: contain;
+        z-index: 5;
     }
 
     .TexteJILLWrapper {
-        top: 10%; 
+        position: absolute;
+        top: 15%; 
         left: 50%;
         transform: translateX(-50%);
-        width: 90%; 
+        width: 85%; 
+        height: 70%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
 
     .TexteJILL {
-        font-size: 15px;
-        padding: 10px;
+        font-size: 14px;
         text-align: center;
+        line-height: 1.2;
     }
 
+    /*----- 4. MONITEUR ECG (CALÉ AU PLUS BAS) -----*/
     .ecg-monitor {
         width: 90%; 
-        right: auto; 
         left: 50%;
         transform: translateX(-50%);
-        bottom: calc(env(safe-area-inset-bottom) + 55px); 
+        /* Utilisation d'une valeur basse fixe pour coller à la barre Safari */
+        bottom: 40px; 
         height: 75px;
     }
 
     .ecg-svg { height: 45px; }
     .bpm { font-size: 18px; top: 5px; right: 10px; }
-    .status-label { font-size: 12px; bottom: 5px; }
 
-    /*----- 4. EXAMEN & QUITTER -----*/
     .texte-quitter {
-        right: auto;
         left: 50%;
         transform: translateX(-50%);
-        width: 100%;
-        text-align: center;
-        bottom: calc(env(safe-area-inset-bottom) + 25px);
+        bottom: 15px;
+        font-size: 13px;
         white-space: nowrap;
-        font-size: 14px;
     }
 
+    /*----- 5. LOGIQUE DE FOCUS -----*/
     .Projet-Slot-Aggrandit, .CV-Slot-Aggrandit, .Veille-Slot-Aggrandit {
         display: none !important;
-    }
-
-    /*----- 5. GESTION DU FOCUS (POUR TACTILE) -----*/
-    
-    .Top-Inventaire:has(.Inventaire-Slot:hover) .Description-Projet,
-    .Top-Inventaire:has(.Inventaire-Slot:hover) .Description-CV,
-    .Top-Inventaire:has(.Inventaire-Slot:hover) .Description-Veille {
-        display: none;
     }
 
     .Top-Inventaire:has(#slot-projet:focus) .Description-Projet,
@@ -144,6 +130,7 @@
         display: flex;
     }
 
+    /* Cache Jill seulement quand un slot a le focus */
     main:has(.Inventaire-Slot:focus) .Dialogue-JILL-Container {
         display: none !important;        
     }
