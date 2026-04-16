@@ -1,12 +1,12 @@
 @media screen and (max-width: 768px) {
-    
 
+    /*----- 0. FIX STRUCTURE SAFARI -----*/
     html, body {
         height: 100% !important;
-        min-height: -webkit-fill-available; 
+        min-height: -webkit-fill-available;
         overflow-x: hidden;
     }
-
+    
     /*----- 1. L'INVENTAIRE -----*/
     .Top-Inventaire {
         right: auto;
@@ -34,7 +34,7 @@
         padding: 0 15px;
     }
 
-    /*----- 2. DESCRIPTIONS & BOUTON (CENTRAGE FIX) -----*/
+    /*----- 2. DESCRIPTIONS & BOUTON -----*/
     .Description-Projet, .Description-CV, .Description-Veille {
         position: absolute;
         bottom: 25px;
@@ -66,65 +66,60 @@
         width: 100%;
         height: 100%;
         color: white;
-        padding: 0;
-        margin: 0;
         text-align: center;
-        white-space: nowrap;
     }
 
-    /*----- 3. DIALOGUE JILL -----*/
+    /*----- 3. DIALOGUE JILL (REPOSITIONNÉ À DROITE) -----*/
+    
     .Dialogue-JILL-Container {
         display: block !important;
         opacity: 1 !important;
-        width: 95%;
-        left: 50%;
-        transform: translateX(-50%);
-        bottom: 37%; 
-        height: 100px;
-        background: url("./Image/Boite-Dialogue.png") no-repeat center;
-        background-size: contain;
+        width: 60%; 
+        left: auto;
+        right: -20%; 
+        bottom: 30%; 
+        transform: none;
+        height: 80px;
+        background-size: 100% 100%;
         z-index: 5;
     }
 
     .TexteJILLWrapper {
         position: absolute;
-        top: 15%; 
-        left: 50%;
-        transform: translateX(-50%);
-        width: 85%; 
-        height: 70%;
+        top: 10%; 
+        left: 5%;
+        width: 90%; 
+        height: 80%;
         display: flex;
         align-items: center;
         justify-content: center;
     }
 
     .TexteJILL {
-        font-size: 14px;
+        font-size: 13px;
         text-align: center;
-        line-height: 1.2;
+        line-height: 1.1;
     }
 
-    /*----- 4. MONITEUR ECG -----*/
+    /*----- 4. MONITEUR ECG (AU PLUS BAS) -----*/
     .ecg-monitor {
         width: 90%; 
         left: 50%;
         transform: translateX(-50%);
-        bottom: calc(env(safe-area-inset-bottom) + 15px);
+        bottom: calc(env(safe-area-inset-bottom) + 15px); 
         height: 70px;
     }
 
-    .ecg-svg { height: 45px; }
-    .bpm { font-size: 18px; top: 5px; right: 10px; }
+    .ecg-svg { height: 40px; }
+    .bpm { font-size: 16px; top: 5px; right: 10px; }
 
-    /*----- 5. ECRAN NOIR & QUITTER (FIX TAILLE) -----*/
+    /*----- 5. ECRAN NOIR & QUITTER -----*/
     .ecran-noir {
         width: 100vw;
-        height: 100%;
+        height: 100svh;
         position: fixed;
         top: 0;
         left: 0;
-        bottom: 0;
-        right: 0;
         z-index: 2000;
         background: black;
         display: none;
@@ -137,14 +132,12 @@
         bottom: calc(env(safe-area-inset-bottom) + 5px);
         width: 100%;
         text-align: center;
-        font-size: 14px;
-        white-space: nowrap;
+        font-size: 13px;
         z-index: 2500;
         color: white;
-        opacity: 0.8;
     }
 
-    /*----- 6. LOGIQUE DE FOCUS & SUPPRESSION SURPLUS -----*/
+    /*----- 6. LOGIQUE DE FOCUS -----*/
     .Projet-Slot-Aggrandit, .CV-Slot-Aggrandit, .Veille-Slot-Aggrandit {
         display: none !important;
     }
