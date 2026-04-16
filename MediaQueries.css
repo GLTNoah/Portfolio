@@ -74,12 +74,12 @@
     .Dialogue-JILL-Container {
         display: block !important;
         opacity: 1 !important;
-        width: 60%; 
+        width: 65%; 
         left: auto;
         right: -20%; 
         bottom: 30%; 
         transform: none;
-        height: 80px;
+        height: 150px;
         background-size: 100% 100%;
         z-index: 5;
     }
@@ -89,7 +89,7 @@
         top: 10%; 
         left: 5%;
         width: 90%; 
-        height: 80%;
+        height: 80%;  
         display: flex;
         align-items: center;
         justify-content: center;
