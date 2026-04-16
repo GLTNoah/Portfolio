@@ -1,5 +1,12 @@
 @media screen and (max-width: 768px) {
     
+
+    html, body {
+        height: 100% !important;
+        min-height: -webkit-fill-available; 
+        overflow-x: hidden;
+    }
+
     /*----- 1. L'INVENTAIRE -----*/
     .Top-Inventaire {
         right: auto;
@@ -72,7 +79,7 @@
         width: 95%;
         left: 50%;
         transform: translateX(-50%);
-        bottom: 160px; 
+        bottom: calc(env(safe-area-inset-bottom) + 37%); 
         height: 100px;
         background: url("./Image/Boite-Dialogue.png") no-repeat center;
         background-size: contain;
@@ -102,8 +109,8 @@
         width: 90%; 
         left: 50%;
         transform: translateX(-50%);
-        bottom: 40px; 
-        height: 75px;
+        bottom: calc(env(safe-area-inset-bottom) + 15px);
+        height: 70px;
     }
 
     .ecg-svg { height: 45px; }
@@ -127,7 +134,7 @@
         position: fixed;
         left: 50%;
         transform: translateX(-50%);
-        bottom: calc(env(safe-area-inset-bottom) + 20px);
+        bottom: calc(env(safe-area-inset-bottom) + 5px);
         width: 100%;
         text-align: center;
         font-size: 14px;
