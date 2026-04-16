@@ -17,10 +17,10 @@
         top: 2%; 
         bottom: auto; 
         border: 1px solid rgba(255, 255, 255, 0.1);
-        background: linear-gradient( to bottom, rgba(27, 27, 27, 0.9) 10%, rgba(0, 0, 0, 0.9) 20%, transparent 25%),
-                    linear-gradient( to top, rgba(27, 27, 27, 0.9) 10%, rgba(0, 0, 0, 0.9) 20%, transparent 25%);
+        background: linear-gradient( to bottom, rgba(27, 27, 27, 0.9) 10%, rgba(0, 0, 0, 0.9) 15%, transparent 20%),
+                    linear-gradient( to top, rgba(27, 27, 27, 0.9) 10%, rgba(0, 0, 0, 0.9) 15%, transparent 20%);
         border-radius: 5px;
-        padding-bottom: 130px;
+        padding-bottom: 100px;
     }
 
     .Top-Bar { padding: 20px 50px; }
