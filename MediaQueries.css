@@ -79,7 +79,7 @@
         width: 95%;
         left: 50%;
         transform: translateX(-50%);
-        bottom: calc(env(safe-area-inset-bottom) + 37%); 
+        bottom: 37%; 
         height: 100px;
         background: url("./Image/Boite-Dialogue.png") no-repeat center;
         background-size: contain;
