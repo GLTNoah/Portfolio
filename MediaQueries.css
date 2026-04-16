@@ -87,7 +87,7 @@
     .TexteJILLWrapper {
         position: absolute;
         top: 10%; 
-        left: 5%;
+        left: 3%;
         width: 90%; 
         height: 80%;  
         display: flex;
@@ -96,7 +96,7 @@
     }
 
     .TexteJILL {
-        font-size: 13px;
+        font-size: 12px;
         text-align: center;
         line-height: 1.1;
     }
