@@ -35,6 +35,7 @@
     }
 
     /*----- 2. DESCRIPTIONS & BOUTON -----*/
+
     .Description-Projet, .Description-CV, .Description-Veille {
         position: absolute;
         bottom: 25px;
@@ -54,19 +55,24 @@
         display: none;
         background-color: rgba(0, 0, 0, 0.9);
         border: 1px solid rgba(255, 255, 255, 0.3);
+        display: none; 
         justify-content: center;
         align-items: center;
     }
 
     .ExaminerIcone label {
         font-size: 18px;
+        color: white;
+        text-align: center;
+        white-space: nowrap;
         display: flex;
         justify-content: center;
         align-items: center;
         width: 100%;
         height: 100%;
-        color: white;
-        text-align: center;
+        margin: 0;
+        padding: 0;
+        line-height: 1; 
     }
 
     /*----- 3. DIALOGUE JILL (REPOSITIONNÉ À DROITE) -----*/
