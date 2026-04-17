@@ -565,3 +565,18 @@ main:has(#slot-veille:hover) .Dialogue-JILL-Container {
     letter-spacing: 2px;
     text-transform: uppercase;
 }
+
+/*-----CURSEUR-----*/
+
+html, body {
+    cursor: url('./Image/Curseur.png') 0 0, auto;
+}
+
+a, button, .Inventaire-Slot, label {
+    cursor: url('./Image/Curseur.png') 0 0, pointer;
+}
+
+a:hover, button:hover, .Inventaire-Slot:hover, label:hover {
+    cursor: url('./Image/Curseur.png') 0 0, pointer;
+}
+
