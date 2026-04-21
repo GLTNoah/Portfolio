@@ -73,6 +73,25 @@
     }
 }
 
+@keyframes radioNoise_telephone {
+    0% {
+        opacity: 0;
+    }
+    30%, 35%, 65%, 68% {
+        opacity: 0.9;
+    }
+    32%, 36%, 66%, 69% {
+        opacity: 0.2; 
+    }
+    34%, 38%, 67%, 70% {
+        opacity: 0.9;
+    }
+    100% {
+        opacity:0;
+    }
+}
+
+
 @keyframes clignotement {
     0%,100%   { opacity: 0.2; } 
     50%  { opacity: 0.8; };
@@ -106,4 +125,3 @@
     from { background-position: 0 center; }
     to { background-position: -300px center; } 
 }
-

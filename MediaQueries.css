@@ -1,4 +1,8 @@
-@media screen and (max-width: 768px) {
+@import url(./KeyFrames.css);
+
+/*-----TELEPHONE-----*/
+
+@media screen and (max-width: 767px) {
 
     /*----- 0. FIX STRUCTURE SAFARI -----*/
     html, body {
@@ -79,15 +83,16 @@
     
     .Dialogue-JILL-Container {
         display: block !important;
-        opacity: 1 !important;
+        opacity: 1;
         width: 65%; 
         left: auto;
-        right: -25%; 
+        right: 5%; 
         bottom: 25%; 
         transform: none;
         height: 150px;
         background-size: 100% 100%;
         z-index: 5;
+        animation: radioNoise_telephone 10s linear infinite;
     }
 
     .TexteJILLWrapper {
@@ -164,3 +169,4 @@
         display: none !important;        
     }
 }
+
