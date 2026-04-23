@@ -1,10 +1,10 @@
 @import url(./KeyFrames.css);
 
-/*-----TELEPHONE-----*/
+/*----- TÉLÉPHONE -----*/
 
 @media screen and (max-width: 767px) {
 
-    /*----- 0. FIX STRUCTURE SAFARI -----*/
+    /*----- 0. AJUSTEMENT STRUCTURE SAFARI -----*/
     html, body {
         height: 100% !important;
         min-height: -webkit-fill-available;
@@ -12,7 +12,7 @@
     }
     
     /*----- 1. L'INVENTAIRE -----*/
-    .Top-Inventaire {
+    .Haut-Inventaire {
         right: auto;
         left: 50%;
         transform: translateX(-50%);
@@ -27,9 +27,9 @@
         padding-bottom: 100px;
     }
 
-    .Top-Bar { padding: 20px 50px; }
-    .Top-Inventaire h1 { top: 20px; font-size: 16px; }
-    .Top-Inventaire h2 { top: 30px; font-size: 22px; }
+    .Barre-Superieure { padding: 20px 50px; }
+    .Haut-Inventaire h1 { top: 20px; font-size: 16px; }
+    .Haut-Inventaire h2 { top: 30px; font-size: 22px; }
 
     .Grille-Inventaire {
         margin-top: 10px; 
@@ -50,7 +50,7 @@
         display: none;
     }
 
-    .ExaminerIcone {
+    .Icone-Examiner {
         width: 280px;
         height: 50px;
         top: 102%;
@@ -59,12 +59,11 @@
         display: none;
         background-color: rgba(0, 0, 0, 0.9);
         border: 1px solid rgba(255, 255, 255, 0.3);
-        display: none; 
         justify-content: center;
         align-items: center;
     }
 
-    .ExaminerIcone label {
+    .Icone-Examiner label {
         font-size: 18px;
         color: white;
         text-align: center;
@@ -81,7 +80,7 @@
 
     /*----- 3. DIALOGUE JILL (REPOSITIONNÉ À DROITE) -----*/
     
-    .Dialogue-JILL-Container {
+    .Conteneur-Dialogue-Jill {
         display: block !important;
         opacity: 1;
         width: 65%; 
@@ -95,7 +94,7 @@
         animation: radioNoise_telephone 10s linear infinite;
     }
 
-    .TexteJILLWrapper {
+    .Enveloppe-Texte-Jill {
         position: absolute;
         top: 10%; 
         left: 3%;
@@ -106,14 +105,14 @@
         justify-content: center;
     }
 
-    .TexteJILL {
+    .Texte-Jill {
         font-size: 12px;
         text-align: center;
         line-height: 1.1;
     }
 
     /*----- 4. MONITEUR ECG (AU PLUS BAS) -----*/
-    .ecg-monitor {
+    .moniteur-ecg {
         width: 90%; 
         left: 50%;
         transform: translateX(-50%);
@@ -121,52 +120,35 @@
         height: 70px;
     }
 
-    .ecg-svg { height: 40px; }
-    .bpm { font-size: 16px; top: 5px; right: 10px; }
+    .svg-ecg { height: 40px; }
+    .pulsations { font-size: 16px; top: 5px; right: 10px; }
 
-    /*----- 5. ECRAN NOIR & QUITTER -----*/
-    .ecran-noir {
-        width: 100vw;
-        height: 100svh;
-        position: fixed;
-        top: 0;
-        left: 0;
-        z-index: 2000;
-        background: black;
-        display: none;
-    }
-
-    .texte-quitter {
-        position: fixed;
-        left: 50%;
-        transform: translateX(-50%);
-        bottom: calc(env(safe-area-inset-bottom) + 5px);
-        width: 100%;
-        text-align: center;
-        font-size: 13px;
-        z-index: 2500;
-        color: white;
+    /*----- 5. BOUTON FERMER LE TERMINAL (NOUVEAU) -----*/
+    .bouton-fermer-ecran {
+        bottom: 50px;
+        right: 50px;
+        font-size: 15px;
+        padding: 5px;
     }
 
     /*----- 6. LOGIQUE DE FOCUS -----*/
-    .Projet-Slot-Aggrandit, .CV-Slot-Aggrandit, .Veille-Slot-Aggrandit {
+    .Projet-Agrandi, .CV-Agrandi, .Veille-Agrandi {
         display: none !important;
     }
 
-    .Top-Inventaire:has(#slot-projet:focus) .Description-Projet,
-    .Top-Inventaire:has(#slot-cv:focus) .Description-CV,
-    .Top-Inventaire:has(#slot-veille:focus) .Description-Veille {
+    .Haut-Inventaire:has(#emplacement-projet:focus) .Description-Projet,
+    .Haut-Inventaire:has(#emplacement-cv:focus) .Description-CV,
+    .Haut-Inventaire:has(#emplacement-veille:focus) .Description-Veille {
         display: block !important;
     }
 
-    #slot-projet:focus + .ExaminerIcone,
-    #slot-cv:focus + .ExaminerIcone,
-    #slot-veille:focus + .ExaminerIcone {
+    #emplacement-projet:focus + .Icone-Examiner,
+    #emplacement-cv:focus + .Icone-Examiner,
+    #emplacement-veille:focus + .Icone-Examiner {
         display: flex;
     }
 
-    main:has(.Inventaire-Slot:focus) .Dialogue-JILL-Container {
+    main:has(.Emplacement-Inventaire:focus) .Conteneur-Dialogue-Jill {
         display: none !important;        
     }
 }
-
