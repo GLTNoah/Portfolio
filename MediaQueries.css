@@ -150,11 +150,7 @@
         display: none !important;        
     }
 
-    /*----- 7. CADRE DU TERMINAL ORDI (DÉLIMITATION SUR MOBILE) -----*/
-    .animation-allumage-ecran, .calque-cathodique {
-        top: 2dvh !important;
-        left: 2vw !important;
-        width: 96vw !important;
-        height: 96dvh !important;
+    main:has(.Emplacement-Inventaire:focus) .moniteur-ecg {
+        display: none !important;        
     }
 }
