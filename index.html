@@ -18,18 +18,18 @@
     <input type="radio" name="examen" id="radio-cv" autocomplete="off" style="display: none;">
     <input type="radio" name="examen" id="radio-veille" autocomplete="off" style="display: none;">
 
-    <div class="screen-on-animation"></div>
-    <div class="crt-overlay"></div>
+    <div class="animation-allumage-ecran"></div>
+    <div class="calque-cathodique"></div>
     <label for="fermer-examen" class="bouton-fermer-ecran">[X] FERMER LE TERMINAL</label>
 
-    <video class="video-background" src="./vidéo/resident-evil.1920x1080.mp4" autoplay muted loop></video>
+    <video class="fond-video" src="./vidéo/resident-evil.1920x1080.mp4" autoplay muted loop></video>
 
     <main>
-        <nav class="Top-Inventaire">
-            <header class="Top-Bar">
-                <div class="Nav-Bouton">
+        <nav class="Haut-Inventaire">
+            <header class="Barre-Superieure">
+                <div class="Bouton-Navigation">
                     <span><img src="./Image/bouton_gauche.png" alt=""></span>
-                    <span>MAP</span>
+                    <span>CARTE</span>
                 </div>
 
                 <div class="Titre-Principal">
@@ -37,39 +37,39 @@
                     <h2>. . .</h2>
                 </div>
 
-                <div class="Nav-Bouton">
+                <div class="Bouton-Navigation">
                     <span><img src="./Image/bouton_droit.png" alt=""></span>
-                    <span>FILES</span>
+                    <span>FICHIERS</span>
                 </div>
             </header>
 
             <div class="Grille-Inventaire">
-                <div class="Inventaire-Slot" id="slot-projet" tabindex="0" onmouseenter="document.getElementById('myaudio').play()">
+                <div class="Emplacement-Inventaire" id="emplacement-projet" tabindex="0" onmouseenter="document.getElementById('myaudio').play()">
                     <span><img src="./Image/Icone-Projet.png" alt=""></span>
                 </div>
-                <ul class="ExaminerIcone">
+                <ul class="Icone-Examiner">
                     <li><label for="radio-projet">Inspecter cet objet ?</label></li>
                 </ul>
 
-                <div class="Inventaire-Slot" id="slot-cv" tabindex="0" onmouseenter="document.getElementById('myaudio').play()">
+                <div class="Emplacement-Inventaire" id="emplacement-cv" tabindex="0" onmouseenter="document.getElementById('myaudio').play()">
                     <span><img src="./Image/Icone-CV.png" alt=""></span>
                 </div>
-                <ul class="ExaminerIcone">
+                <ul class="Icone-Examiner">
                     <li><label for="radio-cv">Inspecter cet objet ?</label></li>
                 </ul>
 
-                <div class="Inventaire-Slot" id="slot-veille" tabindex="0" onmouseenter="document.getElementById('myaudio').play()">
+                <div class="Emplacement-Inventaire" id="emplacement-veille" tabindex="0" onmouseenter="document.getElementById('myaudio').play()">
                     <span><img src="./Image/Icone-Veille.png" alt=""></span>
                 </div>
-                <ul class="ExaminerIcone">
+                <ul class="Icone-Examiner">
                     <li><label for="radio-veille">Inspecter cet objet ?</label></li>
                 </ul>
 
-                <div class="Inventaire-Slot empty" tabindex="0" onmouseenter="document.getElementById('myaudio').play()"></div>
-                <div class="Inventaire-Slot empty" tabindex="0" onmouseenter="document.getElementById('myaudio').play()"></div>
-                <div class="Inventaire-Slot empty" tabindex="0" onmouseenter="document.getElementById('myaudio').play()"></div>
-                <div class="Inventaire-Slot empty" tabindex="0" onmouseenter="document.getElementById('myaudio').play()"></div>
-                <div class="Inventaire-Slot empty" tabindex="0" onmouseenter="document.getElementById('myaudio').play()"></div>
+                <div class="Emplacement-Inventaire vide" tabindex="0" onmouseenter="document.getElementById('myaudio').play()"></div>
+                <div class="Emplacement-Inventaire vide" tabindex="0" onmouseenter="document.getElementById('myaudio').play()"></div>
+                <div class="Emplacement-Inventaire vide" tabindex="0" onmouseenter="document.getElementById('myaudio').play()"></div>
+                <div class="Emplacement-Inventaire vide" tabindex="0" onmouseenter="document.getElementById('myaudio').play()"></div>
+                <div class="Emplacement-Inventaire vide" tabindex="0" onmouseenter="document.getElementById('myaudio').play()"></div>
             </div>
 
             <div class="Description-Projet">
@@ -85,19 +85,19 @@
             </div>
 
             <div class="Description-Veille">
-                <h3>Cles USB</h3>
+                <h3>Clés USB</h3>
                 <hr>
                 <p>Toutes les informations sur la dernière veille technologique.</p>
             </div>
         </nav>
 
-        <div class="ecg-monitor">
-            <div class="ecg-container">
-                <div class="grid-ecg"></div>
-                <div class="baseline"></div>
-                <div class="svg-container">
-                    <svg class="ecg-svg" viewBox="0 0 1000 150" preserveAspectRatio="none">
-                        <path class="heartbeat-line" d="
+        <div class="moniteur-ecg">
+            <div class="conteneur-ecg">
+                <div class="grille-ecg"></div>
+                <div class="ligne-base"></div>
+                <div class="conteneur-svg">
+                    <svg class="svg-ecg" viewBox="0 0 1000 150" preserveAspectRatio="none">
+                        <path class="ligne-rythme-cardiaque" d="
                             M 0 75 L 50 75 L 60 15 L 75 135 L 90 75 L 150 75
                             L 350 75 L 360 5 L 375 135 L 390 75
                             L 650 75 L 660 15 L 675 135 L 690 75
@@ -105,25 +105,24 @@
                         "/>
                     </svg>
                 </div>
-                <div class="bpm">72</div>
-                <div class="status-label">CONDITION: FINE</div>
+                <div class="pulsations">72</div>
+                <div class="libelle-etat">ÉTAT : BON</div>
             </div>
         </div>
 
-        <nav class="Visu-Objet">
-            <div class="Projet-Slot-Aggrandit"><span><img src="./Image/Icone-Projet.png" alt=""></span></div>
-            <div class="CV-Slot-Aggrandit"><span><img src="./Image/Icone-CV.png" alt=""></span></div>
-            <div class="Veille-Slot-Aggrandit"><span><img src="./Image/Icone-Veille.png" alt=""></span></div>
+        <nav class="Visualisation-Objet">
+            <div class="Projet-Agrandi"><span><img src="./Image/Icone-Projet.png" alt=""></span></div>
+            <div class="CV-Agrandi"><span><img src="./Image/Icone-CV.png" alt=""></span></div>
+            <div class="Veille-Agrandi"><span><img src="./Image/Icone-Veille.png" alt=""></span></div>
         </nav>
 
-        <nav class="Dialogue-JILL-Container">
-            <div class="TexteJILLWrapper">
-                <p class="TexteJILL">Avant de continuer, je devrais inspecter tout ce que j'ai eu ici. Je pourrais y trouver des éléments importants...</p>
+        <nav class="Conteneur-Dialogue-Jill">
+            <div class="Enveloppe-Texte-Jill">
+                <p class="Texte-Jill">Avant de continuer, je devrais inspecter tout ce que j'ai eu ici. Je pourrais y trouver des éléments importants...</p>
             </div>
         </nav>
     </main>
 
     <audio id="myaudio" src="./son/Son-inventaire.mp3" oncanplay="this.volume=0.02"></audio>
 </body>
-
 </html>

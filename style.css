@@ -39,7 +39,7 @@ body::before {
     src: url(./font/Cinzel-Regular.ttf);
 }
 
-.video-background {
+.fond-video {
     position: absolute;
     width: 100%;
     height: 100%;
@@ -47,7 +47,7 @@ body::before {
     z-index: -1;
 }
 
-.Top-Inventaire {
+.Haut-Inventaire {
     display: flex;
     position: absolute;
     right: 10%;
@@ -63,7 +63,7 @@ body::before {
     max-width: 500px;
 }
 
-.Top-Bar {
+.Barre-Superieure {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
@@ -77,25 +77,25 @@ body::before {
     align-items: center;
 }
 
-.Nav-Bouton {
+.Bouton-Navigation {
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 5px;
 }
 
-.Top-Inventaire h1, .Top-Inventaire h2 {
+.Haut-Inventaire h1, .Haut-Inventaire h2 {
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
     font-family: "Cinzel", serif;
 }
 
-.Top-Inventaire h1 {
+.Haut-Inventaire h1 {
     font-size: 20px;
     position: absolute;
     top: 40px;
 }
 
-.Top-Inventaire h2 {
+.Haut-Inventaire h2 {
     font-size: 30px;
     position: absolute;
     top: 50px;
@@ -110,7 +110,7 @@ body::before {
     margin-top: 100px;
 }
 
-.Inventaire-Slot {
+.Emplacement-Inventaire {
     aspect-ratio: 1 / 1;
     border: 2px solid rgba(255, 255, 255, 0.1);
     background: rgba(40, 40, 40, 0.5);
@@ -120,7 +120,7 @@ body::before {
     position: relative;
 }
 
-.Inventaire-Slot span {
+.Emplacement-Inventaire span {
     width: 100%;
     height: 100%;
     display: flex;
@@ -128,20 +128,20 @@ body::before {
     align-items: center;
 }
 
-.Inventaire-Slot img {
+.Emplacement-Inventaire img {
     max-width: 90%;
     max-height: 90%;
 }
 
-.Inventaire-Slot.empty {
+.Emplacement-Inventaire.vide {
     position: relative;
     background: rgba(0,  0, 0, 0.4);
     border: 1px solid rgba(255, 255, 255, 0.05);
     overflow: hidden;
 }
 
-.Inventaire-Slot.empty::before,
-.Inventaire-Slot.empty::after {
+.Emplacement-Inventaire.vide::before,
+.Emplacement-Inventaire.vide::after {
     content: "";
     position: absolute;
     top: 50%;
@@ -152,15 +152,15 @@ body::before {
     transform-origin: center;
 }
 
-.Inventaire-Slot.empty::before {
+.Emplacement-Inventaire.vide::before {
     transform: translate(-50%, -50%) rotate(45deg);
 }
 
-.Inventaire-Slot.empty::after {
+.Emplacement-Inventaire.vide::after {
     transform: translate(-50%, -50%) rotate(-45deg);
 }
 
-#slot-veille:hover,#slot-cv:hover,#slot-projet:hover {
+#emplacement-veille:hover, #emplacement-cv:hover, #emplacement-projet:hover {
     border-color: #00ff41; 
     background: rgba(0, 255, 65, 0.1);
     box-shadow: inset 0 0 15px rgba(0, 255, 65, 0.2);
@@ -189,13 +189,13 @@ body::before {
     max-width: 400px;
 }
 
-.Top-Inventaire:has(#slot-projet:hover) .Description-Projet,
-.Top-Inventaire:has(#slot-cv:hover) .Description-CV,
-.Top-Inventaire:has(#slot-veille:hover) .Description-Veille {
+.Haut-Inventaire:has(#emplacement-projet:hover) .Description-Projet,
+.Haut-Inventaire:has(#emplacement-cv:hover) .Description-CV,
+.Haut-Inventaire:has(#emplacement-veille:hover) .Description-Veille {
     display: block;
 }
 
-.ExaminerIcone {
+.Icone-Examiner {
     position: absolute;
     top: 400px;
     width: 300px; 
@@ -206,7 +206,7 @@ body::before {
     border: 1px solid rgba(255, 255, 255, 0.3);
 }
 
-.ExaminerIcone label {
+.Icone-Examiner label {
     display: block;
     width: 100%;
     height: 100%;
@@ -218,30 +218,30 @@ body::before {
     padding: 10px 0px 0px 50px;
 }
 
-.ExaminerIcone label:hover {
+.Icone-Examiner label:hover {
     color: #00ff41; 
     transform: scale(1.02);
 }
 
-#slot-projet:focus + .ExaminerIcone,
-#slot-projet + .ExaminerIcone:hover {
+#emplacement-projet:focus + .Icone-Examiner,
+#emplacement-projet + .Icone-Examiner:hover {
     display: flex;
     left: -10%;
 }
 
-#slot-cv:focus + .ExaminerIcone,
-#slot-cv + .ExaminerIcone:hover {
+#emplacement-cv:focus + .Icone-Examiner,
+#emplacement-cv + .Icone-Examiner:hover {
     display: flex;
     left: 20%;
 }
 
-#slot-veille:focus + .ExaminerIcone,
-#slot-veille + .ExaminerIcone:hover {
+#emplacement-veille:focus + .Icone-Examiner,
+#emplacement-veille + .Icone-Examiner:hover {
     display: flex;
     left: 55%;
 }
 
-.screen-on-animation {
+.animation-allumage-ecran {
     position: fixed;
     top: 0;
     left: 0;
@@ -254,20 +254,19 @@ body::before {
     box-sizing: border-box;
 }
 
-#radio-projet:checked ~ .screen-on-animation,
-#radio-cv:checked ~ .screen-on-animation,
-#radio-veille:checked ~ .screen-on-animation {
+#radio-projet:checked ~ .animation-allumage-ecran,
+#radio-cv:checked ~ .animation-allumage-ecran,
+#radio-veille:checked ~ .animation-allumage-ecran {
     display: block;
     animation: tv-power-on 0.6s ease-out forwards;
 }
 
-#fermer-examen:checked ~ .screen-on-animation {
+#fermer-examen:checked ~ .animation-allumage-ecran {
     display: block;
     animation: tv-power-off 0.6s ease-out forwards;
 }
 
-/*----- FILTRE CRT -----*/
-.crt-overlay {
+.calque-cathodique {
     position: fixed;
     top: 0;
     left: 0;
@@ -278,22 +277,19 @@ body::before {
     background-size: 100% 100%, 100% 4px;
     z-index: 2600;
     pointer-events: none;
-    /* Caché par défaut au lancement du site */
     opacity: 0;
     visibility: hidden;
 }
 
-/* À l'ouverture : on l'affiche et on met le clignotement */
-#radio-projet:checked ~ .crt-overlay,
-#radio-cv:checked ~ .crt-overlay,
-#radio-veille:checked ~ .crt-overlay {
+#radio-projet:checked ~ .calque-cathodique,
+#radio-cv:checked ~ .calque-cathodique,
+#radio-veille:checked ~ .calque-cathodique {
     visibility: visible;
     opacity: 0.3;
     animation: green-flicker 0.1s infinite;
 }
 
-/* À la fermeture : on lance l'animation qui va le masquer pile à la fin */
-#fermer-examen:checked ~ .crt-overlay {
+#fermer-examen:checked ~ .calque-cathodique {
     animation: overlay-turn-off 0.6s forwards;
 }
 
@@ -341,13 +337,13 @@ body::before {
     transition: background 0.2s, color 0.2s, transform 0.2s, box-shadow 0.2s;
 }
 
-body:has(input[name="examen"]:not(#fermer-examen):not(#etat-initial):checked) .Top-Inventaire,
-body:has(input[name="examen"]:not(#fermer-examen):not(#etat-initial):checked) .Dialogue-JILL-Container,
-body:has(input[name="examen"]:not(#fermer-examen):not(#etat-initial):checked) .ecg-monitor {
+body:has(input[name="examen"]:not(#fermer-examen):not(#etat-initial):checked) .Haut-Inventaire,
+body:has(input[name="examen"]:not(#fermer-examen):not(#etat-initial):checked) .Conteneur-Dialogue-Jill,
+body:has(input[name="examen"]:not(#fermer-examen):not(#etat-initial):checked) .moniteur-ecg {
     display: none !important;
 }
 
-.Projet-Slot-Aggrandit, .CV-Slot-Aggrandit, .Veille-Slot-Aggrandit {
+.Projet-Agrandi, .CV-Agrandi, .Veille-Agrandi {
     display: none;
     position: absolute;
     left: 15%;
@@ -360,7 +356,7 @@ body:has(input[name="examen"]:not(#fermer-examen):not(#etat-initial):checked) .e
     z-index: 3000;
 }
 
-.Projet-Slot-Aggrandit img, .CV-Slot-Aggrandit img, .Veille-Slot-Aggrandit img { 
+.Projet-Agrandi img, .CV-Agrandi img, .Veille-Agrandi img { 
     display : flex;
     position: absolute;
     justify-content: center;
@@ -370,14 +366,14 @@ body:has(input[name="examen"]:not(#fermer-examen):not(#etat-initial):checked) .e
     object-fit: contain;
 }
 
-main:has(#radio-projet:checked) .Projet-Slot-Aggrandit, 
-main:has(#radio-cv:checked) .CV-Slot-Aggrandit,
-main:has(#radio-veille:checked) .Veille-Slot-Aggrandit {
+main:has(#radio-projet:checked) .Projet-Agrandi, 
+main:has(#radio-cv:checked) .CV-Agrandi,
+main:has(#radio-veille:checked) .Veille-Agrandi {
     display: flex;
     animation: glitch-apparition 1.3s linear 0.6s forwards;
 }
 
-.Dialogue-JILL-Container {
+.Conteneur-Dialogue-Jill {
     position: absolute;
     opacity: 0;
     bottom: 40%; 
@@ -390,7 +386,7 @@ main:has(#radio-veille:checked) .Veille-Slot-Aggrandit {
     animation: cycleDialogue 18s infinite, radioNoise 3s linear infinite;
 } 
 
-.Dialogue-JILL-Container::before {
+.Conteneur-Dialogue-Jill::before {
     content: "";
     position: absolute;
     top: 0; left: 0; right: 0; bottom: 0;
@@ -399,7 +395,7 @@ main:has(#radio-veille:checked) .Veille-Slot-Aggrandit {
     z-index: 1;
 }
 
-.Dialogue-JILL-Container::after {
+.Conteneur-Dialogue-Jill::after {
     content: "";
     position: absolute;
     top: 0; left: 0; right: 0; bottom: 0;
@@ -408,7 +404,7 @@ main:has(#radio-veille:checked) .Veille-Slot-Aggrandit {
     z-index: 2; 
 }
 
-.Dialogue-JILL-Container::before, .Dialogue-JILL-Container::after {
+.Conteneur-Dialogue-Jill::before, .Conteneur-Dialogue-Jill::after {
     -webkit-mask-image: url("./Image/Boite-Dialogue.png");
     -webkit-mask-size: contain;
     -webkit-mask-repeat: no-repeat;
@@ -419,7 +415,7 @@ main:has(#radio-veille:checked) .Veille-Slot-Aggrandit {
     mask-position: center;    
 }
 
-.TexteJILLWrapper {
+.Enveloppe-Texte-Jill {
     position: absolute;
     top: 17%; 
     left: 10%;
@@ -430,7 +426,7 @@ main:has(#radio-veille:checked) .Veille-Slot-Aggrandit {
     align-items: center;
 }
 
-.TexteJILL {
+.Texte-Jill {
     font-family: 'VT323', monospace;
     opacity: 0.9;
     font-size: 24px; 
@@ -441,7 +437,7 @@ main:has(#radio-veille:checked) .Veille-Slot-Aggrandit {
     animation: radioNoise 15s steps (40, end) infinite;
 }
 
-.ecg-monitor {
+.moniteur-ecg {
     position: absolute;
     bottom: 185px;
     right: 12.75%;
@@ -452,7 +448,7 @@ main:has(#radio-veille:checked) .Veille-Slot-Aggrandit {
     box-shadow: #000 0px 0px 20px, #03ad5e 0px 0px 40px;
 }
 
-.ecg-container {
+.conteneur-ecg {
     width: 100%;
     height: 100%;
     position: relative;
@@ -463,7 +459,7 @@ main:has(#radio-veille:checked) .Veille-Slot-Aggrandit {
     backdrop-filter: blur(5px);
 }
 
-.grid-ecg {
+.grille-ecg {
     position: absolute;
     inset: 0;
     background-image: 
@@ -472,7 +468,7 @@ main:has(#radio-veille:checked) .Veille-Slot-Aggrandit {
     background-size: 25px 25px;
 }
 
-.baseline {
+.ligne-base {
     position: absolute;
     top: 50%;
     left: 0;
@@ -482,7 +478,7 @@ main:has(#radio-veille:checked) .Veille-Slot-Aggrandit {
     transform: translateY(-50%);
 }        
 
-.svg-container {
+.conteneur-svg {
     position: absolute;
     top: 0;
     left: 0;
@@ -493,13 +489,13 @@ main:has(#radio-veille:checked) .Veille-Slot-Aggrandit {
     overflow: hidden;
 }
 
-.ecg-svg {
+.svg-ecg {
     width: 100%;
     height: 80px; 
     overflow: visible;
 }
 
-.heartbeat-line {
+.ligne-rythme-cardiaque {
     fill: none;
     stroke: #00ff88;
     stroke-width: 4;
@@ -511,7 +507,7 @@ main:has(#radio-veille:checked) .Veille-Slot-Aggrandit {
     animation: draw-ecg 3s linear infinite;
 }
 
-.bpm {
+.pulsations {
     position: absolute;
     top: 10px;
     right: 15px;
@@ -523,7 +519,7 @@ main:has(#radio-veille:checked) .Veille-Slot-Aggrandit {
     animation: pulse 1s ease-in-out infinite;
 }
 
-.status-label {
+.libelle-etat {
     position: absolute;
     bottom: 5px;
     left: 10px;
@@ -534,6 +530,6 @@ main:has(#radio-veille:checked) .Veille-Slot-Aggrandit {
     text-transform: uppercase;
 }
 
-html, body, a, button, .Inventaire-Slot, label {
+html, body, a, button, .Emplacement-Inventaire, label {
     cursor: url('./Image/Curseur.png') 0 0, auto;
 }
