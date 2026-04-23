@@ -125,7 +125,7 @@
 
     /*----- 5. BOUTON FERMER LE TERMINAL -----*/
     .bouton-fermer-ecran {
-        bottom: 100px; 
+        bottom: 80px; 
         right: 50px;
         font-size: 18px;
         padding: 5px;
