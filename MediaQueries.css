@@ -152,7 +152,7 @@
         display: none !important;        
     }
 
-    /*----- 7. CADRE DU TERMINAL ORDI (ÉPAISSISSEMENT DU BAS) -----*/
+    /*----- 7. CADRE DU TERMINAL ORDI -----*/
 
     .animation-allumage-ecran {
         border-bottom-width: 70px !important; 
