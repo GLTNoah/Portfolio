@@ -9,14 +9,18 @@
     <link rel="stylesheet" href="MediaQueries.css">
     <link rel="stylesheet" href="KeyFrames.css">
     <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
-    </footer>
 </head>
 
 <body>
-    <input type="radio" name="examen" id="fermer-examen" checked style="display: none;">
-    <input type="radio" name="examen" id="radio-projet" style="display: none;">
-    <input type="radio" name="examen" id="radio-cv" style="display: none;">
-    <input type="radio" name="examen" id="radio-veille" style="display: none;">
+    <input type="radio" name="examen" id="etat-initial" checked autocomplete="off" style="display: none;">
+    <input type="radio" name="examen" id="fermer-examen" autocomplete="off" style="display: none;">
+    <input type="radio" name="examen" id="radio-projet" autocomplete="off" style="display: none;">
+    <input type="radio" name="examen" id="radio-cv" autocomplete="off" style="display: none;">
+    <input type="radio" name="examen" id="radio-veille" autocomplete="off" style="display: none;">
+
+    <div class="screen-on-animation"></div>
+    <div class="crt-overlay"></div>
+    <label for="fermer-examen" class="bouton-fermer-ecran">[X] FERMER LE TERMINAL</label>
 
     <video class="video-background" src="./vidéo/resident-evil.1920x1080.mp4" autoplay muted loop></video>
 
@@ -117,13 +121,9 @@
                 <p class="TexteJILL">Avant de continuer, je devrais inspecter tout ce que j'ai eu ici. Je pourrais y trouver des éléments importants...</p>
             </div>
         </nav>
-
-        <label for="fermer-examen" id="ecran-noir-examen" class="ecran-noir">
-            <p class="texte-quitter">Cliquez pour quitter l'examen</p>
-        </label>
-
     </main>
 
     <audio id="myaudio" src="./son/Son-inventaire.mp3" oncanplay="this.volume=0.02"></audio>
 </body>
+
 </html>
