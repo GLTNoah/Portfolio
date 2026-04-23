@@ -125,7 +125,7 @@
 
     /*----- 5. BOUTON FERMER LE TERMINAL -----*/
     .bouton-fermer-ecran {
-        bottom: 150px; 
+        bottom: 100px; 
         right: 50px;
         font-size: 18px;
         padding: 5px;
@@ -155,7 +155,7 @@
     /*----- 7. CADRE DU TERMINAL ORDI (ÉPAISSISSEMENT DU BAS) -----*/
 
     .animation-allumage-ecran {
-        border-bottom-width: 135px !important; 
+        border-bottom-width: 70px !important; 
         border-radius: 0 !important; 
     }
 }
