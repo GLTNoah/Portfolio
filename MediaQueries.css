@@ -78,7 +78,7 @@
         line-height: 1; 
     }
 
-    /*----- 3. DIALOGUE JILL (REPOSITIONNÉ À DROITE) -----*/
+    /*----- 3. DIALOGUE JILL -----*/
     
     .Conteneur-Dialogue-Jill {
         display: block !important;
@@ -111,7 +111,7 @@
         line-height: 1.1;
     }
 
-    /*----- 4. MONITEUR ECG (AU PLUS BAS) -----*/
+    /*----- 4. MONITEUR ECG -----*/
     .moniteur-ecg {
         width: 90%; 
         left: 50%;
