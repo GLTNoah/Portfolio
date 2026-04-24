@@ -40,7 +40,7 @@
 
     /*----- 2. DESCRIPTIONS & BOUTON -----*/
 
-    .Description-Projet, .Description-CV, .Description-Veille, .Description-Jeu,.Description-Ordi {
+    .Description-Projet, .Description-CV, .Description-Veille, .Description-Jeu, .Description-Ordi {
         position: absolute;
         bottom: 15px;
         left: 0;
@@ -53,7 +53,7 @@
     .Icone-Examiner {
         width: 280px;
         height: 50px;
-        top: 102%;
+        top: 102% !important;
         left: 50% !important;
         transform: translateX(-50%);
         display: none;
