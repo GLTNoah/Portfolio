@@ -40,7 +40,7 @@
 
     /*----- 2. DESCRIPTIONS & BOUTON -----*/
 
-    .Description-Projet, .Description-CV, .Description-Veille, .Description-Ordi {
+    .Description-Projet, .Description-CV, .Description-Veille, .Description-Jeu,.Description-Ordi {
         position: absolute;
         bottom: 15px;
         left: 0;
@@ -132,20 +132,18 @@
     }
 
     /*----- 6. LOGIQUE DE FOCUS -----*/
-    .Projet-Agrandi, .CV-Agrandi, .Veille-Agrandi, .Ordi-Agrandi {
-        display: none !important;
-    }
 
     .Haut-Inventaire:has(#emplacement-projet:focus) .Description-Projet,
     .Haut-Inventaire:has(#emplacement-cv:focus) .Description-CV,
     .Haut-Inventaire:has(#emplacement-veille:focus) .Description-Veille,
-    .Haut-Inventaire:has(#emplacement-ordi:focus) .Description-Ordi {
+    .Haut-Inventaire:has(#emplacement-jeu:focus) .Description-Jeu {
         display: block !important;
     }
 
     #emplacement-projet:focus + .Icone-Examiner,
     #emplacement-cv:focus + .Icone-Examiner,
-    #emplacement-veille:focus + .Icone-Examiner {
+    #emplacement-veille:focus + .Icone-Examiner,
+    #emplacement-jeu:focus + .Icone-Examiner {
         display: flex;
     }
 

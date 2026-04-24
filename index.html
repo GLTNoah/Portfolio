@@ -17,6 +17,7 @@
     <input type="radio" name="examen" id="radio-projet" autocomplete="off" style="display: none;">
     <input type="radio" name="examen" id="radio-cv" autocomplete="off" style="display: none;">
     <input type="radio" name="examen" id="radio-veille" autocomplete="off" style="display: none;">
+    <input type="radio" name="examen" id="radio-jeu" autocomplete="off" style="display: none;">
 
     <div class="animation-allumage-ecran"></div>
     <div class="calque-cathodique"></div>
@@ -70,6 +71,13 @@
                 <div class="Emplacement-Inventaire vide" tabindex="0" onmouseenter="document.getElementById('myaudio').play()"></div>
                 <div class="Emplacement-Inventaire vide" tabindex="0" onmouseenter="document.getElementById('myaudio').play()"></div>
 
+                <div class="Emplacement-Inventaire" id="emplacement-jeu" tabindex="0" onmouseenter="document.getElementById('myaudio').play()">
+                    <span><img src="./Image/Icone-Jeu.png" alt=""></span>
+                </div>
+                <ul class="Icone-Examiner">
+                    <li><label for="radio-jeu">Inspecter cet objet ?</label></li>
+                </ul>
+
                 <div class="Emplacement-Inventaire" id="emplacement-ordi" tabindex="0" onmouseenter="document.getElementById('myaudio').play()">
                     <span><img src="./Image/Icone-Ordi.png" alt=""></span>
                 </div>
@@ -98,6 +106,13 @@
                 <hr>
                 <p>Un ordinateur portable, utile pour inspecter les fichiers et les documents.</p>
             </div>
+
+            <div class="Description-Jeu">
+                <h3> CD ETRANGE</h3>
+                <hr>
+                <p> ??? Un disque étrange... On dirait un vieux jeu vidéo.</p>
+            </div>
+
         </nav>
 
         <div class="moniteur-ecg">
@@ -118,12 +133,6 @@
                 <div class="libelle-etat">ÉTAT : BON</div>
             </div>
         </div>
-
-        <nav class="Visualisation-Objet">
-            <div class="Projet-Agrandi"><span><img src="./Image/Icone-Projet.png" alt=""></span></div>
-            <div class="CV-Agrandi"><span><img src="./Image/Icone-CV.png" alt=""></span></div>
-            <div class="Veille-Agrandi"><span><img src="./Image/Icone-Veille.png" alt=""></span></div>
-        </nav>
 
         <nav class="Conteneur-Dialogue-Jill">
             <div class="Enveloppe-Texte-Jill">
