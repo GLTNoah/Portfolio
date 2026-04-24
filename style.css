@@ -1,6 +1,9 @@
 @import url(./KeyFrames.css);
 @import url(./MediaQueries.css);
 
+/* =========================================
+   00. BASE & RÉINITIALISATION
+========================================= */
 * {
     margin: 0;
     padding: 0;
@@ -39,6 +42,10 @@ body::before {
     src: url(./font/Cinzel-Regular.ttf);
 }
 
+html, body, a, button, .Emplacement-Inventaire, label {
+    cursor: url('./Image/Curseur.png') 0 0, auto;
+}
+
 .fond-video {
     position: absolute;
     width: 100%;
@@ -46,6 +53,10 @@ body::before {
     object-fit: cover;
     z-index: -1;
 }
+
+/* =========================================
+   01. INTERFACE PRINCIPALE (HAUT)
+========================================= */
 
 .Haut-Inventaire {
     display: flex;
@@ -100,6 +111,10 @@ body::before {
     position: absolute;
     top: 50px;
 }
+
+/* =========================================
+   02. GRILLE D'INVENTAIRE
+========================================= */
 
 .Grille-Inventaire {
     display : grid;
@@ -160,14 +175,21 @@ body::before {
     transform: translate(-50%, -50%) rotate(-45deg);
 }
 
-#emplacement-veille:hover, #emplacement-cv:hover, #emplacement-projet:hover {
+#emplacement-veille:hover, 
+#emplacement-cv:hover, 
+#emplacement-projet:hover,
+#emplacement-ordi:hover {
     border-color: #00ff41; 
     background: rgba(0, 255, 65, 0.1);
     box-shadow: inset 0 0 15px rgba(0, 255, 65, 0.2);
     transform: scale(1.05);
 }
 
-.Description-Projet, .Description-CV, .Description-Veille {
+/* =========================================
+   03. DESCRIPTIONS DES OBJETS
+========================================= */
+
+.Description-Projet, .Description-CV, .Description-Veille, .Description-Ordi {
     display: none;
     position: absolute;
     bottom: 50px;
@@ -178,22 +200,27 @@ body::before {
     text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
 }
 
-.Description-Projet hr, .Description-CV hr, .Description-Veille hr {
+.Description-Projet hr, .Description-CV hr, .Description-Veille hr, .Description-Ordi hr {
     border: 0;
     height: 1px;
     background: rgba(255, 255, 255, 0.5);
     margin: 10px 0;
 }
 
-.Description-CV p, .Description-Projet p, .Description-Veille p {
+.Description-CV p, .Description-Projet p, .Description-Veille p, .Description-Ordi p {
     max-width: 400px;
 }
 
 .Haut-Inventaire:has(#emplacement-projet:hover) .Description-Projet,
 .Haut-Inventaire:has(#emplacement-cv:hover) .Description-CV,
-.Haut-Inventaire:has(#emplacement-veille:hover) .Description-Veille {
+.Haut-Inventaire:has(#emplacement-veille:hover) .Description-Veille,
+.Haut-Inventaire:has(#emplacement-ordi:hover) .Description-Ordi {
     display: block;
 }
+
+/* =========================================
+   04. MENU D'INSPECTION
+========================================= */
 
 .Icone-Examiner {
     position: absolute;
@@ -240,6 +267,10 @@ body::before {
     display: flex;
     left: 55%;
 }
+
+/* =========================================
+   05. TERMINAL CATHODIQUE (CRT)
+========================================= */
 
 .animation-allumage-ecran {
     position: fixed;
@@ -293,6 +324,10 @@ body::before {
     animation: overlay-turn-off 0.6s forwards;
 }
 
+/* =========================================
+   06. BOUTON FERMER LE TERMINAL
+========================================= */
+
 .bouton-fermer-ecran {
     position: fixed;
     bottom: 75px;
@@ -337,11 +372,19 @@ body::before {
     transition: background 0.2s, color 0.2s, transform 0.2s, box-shadow 0.2s;
 }
 
+/* =========================================
+   07. MASQUAGE GLOBAL PENDANT EXAMEN
+========================================= */
+
 body:has(input[name="examen"]:not(#fermer-examen):not(#etat-initial):checked) .Haut-Inventaire,
 body:has(input[name="examen"]:not(#fermer-examen):not(#etat-initial):checked) .Conteneur-Dialogue-Jill,
 body:has(input[name="examen"]:not(#fermer-examen):not(#etat-initial):checked) .moniteur-ecg {
     display: none !important;
 }
+
+/* =========================================
+   08. VISUALISATION OBJETS (AGRANDIS)
+========================================= */
 
 .Projet-Agrandi, .CV-Agrandi, .Veille-Agrandi {
     display: none;
@@ -372,6 +415,10 @@ main:has(#radio-veille:checked) .Veille-Agrandi {
     display: flex;
     animation: glitch-apparition 1.3s linear 0.6s forwards;
 }
+
+/* =========================================
+   09. BOÎTE DE DIALOGUE (JILL)
+========================================= */
 
 .Conteneur-Dialogue-Jill {
     position: absolute;
@@ -436,6 +483,10 @@ main:has(#radio-veille:checked) .Veille-Agrandi {
     overflow: hidden;
     animation: radioNoise 15s steps (40, end) infinite;
 }
+
+/* =========================================
+   10. MONITEUR ECG
+========================================= */
 
 .moniteur-ecg {
     position: absolute;
@@ -528,8 +579,4 @@ main:has(#radio-veille:checked) .Veille-Agrandi {
     font-size: 16px;
     letter-spacing: 2px;
     text-transform: uppercase;
-}
-
-html, body, a, button, .Emplacement-Inventaire, label {
-    cursor: url('./Image/Curseur.png') 0 0, auto;
 }
