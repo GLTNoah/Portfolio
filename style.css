@@ -273,8 +273,8 @@ html, body, a, button, .Emplacement-Inventaire, label {
 #emplacement-jeu:focus + .Icone-Examiner,
 #emplacement-jeu + .Icone-Examiner:hover {
     display: flex;
-    left: 20%;
-    top: 60%;
+    top: 67%;
+    left: -10%;
 }
 
 /* =========================================
@@ -472,7 +472,7 @@ body:has(input[name="examen"]:not(#fermer-examen):not(#etat-initial):checked) .m
     bottom: 185px;
     right: 12.75%;
     width: 400px;
-    height: 120px;
+    height: 100px;
     z-index: 10;
     pointer-events: none;
     box-shadow: #000 0px 0px 20px, #03ad5e 0px 0px 40px;
