@@ -273,7 +273,7 @@ html, body, a, button, .Emplacement-Inventaire, label {
 #emplacement-jeu:focus + .Icone-Examiner,
 #emplacement-jeu + .Icone-Examiner:hover {
     display: flex;
-    top: 67%;
+    top: 60%;
     left: -10%;
 }
 
