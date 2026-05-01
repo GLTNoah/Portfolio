@@ -559,3 +559,59 @@ body:has(input[name="examen"]:not(#fermer-examen):not(#etat-initial):checked) .m
     letter-spacing: 2px;
     text-transform: uppercase;
 }
+
+.Jeu-Agrandi {
+    display: none;
+    position: absolute;
+    left: 15%;
+    top: 10%;
+    bottom: 10%;
+    width: 40%;
+    backdrop-filter: blur(15px);
+    -webkit-mask-image: linear-gradient(to right, rgba(0,0,0,0.2) 5%, black 15%, black 85%, rgba(0,0,0,0.5) 100%);
+    mask-image: linear-gradient(to right, rgba(0,0,0,0.2) 5%, black 15%, black 85%, rgba(0,0,0,0.5) 100%);
+    z-index: 3000;
+}
+
+.Jeu-Agrandi img { 
+    display : flex;
+    position: absolute;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+main:has(#radio-jeu:checked) .Jeu-Agrandi {
+    display: flex;
+    animation: glitch-apparition 1.3s linear 0.6s forwards;
+}
+
+.texte-terminal {
+    position: absolute;
+    left: 110%; 
+    top: 10%;
+    width: 600px;
+    color: #00ff41; 
+    font-family: 'VT323', monospace;
+    font-size: 28px;
+    text-shadow: 0 0 8px #00ff41;
+    line-height: 1.2;
+    white-space: pre-wrap; 
+}
+
+.curseur-terminal {
+    display: inline-block;
+    width: 14px;
+    height: 24px;
+    background-color: #00ff41;
+    vertical-align: bottom;
+    margin-left: 2px;
+    animation: clignotement-curseur 1s infinite;
+}
+
+@keyframes clignotement-curseur {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+}
