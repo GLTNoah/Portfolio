@@ -6,18 +6,12 @@
 
 @media (min-width: 320px) and (max-width: 480px) {
 
-    /* =========================================
-       00. AJUSTEMENT STRUCTURE SAFARI
-    ========================================= */
     html, body {
         height: 100% !important;
         min-height: -webkit-fill-available;
         overflow-x: hidden;
     }
     
-    /* =========================================
-       01. INTERFACE PRINCIPALE (HAUT)
-    ========================================= */
     .Haut-Inventaire {
         right: auto;
         left: 50%;
@@ -37,9 +31,6 @@
     .Haut-Inventaire h1 { top: 20px; font-size: 16px; }
     .Haut-Inventaire h2 { top: 30px; font-size: 22px; }
 
-    /* =========================================
-       02. GRILLE D'INVENTAIRE
-    ========================================= */
     .Grille-Inventaire {
         margin-top: 10px; 
         grid-template-columns: repeat(4, 1fr); 
@@ -47,9 +38,6 @@
         padding: 0 15px;
     }
 
-    /* =========================================
-       03. DESCRIPTIONS DES OBJETS
-    ========================================= */
     .Description-Projet, .Description-CV, .Description-Veille, .Description-Jeu, .Description-Ordi {
         position: absolute;
         bottom: 15px;
@@ -60,9 +48,6 @@
         display: none;
     }
 
-    /* =========================================
-       04. MENU D'INSPECTION & LOGIQUE FOCUS
-    ========================================= */
     .Icone-Examiner {
         width: 280px;
         height: 50px;
@@ -105,17 +90,11 @@
         display: flex;
     }
 
-    /* =========================================
-       05. TERMINAL CATHODIQUE (CRT)
-    ========================================= */
     .animation-allumage-ecran {
         border-bottom-width: 70px !important; 
         border-radius: 0 !important; 
     }
 
-    /* =========================================
-       06. BOUTON FERMER LE TERMINAL
-    ========================================= */
     .bouton-fermer-ecran {
         bottom: 13%; 
         right: 15%;
@@ -123,16 +102,10 @@
         padding: 5px;
     }
 
-    /* =========================================
-       07. MASQUAGE GLOBAL & VISUALISATION
-    ========================================= */
     main:has(.Emplacement-Inventaire:focus) .Conteneur-Dialogue-Jill {
         display: none !important;        
     }
 
-    /* =========================================
-       08. BOÎTE DE DIALOGUE (JILL)
-    ========================================= */
     .Conteneur-Dialogue-Jill {
         display: block !important;
         opacity: 1;
@@ -164,9 +137,6 @@
         line-height: 1.1;
     }
 
-    /* =========================================
-       09. MONITEUR ECG
-    ========================================= */
     .moniteur-ecg {
         width: 90%; 
         left: 50%;
@@ -178,11 +148,21 @@
     .svg-ecg { height: 40px; }
     .pulsations { font-size: 16px; top: 5px; right: 10px; }
 
+    .CV-Agrandi {
+        left: 5%;
+        width: 90%;
+        padding: 20px;
+    }
+
+    .En-Tete-CV h1 { font-size: 32px; }
+    .Section-CV h3 { font-size: 24px; }
+    .Section-CV p, .Section-CV li { font-size: 18px; }
 }
 
 /* =========================================
    GRANDS ÉCRANS (1281px et +) - Format 1200p / 4K
 ========================================= */
+
 @media (min-width: 1281px) {
 
     .Haut-Inventaire { max-width: 600px; }
@@ -235,7 +215,7 @@
     .Conteneur-Dialogue-Jill {
         width: 700px; 
         height: 180px;
-        bottom: 45%; 
+        bottom: 35%; 
         left: 30%;
     } 
 
@@ -250,11 +230,17 @@
 
     .pulsations { font-size: 34px; top: 15px; right: 20px; }
     .libelle-etat { font-size: 18px; bottom: 8px; left: 15px; }
+
+    .CV-Agrandi {
+        width: 60%;
+        left: 10%;
+    }
 }
 
 /* =========================================
-    HAUTEUR POUR ÉCRANS 1080p
+   HAUTEUR POUR ÉCRANS 1080p
 ========================================= */
+
 @media (min-width: 1281px) and (max-height: 1100px) {
     
     .Haut-Inventaire { max-width: 500px; } 

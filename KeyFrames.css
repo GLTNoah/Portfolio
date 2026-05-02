@@ -115,3 +115,12 @@
     0%, 100% { opacity: 0.3; }
     50% { opacity: 0.25; }
 }
+
+@keyframes clignotement-curseur {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+}
+
+@keyframes verrouillage-affichage {
+    to { opacity: 1; }
+}

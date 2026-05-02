@@ -560,8 +560,13 @@ body:has(input[name="examen"]:not(#fermer-examen):not(#etat-initial):checked) .m
     text-transform: uppercase;
 }
 
-.Jeu-Agrandi {
+/* =========================================
+   10. VISUALISATION OBJETS (AGRANDIS)
+========================================= */
+
+.Projet-Agrandi, .Veille-Agrandi, .Jeu-Agrandi {
     display: none;
+    opacity: 0;
     position: absolute;
     left: 15%;
     top: 10%;
@@ -573,7 +578,7 @@ body:has(input[name="examen"]:not(#fermer-examen):not(#etat-initial):checked) .m
     z-index: 3000;
 }
 
-.Jeu-Agrandi img { 
+.Projet-Agrandi img, .Veille-Agrandi img, .Jeu-Agrandi img { 
     display : flex;
     position: absolute;
     justify-content: center;
@@ -583,35 +588,102 @@ body:has(input[name="examen"]:not(#fermer-examen):not(#etat-initial):checked) .m
     object-fit: contain;
 }
 
-main:has(#radio-jeu:checked) .Jeu-Agrandi {
-    display: flex;
-    animation: glitch-apparition 1.3s linear 0.6s forwards;
-}
-
-.texte-terminal {
+.CV-Agrandi {
+    display: none;
+    opacity: 0;
     position: absolute;
-    left: 110%; 
+    left: 5%;
     top: 10%;
-    width: 600px;
-    color: #00ff41; 
+    bottom: 10%;
+    width: 70%;
+    background: rgba(0, 15, 5, 0.9);
+    border: 2px solid #00ff41;
+    box-shadow: 0 0 20px rgba(0, 255, 65, 0.2), inset 0 0 20px rgba(0, 255, 65, 0.2);
+    z-index: 3000;
+    padding: 40px;
+    color: #00ff41;
     font-family: 'VT323', monospace;
-    font-size: 28px;
-    text-shadow: 0 0 8px #00ff41;
-    line-height: 1.2;
-    white-space: pre-wrap; 
+    overflow-y: auto;
+    flex-direction: column;
 }
 
-.curseur-terminal {
-    display: inline-block;
-    width: 14px;
-    height: 24px;
-    background-color: #00ff41;
-    vertical-align: bottom;
-    margin-left: 2px;
-    animation: clignotement-curseur 1s infinite;
+.CV-Agrandi::-webkit-scrollbar {
+    width: 10px;
 }
 
-@keyframes clignotement-curseur {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0; }
+.CV-Agrandi::-webkit-scrollbar-track {
+    background: rgba(0, 20, 10, 0.8);
+    border-left: 1px solid #00ff41;
+}
+
+.CV-Agrandi::-webkit-scrollbar-thumb {
+    background: #00ff41;
+}
+
+.En-Tete-CV {
+    border-bottom: 2px solid #00ff41;
+    padding-bottom: 20px;
+    margin-bottom: 30px;
+}
+
+.En-Tete-CV h2 { font-size: 24px; opacity: 0.8; }
+.En-Tete-CV h1 { font-size: 48px; letter-spacing: 5px; text-shadow: 0 0 10px #00ff41; }
+
+.Section-CV { margin-bottom: 30px; }
+.Section-CV h3 { font-size: 32px; margin-bottom: 15px; text-shadow: 0 0 5px #00ff41; }
+.Section-CV p, .Section-CV li { font-size: 24px; line-height: 1.5; margin-bottom: 10px; }
+
+body:has(#radio-projet:checked) .Projet-Agrandi, 
+body:has(#radio-cv:checked) .CV-Agrandi,
+body:has(#radio-veille:checked) .Veille-Agrandi,
+body:has(#radio-jeu:checked) .Jeu-Agrandi {
+    display: flex;
+    animation: verrouillage-affichage 0.1s 0.6s forwards, glitch-apparition 1.3s linear 0.6s forwards;
+}
+
+/* =========================================
+   11. TELECHARGEMENT CV
+========================================= */
+
+.bouton-telecharger-ecran {
+    position: fixed;
+    top: 12%;
+    right: 90px;
+    background: #021a0a;
+    color: #00ff88;
+    font-family: 'VT323', monospace;
+    font-size: 38px;
+    border: #076338 2px solid;
+    box-shadow: 0 0 5px #077642, 0 0 10px #0c5533;
+    padding: 10px;
+    z-index: 5000;
+    cursor: pointer;
+    text-shadow: 0 0 10px #00ff88;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    text-decoration: none;
+}
+
+#radio-cv:checked ~ .bouton-telecharger-ecran {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transition: opacity 0.3s ease 0.6s, visibility 0.3s ease 0.6s;
+}
+
+#fermer-examen:checked ~ .bouton-telecharger-ecran,
+#etat-initial:checked ~ .bouton-telecharger-ecran {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: opacity 0s, visibility 0s; 
+}
+
+.bouton-telecharger-ecran:hover {
+    background: rgba(0, 255, 136, 0.15);
+    color: white;
+    box-shadow: 0 0 15px #00ff88;
+    transform: scale(1.05);
+    transition: background 0.2s, color 0.2s, transform 0.2s, box-shadow 0.2s;
 }
