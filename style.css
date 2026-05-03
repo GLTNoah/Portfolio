@@ -633,10 +633,7 @@ body:has(input[name="examen"]:not(#fermer-examen):not(#etat-initial):checked) .m
 .Section-CV h3 { font-size: 32px; margin-bottom: 15px; text-shadow: 0 0 5px #00ff41; }
 .Section-CV p, .Section-CV li { font-size: 24px; line-height: 1.5; margin-bottom: 10px; }
 
-body:has(#radio-projet:checked) .Projet-Agrandi, 
-body:has(#radio-cv:checked) .CV-Agrandi,
-body:has(#radio-veille:checked) .Veille-Agrandi,
-body:has(#radio-jeu:checked) .Jeu-Agrandi {
+body:has(#radio-cv:checked) .CV-Agrandi {
     display: flex;
     animation: verrouillage-affichage 0.1s 0.6s forwards, glitch-apparition 1.3s linear 0.6s forwards;
 }
