@@ -684,3 +684,84 @@ body:has(#radio-cv:checked) .CV-Agrandi {
     transform: scale(1.05);
     transition: background 0.2s, color 0.2s, transform 0.2s, box-shadow 0.2s;
 }
+
+/* =========================================
+   12. AFFICHAGE ORDI CATHODIQUE
+========================================= */
+
+.Panneau-Lateral-CRT {
+    display: none;
+    opacity: 0;
+    position: absolute;
+    right: 5%;
+    top: 28%;
+    bottom: 25%;
+    width: 22%;
+    max-width: 350px;
+    background: rgba(0, 15, 5, 0.7);
+    border: 2px solid rgba(0, 255, 65, 0.5);
+    box-shadow: 0 0 10px rgba(0, 255, 65, 0.1);
+    z-index: 3000;
+    padding: 20px;
+    color: #00ff41;
+    font-family: 'VT323', monospace;
+    flex-direction: column;
+    gap: 15px;
+}
+
+body:has(#radio-cv:checked) .Panneau-Lateral-CRT {
+    display: flex;
+    animation: verrouillage-affichage 0.1s 0.6s forwards, glitch-apparition 1.3s linear 0.6s forwards;
+}
+
+.panneau-header {
+    font-size: 28px;
+    border-bottom: 1px solid rgba(0, 255, 65, 0.5);
+    padding-bottom: 5px;
+    text-shadow: 0 0 5px #00ff41;
+}
+
+.panneau-contenu p {
+    font-size: 22px;
+    margin-bottom: 5px;
+    line-height: 1.2;
+}
+
+.clignotant-rapide {
+    animation: pulse 1s infinite;
+}
+
+.barre-chargement-crt {
+    width: 100%;
+    height: 12px;
+    border: 1px solid rgba(0, 255, 65, 0.5);
+    margin-top: 10px;
+    position: relative;
+}
+
+.progression-crt {
+    height: 100%;
+    background: #00ff41;
+    width: 0%;
+    animation: load-bar-crt 2.5s steps(8) forwards 1s;
+}
+
+.grille-radar {
+    flex-grow: 1;
+    border: 1px dashed rgba(0, 255, 65, 0.3);
+    background-image:
+        linear-gradient(rgba(0, 255, 65, 0.1) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 255, 65, 0.1) 1px, transparent 1px);
+    background-size: 15px 15px;
+    position: relative;
+    overflow: hidden;
+}
+
+.ligne-scan {
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: #00ff41;
+    box-shadow: 0 0 10px #00ff41;
+    animation: scan-vertical 3s linear infinite;
+}

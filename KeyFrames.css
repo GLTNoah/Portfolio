@@ -124,3 +124,12 @@
 @keyframes verrouillage-affichage {
     to { opacity: 1; }
 }
+
+@keyframes load-bar-crt {
+    to { width: 100%; }
+}
+
+@keyframes scan-vertical {
+    0% { top: -10%; }
+    100% { top: 110%; }
+}
