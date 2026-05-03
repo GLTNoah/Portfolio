@@ -151,9 +151,9 @@
     .CV-Agrandi {
         left: 50% !important;
         transform: translateX(-50%) !important;
-        width: 62% !important; 
+        width: 77% !important; 
         top: 15% !important;
-        bottom: 20.5% !important;
+        bottom: 17.5% !important;
         padding: 15px 12px !important;
     }
 
@@ -175,7 +175,7 @@
     }
 
     .bouton-fermer-ecran {
-        bottom: 13% !important;
+        bottom: 9% !important;
         left: 50% !important;
         right: auto !important;
         transform: translateX(-50%) !important;
