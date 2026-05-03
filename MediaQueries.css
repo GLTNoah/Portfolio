@@ -151,9 +151,9 @@
     .CV-Agrandi {
         left: 50% !important;
         transform: translateX(-50%) !important;
-        width: 92% !important; 
-        top: 12% !important;
-        bottom: 12% !important;
+        width: 62% !important; 
+        top: 15% !important;
+        bottom: 20.5% !important;
         padding: 15px 12px !important;
     }
 
@@ -163,7 +163,7 @@
     .Section-CV p, .Section-CV li { font-size: 13px !important; margin-bottom: 5px !important; line-height: 1.3 !important; }
 
     .bouton-telecharger-ecran {
-        top: 3% !important;
+        top: 7.5% !important;
         left: 50% !important;
         right: auto !important;
         transform: translateX(-50%) !important;
@@ -175,7 +175,7 @@
     }
 
     .bouton-fermer-ecran {
-        bottom: 3% !important;
+        bottom: 13% !important;
         left: 50% !important;
         right: auto !important;
         transform: translateX(-50%) !important;
