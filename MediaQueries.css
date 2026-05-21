@@ -307,7 +307,7 @@
     .Icone-Examiner {
         width: 300px; 
         height: 50px;
-        top: 345px; 
+        top: 320px; 
     }
 
     .Icone-Examiner label {
@@ -319,7 +319,7 @@
     #emplacement-jeu + .Icone-Examiner:hover,
     #emplacement-ordi:focus + .Icone-Examiner,
     #emplacement-ordi + .Icone-Examiner:hover {
-        top: 650px;  
+        top: 625px;  
     }  
 
     .bouton-fermer-ecran {
