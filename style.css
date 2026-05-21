@@ -75,11 +75,24 @@ html, body, a, button, .Emplacement-Inventaire, label {
 }
 
 .Barre-Superieure {
-    display: flex;
-    justify-content: space-between;
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
     align-items: flex-end;
     width: 100%;
+    gap: 40px;
     font-family: 'VT323', monospace;
+}
+
+#Label-Carte {
+    justify-self: end;
+}
+
+#Label-Etat-Initial {
+    justify-self: center;
+}
+
+#Label-Pomodoro {
+    justify-self: start;
 }
 
 .Titre-Principal {
