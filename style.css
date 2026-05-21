@@ -79,40 +79,47 @@ html, body, a, button, .Emplacement-Inventaire, label {
     justify-content: space-between;
     align-items: flex-start;
     width: 100%;
-    padding: 40px 80px;
+    font-family: 'VT323', monospace;
+
 }
 
 .Titre-Principal {
     display: flex;
     flex-direction: column;
     align-items: center;
+    font-weight: bold;
+}
+
+.Titre-Principal h1 {
+    font-size: 48px;
+    letter-spacing: 5px;
 }
 
 .Bouton-Navigation {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 5px;
+    gap: 10px;
+    font-size: 18px;
+    letter-spacing: 5px;
 }
 
-.Haut-Inventaire h1, .Haut-Inventaire h2 {
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
-    font-family: "Cinzel", serif;
+#Label-Carte:hover,
+#Label-Pomodoro:hover {
+    transform: scale(1.05);
 }
 
-.Haut-Inventaire h1 {
-    font-size: 20px;
-    position: absolute;
-    top: 40px;
+body:has(#Btn-Pomodoro:checked) .Grille-Inventaire,
+body:has(#Btn-Pomodoro:checked) .Conteneur-Dialogue-Jill,
+body:has(#Btn-Pomodoro:checked) .moniteur-ecg {
+    display: none !important;
 }
 
-.Haut-Inventaire h2 {
-    font-size: 30px;
-    position: absolute;
-    top: 50px;
+#Label-Etat-Initial:hover {
+    transform: scale(1.05);
 }
 
-/* =========================================
+/* =========================================    
    02. GRILLE D'INVENTAIRE
 ========================================= */
 
@@ -388,9 +395,9 @@ html, body, a, button, .Emplacement-Inventaire, label {
    07. MASQUAGE GLOBAL PENDANT EXAMEN
 ========================================= */
 
-body:has(input[name="examen"]:not(#fermer-examen):not(#etat-initial):checked) .Haut-Inventaire,
-body:has(input[name="examen"]:not(#fermer-examen):not(#etat-initial):checked) .Conteneur-Dialogue-Jill,
-body:has(input[name="examen"]:not(#fermer-examen):not(#etat-initial):checked) .moniteur-ecg {
+body:has(input[name="examen"]:not(#fermer-examen):not(#etat-initial):not(#Btn-Pomodoro):not(#Btn-Carte):checked) .Haut-Inventaire,
+body:has(input[name="examen"]:not(#fermer-examen):not(#etat-initial):not(#Btn-Pomodoro):not(#Btn-Carte):checked) .Conteneur-Dialogue-Jill,
+body:has(input[name="examen"]:not(#fermer-examen):not(#etat-initial):not(#Btn-Pomodoro):not(#Btn-Carte):checked) .moniteur-ecg {
     display: none !important;
 }
 

@@ -18,6 +18,10 @@
     <input type="radio" name="examen" id="radio-cv" autocomplete="off" style="display: none;">
     <input type="radio" name="examen" id="radio-veille" autocomplete="off" style="display: none;">
     <input type="radio" name="examen" id="radio-jeu" autocomplete="off" style="display: none;">
+    <input type="radio" name="examen" id="radio-ordi" autocomplete="off" style="display: none;">
+
+    <input type="radio" name="examen" id="Btn-Carte" autocomplete="off" style="display: none;">
+    <input type="radio" name="examen" id="Btn-Pomodoro" autocomplete="off" style="display: none;">
 
     <div class="animation-allumage-ecran"></div>
     <div class="calque-cathodique"></div>
@@ -30,20 +34,20 @@
     <main>
         <nav class="Haut-Inventaire">
             <header class="Barre-Superieure">
-                <div class="Bouton-Navigation">
+                <label class="Bouton-Navigation" id="Label-Carte" for="Btn-Carte">
                     <span><img src="./Image/bouton_gauche.png" alt=""></span>
                     <span>CARTE</span>
-                </div>
+                </label>
 
-                <div class="Titre-Principal">
-                    <h1>Inventaire</h1>
-                    <h2>. . .</h2>
-                </div>
+                <label class="Titre-Principal" id="Label-Etat-Initial" for="etat-initial">
+                        <h1>Inventaire</h1>
+                        <h2>. . .</h2>
+                </label>
 
-                <div class="Bouton-Navigation">
+                <label class="Bouton-Navigation" id="Label-Pomodoro" for="Btn-Pomodoro">
                     <span><img src="./Image/bouton_droit.png" alt=""></span>
-                    <span>FICHIERS</span>
-                </div>
+                    <span>POMODORO</span>
+                </label>
             </header>
 
             <div class="Grille-Inventaire">
