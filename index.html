@@ -94,6 +94,25 @@
                 <button id="pomodoro-start">[ START ]</button>
                 <button id="pomodoro-pause">[ PAUSE ]</button>
                 <button id="pomodoro-reset">[ RESET ]</button>
+                
+                <div class="pomodoro-settings-container">
+                    <div class="pomodoro-settings">
+                        <p>TRAVAIL (MIN)</p>
+                        <div class="settings-boutons">
+                            <button id="btn-minus-work">[ - ]</button>
+                            <span id="val-work">25</span>
+                            <button id="btn-plus-work">[ + ]</button>
+                        </div>
+                    </div>
+                    <div class="pomodoro-settings">
+                        <p>PAUSE (MIN)</p>
+                        <div class="settings-boutons">
+                            <button id="btn-minus-break">[ - ]</button>
+                            <span id="val-break">5</span>
+                            <button id="btn-plus-break">[ + ]</button>
+                        </div>
+                    </div>
+                </div>
             </div>
 
             <div class="Description-Projet">
@@ -258,5 +277,7 @@
     </main>
 
     <audio id="myaudio" src="./son/Son-inventaire.mp3" oncanplay="this.volume=0.02"></audio>
+    <audio id="pomodoro-sound" src="./son/Son-pomodoro.mp3" oncanplay="this.volume=0.04"></audio>
+
 </body>
 </html>
