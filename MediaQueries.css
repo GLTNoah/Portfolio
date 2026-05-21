@@ -137,17 +137,6 @@
         line-height: 1.1;
     }
 
-    .moniteur-ecg {
-        width: 90%; 
-        left: 50%;
-        transform: translateX(-50%);
-        bottom: calc(env(safe-area-inset-bottom) + 15px); 
-        height: 70px;
-    }
-
-    .svg-ecg { height: 40px; }
-    .pulsations { font-size: 16px; top: 5px; right: 10px; }
-
     .CV-Agrandi, .Veille-Agrandi {
         left: 50% !important;
         transform: translateX(-50%) !important;
@@ -266,16 +255,6 @@
 
     .Texte-Jill { font-size: 28px; }
 
-    .moniteur-ecg {
-        width: 500px; 
-        height: 140px;
-        bottom: 200px; 
-        right: 12.75%;
-    }
-
-    .pulsations { font-size: 34px; top: 15px; right: 20px; }
-    .libelle-etat { font-size: 18px; bottom: 8px; left: 15px; }
-
     .CV-Agrandi {
         width: 60%;
         left: 10%;
@@ -358,25 +337,6 @@
     } 
 
     .Texte-Jill { font-size: 28px; }
-
-    .moniteur-ecg {
-        width: 380px; 
-        height: 105px;
-        bottom: 200px; 
-        right: 12.75%;
-    }
-
-    .pulsations {
-        font-size: 28px;
-        top: 10px;
-        right: 20px;
-    }
-
-    .libelle-etat {
-        font-size: 16px;
-        bottom: 8px;
-        left: 15px;
-    }
 
     .CV-Agrandi {
         width: 60%;
