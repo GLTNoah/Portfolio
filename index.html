@@ -8,7 +8,9 @@
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="MediaQueries.css">
     <link rel="stylesheet" href="KeyFrames.css">
+    <link rel="stylesheet" href="pomodoro.css">
     <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
+    <script src="pomodoro.js" defer></script>
 </head>
 
 <body>
@@ -88,6 +90,12 @@
                 </div>
             </div>
 
+            <div class="pomodoro-controls">
+                <button id="pomodoro-start">[ START ]</button>
+                <button id="pomodoro-pause">[ PAUSE ]</button>
+                <button id="pomodoro-reset">[ RESET ]</button>
+            </div>
+
             <div class="Description-Projet">
                 <h3>DISQUE DUR "PROJET"</h3>
                 <hr>
@@ -147,6 +155,7 @@
 
         <nav class ="Visualisation-Objet">
             <div class="Projet-Agrandi"><span><img src="..." alt=""></span></div>
+            
             <div class="CV-Agrandi">
                 <div class="En-Tete-CV">
                     <h2>DOSSIER PERSONNEL - ACCRÉDITATION SLAM</h2>
@@ -236,6 +245,16 @@
                 </div>
             </div>
         </nav>
+
+        <div class="Pomodoro-Container">
+            <h2 id="pomodoro-mode">MODE: TRAVAIL</h2>
+            <div class="pomodoro-progress-bar-container">
+                <div id="pomodoro-progress"></div>
+            </div>
+            <div id="pomodoro-timer">25:00</div>
+            <div id="pomodoro-sessions">Sessions complétées: 0</div>
+        </div>
+
     </main>
 
     <audio id="myaudio" src="./son/Son-inventaire.mp3" oncanplay="this.volume=0.02"></audio>

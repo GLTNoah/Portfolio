@@ -1,0 +1,129 @@
+/* =========================================
+   AFFICHAGE DU TIMER (Zone gauche)
+========================================= */
+.Pomodoro-Container {
+    display: none;
+    position: absolute;
+    left: 5%;
+    top: 10%;
+    bottom: 10%;
+    width: 45%; /* S'adapte à la partie gauche de l'écran */
+    background: rgba(0, 15, 5, 0.9);
+    border: 2px solid #00ff41;
+    box-shadow: 0 0 20px rgba(0, 255, 65, 0.2), inset 0 0 20px rgba(0, 255, 65, 0.2);
+    z-index: 3000;
+    padding: 40px;
+    color: #00ff41;
+    font-family: 'VT323', monospace;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+body:has(#Btn-Pomodoro:checked) .Pomodoro-Container {
+    display: flex;
+    animation: glitch-apparition 1.3s linear forwards;
+}
+
+#pomodoro-mode {
+    font-size: 52px;
+    letter-spacing: 5px;
+    text-shadow: 0 0 10px #00ff41;
+    margin-bottom: 40px;
+}
+
+#pomodoro-timer {
+    font-size: 160px;
+    text-shadow: 0 0 20px #00ff41;
+    margin: 20px 0 50px 0;
+    line-height: 1;
+}
+
+.pomodoro-progress-bar-container {
+    width: 90%;
+    height: 20px;
+    border: 2px solid #00ff41;
+    margin-bottom: 20px;
+    position: relative;
+    background: rgba(0, 0, 0, 0.5);
+}
+
+#pomodoro-progress {
+    height: 100%;
+    background: #00ff41;
+    width: 100%;
+    transition: width 1s linear;
+}
+
+#pomodoro-sessions {
+    font-size: 28px;
+    opacity: 0.8;
+}
+
+/* =========================================
+   CONTRÔLES DU POMODORO (Dans l'inventaire)
+========================================= */
+.pomodoro-controls {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+    width: 100%;
+    margin-top: 100px;
+}
+
+body:has(#Btn-Pomodoro:checked) .pomodoro-controls {
+    display: flex;
+    animation: glitch-apparition 0.5s ease forwards;
+}
+
+.pomodoro-controls button {
+    background: #021a0a;
+    color: #00ff88;
+    font-family: 'VT323', monospace;
+    font-size: 38px;
+    border: #076338 2px solid;
+    box-shadow: 0 0 5px #077642, 0 0 10px #0c5533;
+    padding: 15px 40px;
+    width: 80%; /* Prend bien la largeur de l'inventaire */
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.pomodoro-controls button:hover {
+    background: rgba(0, 255, 136, 0.15);
+    color: white;
+    box-shadow: 0 0 15px #00ff88;
+    transform: scale(1.05);
+}
+
+/* =========================================
+   THÈME PAUSE (Couleur Cyan)
+========================================= */
+.Pomodoro-Container.pause-mode {
+    border-color: #00d9ff;
+    box-shadow: 0 0 20px rgba(0, 217, 255, 0.2), inset 0 0 20px rgba(0, 217, 255, 0.2);
+    color: #00d9ff;
+}
+
+.Pomodoro-Container.pause-mode #pomodoro-mode,
+.Pomodoro-Container.pause-mode #pomodoro-timer {
+    text-shadow: 0 0 10px #00d9ff;
+}
+
+.Pomodoro-Container.pause-mode .pomodoro-progress-bar-container { border-color: #00d9ff; }
+.Pomodoro-Container.pause-mode #pomodoro-progress { background: #00d9ff; }
+
+/* Thème pause pour les boutons de l'inventaire */
+.pomodoro-controls.pause-mode button {
+    color: #00d9ff;
+    border-color: #0088aa;
+    box-shadow: 0 0 5px #0088aa;
+}
+
+.pomodoro-controls.pause-mode button:hover {
+    background: rgba(0, 217, 255, 0.15);
+    color: white;
+    box-shadow: 0 0 15px #00d9ff;
+}
