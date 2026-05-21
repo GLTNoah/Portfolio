@@ -232,7 +232,7 @@ body:has(#Btn-Pomodoro:checked) .Conteneur-Dialogue-Jill {
 
 .Icone-Examiner {
     position: absolute;
-    top: 400px;
+    top: 420px;
     width: 300px; 
     height: 50px;
     background-color: rgba(0, 0, 0, 0.9);
@@ -279,7 +279,7 @@ body:has(#Btn-Pomodoro:checked) .Conteneur-Dialogue-Jill {
 #emplacement-jeu:focus + .Icone-Examiner,
 #emplacement-jeu + .Icone-Examiner:hover {
     display: flex;
-    top: 60%;
+    top: 63%;
     left: -10%;
 }
 
