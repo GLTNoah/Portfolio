@@ -77,10 +77,9 @@ html, body, a, button, .Emplacement-Inventaire, label {
 .Barre-Superieure {
     display: flex;
     justify-content: space-between;
-    align-items: flex-start;
+    align-items: flex-end;
     width: 100%;
     font-family: 'VT323', monospace;
-
 }
 
 .Titre-Principal {
@@ -99,23 +98,38 @@ html, body, a, button, .Emplacement-Inventaire, label {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 10px;
-    font-size: 18px;
+    font-size: 22px;
     letter-spacing: 5px;
 }
 
+.dot-indicateur {
+    display: block;
+    width: 35px;
+    height: 4px;
+    background-color: rgba(255, 255, 255, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    transition: all 0.3s ease;
+    margin-top: 12px;
+}
+
+#etat-initial:checked ~ main .dot-center,
+#Btn-Carte:checked ~ main .dot-left,
+#Btn-Pomodoro:checked ~ main .dot-right {
+    background-color: #00ff41;
+    border-color: #00ff88;
+    box-shadow: 0 0 12px #00ff41, 0 0 4px #00ff41;
+    transform: scaleX(1.4) scaleY(1.2);
+}
+
 #Label-Carte:hover,
-#Label-Pomodoro:hover {
+#Label-Pomodoro:hover,
+#Label-Etat-Initial:hover {
     transform: scale(1.05);
 }
 
 body:has(#Btn-Pomodoro:checked) .Grille-Inventaire,
 body:has(#Btn-Pomodoro:checked) .Conteneur-Dialogue-Jill {
     display: none !important;
-}
-
-#Label-Etat-Initial:hover {
-    transform: scale(1.05);
 }
 
 /* =========================================    
@@ -399,7 +413,6 @@ body:has(input[name="examen"]:not(#fermer-examen):not(#etat-initial):not(#Btn-Po
     display: none !important;
 }
 
-
 /* =========================================
    08. BOÎTE DE DIALOGUE (JILL)
 ========================================= */
@@ -598,7 +611,7 @@ body:has(#radio-cv:checked) .CV-Agrandi {
 }
 
 /* =========================================
-   10. TELECHARGEMENT CV
+   10. TELECHARGEMENT CV & VEILLE
 ========================================= */
 
 .bouton-telecharger-ecran {
@@ -643,8 +656,6 @@ body:has(#radio-cv:checked) .CV-Agrandi {
     transform: scale(1.05);
     transition: background 0.2s, color 0.2s, transform 0.2s, box-shadow 0.2s;
 }
-
-/* Bouton Veille */
 
 .bouton-telecharger-ecran-Veille {
     position: fixed;
