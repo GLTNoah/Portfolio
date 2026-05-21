@@ -104,7 +104,17 @@ function mettreEnPause() {
 
 function reinitialiserTimer() {
     mettreEnPause();
-    tempsRestant = modeTravailActif ? minutesTravail * 60 : minutesPause * 60;
+    
+    modeTravailActif = true;
+    tempsRestant = minutesTravail * 60;
+    sessionsTerminees = 0;
+    
+    texteMode.textContent = "MODE: TRAVAIL";
+    affichageSessions.textContent = "Sessions complétées: " + sessionsTerminees;
+    
+    conteneurPomodoro.classList.remove('pause-mode');
+    conteneurControles.classList.remove('pause-mode');
+    
     majAffichage();
 }
 
@@ -130,6 +140,10 @@ function changerTempsTravail(changement) {
     }
 }
 
+/* =========================================
+   05. ÉCOUTEURS D'ÉVÉNEMENTS ET INITIALISATION
+========================================= */
+
 function changerTempsPause(changement) {
     minutesPause = minutesPause + changement;
     
@@ -147,10 +161,6 @@ function changerTempsPause(changement) {
         majAffichage();
     }
 }
-
-/* =========================================
-   05. ÉCOUTEURS D'ÉVÉNEMENTS ET INITIALISATION
-========================================= */
 
 btnMoinsTravail.addEventListener('click', () => changerTempsTravail(-1));
 btnPlusTravail.addEventListener('click', () => changerTempsTravail(1));

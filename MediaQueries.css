@@ -211,7 +211,7 @@
 @media (min-width: 1281px) {
 
     .Haut-Inventaire { max-width: 600px; }
-    .Barre-Superieure { padding: 40px 90px; }
+    .Barre-Superieure { padding: 40px 40px; }
     .Haut-Inventaire h1 { font-size: 24px; top: 40px; }
     .Haut-Inventaire h2 { font-size: 36px; top: 50px; }
 
@@ -307,7 +307,7 @@
 @media (min-width: 1281px) and (max-height: 1100px) {
     
     .Haut-Inventaire { max-width: 480px; }
-    .Barre-Superieure { padding: 35px 75px; }
+    .Barre-Superieure { padding: 35px 25px; }
     .Haut-Inventaire h1 { font-size: 24px; top: 40px; }
     .Haut-Inventaire h2 { font-size: 36px; top: 50px; }
 
