@@ -1,9 +1,6 @@
 @import url(./KeyFrames.css);
 @import url(./MediaQueries.css);
 
-/* =========================================
-   00. BASE & RÉINITIALISATION
-========================================= */
 * {
     margin: 0;
     padding: 0;
@@ -54,10 +51,6 @@ html, body, a, button, .Emplacement-Inventaire, label {
     z-index: -1;
 }
 
-/* =========================================
-   01. INTERFACE PRINCIPALE (HAUT)
-========================================= */
-
 .Haut-Inventaire {
     display: flex;
     position: absolute;
@@ -71,58 +64,51 @@ html, body, a, button, .Emplacement-Inventaire, label {
     backdrop-filter: blur(5px);
     color: white;
     width : 90%;
-    max-width: 500px;
+    max-width: 480px;
 }
 
 .Barre-Superieure {
-    display: grid;
-    grid-template-columns: 1fr auto 1fr;
+    display: flex;
+    justify-content: center;
     align-items: flex-end;
     width: 100%;
-    gap: 40px;
+    gap: 30px;
+    padding-top: 25px;
     font-family: 'VT323', monospace;
 }
 
-#Label-Carte {
-    justify-self: end;
+#Label-Carte, #Label-Pomodoro {
+    width: 100px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 #Label-Etat-Initial {
-    justify-self: center;
-}
-
-#Label-Pomodoro {
-    justify-self: start;
-}
-
-.Titre-Principal {
     display: flex;
     flex-direction: column;
     align-items: center;
-    font-weight: bold;
 }
 
 .Titre-Principal h1 {
-    font-size: 48px;
-    letter-spacing: 5px;
+    font-size: 32px;
+    letter-spacing: 3px;
+    font-weight: bold;
 }
 
 .Bouton-Navigation {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    font-size: 22px;
-    letter-spacing: 5px;
+    font-size: 16px;
+    letter-spacing: 2px;
 }
 
 .dot-indicateur {
     display: block;
-    width: 35px;
-    height: 4px;
+    width: 25px;
+    height: 3px;
     background-color: rgba(255, 255, 255, 0.15);
     border: 1px solid rgba(255, 255, 255, 0.3);
     transition: all 0.3s ease;
-    margin-top: 12px;
+    margin-top: 10px;
 }
 
 #etat-initial:checked ~ main .dot-center,
@@ -130,7 +116,7 @@ html, body, a, button, .Emplacement-Inventaire, label {
 #Btn-Pomodoro:checked ~ main .dot-right {
     background-color: #00ff41;
     border-color: #00ff88;
-    box-shadow: 0 0 12px #00ff41, 0 0 4px #00ff41;
+    box-shadow: 0 0 10px #00ff41, 0 0 3px #00ff41;
     transform: scaleX(1.4) scaleY(1.2);
 }
 
@@ -145,17 +131,13 @@ body:has(#Btn-Pomodoro:checked) .Conteneur-Dialogue-Jill {
     display: none !important;
 }
 
-/* =========================================    
-   02. GRILLE D'INVENTAIRE
-========================================= */
-
 .Grille-Inventaire {
     display : grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
-    padding: 20px;
+    gap: 15px;
+    padding: 15px;
     width: 100%;
-    margin-top: 100px;
+    margin-top: 60px;
 }
 
 .Emplacement-Inventaire {
@@ -219,17 +201,13 @@ body:has(#Btn-Pomodoro:checked) .Conteneur-Dialogue-Jill {
     transform: scale(1.05);
 }
 
-/* =========================================
-   03. DESCRIPTIONS DES OBJETS
-========================================= */
-
 .Description-Projet, .Description-CV, .Description-Veille, .Description-Ordi, .Description-Jeu {
     display: none;
     position: absolute;
-    bottom: 50px;
+    bottom: 30px;
     left: 20px;
     color: rgb(255, 255, 255);
-    font-size: 18px;
+    font-size: 15px;
     font-family: "Cinzel", serif;
     text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
 }
@@ -238,11 +216,11 @@ body:has(#Btn-Pomodoro:checked) .Conteneur-Dialogue-Jill {
     border: 0;
     height: 1px;
     background: rgba(255, 255, 255, 0.5);
-    margin: 10px 0;
+    margin: 8px 0;
 }
 
 .Description-CV p, .Description-Projet p, .Description-Veille p, .Description-Ordi p, .Description-Jeu p {
-    max-width: 400px;
+    max-width: 320px;
 }
 
 .Haut-Inventaire:has(#emplacement-projet:hover) .Description-Projet,
@@ -253,15 +231,11 @@ body:has(#Btn-Pomodoro:checked) .Conteneur-Dialogue-Jill {
     display: block;
 }
 
-/* =========================================
-   04. MENU D'INSPECTION
-========================================= */
-
 .Icone-Examiner {
     position: absolute;
-    top: 420px;
-    width: 300px; 
-    height: 50px;
+    top: 290px;
+    width: 240px; 
+    height: 40px;
     background-color: rgba(0, 0, 0, 0.9);
     z-index: 150;
     display: none;
@@ -274,10 +248,10 @@ body:has(#Btn-Pomodoro:checked) .Conteneur-Dialogue-Jill {
     height: 100%;
     font-family: 'VT323', monospace;
     color: white;
-    font-size: 24px;
+    font-size: 18px;
     cursor: pointer;
     transition: color 0.2s, transform 0.2s;
-    padding: 10px 0px 0px 50px;
+    padding: 10px 0px 0px 40px;
 }
 
 .Icone-Examiner label:hover {
@@ -288,31 +262,27 @@ body:has(#Btn-Pomodoro:checked) .Conteneur-Dialogue-Jill {
 #emplacement-projet:focus + .Icone-Examiner,
 #emplacement-projet + .Icone-Examiner:hover {
     display: flex;
-    left: -10%;
+    left: -8%;
 }
 
 #emplacement-cv:focus + .Icone-Examiner,
 #emplacement-cv + .Icone-Examiner:hover {
     display: flex;
-    left: 20%;
+    left: 27%;
 }
 
 #emplacement-veille:focus + .Icone-Examiner,
 #emplacement-veille + .Icone-Examiner:hover {
     display: flex;
-    left: 55%;
+    left: 62%;
 }
 
 #emplacement-jeu:focus + .Icone-Examiner,
 #emplacement-jeu + .Icone-Examiner:hover {
     display: flex;
-    top: 63%;
-    left: -10%;
+    top: 75%;
+    left: -8%;
 }
-
-/* =========================================
-   05. TERMINAL CATHODIQUE (CRT)
-========================================= */
 
 .animation-allumage-ecran {
     position: fixed;
@@ -368,21 +338,17 @@ body:has(#Btn-Pomodoro:checked) .Conteneur-Dialogue-Jill {
     animation: overlay-turn-off 0.6s forwards;
 }
 
-/* =========================================
-   06. BOUTON FERMER LE TERMINAL
-========================================= */
-
 .bouton-fermer-ecran {
     position: fixed;
-    bottom: 75px;
-    right: 75px;
+    bottom: 50px;
+    right: 50px;
     background: #021a0a;
     color: #00ff88;
     font-family: 'VT323', monospace;
-    font-size: 28px;
+    font-size: 22px;
     border: #076338 2px solid;
     box-shadow: 0 0 5px #077642, 0 0 10px #0c5533;
-    padding: 10px;
+    padding: 8px 15px;
     z-index: 5000;
     cursor: pointer;
     text-shadow: 0 0 10px #00ff88;
@@ -417,18 +383,10 @@ body:has(#Btn-Pomodoro:checked) .Conteneur-Dialogue-Jill {
     transition: background 0.2s, color 0.2s, transform 0.2s, box-shadow 0.2s;
 }
 
-/* =========================================
-   07. MASQUAGE GLOBAL PENDANT EXAMEN
-========================================= */
-
 body:has(input[name="examen"]:not(#fermer-examen):not(#etat-initial):not(#Btn-Pomodoro):not(#Btn-Carte):checked) .Haut-Inventaire,
 body:has(input[name="examen"]:not(#fermer-examen):not(#etat-initial):not(#Btn-Pomodoro):not(#Btn-Carte):checked) .Conteneur-Dialogue-Jill {
     display: none !important;
 }
-
-/* =========================================
-   08. BOÎTE DE DIALOGUE (JILL)
-========================================= */
 
 .Conteneur-Dialogue-Jill {
     position: absolute;
@@ -436,8 +394,8 @@ body:has(input[name="examen"]:not(#fermer-examen):not(#etat-initial):not(#Btn-Po
     bottom: 40%; 
     left: 22%;
     transform: translateX(-50%);
-    width: 800px;
-    height: 150px;
+    width: 600px;
+    height: 120px;
     z-index: 5; 
     pointer-events: none;    
     animation: cycleDialogue 18s infinite, radioNoise 3s linear infinite;
@@ -486,17 +444,13 @@ body:has(input[name="examen"]:not(#fermer-examen):not(#etat-initial):not(#Btn-Po
 .Texte-Jill {
     font-family: 'VT323', monospace;
     opacity: 0.9;
-    font-size: 24px; 
+    font-size: 20px; 
     color: #efefef;
     letter-spacing: 1px;
     text-shadow: 2px 2px 0px #000; 
     overflow: hidden;
     animation: radioNoise 15s steps (40, end) infinite;
 }
-
-/* =========================================
-   09. VISUALISATION OBJETS (AGRANDIS)
-========================================= */
 
 .Projet-Agrandi, .Jeu-Agrandi {
     display: none;
@@ -529,12 +483,12 @@ body:has(input[name="examen"]:not(#fermer-examen):not(#etat-initial):not(#Btn-Po
     left: 5%;
     top: 10%;
     bottom: 10%;
-    width: 70%;
+    width: 55%;
     background: rgba(0, 15, 5, 0.9);
     border: 2px solid #00ff41;
     box-shadow: 0 0 20px rgba(0, 255, 65, 0.2), inset 0 0 20px rgba(0, 255, 65, 0.2);
     z-index: 3000;
-    padding: 40px;
+    padding: 30px;
     color: #00ff41;
     font-family: 'VT323', monospace;
     overflow-y: auto;
@@ -548,12 +502,12 @@ body:has(input[name="examen"]:not(#fermer-examen):not(#etat-initial):not(#Btn-Po
     left: 5%;
     top: 10%;
     bottom: 10%;
-    width: 62%;
+    width: 55%;
     background: rgba(0, 15, 5, 0.9);
     border: 2px solid #00ff41;
     box-shadow: 0 0 20px rgba(0, 255, 65, 0.2), inset 0 0 20px rgba(0, 255, 65, 0.2);
     z-index: 3000;
-    padding: 40px;
+    padding: 30px;
     color: #00ff41;
     font-family: 'VT323', monospace;
     overflow-y: auto;
@@ -561,7 +515,7 @@ body:has(input[name="examen"]:not(#fermer-examen):not(#etat-initial):not(#Btn-Po
 }
 
 .CV-Agrandi::-webkit-scrollbar, .Veille-Agrandi::-webkit-scrollbar {
-    width: 10px;
+    width: 8px;
 }
 
 .CV-Agrandi::-webkit-scrollbar-track, .Veille-Agrandi::-webkit-scrollbar-track {
@@ -575,16 +529,16 @@ body:has(input[name="examen"]:not(#fermer-examen):not(#etat-initial):not(#Btn-Po
 
 .En-Tete-CV, .En-Tete-Veille {
     border-bottom: 2px solid #00ff41;
-    padding-bottom: 20px;
-    margin-bottom: 30px;
+    padding-bottom: 15px;
+    margin-bottom: 20px;
 }
 
-.En-Tete-CV h2, .En-Tete-Veille h2 { font-size: 24px; opacity: 0.8; }
-.En-Tete-CV h1, .En-Tete-Veille h1 { font-size: 48px; letter-spacing: 5px; text-shadow: 0 0 10px #00ff41; }
+.En-Tete-CV h2, .En-Tete-Veille h2 { font-size: 18px; opacity: 0.8; }
+.En-Tete-CV h1, .En-Tete-Veille h1 { font-size: 36px; letter-spacing: 4px; text-shadow: 0 0 8px #00ff41; }
 
-.Section-CV, .Section-Veille { margin-bottom: 30px; }
-.Section-CV h3, .Section-Veille h3 { font-size: 32px; margin-bottom: 15px; text-shadow: 0 0 5px #00ff41; }
-.Section-CV p, .Section-CV li, .Section-Veille p, .Section-Veille li { font-size: 24px; line-height: 1.5; margin-bottom: 10px; }
+.Section-CV, .Section-Veille { margin-bottom: 20px; }
+.Section-CV h3, .Section-Veille h3 { font-size: 24px; margin-bottom: 10px; text-shadow: 0 0 4px #00ff41; }
+.Section-CV p, .Section-CV li, .Section-Veille p, .Section-Veille li { font-size: 18px; line-height: 1.5; margin-bottom: 8px; }
 
 body:has(#radio-cv:checked) .CV-Agrandi,
 body:has(#radio-veille:checked) .Veille-Agrandi {
@@ -592,52 +546,17 @@ body:has(#radio-veille:checked) .Veille-Agrandi {
     animation: verrouillage-affichage 0.1s 0.6s forwards, glitch-apparition 1.3s linear 0.6s forwards;
 }
 
-.CV-Agrandi::-webkit-scrollbar {
-    width: 10px;
-}
-
-.CV-Agrandi::-webkit-scrollbar-track {
-    background: rgba(0, 20, 10, 0.8);
-    border-left: 1px solid #00ff41;
-}
-
-.CV-Agrandi::-webkit-scrollbar-thumb {
-    background: #00ff41;
-}
-
-.En-Tete-CV {
-    border-bottom: 2px solid #00ff41;
-    padding-bottom: 20px;
-    margin-bottom: 30px;
-}
-
-.En-Tete-CV h2 { font-size: 24px; opacity: 0.8; }
-.En-Tete-CV h1 { font-size: 48px; letter-spacing: 5px; text-shadow: 0 0 10px #00ff41; }
-
-.Section-CV { margin-bottom: 30px; }
-.Section-CV h3 { font-size: 32px; margin-bottom: 15px; text-shadow: 0 0 5px #00ff41; }
-.Section-CV p, .Section-CV li { font-size: 24px; line-height: 1.5; margin-bottom: 10px; }
-
-body:has(#radio-cv:checked) .CV-Agrandi {
-    display: flex;
-    animation: verrouillage-affichage 0.1s 0.6s forwards, glitch-apparition 1.3s linear 0.6s forwards;
-}
-
-/* =========================================
-   10. TELECHARGEMENT CV & VEILLE
-========================================= */
-
-.bouton-telecharger-ecran {
+.bouton-telecharger-ecran, .bouton-telecharger-ecran-Veille {
     position: fixed;
-    top: 12%;
-    right: 90px;
+    top: 10%;
+    right: 50px;
     background: #021a0a;
     color: #00ff88;
     font-family: 'VT323', monospace;
-    font-size: 38px;
+    font-size: 26px;
     border: #076338 2px solid;
     box-shadow: 0 0 5px #077642, 0 0 10px #0c5533;
-    padding: 10px;
+    padding: 8px 15px;
     z-index: 5000;
     cursor: pointer;
     text-shadow: 0 0 10px #00ff88;
@@ -662,32 +581,12 @@ body:has(#radio-cv:checked) .CV-Agrandi {
     transition: opacity 0s, visibility 0s; 
 }
 
-.bouton-telecharger-ecran:hover {
+.bouton-telecharger-ecran:hover, .bouton-telecharger-ecran-Veille:hover {
     background: rgba(0, 255, 136, 0.15);
     color: white;
     box-shadow: 0 0 15px #00ff88;
     transform: scale(1.05);
     transition: background 0.2s, color 0.2s, transform 0.2s, box-shadow 0.2s;
-}
-
-.bouton-telecharger-ecran-Veille {
-    position: fixed;
-    top: 12%;
-    right: 90px;
-    background: #021a0a;
-    color: #00ff88;
-    font-family: 'VT323', monospace;
-    font-size: 38px;
-    border: #076338 2px solid;
-    box-shadow: 0 0 5px #077642, 0 0 10px #0c5533;
-    padding: 10px;
-    z-index: 5000;
-    cursor: pointer;
-    text-shadow: 0 0 10px #00ff88;
-    opacity: 0;
-    visibility: hidden;
-    pointer-events: none;
-    text-decoration: none;
 }
 
 #radio-veille:checked ~ .bouton-telecharger-ecran-Veille {
@@ -705,18 +604,6 @@ body:has(#radio-cv:checked) .CV-Agrandi {
     transition: opacity 0s, visibility 0s; 
 }
 
-.bouton-telecharger-ecran-Veille:hover {
-    background: rgba(0, 255, 136, 0.15);
-    color: white;
-    box-shadow: 0 0 15px #00ff88;
-    transform: scale(1.05);
-    transition: background 0.2s, color 0.2s, transform 0.2s, box-shadow 0.2s;
-}
-
-/* =========================================
-   11. AFFICHAGE ORDI CATHODIQUE
-========================================= */
-
 .Panneau-Lateral-CRT {
     display: none;
     opacity: 0;
@@ -725,16 +612,16 @@ body:has(#radio-cv:checked) .CV-Agrandi {
     top: 28%;
     bottom: 25%;
     width: 22%;
-    max-width: 350px;
+    max-width: 300px;
     background: rgba(0, 15, 5, 0.7);
     border: 2px solid rgba(0, 255, 65, 0.5);
     box-shadow: 0 0 10px rgba(0, 255, 65, 0.1);
     z-index: 3000;
-    padding: 20px;
+    padding: 15px;
     color: #00ff41;
     font-family: 'VT323', monospace;
     flex-direction: column;
-    gap: 15px;
+    gap: 12px;
 }
 
 body:has(#radio-cv:checked) .Panneau-Lateral-CRT,
@@ -744,14 +631,14 @@ body:has(#radio-veille:checked) .Panneau-Lateral-CRT {
 }
 
 .panneau-header {
-    font-size: 28px;
+    font-size: 22px;
     border-bottom: 1px solid rgba(0, 255, 65, 0.5);
     padding-bottom: 5px;
     text-shadow: 0 0 5px #00ff41;
 }
 
 .panneau-contenu p {
-    font-size: 22px;
+    font-size: 18px;
     margin-bottom: 5px;
     line-height: 1.2;
 }
@@ -762,7 +649,7 @@ body:has(#radio-veille:checked) .Panneau-Lateral-CRT {
 
 .barre-chargement-crt {
     width: 100%;
-    height: 12px;
+    height: 10px;
     border: 1px solid rgba(0, 255, 65, 0.5);
     margin-top: 10px;
     position: relative;
