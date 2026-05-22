@@ -392,9 +392,9 @@ body:has(input[name="examen"]:not(#fermer-examen):not(#etat-initial):not(#Btn-Po
     position: absolute;
     opacity: 0;
     bottom: 40%; 
-    left: 22%;
+    left: 27%;
     transform: translateX(-50%);
-    width: 600px;
+    width: 500px;
     height: 120px;
     z-index: 5; 
     pointer-events: none;    
