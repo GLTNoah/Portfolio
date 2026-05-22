@@ -1,5 +1,9 @@
 @import url(./KeyFrames.css);
 
+/* =========================================
+   ADAPTATION  MOBILE (Uniquement si largeur ≤ 480px)
+========================================= */
+
 @media (min-width: 320px) and (max-width: 480px) {
 
     html, body {
@@ -189,6 +193,10 @@
     }
 }
 
+/* =========================================
+   ADAPTATION  TABLETTE (Uniquement si largeur ≤ 1280px)
+========================================= */
+
 @media (min-width: 1281px) {
 
     .Haut-Inventaire { max-width: 480px; }
@@ -283,6 +291,10 @@
     }
 }
 
+/* =========================================
+   ADAPTATION FENÊTRÉE (Uniquement si largeur > 1280px et hauteur < 1100px)
+========================================= */
+
 @media (min-width: 1281px) and (max-height: 1100px) {
     
     .Haut-Inventaire { max-width: 450px; }
@@ -352,5 +364,4 @@
     .pomodoro-settings p {
         font-size: 18px !important;
     }
-}
 }

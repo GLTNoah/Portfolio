@@ -681,3 +681,19 @@ body:has(#radio-veille:checked) .Panneau-Lateral-CRT {
     box-shadow: 0 0 10px #00ff41;
     animation: scan-vertical 3s linear infinite;
 }
+
+.Conteneur-Carte {
+    display: none;
+    position: absolute;
+    top: 10%;
+    left: 10%;
+    width: 80%;
+    height: 80%;
+    z-index: 3000;
+}
+
+body:has(#radio-carte:checked) .Conteneur-Carte {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
