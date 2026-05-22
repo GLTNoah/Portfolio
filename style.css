@@ -1,6 +1,11 @@
 @import url(./KeyFrames.css);
 @import url(./MediaQueries.css);
 
+
+/* =========================================
+    STYLES GÉNÉRAUX
+========================================= */
+
 * {
     margin: 0;
     padding: 0;
@@ -50,6 +55,10 @@ html, body, a, button, .Emplacement-Inventaire, label {
     object-fit: cover;
     z-index: -1;
 }
+
+/* =========================================
+    STYLES INVENTAIRE
+========================================= */
 
 .Haut-Inventaire {
     display: flex;
@@ -130,6 +139,10 @@ body:has(#Btn-Pomodoro:checked) .Grille-Inventaire,
 body:has(#Btn-Pomodoro:checked) .Conteneur-Dialogue-Jill {
     display: none !important;
 }
+
+/* =========================================
+    STYLES DIALOGUE & ANIMATIONS
+========================================= */
 
 .Grille-Inventaire {
     display : grid;
@@ -231,6 +244,10 @@ body:has(#Btn-Pomodoro:checked) .Conteneur-Dialogue-Jill {
     display: block;
 }
 
+/* =========================================
+    STYLES EXAMEN & ANIMATIONS
+========================================= */
+
 .Icone-Examiner {
     position: absolute;
     top: 290px;
@@ -283,6 +300,10 @@ body:has(#Btn-Pomodoro:checked) .Conteneur-Dialogue-Jill {
     top: 75%;
     left: -8%;
 }
+
+/* =========================================
+    STYLES APPARITION & DISPARITION
+========================================= */
 
 .animation-allumage-ecran {
     position: fixed;
@@ -387,6 +408,10 @@ body:has(input[name="examen"]:not(#fermer-examen):not(#etat-initial):not(#Btn-Po
 body:has(input[name="examen"]:not(#fermer-examen):not(#etat-initial):not(#Btn-Pomodoro):not(#Btn-Carte):checked) .Conteneur-Dialogue-Jill {
     display: none !important;
 }
+
+/* =========================================
+    STYLES ANIMATIONS GÉNÉRALES
+========================================= */
 
 .Conteneur-Dialogue-Jill {
     position: absolute;
@@ -681,6 +706,10 @@ body:has(#radio-veille:checked) .Panneau-Lateral-CRT {
     box-shadow: 0 0 10px #00ff41;
     animation: scan-vertical 3s linear infinite;
 }
+
+/* =========================================
+    STYLE CARTE
+========================================= */
 
 .Conteneur-Carte {
     display: none;
