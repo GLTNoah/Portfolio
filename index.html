@@ -114,6 +114,26 @@
                 </div>
             </div>
 
+            <div class="Panneau-Theme-Zone">
+                <div class="theme-preview-box">
+                    <img id="theme-image" src="" alt="" style="display: none;">
+                    <div class="ligne-scan"></div>
+                </div>
+                
+                <h2 id="theme-titre">EN ATTENTE...</h2>
+                
+                <div class="theme-infos">
+                    <p id="theme-desc">> VEUILLEZ SÉLECTIONNER UNE ZONE SUR LE RADAR.</p>
+                </div>
+                
+                <div class="theme-audio-lecteur" style="display: none;">
+                    <p>> PISTE AUDIO</p>
+                    <audio id="theme-audio-preview" controls controlsList="nodownload"></audio>
+                </div>
+                
+                <button id="btn-activer-theme" style="display: none;">[ INITIER LA SÉQUENCE ]</button>
+            </div>
+
             <div class="Description-Projet">
                 <h3>DISQUE DUR "PROJET"</h3>
                 <hr>
@@ -143,7 +163,6 @@
                 <hr>
                 <p> ??? Un disque étrange... On dirait un vieux jeu vidéo.</p>
             </div>
-
         </nav>
 
         <nav class="Conteneur-Dialogue-Jill">
@@ -152,98 +171,8 @@
             </div>
         </nav>
 
-        <nav class ="Visualisation-Objet">
-            <div class="Projet-Agrandi"><span><img src="..." alt=""></span></div>
-            
-            <div class="CV-Agrandi">
-                <div class="En-Tete-CV">
-                    <h2>DOSSIER PERSONNEL - ACCRÉDITATION SLAM</h2>
-                    <h1>NOAH GUILLOT</h1>
-                </div>
-                <div class="Corps-CV">
-                    <div class="Section-CV">
-                        <h3>> IDENTIFICATION</h3>
-                        <p>Âge : 22 ans | Localisation : Toulouse</p>
-                        <p>Contact : nghuillot@gmail.com | 06.11.84.39.65</p>
-                        <p>Cible : Alternance Développeur Informatique / Gestionnaire BDD</p>
-                    </div>
-                    <div class="Section-CV">
-                        <h3>> COMPÉTENCES DÉTECTÉES</h3>
-                        <ul>
-                            <li>- HTML / CSS (Création d'interfaces)</li>
-                            <li>- SQL (Requêtes, jointures, gestion de bases de données)</li>
-                            <li>- Python (Algorithmique et bases)</li>
-                            <li>- Hardware : Montage & Diagnostic complet PC/Mac</li>
-                            <li>- Langue : Anglais (Niveau B1)</li>
-                        </ul>
-                    </div>
-                    <div class="Section-CV">
-                        <h3>> HISTORIQUE OPÉRATIONNEL</h3>
-                        <p>[DEPUIS OCT. 2025] Alternance Technicien Support (Glassytech) - Maintenance, logistique, conseil.</p>
-                        <p>[DEPUIS 2024] Auto-Entrepreneur (S&N Store) - E-commerce & Community Management.</p>
-                        <p>[2019 - 2024] Éducateur de Tennis & Membre du Bureau (TC Saint-Martory).</p>
-                    </div>
-                    <div class="Section-CV">
-                        <h3>> ARCHIVES DE FORMATION</h3>
-                        <p>[DEPUIS 2025] BTS SIO Option SLAM (IRIS-Médiaschool)</p>
-                        <p>[DEPUIS 2025] Licence de Psychologie (Univ. Jean Jaurès)</p>
-                        <p>[2023] DEUG de Psychologie</p>
-                        <p>[2021] CQP Tennis & Baccalauréat STMG</p>
-                    </div>
-                    <div class="Section-CV">
-                        <h3>> PROTOCOLES COMPLÉMENTAIRES</h3>
-                        <p>Adaptabilité | Rigueur et minutie | Profil autodidacte.</p>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="Veille-Agrandi">
-                <div class="En-Tete-Veille">
-                    <h2>ARCHIVES - CLÉ USB SÉCURISÉE</h2>
-                    <h1>VEILLE TECHNOLOGIQUE</h1>
-                </div>
-                <div class="Corps-Veille">
-                    <div class="Section-Veille">
-                        <h3>> SUJET D'ÉTUDE</h3>
-                        <p>Sujet : L'ALGORAVE - Le Live Coding comme performance logicielle</p>
-                        <p>L'Algorave consiste à créer de la musique et des visuels en direct uniquement en écrivant du code informatique. Le code n'est plus caché, il est projeté publiquement sur un mur, transformant la programmation en une performance artistique spontanée et dynamique. Cette pratique pousse à reconsidérer la solidité et la résilience des systèmes, car le code devient une matière vivante modifiable en temps réel sans jamais tolérer d'interruption de service.</p>
-                    </div>
-                    <div class="Section-Veille">
-                        <h3>> SOURCES ET OUTILS</h3>
-                        <ul>
-                            <li>- Feedly pour regrouper les flux RSS (ex: TOPLAP) et surveiller les dépôts GitHub.</li>
-                            <li>- Alertes Google configurées sur les mots-clés 'Live Coding' et 'Algorave'.</li>
-                            <li>- Serveurs Discord et Mastodon pour la surveillance des échanges techniques et l'entraide.</li>
-                            <li>- Newsletters (JavaScript Weekly) et plateforme daily.dev pour trouver des retours d'expérience.</li>
-                        </ul>
-                    </div>
-                    <div class="Section-Veille">
-                        <h3>> RAPPORTS ET ARTICLES</h3>
-                        <p>[2024] TOPLAP : Portail mondial incontournable du live coding.</p>
-                        <p>[2024] IRCAM : Recherches sur le son et l'intelligence artificielle.</p>
-                        <p>[2023] ACM Digital Library : Études techniques sur la collaboration distribuée.</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="Jeu-Agrandi"><span><img src="..." alt=""></span></div>
-            
-            <div class="Panneau-Lateral-CRT">
-                <div class="panneau-header">SYS.STATUT</div>
-                <div class="panneau-contenu">
-                    <p>CONNEXION... <span class="clignotant-rapide">[OK]</span></p>
-                    <p>DÉCRYPTAGE... <span class="clignotant-rapide">[OK]</span></p>
-                    <div class="barre-chargement-crt"><div class="progression-crt"></div></div>
-                    <br>
-                    <p>> CPU : OPTIMAL</p>
-                    <p>> MEM : 640K</p>
-                    <p>> UPLINK : SÉCURISÉ</p>
-                </div>
-                <div class="grille-radar">
-                    <div class="ligne-scan"></div>
-                </div>
-            </div>
-        </nav>
+        <nav class="Visualisation-Objet">
+            </nav>
 
         <div class="Pomodoro-Container">
             <h2 id="pomodoro-mode">MODE: TRAVAIL</h2>
@@ -256,25 +185,40 @@
 
         <div class="Conteneur-Carte">
             <svg version="1.1" viewBox="0 0 1920 1080" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
-                
                 <image href="./svg/Carte-RE.svg" x="0" y="0" width="100%" height="100%" />
-
-                <polygon class="zone-carte" id="carte-eglise" points="1470,680 1650,590 1800,650 1600,740" />
+                
+                <polygon class="zone-carte" id="carte-eglise" 
+                    data-titre="ÉGLISE DU VILLAGE" 
+                    data-desc="> ZONE HOSTILE\n> ACTIVITÉ CULTISTE DÉTECTÉE" 
+                    data-img="./Image/preview-eglise.jpg" 
+                    data-audio="./son/Foreboding.mp3" 
+                    data-video="./vidéo/emily-grace-resident-evil-requiem.mp4" 
+                    points="1470,680 1650,590 1800,650 1600,740" />
                 <text class="texte-carte" x="1590" y="680" fill="#ffffff" font-size="24" opacity="0">ÉGLISE</text>
 
-                <polygon class="zone-carte" id="carte-police" points="530,560 800,410 1080,570 800,710" />
+                <polygon class="zone-carte" id="carte-police" 
+                    data-titre="COMMISSARIAT R.P.D." 
+                    data-desc="> EMPLACEMENT SÉCURISÉ\n> PRÉSENCE : L.S. KENNEDY" 
+                    data-img="./Image/preview-leon.jpg" 
+                    data-audio="./son/TheFront_Hall.mp3" 
+                    data-video="./vidéo/police-station-resident-evil.mp4" 
+                    points="530,560 800,410 1080,570 800,710" />
                 <text class="texte-carte" x="850" y="580" fill="#ffffff" font-size="24" opacity="0">COMMISSARIAT</text>
 
-                <polygon class="zone-carte" id="carte-usine" points="350,230 550,130 770,280 550,380" />
+                <polygon class="zone-carte" id="carte-usine" 
+                    data-titre="ZONE INDUSTRIELLE" 
+                    data-desc="> INSTALLATION ABANDONNÉE\n> DANGER BIOLOGIQUE : ÉLEVÉ" 
+                    data-img="./Image/preview-usine.jpg" 
+                    data-audio="./son/AdaTheme.mp3" 
+                    data-video="./vidéo/ada-wong-lethal-grace.mp4" 
+                    points="350,230 550,130 770,280 550,380" />
                 <text class="texte-carte" x="550" y="230" fill="#ffffff" font-size="24" opacity="0">ZONE INDUSTRIELLE</text>
-
             </svg>
         </div>
-
     </main>
 
     <audio id="myaudio" src="./son/Son-inventaire.mp3" oncanplay="this.volume=0.02"></audio>
     <audio id="pomodoro-sound" src="./son/Son-pomodoro.mp3" oncanplay="this.volume=0.04"></audio>
-
+    <audio id="bg-music" loop></audio>
 </body>
 </html>

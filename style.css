@@ -758,6 +758,15 @@ body:has(#radio-veille:checked) .Panneau-Lateral-CRT {
     transition: opacity 0.2s ease;
 }
 
+.Conteneur-Carte .zone-carte.zone-active {
+    fill: rgba(0, 255, 65, 0.25) !important;
+    stroke: #00ff41 !important;
+    stroke-width: 2px !important;
+    stroke-dasharray: 0 !important;
+    animation: none !important;
+    filter: drop-shadow(0 0 10px rgba(0, 255, 65, 0.5)) !important;
+}
+
 .Conteneur-Carte .zone-carte:hover + .texte-carte {
     opacity: 1;
 }
@@ -776,4 +785,102 @@ body:has(#Btn-Carte:checked) .Conteneur-Dialogue-Jill {
     bottom: 10%; 
     left: 35%; 
     z-index: 4000; 
+}
+
+/* =========================================
+    STYLE INVENTAIRE CARTE
+========================================= */
+
+.Panneau-Theme-Zone {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    padding: 0 25px;
+    margin-top: 120px;
+}
+
+body:has(#Btn-Carte:checked) .Panneau-Theme-Zone {
+    display: flex;
+    animation: glitch-apparition 0.5s ease forwards;
+}
+
+.theme-preview-box {
+    width: 100%;
+    aspect-ratio: 16/9;
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    background: rgba(40, 40, 40, 0.5);
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: inset 0 0 15px rgba(0, 255, 65, 0.1);
+}
+
+.theme-preview-box img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.8;
+}
+
+#theme-titre {
+    font-family: "Cinzel", serif;
+    font-size: 20px;
+    color: #fff;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
+    margin: 20px 0 10px 0;
+    text-align: center;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+    padding-bottom: 10px;
+    width: 100%;
+}
+
+.theme-infos {
+    width: 100%;
+    margin-bottom: 15px;
+    font-family: 'VT323', monospace;
+    color: #00ff41;
+    font-size: 18px;
+    text-shadow: 0 0 5px rgba(0, 255, 65, 0.5);
+    white-space: pre-line;
+}
+
+.theme-audio-lecteur {
+    width: 100%;
+    margin-bottom: 20px;
+    font-family: 'VT323', monospace;
+    color: #00ff41;
+}
+
+.theme-audio-lecteur p {
+    font-size: 16px;
+    margin-bottom: 5px;
+}
+
+.theme-audio-lecteur audio {
+    width: 100%;
+    height: 35px;
+    outline: none;
+    filter: sepia(100%) hue-rotate(80deg) saturate(300%) contrast(150%);
+}
+
+#btn-activer-theme {
+    background: rgba(0, 0, 0, 0.9);
+    color: white;
+    font-family: 'VT323', monospace;
+    font-size: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    padding: 10px 20px;
+    width: 100%;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+#btn-activer-theme:hover {
+    color: #00ff41;
+    border-color: #00ff41;
+    transform: scale(1.02);
+    box-shadow: inset 0 0 15px rgba(0, 255, 65, 0.2);
 }

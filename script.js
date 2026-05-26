@@ -194,7 +194,7 @@ const dialoguesLieux = {
 };
 
 const texteInventaire = "Avant de continuer, je devrais inspecter tout ce que j'ai eu ici. Je pourrais y trouver des éléments importants...";
-const texteCarteDefaut = "Ca craint ici ... Je devrais peut-être jeter un œil à la carte pour voir où je peux aller.";
+const texteCarteDefaut = "Ca craint ici ... Je me demande comment s'en sortent les autres ?";
 
 radiosExamen.forEach(radio => {
     radio.addEventListener('change', () => {
@@ -224,4 +224,41 @@ zonesCarte.forEach(zone => {
             dialogueJill.textContent = texteCarteDefaut;
         }
     });
+});
+
+/* =========================================
+   07. INTERACTIONS DE LA CARTE (SVG)
+========================================= */
+
+zonesCarte.forEach(zone => {
+    zone.addEventListener('click', () => {
+        zoneSelectionnee = {
+            titre: zone.dataset.titre,
+            desc: zone.dataset.desc,
+            img: zone.dataset.img,
+            audio: zone.dataset.audio,
+            video: zone.dataset.video
+        };
+
+        themeTitre.textContent = zoneSelectionnee.titre;
+        themeDesc.textContent = zoneSelectionnee.desc;
+        themeImage.src = zoneSelectionnee.img;
+        themeImage.style.display = "block";
+        themeAudioPreview.src = zoneSelectionnee.audio;
+        conteneurAudioPreview.style.display = "block";
+        btnActiverTheme.style.display = "block";
+
+        zonesCarte.forEach(c => c.classList.remove('zone-active'));
+        zone.classList.add('zone-active');
+        document.getElementById('myaudio').play();
+    });
+});
+
+btnActiverTheme.addEventListener('click', () => {
+    if (zoneSelectionnee) {
+        fondVideo.src = zoneSelectionnee.video;
+        bgMusic.src = zoneSelectionnee.audio;
+        bgMusic.volume = 0.02;
+        bgMusic.play();
+    }
 });
