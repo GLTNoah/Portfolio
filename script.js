@@ -178,3 +178,50 @@ boutonPause.addEventListener('click', mettreEnPause);
 boutonReset.addEventListener('click', reinitialiserTimer);
 
 majAffichage();
+
+/* =========================================
+   06. INTERACTIONS DE LA CARTE (SVG)
+========================================= */
+
+const dialogueJill = document.querySelector('.Texte-Jill');
+const zonesCarte = document.querySelectorAll('.zone-carte');
+const btnCarte = document.getElementById('Btn-Carte');
+const radiosExamen = document.querySelectorAll('input[name="examen"]');
+const dialoguesLieux = {
+    'carte-eglise': "Une vieille église... J'entends des bruits étranges venant du clocher. Mieux vaut être prudente.",
+    'carte-police': "Le commissariat de Raccoon City. Si des survivants s'y cachent, c'est là-bas que je dois aller.",
+    'carte-usine': "La zone industrielle. Cet endroit est un vrai labyrinthe, et ça grouille d'infectés."
+};
+
+const texteInventaire = "Avant de continuer, je devrais inspecter tout ce que j'ai eu ici. Je pourrais y trouver des éléments importants...";
+const texteCarteDefaut = "Ca craint ici ... Je devrais peut-être jeter un œil à la carte pour voir où je peux aller.";
+
+radiosExamen.forEach(radio => {
+    radio.addEventListener('change', () => {
+        if (btnCarte.checked) {
+            dialogueJill.textContent = texteCarteDefaut;
+        } else {
+            dialogueJill.textContent = texteInventaire;
+        }
+    });
+});
+
+zonesCarte.forEach(zone => {
+    zone.addEventListener('mouseenter', () => {
+        if (dialoguesLieux[zone.id]) {
+            dialogueJill.textContent = dialoguesLieux[zone.id];
+        }
+        
+        const son = document.getElementById('myaudio');
+        if (son) {
+            son.currentTime = 0;
+            son.play();
+        }
+    });
+
+    zone.addEventListener('mouseleave', () => {
+        if (btnCarte.checked) {
+            dialogueJill.textContent = texteCarteDefaut;
+        }
+    });
+});

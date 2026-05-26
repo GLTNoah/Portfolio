@@ -1,7 +1,6 @@
 @import url(./KeyFrames.css);
 @import url(./MediaQueries.css);
 
-
 /* =========================================
     STYLES GÉNÉRAUX
 ========================================= */
@@ -708,26 +707,73 @@ body:has(#radio-veille:checked) .Panneau-Lateral-CRT {
 }
 
 /* =========================================
-    STYLE CARTE
+    STYLE CARTE INTERACTIVE 
 ========================================= */
 
 .Conteneur-Carte {
     display: none;
     position: absolute;
-    top: 10%;
-    left: -15%;
-    width: 80%;
-    height: 80%;
+    top: 3%;
+    left: 5%;
+    width: 55%;
+    height: 55%;
+    background: rgba(0, 15, 5, 0.9);
+    border: 2px solid #00ff41;
+    box-shadow: 0 0 20px rgba(0, 255, 65, 0.2), inset 0 0 20px rgba(0, 255, 65, 0.2);
     z-index: 3000;
+    padding: 0; 
+    overflow: hidden;
+}
+
+.Conteneur-Carte svg {
+    width: 100%;
+    height: 100%;
+    image-rendering: pixelated;
+}
+
+.Conteneur-Carte .zone-carte {
+    cursor: pointer;
+    fill: rgba(255, 0, 0, 0.05);
+    stroke: rgba(255, 0, 0, 0.3);
+    stroke-width: 1px;
+    stroke-dasharray: 4, 4;
+    transition: all 0.2s ease;
+    animation: radar-pulse 3s infinite;
+}
+
+.Conteneur-Carte .zone-carte:hover {
+    fill: rgba(255, 0, 0, 0.3); 
+    stroke: rgba(255, 50, 50, 0.8); 
+    stroke-width: 2px;
+    stroke-dasharray: 0;
+    filter: drop-shadow(0 0 10px rgba(255, 0, 0, 0.5));
+    animation: none;
+}
+
+.Conteneur-Carte .texte-carte {
+    pointer-events: none;
+    font-family: 'VT323', monospace;
+    text-anchor: middle;
+    text-shadow: 2px 2px 0px #000;
+    transition: opacity 0.2s ease;
+}
+
+.Conteneur-Carte .zone-carte:hover + .texte-carte {
+    opacity: 1;
 }
 
 body:has(#Btn-Carte:checked) .Conteneur-Carte {
     display: flex;
-    justify-content: center;
-    align-items: center;
+    animation: glitch-apparition 1.3s linear forwards;
 }
 
-body:has(#Btn-Carte:checked) .Grille-Inventaire,
-body:has(#Btn-Carte:checked) .Conteneur-Dialogue-Jill {
+body:has(#Btn-Carte:checked) .Grille-Inventaire {
     display: none !important;
+}
+
+body:has(#Btn-Carte:checked) .Conteneur-Dialogue-Jill {
+    display: block !important;
+    bottom: 10%; 
+    left: 35%; 
+    z-index: 4000; 
 }
