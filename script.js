@@ -1,5 +1,5 @@
 /* =========================================
-   01. ÉLÉMENTS DU DOM ET VARIABLES
+   01. ÉLÉMENTS DU DOM ET VARIABLES POMODORO
 ========================================= */
 
 const ecranTimer = document.getElementById('pomodoro-timer');
@@ -22,7 +22,6 @@ const btnPlusPause = document.getElementById('btn-plus-break');
 
 let minutesTravail = 25;
 let minutesPause = 5;
-
 let tempsRestant = minutesTravail * 60;
 let modeTravailActif = true;
 let intervalleTimer = null;
@@ -42,7 +41,6 @@ function jouerSon() {
 function majAffichage() {
     let minutes = Math.floor(tempsRestant / 60);
     let secondes = tempsRestant % 60;
-
     let affichageMin = minutes < 10 ? "0" + minutes : minutes;
     let affichageSec = secondes < 10 ? "0" + secondes : secondes;
 
@@ -50,13 +48,11 @@ function majAffichage() {
 
     let tempsTotal = modeTravailActif ? minutesTravail * 60 : minutesPause * 60;
     let pourcentageProgression = (tempsRestant / tempsTotal) * 100;
-    
     barreProgression.style.width = pourcentageProgression + "%";
 }
 
 function changerMode() {
     modeTravailActif = !modeTravailActif;
-
     if (modeTravailActif) {
         tempsRestant = minutesTravail * 60;
         texteMode.textContent = "MODE: TRAVAIL";
@@ -70,7 +66,6 @@ function changerMode() {
         sessionsTerminees = sessionsTerminees + 1;
         affichageSessions.textContent = "Sessions complétées: " + sessionsTerminees;
     }
-    
     majAffichage();
 }
 
@@ -79,14 +74,10 @@ function changerMode() {
 ========================================= */
 
 function demarrerTimer() {
-    if (intervalleTimer !== null) {
-        return;
-    }
-    
+    if (intervalleTimer !== null) return;
     intervalleTimer = setInterval(() => {
-        tempsRestant = tempsRestant - 1;
+        tempsRestant--;
         majAffichage();
-        
         if (tempsRestant === 0) {
             jouerSon();
             clearInterval(intervalleTimer);
@@ -104,137 +95,63 @@ function mettreEnPause() {
 
 function reinitialiserTimer() {
     mettreEnPause();
-    
     modeTravailActif = true;
     tempsRestant = minutesTravail * 60;
     sessionsTerminees = 0;
-    
     texteMode.textContent = "MODE: TRAVAIL";
-    affichageSessions.textContent = "Sessions complétées: " + sessionsTerminees;
-    
+    affichageSessions.textContent = "Sessions complétées: 0";
     conteneurPomodoro.classList.remove('pause-mode');
     conteneurControles.classList.remove('pause-mode');
-    
     majAffichage();
 }
 
 /* =========================================
-   04. PARAMÉTRAGES DES TEMPS
+   04. PARAMÉTRAGES ET ÉCOUTEURS
 ========================================= */
 
-function changerTempsTravail(changement) {
-    minutesTravail = minutesTravail + changement;
-    
-    if (minutesTravail < 1) {
-        minutesTravail = 1;
-    }
-    if (minutesTravail > 60) {
-        minutesTravail = 60;
-    }
-    
-    valTravail.textContent = minutesTravail;
-    
-    if (modeTravailActif && intervalleTimer === null) {
-        tempsRestant = minutesTravail * 60;
-        majAffichage();
-    }
-}
+btnMoinsTravail.addEventListener('click', () => { minutesTravail = Math.max(1, minutesTravail - 1); valTravail.textContent = minutesTravail; });
+btnPlusTravail.addEventListener('click', () => { minutesTravail = Math.min(60, minutesTravail + 1); valTravail.textContent = minutesTravail; });
+btnMoinsPause.addEventListener('click', () => { minutesPause = Math.max(1, minutesPause - 1); valPause.textContent = minutesPause; });
+btnPlusPause.addEventListener('click', () => { minutesPause = Math.min(30, minutesPause + 1); valPause.textContent = minutesPause; });
 
-/* =========================================
-   05. ÉCOUTEURS D'ÉVÉNEMENTS ET INITIALISATION
-========================================= */
-
-function changerTempsPause(changement) {
-    minutesPause = minutesPause + changement;
-    
-    if (minutesPause < 1) {
-        minutesPause = 1;
-    }
-    if (minutesPause > 30) {
-        minutesPause = 30;
-    }
-    
-    valPause.textContent = minutesPause;
-    
-    if (!modeTravailActif && intervalleTimer === null) {
-        tempsRestant = minutesPause * 60;
-        majAffichage();
-    }
-}
-
-btnMoinsTravail.addEventListener('click', () => changerTempsTravail(-1));
-btnPlusTravail.addEventListener('click', () => changerTempsTravail(1));
-btnMoinsPause.addEventListener('click', () => changerTempsPause(-1));
-btnPlusPause.addEventListener('click', () => changerTempsPause(1));
-
-boutonStart.addEventListener('click', () => {
-    if (intervalleTimer === null) {
-        jouerSon();
-    }
-    demarrerTimer();
-});
-
+boutonStart.addEventListener('click', () => { if (intervalleTimer === null) jouerSon(); demarrerTimer(); });
 boutonPause.addEventListener('click', mettreEnPause);
 boutonReset.addEventListener('click', reinitialiserTimer);
 
-majAffichage();
-
 /* =========================================
-   06. INTERACTIONS DE LA CARTE (SVG)
+   05. INTERACTIONS DE LA CARTE (SVG)
 ========================================= */
 
 const dialogueJill = document.querySelector('.Texte-Jill');
 const zonesCarte = document.querySelectorAll('.zone-carte');
 const btnCarte = document.getElementById('Btn-Carte');
 const radiosExamen = document.querySelectorAll('input[name="examen"]');
-const dialoguesLieux = {
-    'carte-eglise': "Une vieille église... J'entends des bruits étranges venant du clocher. Mieux vaut être prudente.",
-    'carte-police': "Le commissariat de Raccoon City. Si des survivants s'y cachent, c'est là-bas que je dois aller.",
-    'carte-usine': "La zone industrielle. Cet endroit est un vrai labyrinthe, et ça grouille d'infectés."
-};
 
-const texteInventaire = "Avant de continuer, je devrais inspecter tout ce que j'ai eu ici. Je pourrais y trouver des éléments importants...";
-const texteCarteDefaut = "Ca craint ici ... Je me demande comment s'en sortent les autres ?";
+const fondVideo = document.querySelector('.fond-video');
+const bgMusic = document.getElementById('bg-music');
+const themeTitre = document.getElementById('theme-titre');
+const themeImage = document.getElementById('theme-image');
+const themeDesc = document.getElementById('theme-desc');
+const themeAudioPreview = document.getElementById('theme-audio-preview');
+const conteneurAudioPreview = document.querySelector('.theme-audio-lecteur');
+const btnActiverTheme = document.getElementById('btn-activer-theme');
 
-radiosExamen.forEach(radio => {
-    radio.addEventListener('change', () => {
-        if (btnCarte.checked) {
-            dialogueJill.textContent = texteCarteDefaut;
-        } else {
-            dialogueJill.textContent = texteInventaire;
-        }
-    });
-});
+let zoneSelectionnee = null;
 
 zonesCarte.forEach(zone => {
     zone.addEventListener('mouseenter', () => {
-        if (dialoguesLieux[zone.id]) {
-            dialogueJill.textContent = dialoguesLieux[zone.id];
-        }
-        
-        const son = document.getElementById('myaudio');
-        if (son) {
-            son.currentTime = 0;
-            son.play();
-        }
+        if (zone.dataset.titre) dialogueJill.textContent = "C'est " + zone.dataset.titre + "...";
+        document.getElementById('myaudio').play();
     });
 
     zone.addEventListener('mouseleave', () => {
-        if (btnCarte.checked) {
-            dialogueJill.textContent = texteCarteDefaut;
-        }
+        if (btnCarte.checked) dialogueJill.textContent = "Ca craint ici ... Je me demande comment s'en sortent les autres ?";
     });
-});
 
-/* =========================================
-   07. INTERACTIONS DE LA CARTE (SVG)
-========================================= */
-
-zonesCarte.forEach(zone => {
     zone.addEventListener('click', () => {
         zoneSelectionnee = {
             titre: zone.dataset.titre,
-            desc: zone.dataset.desc,
+            desc: zone.dataset.desc.replace(/\\n/g, '\n'),
             img: zone.dataset.img,
             audio: zone.dataset.audio,
             video: zone.dataset.video
@@ -250,7 +167,6 @@ zonesCarte.forEach(zone => {
 
         zonesCarte.forEach(c => c.classList.remove('zone-active'));
         zone.classList.add('zone-active');
-        document.getElementById('myaudio').play();
     });
 });
 
@@ -262,3 +178,9 @@ btnActiverTheme.addEventListener('click', () => {
         bgMusic.play();
     }
 });
+
+radiosExamen.forEach(radio => {
+    radio.addEventListener('change', () => themeAudioPreview.pause());
+});
+
+majAffichage();
