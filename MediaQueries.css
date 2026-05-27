@@ -498,6 +498,10 @@ PLEIN ECRAN DE HAUTEUR REDUITE (EX: ORDINATEUR PORTABLE)
         right: 100px;
     }
 
+    .Conteneur-Dialogue-Jill {
+        top: 520px !important;
+    }
+
     .Conteneur-Carte {
         top: 8% !important;
         left: 3% !important;
@@ -508,7 +512,7 @@ PLEIN ECRAN DE HAUTEUR REDUITE (EX: ORDINATEUR PORTABLE)
     }
 
     .Panneau-Theme-Zone {
-        margin-top: 45px !important;
+        margin-top: 85px !important;
         overflow-y: hidden;
 
     }
@@ -525,7 +529,7 @@ PLEIN ECRAN DE HAUTEUR REDUITE (EX: ORDINATEUR PORTABLE)
     }
 
     body:has(#Btn-Carte:checked) .Conteneur-Dialogue-Jill {
-        bottom: 5% !important;
+        top: 75% !important;
         left: 25% !important;
         width: 500px !important;
     }

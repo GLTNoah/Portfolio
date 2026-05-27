@@ -301,15 +301,25 @@
                     data-img="./Image/PreviewADA.png" 
                     data-audio="./son/AdaTheme.mp3" 
                     data-video="./vidéo/ada-wong-lethal-grace.mp4" 
-                    points="350,230 550,130 770,280 550,380" />
+                    points="350,230 540,130 770,280 550,380" />
                 <text class="texte-carte" x="550" y="230" fill="#ffffff" font-size="24" opacity="0">ZONE INDUSTRIELLE</text>
+
+                <polygon class="zone-carte" id="carte-bibliotheque" 
+                    data-titre="BIBLIOTHEQUE" 
+                    data-desc="> LIEU DE CONNAISSANCE\n> PRÉSENCE : JILL VALENTINE" 
+                    data-img="./Image/PreviewJill.png" 
+                    data-audio="./son/The-City-of-Ruin.mp3"
+                    data-video="./vidéo/resident-evil.1920x1080.mp4" 
+                    points="480,780 580,840 700,780 600,720" />
+                <text class="texte-carte" x="590" y="780" fill="#ffffff" font-size="24" opacity="0">BIBLIOTHEQUE</text>
             </svg>
         </div>
     </main>
 
-    <audio id="myaudio" src="./son/Son-inventaire.mp3" oncanplay="this.volume=0.02"></audio>
+    <audio id="myaudio" src="./son/Son-inventaire.mp3" oncanplay="this.volume=0.01"></audio>
     <audio id="pomodoro-sound" src="./son/Son-pomodoro.mp3" oncanplay="this.volume=0.04"></audio>
-    <audio id="bg-music" loop></audio>
+    <audio id="audio-fond" src="./son/The-City-of-Ruin.mp3" oncanplay="this.volume=0.01" autoplay loop></audio>
+    <audio id="bg-music" oncanplay="this.volume=0.01" loop></audio>
 </body>
 
 </html>

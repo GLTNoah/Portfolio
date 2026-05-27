@@ -183,4 +183,26 @@ radiosExamen.forEach(radio => {
     radio.addEventListener('change', () => themeAudioPreview.pause());
 });
 
+/* =========================================
+   06. GESTION DU SON DE FOND ET DES THÈMES
+========================================= */
+
+const audioFond = document.getElementById('audio-fond');
+const themeAudios = document.querySelectorAll('.theme-audio-lecteur audio');
+const btnActiver = document.getElementById('btn-activer-theme');
+
+themeAudios.forEach(audio => {
+    audio.addEventListener('play', function() {
+        if (audioFond) {
+            audioFond.pause();
+        }
+    });
+});
+
+if (btnActiver && audioFond) {
+    btnActiver.addEventListener('click', () => {
+        audioFond.pause();
+    });
+}
+
 majAffichage();
