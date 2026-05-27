@@ -884,3 +884,4 @@ body:has(#Btn-Carte:checked) .Panneau-Theme-Zone {
     transform: scale(1.02);
     box-shadow: inset 0 0 15px rgba(0, 255, 65, 0.2);
 }
+

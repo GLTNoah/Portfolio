@@ -174,7 +174,7 @@ btnActiverTheme.addEventListener('click', () => {
     if (zoneSelectionnee) {
         fondVideo.src = zoneSelectionnee.video;
         bgMusic.src = zoneSelectionnee.audio;
-        bgMusic.volume = 0.02;
+        bgMusic.volume = 0.05;
         bgMusic.play();
     }
 });
