@@ -76,7 +76,7 @@
     .Icone-Examiner label { font-size: 20px; padding-left: 45px; }
     #emplacement-jeu:focus + .Icone-Examiner, #emplacement-jeu + .Icone-Examiner:hover, #emplacement-ordi:focus + .Icone-Examiner, #emplacement-ordi + .Icone-Examiner:hover { top: 600px; left: -10%; }  
     .bouton-fermer-ecran { bottom: 80px; right: 100px; font-size: 24px; padding: 12px; }
-    .Conteneur-Dialogue-Jill { width: 600px; height: 120px; bottom: 41%; left: 30%; } 
+    .Conteneur-Dialogue-Jill { width: 500px; height: 120px; bottom: 41%; left: 25%; } 
     .Texte-Jill { font-size: 22px; }
     .CV-Agrandi, .Veille-Agrandi { width: 55%; left: 12%; padding: 30px; }
     .En-Tete-CV h1, .En-Tete-Veille h1 { font-size: 36px; }
@@ -130,8 +130,8 @@
         height: auto !important;
         aspect-ratio: 16 / 9 !important;
     }
-    .Panneau-Theme-Zone { margin-top: 60px; }
-    .theme-preview-box { height: 120px; margin-bottom: 10px; }
+    .Panneau-Theme-Zone { margin-top: 40px; }
+    .theme-preview-box { height: 170px; margin-bottom: 10px; }
     #theme-titre { margin: 10px 0 10px 0; }
     body:has(#Btn-Carte:checked) .Conteneur-Dialogue-Jill { bottom: 2% !important; }
 }
