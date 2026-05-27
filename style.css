@@ -1,10 +1,6 @@
 @import url(./KeyFrames.css);
 @import url(./MediaQueries.css);
 
-/* =========================================
-    STYLES GÉNÉRAUX
-========================================= */
-
 * {
     margin: 0;
     padding: 0;
@@ -54,10 +50,6 @@ html, body, a, button, .Emplacement-Inventaire, label {
     object-fit: cover;
     z-index: -1;
 }
-
-/* =========================================
-    STYLES INVENTAIRE
-========================================= */
 
 .Haut-Inventaire {
     display: flex;
@@ -138,10 +130,6 @@ body:has(#Btn-Pomodoro:checked) .Grille-Inventaire,
 body:has(#Btn-Pomodoro:checked) .Conteneur-Dialogue-Jill {
     display: none !important;
 }
-
-/* =========================================
-    STYLES DIALOGUE & ANIMATIONS
-========================================= */
 
 .Grille-Inventaire {
     display : grid;
@@ -243,10 +231,6 @@ body:has(#Btn-Pomodoro:checked) .Conteneur-Dialogue-Jill {
     display: block;
 }
 
-/* =========================================
-    STYLES EXAMEN & ANIMATIONS
-========================================= */
-
 .Icone-Examiner {
     position: absolute;
     top: 290px;
@@ -299,10 +283,6 @@ body:has(#Btn-Pomodoro:checked) .Conteneur-Dialogue-Jill {
     top: 75%;
     left: -8%;
 }
-
-/* =========================================
-    STYLES APPARITION & DISPARITION
-========================================= */
 
 .animation-allumage-ecran {
     position: fixed;
@@ -407,10 +387,6 @@ body:has(input[name="examen"]:not(#fermer-examen):not(#etat-initial):not(#Btn-Po
 body:has(input[name="examen"]:not(#fermer-examen):not(#etat-initial):not(#Btn-Pomodoro):not(#Btn-Carte):checked) .Conteneur-Dialogue-Jill {
     display: none !important;
 }
-
-/* =========================================
-    STYLES ANIMATIONS GÉNÉRALES
-========================================= */
 
 .Conteneur-Dialogue-Jill {
     position: absolute;
@@ -706,10 +682,6 @@ body:has(#radio-veille:checked) .Panneau-Lateral-CRT {
     animation: scan-vertical 3s linear infinite;
 }
 
-/* =========================================
-    STYLE CARTE INTERACTIVE 
-========================================= */
-
 .Conteneur-Carte {
     display: none;
     position: absolute;
@@ -787,10 +759,6 @@ body:has(#Btn-Carte:checked) .Conteneur-Dialogue-Jill {
     z-index: 4000; 
 }
 
-/* =========================================
-    STYLE INVENTAIRE CARTE
-========================================= */
-
 .Panneau-Theme-Zone {
     display: none;
     flex-direction: column;
@@ -861,10 +829,61 @@ body:has(#Btn-Carte:checked) .Panneau-Theme-Zone {
 }
 
 .theme-audio-lecteur audio {
+    display: none;
+}
+
+.custom-audio-player {
+    display: flex;
+    align-items: center;
+    gap: 15px;
     width: 100%;
-    height: 35px;
-    outline: none;
-    filter: sepia(100%) hue-rotate(80deg) saturate(300%) contrast(150%);
+    border: 1px solid rgba(0, 255, 65, 0.2);
+    background: rgba(0, 15, 5, 0.8);
+    padding: 10px 15px;
+    margin-top: 10px;
+    box-shadow: inset 0 0 10px rgba(0, 255, 65, 0.1);
+}
+
+#custom-play-btn {
+    color: #00ff41;
+    font-family: 'VT323', monospace;
+    font-size: 18px;
+    cursor: pointer;
+    min-width: 100px;
+    text-align: left;
+    text-shadow: 0 0 5px rgba(0, 255, 65, 0.5);
+    transition: color 0.2s, text-shadow 0.2s;
+}
+
+#custom-play-btn:hover {
+    color: #fff;
+    text-shadow: 0 0 10px #00ff41, 0 0 20px #00ff41;
+}
+
+.audio-progress-container {
+    flex-grow: 1;
+    height: 8px;
+    background: rgba(0, 255, 65, 0.1);
+    border: 1px solid rgba(0, 255, 65, 0.3);
+    position: relative;
+    cursor: pointer;
+}
+
+#audio-progress-bar {
+    height: 100%;
+    width: 0%;
+    background: #00ff41;
+    box-shadow: 0 0 8px #00ff41;
+    transition: width 0.1s linear;
+}
+
+#audio-time {
+    color: #00ff41;
+    font-family: 'VT323', monospace;
+    font-size: 16px;
+    min-width: 95px;
+    text-align: right;
+    opacity: 0.8;
 }
 
 #btn-activer-theme {
@@ -886,4 +905,3 @@ body:has(#Btn-Carte:checked) .Panneau-Theme-Zone {
     transform: scale(1.02);
     box-shadow: inset 0 0 15px rgba(0, 255, 65, 0.2);
 }
-

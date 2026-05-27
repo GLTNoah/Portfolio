@@ -128,7 +128,14 @@
                 
                 <div class="theme-audio-lecteur" style="display: none;">
                     <p>> PISTE AUDIO</p>
-                    <audio id="theme-audio-preview" controls controlsList="nodownload"></audio>
+                    <audio id="theme-audio-preview" preload="metadata"></audio>
+                    <div class="custom-audio-player">
+                        <button id="custom-play-btn">[ &#9658; LECTURE ]</button>
+                        <div class="audio-progress-container">
+                            <div id="audio-progress-bar"></div>
+                        </div>
+                        <span id="audio-time">00:00 / 00:00</span>
+                    </div>
                 </div>
                 
                 <button id="btn-activer-theme" style="display: none;">[ INITIER LA SÉQUENCE ]</button>

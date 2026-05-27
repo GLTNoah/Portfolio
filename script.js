@@ -1,7 +1,3 @@
-/* =========================================
-   01. ÉLÉMENTS DU DOM ET VARIABLES POMODORO
-========================================= */
-
 const ecranTimer = document.getElementById('pomodoro-timer');
 const texteMode = document.getElementById('pomodoro-mode');
 const boutonStart = document.getElementById('pomodoro-start');
@@ -26,10 +22,6 @@ let tempsRestant = minutesTravail * 60;
 let modeTravailActif = true;
 let intervalleTimer = null;
 let sessionsTerminees = 0;
-
-/* =========================================
-   02. GESTION DU SON ET DE L'AFFICHAGE
-========================================= */
 
 function jouerSon() {
     if (sonPomodoro) {
@@ -69,10 +61,6 @@ function changerMode() {
     majAffichage();
 }
 
-/* =========================================
-   03. LOGIQUE DU CHRONOMÈTRE
-========================================= */
-
 function demarrerTimer() {
     if (intervalleTimer !== null) return;
     intervalleTimer = setInterval(() => {
@@ -105,10 +93,6 @@ function reinitialiserTimer() {
     majAffichage();
 }
 
-/* =========================================
-   04. PARAMÉTRAGES ET ÉCOUTEURS
-========================================= */
-
 btnMoinsTravail.addEventListener('click', () => { minutesTravail = Math.max(1, minutesTravail - 1); valTravail.textContent = minutesTravail; });
 btnPlusTravail.addEventListener('click', () => { minutesTravail = Math.min(60, minutesTravail + 1); valTravail.textContent = minutesTravail; });
 btnMoinsPause.addEventListener('click', () => { minutesPause = Math.max(1, minutesPause - 1); valPause.textContent = minutesPause; });
@@ -118,10 +102,6 @@ boutonStart.addEventListener('click', () => { if (intervalleTimer === null) joue
 boutonPause.addEventListener('click', mettreEnPause);
 boutonReset.addEventListener('click', reinitialiserTimer);
 
-/* =========================================
-   05. INTERACTIONS DE LA CARTE (SVG)
-========================================= */
-
 const dialogueJill = document.querySelector('.Texte-Jill');
 const zonesCarte = document.querySelectorAll('.zone-carte');
 const btnCarte = document.getElementById('Btn-Carte');
@@ -129,14 +109,28 @@ const radiosExamen = document.querySelectorAll('input[name="examen"]');
 
 const fondVideo = document.querySelector('.fond-video');
 const bgMusic = document.getElementById('bg-music');
+const audioFond = document.getElementById('audio-fond');
 const themeTitre = document.getElementById('theme-titre');
 const themeImage = document.getElementById('theme-image');
 const themeDesc = document.getElementById('theme-desc');
 const themeAudioPreview = document.getElementById('theme-audio-preview');
 const conteneurAudioPreview = document.querySelector('.theme-audio-lecteur');
 const btnActiverTheme = document.getElementById('btn-activer-theme');
+const customPlayBtn = document.getElementById('custom-play-btn');
+const audioProgressBar = document.getElementById('audio-progress-bar');
+const audioProgressContainer = document.querySelector('.audio-progress-container');
+const audioTimeDisplay = document.getElementById('audio-time');
 
 let zoneSelectionnee = null;
+themeAudioPreview.volume = 0.05;
+
+function relancerMusiqueDeFond() {
+    if (bgMusic.getAttribute('src')) {
+        bgMusic.play();
+    } else {
+        audioFond.play();
+    }
+}
 
 zonesCarte.forEach(zone => {
     zone.addEventListener('mouseenter', () => {
@@ -165,6 +159,10 @@ zonesCarte.forEach(zone => {
         conteneurAudioPreview.style.display = "block";
         btnActiverTheme.style.display = "block";
 
+        customPlayBtn.innerHTML = "[ &#9658; LECTURE ]";
+        audioProgressBar.style.width = "0%";
+        audioTimeDisplay.textContent = "00:00 / 00:00";
+
         zonesCarte.forEach(c => c.classList.remove('zone-active'));
         zone.classList.add('zone-active');
     });
@@ -172,6 +170,10 @@ zonesCarte.forEach(zone => {
 
 btnActiverTheme.addEventListener('click', () => {
     if (zoneSelectionnee) {
+        audioFond.pause();
+        themeAudioPreview.pause();
+        customPlayBtn.innerHTML = "[ &#9658; LECTURE ]";
+        
         fondVideo.src = zoneSelectionnee.video;
         bgMusic.src = zoneSelectionnee.audio;
         bgMusic.volume = 0.05;
@@ -180,29 +182,68 @@ btnActiverTheme.addEventListener('click', () => {
 });
 
 radiosExamen.forEach(radio => {
-    radio.addEventListener('change', () => themeAudioPreview.pause());
-});
-
-/* =========================================
-   06. GESTION DU SON DE FOND ET DES THÈMES
-========================================= */
-
-const audioFond = document.getElementById('audio-fond');
-const themeAudios = document.querySelectorAll('.theme-audio-lecteur audio');
-const btnActiver = document.getElementById('btn-activer-theme');
-
-themeAudios.forEach(audio => {
-    audio.addEventListener('play', function() {
-        if (audioFond) {
-            audioFond.pause();
+    radio.addEventListener('change', () => {
+        if (!themeAudioPreview.paused) {
+            themeAudioPreview.pause();
+            customPlayBtn.innerHTML = "[ &#9658; LECTURE ]";
+            relancerMusiqueDeFond();
         }
     });
 });
 
-if (btnActiver && audioFond) {
-    btnActiver.addEventListener('click', () => {
+const formatTime = (time) => {
+    if (isNaN(time)) return "00:00";
+    const m = Math.floor(time / 60).toString().padStart(2, '0');
+    const s = Math.floor(time % 60).toString().padStart(2, '0');
+    return `${m}:${s}`;
+};
+
+customPlayBtn.addEventListener('click', () => {
+    if (themeAudioPreview.paused) {
+        const previewFile = themeAudioPreview.getAttribute('src');
+        const bgFile = bgMusic.getAttribute('src');
+        const fondFile = audioFond.getAttribute('src');
+
+        const isBgPlaying = !bgMusic.paused && previewFile === bgFile;
+        const isFondPlaying = !audioFond.paused && previewFile === fondFile;
+
+        if (isBgPlaying || isFondPlaying) {
+            return;
+        }
+
         audioFond.pause();
-    });
-}
+        bgMusic.pause();
+
+        themeAudioPreview.play();
+        customPlayBtn.innerHTML = "[ &#10074;&#10074; PAUSE ]";
+    } else {
+        themeAudioPreview.pause();
+        customPlayBtn.innerHTML = "[ &#9658; LECTURE ]";
+        relancerMusiqueDeFond();
+    }
+});
+
+themeAudioPreview.addEventListener('loadedmetadata', () => {
+    audioTimeDisplay.textContent = `00:00 / ${formatTime(themeAudioPreview.duration)}`;
+});
+
+themeAudioPreview.addEventListener('timeupdate', () => {
+    const current = themeAudioPreview.currentTime;
+    const duration = themeAudioPreview.duration;
+    audioProgressBar.style.width = (current / duration) * 100 + "%";
+    audioTimeDisplay.textContent = `${formatTime(current)} / ${formatTime(duration)}`;
+});
+
+themeAudioPreview.addEventListener('ended', () => {
+    customPlayBtn.innerHTML = "[ &#9658; LECTURE ]";
+    audioProgressBar.style.width = "0%";
+    audioTimeDisplay.textContent = `00:00 / ${formatTime(themeAudioPreview.duration)}`;
+    relancerMusiqueDeFond();
+});
+
+audioProgressContainer.addEventListener('click', (e) => {
+    const rect = audioProgressContainer.getBoundingClientRect();
+    themeAudioPreview.currentTime = ((e.clientX - rect.left) / rect.width) * themeAudioPreview.duration;
+});
 
 majAffichage();
