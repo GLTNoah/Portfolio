@@ -512,8 +512,9 @@ PLEIN ECRAN DE HAUTEUR REDUITE (EX: ORDINATEUR PORTABLE)
     }
 
     .Panneau-Theme-Zone {
-        margin-top: 85px !important;
-        overflow-y: hidden;
+        margin-top: 25px !important;
+        max-height: 70vh !important;
+        overflow-y: auto !important;
 
     }
 
