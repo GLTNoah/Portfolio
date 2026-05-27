@@ -530,6 +530,10 @@
     }
 }
 
+/* =========================================
+    MEDIA QUERIES POUR PETITS ÉCRANS 1000PX X 900PX
+========================================= */
+
 @media (min-width: 1000px) and (max-height: 900px) {
     .Haut-Inventaire {
         max-width: 450px;
@@ -565,7 +569,7 @@
     }
 
     .Panneau-Theme-Zone {
-        margin-top: 25px !important;
+        margin-top: 35px !important;
         max-height: 70vh !important;
         overflow-y: auto !important;
     }
