@@ -600,7 +600,7 @@ FENETRE DE HAUTEUR REDUITE (EX: ORDINATEUR PORTABLE)
     }
 
     .Panneau-Theme-Zone {
-        margin-top: 10px !important;
+        margin-top: 40px !important;
         max-height: 70vh !important;
         overflow-y: auto !important;
     }
