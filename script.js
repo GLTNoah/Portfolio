@@ -143,7 +143,6 @@ let themeActuel = {
     dialogue: "Avant de continuer, je devrais inspecter tout ce que j'ai eu ici. Je pourrais y trouver des éléments importants..."
 };
 
-// Dictionnaire des dialogues selon le personnage actif
 const dialoguesPersonnages = {
     "> JILL VALENTINE": {
         "carte-eglise": "Une vieille église... L'ambiance y est glaciale. Je ferais bien de rester sur mes gardes.",
@@ -152,16 +151,16 @@ const dialoguesPersonnages = {
         "carte-bibliotheque": "La bibliothèque. Un bon endroit pour trouver des informations et planifier la prochaine étape."
     },
     "> GRACE ASHCROFT": {
-        "carte-eglise": "Notre sanctuaire. La foi est la seule chose qui nous sauvera de la pourriture de ce monde.",
-        "carte-police": "Ces prétendues forces de l'ordre... Leurs armes ne peuvent rien contre la volonté divine.",
-        "carte-usine": "L'industrie des hommes périra. Seule la chair sanctifiée restera.",
-        "carte-bibliotheque": "Des mots vides de sens. La vraie connaissance s'écrit dans le sang."
+        "carte-eglise": "Je... je pensais qu'on serait en sécurité ici. Mais... l'ambiance est si lourde. Ça me fait peur.",
+        "carte-police": "Toutes ces armes... et ce sang... Vous croyez vraiment qu'il reste quelqu'un pour nous protéger là-bas ?",
+        "carte-usine": "Emily... ça ressemble à l'endroit où ils t'avaient retenue. Tu... tu es vraiment sûre de vouloir y retourner ?",
+        "carte-bibliotheque": "C'est... c'est si calme. On pourrait peut-être juste rester cachés ici un petit moment ?"
     },
-    "> LEON S. KENNEDY": {
-        "carte-eglise": "Un culte qui traîne dans le coin ? Ça me rappelle de très mauvais souvenirs...",
-        "carte-police": "Le R.P.D. C'était censé être mon premier jour de boulot... Quel cauchemar.",
-        "carte-usine": "Si Umbrella est derrière ça, cette usine est l'endroit parfait pour cacher un labo.",
-        "carte-bibliotheque": "Si Claire est dans les parages, elle cherchera sûrement des infos ici."
+    "> LEON S. KENNEDY / CLAIRE REDFIELD": {
+        "carte-eglise": "Encore une histoire de secte... Reste sur tes gardes, Claire cet endroit me rappelle de très mauvais souvenirs...",
+        "carte-police": "On sait tous les deux qu'un commissariat n'est jamais le refuge qu'on espère. Garde ton arme prête, Claire.",
+        "carte-usine": "Une installation abandonnée. Couvre mes arrières, Claire, on va aller voir ce qu'ils cachent là-dedans.",
+        "carte-bibliotheque": "On devrait pouvoir trouver des indices ici. Je sécurise le périmètre pendant que tu fouilles les archives, Claire."
     },
     "> ADA WONG": {
         "carte-eglise": "La ferveur religieuse fait d'excellents cobayes, mais de très mauvais associés.",
@@ -208,12 +207,9 @@ zonesCarte.forEach(zone => {
     zone.addEventListener('mouseenter', () => {
         if (nomContact) nomContact.textContent = personnageActif;
 
-        // Cherche le dialogue dans le dictionnaire, sinon utilise celui par défaut
-        if (dialoguesPersonnages[personnageActif] && dialoguesPersonnages[personnageActif][zone.id]) {
-            if (dialogueJill) dialogueJill.textContent = dialoguesPersonnages[personnageActif][zone.id];
-        } else if (dialogueJill && zone.dataset.dialogue) {
-            if (dialogueJill) dialogueJill.textContent = zone.dataset.dialogue;
-        }
+        if (dialogueJill && dialoguesPersonnages[personnageActif]?.[zone.id]) {
+        dialogueJill.textContent = dialoguesPersonnages[personnageActif][zone.id];
+    }
         
         const myAudio = document.getElementById('myaudio');
         if (myAudio) myAudio.play();
@@ -227,7 +223,6 @@ zonesCarte.forEach(zone => {
     });
 
     zone.addEventListener('click', () => {
-        // Normalisation du nom de contact (gère les différences de casse et l'absence du préfixe "> ")
         let contactBrut = zone.dataset.contact || "> JILL VALENTINE";
         let contactAjuste = contactBrut.trim().toUpperCase();
         if (!contactAjuste.startsWith("> ")) {
@@ -242,7 +237,7 @@ zonesCarte.forEach(zone => {
             audio: zone.dataset.audio,
             video: zone.dataset.video,
             contact: contactAjuste,
-            dialogueActif: zone.dataset.dialogueActif || zone.dataset.dialogueactif || zone.dataset.dialogue || ""
+            dialogueActif: zone.dataset.dialogueActif || zone.dataset.dialogueactif || zone.dataset.dialogue || "" // <-- À SUPPRIMER
         };
 
         if (themeTitre) themeTitre.textContent = zoneSelectionnee.titre;
@@ -279,11 +274,7 @@ btnActiverTheme.addEventListener('click', () => {
             bgMusic.play();
         }
         if (titreMusiqueActuelle) titreMusiqueActuelle.textContent = formaterTitreMusique(zoneSelectionnee.audio);
-
-        // Mise à jour du personnage aux commandes !
         personnageActif = zoneSelectionnee.contact;
-
-        // Dialogue par défaut de sécurité si non renseigné dans le HTML
         let dialogueSecours = dialoguesPersonnages[personnageActif] && dialoguesPersonnages[personnageActif][zoneSelectionnee.id] 
                               ? dialoguesPersonnages[personnageActif][zoneSelectionnee.id] 
                               : "Il faut que je continue l'exploration...";

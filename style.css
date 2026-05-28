@@ -427,6 +427,7 @@ body:has(input[name="examen"]:not(#fermer-examen):not(#etat-initial):not(#Btn-Po
     pointer-events: none;    
     display: flex;
     flex-direction: column;
+    animation : levitation 3s ease-in-out infinite;
 } 
 
 .Header-Dialogue {

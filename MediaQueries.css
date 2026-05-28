@@ -511,7 +511,7 @@
     .Conteneur-Dialogue-Jill {
         position: fixed !important;
         width: 600px;
-        bottom: 28vh !important;
+        bottom: 30vh !important;
     }
 
     body:has(#Btn-Carte:checked) .Conteneur-Dialogue-Jill {
