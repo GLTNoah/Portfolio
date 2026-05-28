@@ -124,7 +124,7 @@
         width: 75%;
         left: auto;
         right: 5%;
-        bottom: 25%;
+        bottom: 35%;
         transform: none;
         z-index: 5;
     }
@@ -359,7 +359,7 @@
 
     .Conteneur-Dialogue-Jill {
         width: 600px;
-        bottom: 38%;
+        bottom: 48%;
         left: 30%;
     }
 
@@ -498,7 +498,7 @@
     }
 
     .Conteneur-Dialogue-Jill {
-        bottom: 42% !important;
+        bottom: 43% !important;
         top: auto !important;
     }
 
@@ -650,7 +650,7 @@
     }
 
     .Conteneur-Dialogue-Jill {
-        bottom: 28% !important;
+        bottom: 38% !important;
         top: auto !important;
     }
 
