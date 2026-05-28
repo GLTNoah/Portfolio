@@ -365,7 +365,7 @@
 
     .Conteneur-Dialogue-Jill {
         position: fixed !important;
-        width: 600px;
+        width: 500px;
         bottom: 48vh !important;
         left: 30%;
         z-index: 5000;
