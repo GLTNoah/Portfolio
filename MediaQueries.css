@@ -562,6 +562,7 @@
     .Conteneur-Dialogue-Jill {
         bottom: 33% !important;
         top: auto !important;
+        width: 500px !important;
     }
 
     .Conteneur-Carte {
