@@ -1,7 +1,9 @@
 @import url(./KeyFrames.css);
 
 /* =========================================
-   MOBILES & TABLETTES (< 1000px)
+   IMPACT : ÉCRANS ÉTROITS (Mobiles, Tablettes, Fenêtres réduites)
+   Résolution ciblée : Largeur inférieure à 1000px.
+   C'est ici qu'il faut faire des modifications pour l'affichage sur smartphone (ex: iPhone, Android) ou tablette en mode portrait. La vue bascule souvent en colonne et s'adapte pour la navigation tactile.
 ========================================= */
 @media (max-width: 999px) {
     html,
@@ -276,7 +278,10 @@
 }
 
 /* =========================================
-   DESKTOP GLOBAL (BASE)
+   IMPACT : ÉCRANS LARGES & DESKTOP (Base pour Ordinateurs)
+   Résolution ciblée : Largeur supérieure ou égale à 1000px.
+   Ceci est la BASE absolue pour tous les ordinateurs de bureau et PC portables. Si vous modifiez un élément ici, cela affectera tous les grands écrans par défaut (
+   sauf si une règle de hauteur plus spécifique ci-dessous vient l'écraser). Utile pour placer vos éléments sur un 1920x1080 ou 1920x1200 en plein écran.
 ========================================= */
 @media (min-width: 1000px) {
     .Haut-Inventaire {
@@ -478,7 +483,9 @@
 }
 
 /* =========================================
-   ÉCRANS WINDOWED (Hauteur 901px - 1100px)
+   IMPACT : ÉCRANS DESKTOP (Hauteur Moyenne - Mode Fenêtré 1080p)
+   Résolution ciblée : Largeur >= 1000px ET Hauteur comprise entre 901px et 1100px.
+   Modifiez cette section pour corriger l'affichage sur un écran de bureau standard (1920x1080) lorsque la fenêtre ne prend pas toute la hauteur (barre des tâches visible, onglets du navigateur imposants, mode fenêtré).
 ========================================= */
 @media (min-width: 1000px) and (max-height: 1100px) and (min-height: 901px) {
     .Haut-Inventaire {
@@ -501,6 +508,17 @@
         right: 100px;
     }
 
+    .Conteneur-Dialogue-Jill {
+        position: fixed !important;
+        width: 600px;
+        bottom: 28vh !important;
+    }
+
+    body:has(#Btn-Carte:checked) .Conteneur-Dialogue-Jill {
+        position: fixed !important;
+        bottom: 20vh !important;
+    }
+
     .Conteneur-Carte {
         top: 8% !important;
         left: 3% !important;
@@ -515,6 +533,7 @@
         overflow-y: hidden;
     }
 
+
     .theme-preview-box {
         height: 260px !important;
         flex-shrink: 0;
@@ -528,7 +547,10 @@
 }
 
 /* =========================================
-   PETITS ÉCRANS LAPTOP (Hauteur <= 900px)
+   IMPACT : PC PORTABLES & ÉCRANS AVEC MISE À L'ÉCHELLE (Zoom Windows)
+   Résolution ciblée : Largeur >= 1000px ET Hauteur inférieure ou égale à 900px.
+   C'est ici qu'il faut modifier pour ajuster l'affichage sur les ordinateurs portables (13", 14", 15") qui utilisent souvent un zoom d'affichage Windows (125% ou 150%). 
+   Ce zoom réduit artificiellement la hauteur perçue par le navigateur sous la barre des 900px.
 ========================================= */
 @media (min-width: 1000px) and (max-height: 900px) {
     .Haut-Inventaire {
@@ -579,7 +601,10 @@
 }
 
 /* =========================================
-   TRÈS PETITS ÉCRANS (Hauteur <= 700px)
+   IMPACT : ÉCRANS TRÈS ÉCRASÉS EN HAUTEUR
+   Résolution ciblée : Hauteur inférieure ou égale à 700px (peu importe la largeur).
+   Cette section s'active si la fenêtre du navigateur est très fortement réduite en hauteur (fenêtre écrasée, mode paysage sur petit mobile, ou laptop avec un zoom extrême). 
+   Utile pour réduire drastiquement la taille des éléments (comme le timer Pomodoro) et éviter qu'ils ne débordent de l'écran.
 ========================================= */
 @media (max-height: 700px) {
     .Grille-Inventaire {
