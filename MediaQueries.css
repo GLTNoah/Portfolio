@@ -1,8 +1,5 @@
 @import url(./KeyFrames.css);
 
-/* =========================================
-   MOBILES & TABLETTES (< 1000px)
-========================================= */
 @media (max-width: 999px) {
     html,
     body {
@@ -124,7 +121,7 @@
         width: 75%;
         left: auto;
         right: 5%;
-        bottom: 45%;
+        bottom: 35%;
         transform: none;
         z-index: 5;
     }
@@ -266,7 +263,7 @@
 
     body:has(#Btn-Carte:checked) .Conteneur-Dialogue-Jill {
         bottom: auto !important;
-        top: 28% !important;
+        top: 38% !important;
         left: 50% !important;
         transform: translateX(-50%) !important;
         width: 90% !important;
@@ -274,9 +271,6 @@
     }
 }
 
-/* =========================================
-   DESKTOP GLOBAL (BASE)
-========================================= */
 @media (min-width: 1000px) {
     .Haut-Inventaire {
         max-width: 480px;
@@ -466,29 +460,13 @@
     }
 
     body:has(#Btn-Carte:checked) .Conteneur-Dialogue-Jill {
-        bottom: 15% !important;
+        bottom: 8% !important;
         top: auto !important;
         left: 25% !important;
         width: 500px !important;
     }
 }
 
-/* =========================================
-   ÉCRANS 1920x1200 (Hauteur > 1100px)
-========================================= */
-@media (min-width: 1000px) and (min-height: 1101px) {
-    .Conteneur-Dialogue-Jill {
-        bottom: 58% !important;
-    }
-
-    body:has(#Btn-Carte:checked) .Conteneur-Dialogue-Jill {
-        bottom: 25% !important;
-    }
-}
-
-/* =========================================
-   ÉCRANS WINDOWED (Hauteur 901px - 1100px)
-========================================= */
 @media (min-width: 1000px) and (max-height: 1100px) and (min-height: 901px) {
     .Haut-Inventaire {
         max-width: 450px;
@@ -511,7 +489,7 @@
     }
 
     .Conteneur-Dialogue-Jill {
-        bottom: 53% !important;
+        bottom: 43% !important;
         top: auto !important;
     }
 
@@ -541,16 +519,13 @@
     }
 
     body:has(#Btn-Carte:checked) .Conteneur-Dialogue-Jill {
-        bottom: 24% !important;
+        bottom: 14% !important;
         top: auto !important;
         left: 25% !important;
         width: 500px !important;
     }
 }
 
-/* =========================================
-   PETITS ÉCRANS LAPTOP (Hauteur <= 900px)
-========================================= */
 @media (min-width: 1000px) and (max-height: 900px) {
     .Haut-Inventaire {
         max-width: 450px;
@@ -612,9 +587,6 @@
     }
 }
 
-/* =========================================
-   TRÈS PETITS ÉCRANS (Hauteur <= 700px)
-========================================= */
 @media (max-height: 700px) {
     .Grille-Inventaire {
         margin-top: 20px !important;
@@ -696,5 +668,15 @@
     body:has(#Btn-Carte:checked) .Conteneur-Dialogue-Jill {
         bottom: 3% !important;
         top: auto !important;
+    }
+}
+
+@media (min-width: 1000px) and (min-height: 1101px) {
+    .Conteneur-Dialogue-Jill {
+        bottom: 58% !important;
+    }
+
+    body:has(#Btn-Carte:checked) .Conteneur-Dialogue-Jill {
+        bottom: 18% !important;
     }
 }
