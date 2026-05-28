@@ -498,7 +498,7 @@
     }
 
     .Conteneur-Dialogue-Jill {
-        bottom: 37% !important;
+        bottom: 42% !important;
         top: auto !important;
     }
 
@@ -528,7 +528,7 @@
     }
 
     body:has(#Btn-Carte:checked) .Conteneur-Dialogue-Jill {
-        bottom: 9% !important;
+        bottom: 14% !important;
         top: auto !important;
         left: 25% !important;
         width: 500px !important;
@@ -560,7 +560,7 @@
     }
 
     .Conteneur-Dialogue-Jill {
-        bottom: 33% !important;
+        bottom: 53% !important;
         top: auto !important;
     }
 
