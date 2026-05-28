@@ -151,7 +151,7 @@ const dialoguesPersonnages = {
         "carte-usine": "Une usine abandonnée. Le niveau de danger biologique est critique ici. Je dois avancer prudemment.",
         "carte-bibliotheque": "La bibliothèque. Un bon endroit pour trouver des informations et planifier la prochaine étape."
     },
-    "> EMILY GRACE": {
+    "> GRACE ASHCROFT": {
         "carte-eglise": "Notre sanctuaire. La foi est la seule chose qui nous sauvera de la pourriture de ce monde.",
         "carte-police": "Ces prétendues forces de l'ordre... Leurs armes ne peuvent rien contre la volonté divine.",
         "carte-usine": "L'industrie des hommes périra. Seule la chair sanctifiée restera.",
@@ -227,14 +227,22 @@ zonesCarte.forEach(zone => {
     });
 
     zone.addEventListener('click', () => {
+        // Normalisation du nom de contact (gère les différences de casse et l'absence du préfixe "> ")
+        let contactBrut = zone.dataset.contact || "> JILL VALENTINE";
+        let contactAjuste = contactBrut.trim().toUpperCase();
+        if (!contactAjuste.startsWith("> ")) {
+            contactAjuste = "> " + contactAjuste;
+        }
+
         zoneSelectionnee = {
+            id: zone.id,
             titre: zone.dataset.titre,
             desc: zone.dataset.desc ? zone.dataset.desc.replace(/\\n/g, '\n') : '',
             img: zone.dataset.img,
             audio: zone.dataset.audio,
             video: zone.dataset.video,
-            contact: zone.dataset.contact || "> JILL VALENTINE",
-            dialogueActif: zone.dataset.dialogueActif || ""
+            contact: contactAjuste,
+            dialogueActif: zone.dataset.dialogueActif || zone.dataset.dialogueactif || zone.dataset.dialogue || ""
         };
 
         if (themeTitre) themeTitre.textContent = zoneSelectionnee.titre;
@@ -274,9 +282,15 @@ btnActiverTheme.addEventListener('click', () => {
 
         // Mise à jour du personnage aux commandes !
         personnageActif = zoneSelectionnee.contact;
+
+        // Dialogue par défaut de sécurité si non renseigné dans le HTML
+        let dialogueSecours = dialoguesPersonnages[personnageActif] && dialoguesPersonnages[personnageActif][zoneSelectionnee.id] 
+                              ? dialoguesPersonnages[personnageActif][zoneSelectionnee.id] 
+                              : "Il faut que je continue l'exploration...";
+
         themeActuel = {
             contact: personnageActif,
-            dialogue: zoneSelectionnee.dialogueActif
+            dialogue: zoneSelectionnee.dialogueActif !== "" ? zoneSelectionnee.dialogueActif : dialogueSecours
         };
 
         if (nomContact) nomContact.textContent = themeActuel.contact;
