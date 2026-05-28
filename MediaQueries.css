@@ -124,7 +124,7 @@
         width: 75%;
         left: auto;
         right: 5%;
-        bottom: 35%;
+        bottom: 45%;
         transform: none;
         z-index: 5;
     }
@@ -266,7 +266,7 @@
 
     body:has(#Btn-Carte:checked) .Conteneur-Dialogue-Jill {
         bottom: auto !important;
-        top: 38% !important;
+        top: 28% !important;
         left: 50% !important;
         transform: translateX(-50%) !important;
         width: 90% !important;
@@ -275,7 +275,7 @@
 }
 
 /* =========================================
-   DESKTOP GLOBAL (>= 1000px)
+   DESKTOP GLOBAL (BASE)
 ========================================= */
 @media (min-width: 1000px) {
     .Haut-Inventaire {
@@ -359,7 +359,7 @@
 
     .Conteneur-Dialogue-Jill {
         width: 600px;
-        bottom: 58%;
+        bottom: 48%;
         left: 30%;
     }
 
@@ -466,10 +466,23 @@
     }
 
     body:has(#Btn-Carte:checked) .Conteneur-Dialogue-Jill {
-        bottom: 18% !important;
+        bottom: 15% !important;
         top: auto !important;
         left: 25% !important;
         width: 500px !important;
+    }
+}
+
+/* =========================================
+   ÉCRANS 1920x1200 (Hauteur > 1100px)
+========================================= */
+@media (min-width: 1000px) and (min-height: 1101px) {
+    .Conteneur-Dialogue-Jill {
+        bottom: 58% !important;
+    }
+
+    body:has(#Btn-Carte:checked) .Conteneur-Dialogue-Jill {
+        bottom: 25% !important;
     }
 }
 
