@@ -384,39 +384,55 @@ body:has(#Btn-Pomodoro:checked) .Conteneur-Dialogue-Jill {
 }
 
 body:has(input[name="examen"]:not(#fermer-examen):not(#etat-initial):not(#Btn-Pomodoro):not(#Btn-Carte):checked) .Haut-Inventaire,
-body:has(input[name="examen"]:not(#fermer-examen):not(#etat-initial):not(#Btn-Pomodoro):not(#Btn-Carte):checked) .Conteneur-Dialogue-Jill {
+body:has(input[name="examen"]:not(#fermer-examen):not(#etat-initial):not(#Btn-Pomodoro):not(#Btn-Carte):checked) .Conteneur-Dialogue-Jill, 
+body:has(input[name="examen"]:not(#fermer-examen):not(#etat-initial):not(#Btn-Pomodoro):not(#Btn-Carte):checked) .Widget-Audio-Global {
     display: none !important;
 }
 
 .Conteneur-Dialogue-Jill {
     position: absolute;
-    opacity: 0;
+    opacity: 1;
     bottom: 40%; 
     left: 27%;
     transform: translateX(-50%);
     width: 500px;
-    height: 120px;
+    background: rgba(0, 15, 5, 0.85);
+    border: 2px solid #00ff41;
+    box-shadow: 0 0 15px rgba(0, 255, 65, 0.2), inset 0 0 10px rgba(0, 255, 65, 0.2);
     z-index: 5; 
     pointer-events: none;    
-    animation: cycleDialogue 18s infinite, radioNoise 3s linear infinite;
+    display: flex;
+    flex-direction: column;
 } 
 
-.Conteneur-Dialogue-Jill::before {
-    content: "";
-    position: absolute;
-    top: 0; left: 0; right: 0; bottom: 0;
-    background: url("./Image/Boite-Dialogue.png") no-repeat center;
-    background-size: contain;
-    z-index: 1;
+.Header-Dialogue {
+    display: flex;
+    justify-content: space-between;
+    background: rgba(0, 255, 65, 0.2);
+    border-bottom: 1px solid #00ff41;
+    padding: 5px 15px;
+    font-family: 'VT323', monospace;
+    color: #00ff41;
+    font-size: 18px;
 }
 
-.Conteneur-Dialogue-Jill::after {
-    content: "";
-    position: absolute;
-    top: 0; left: 0; right: 0; bottom: 0;
-    background: linear-gradient(rgba(0, 0, 0, 0) 50%, rgba(0, 0, 0, 0.2) 50%);
-    background-size: 100% 4px; 
-    z-index: 2; 
+.Statut-Com {
+    animation: pulse 1.5s infinite;
+}
+
+.Enveloppe-Texte-Jill {
+    padding: 15px 20px;
+    min-height: 80px;
+    display: flex;
+    align-items: center;
+}
+
+.Texte-Jill {
+    font-family: 'VT323', monospace;
+    font-size: 20px; 
+    color: #efefef;
+    letter-spacing: 1px;
+    text-shadow: 1px 1px 0px #000;
 }
 
 .Conteneur-Dialogue-Jill::before, .Conteneur-Dialogue-Jill::after {
@@ -428,28 +444,6 @@ body:has(input[name="examen"]:not(#fermer-examen):not(#etat-initial):not(#Btn-Po
     mask-size: contain;
     mask-repeat: no-repeat;
     mask-position: center;    
-}
-
-.Enveloppe-Texte-Jill {
-    position: absolute;
-    top: 17%; 
-    left: 10%;
-    width: 80%; 
-    height: 60%;
-    z-index: 10; 
-    display: flex; 
-    align-items: center;
-}
-
-.Texte-Jill {
-    font-family: 'VT323', monospace;
-    opacity: 0.9;
-    font-size: 20px; 
-    color: #efefef;
-    letter-spacing: 1px;
-    text-shadow: 2px 2px 0px #000; 
-    overflow: hidden;
-    animation: radioNoise 15s steps (40, end) infinite;
 }
 
 .Projet-Agrandi, .Jeu-Agrandi {
@@ -904,4 +898,64 @@ body:has(#Btn-Carte:checked) .Panneau-Theme-Zone {
     border-color: #00ff41;
     transform: scale(1.02);
     box-shadow: inset 0 0 15px rgba(0, 255, 65, 0.2);
+}
+
+/* =========================================
+   BOUTON SON
+========================================= */
+
+.Widget-Audio-Global {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    display: flex;
+    align-items: center;
+    background: rgba(0, 15, 5, 0.8);
+    border: 1px solid rgba(0, 255, 65, 0.4);
+    padding: 5px 20px 5px 5px;
+    gap: 15px;
+    box-shadow: 0 0 10px rgba(0, 255, 65, 0.1);
+    z-index: 5000;
+}
+
+.Bouton-Son {
+    width: 35px;
+    height: 35px;
+    background: transparent;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-right: 1px solid rgba(0, 255, 65, 0.3);
+    padding-right: 15px;
+    margin-left: 10px;
+}
+
+.Bouton-Son img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    filter: sepia(100%) grayscale(100%) brightness(150%);
+    transition: filter 0.2s;
+}
+
+.Bouton-Son:hover img {
+    filter: sepia(100%) grayscale(100%) brightness(200%) drop-shadow(0 0 5px #00ff41);
+}
+
+.Piste-Infos {
+    font-family: 'VT323', monospace;
+    font-size: 18px;
+    white-space: nowrap;
+}
+
+.label-lecture {
+    color: white;
+    opacity: 0.7;
+}
+
+#titre-musique-actuelle {
+    color: #00ff41;
+    text-shadow: 0 0 5px rgba(0, 255, 65, 0.5);
+    letter-spacing: 1px;
 }

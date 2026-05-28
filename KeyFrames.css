@@ -76,12 +76,6 @@
     100% { transform: translate(0, 0); }
 }
 
-@keyframes cycleDialogue {
-    0%, 15% { opacity: 0; visibility: hidden; transform: translateX(-50%) translateY(10px); }
-    22%, 85% { opacity: 1; visibility: visible; transform: translateX(-50%) translateY(0); }
-    92%, 100% { opacity: 0; visibility: hidden; }
-}
-
 @keyframes tv-power-on {
     0% { transform: scaleY(0.005) scaleX(0); background: #fff; box-shadow: none; }
     50% { transform: scaleY(0.005) scaleX(1); background: #fff; box-shadow: none; }
