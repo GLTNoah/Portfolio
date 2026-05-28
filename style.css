@@ -1,6 +1,9 @@
 @import url(./KeyFrames.css);
 @import url(./MediaQueries.css);
 
+/* =========================================
+   GLOBAL & REINITIALISATION
+========================================= */
 * {
     margin: 0;
     padding: 0;
@@ -51,6 +54,9 @@ html, body, a, button, .Emplacement-Inventaire, label {
     z-index: -1;
 }
 
+/* =========================================
+   NAVIGATION & EN-TÊTE
+========================================= */
 .Haut-Inventaire {
     display: flex;
     position: absolute;
@@ -131,6 +137,9 @@ body:has(#Btn-Pomodoro:checked) .Conteneur-Dialogue-Jill {
     display: none !important;
 }
 
+/* =========================================
+   GRILLE D'INVENTAIRE
+========================================= */
 .Grille-Inventaire {
     display : grid;
     grid-template-columns: repeat(3, 1fr);
@@ -201,6 +210,9 @@ body:has(#Btn-Pomodoro:checked) .Conteneur-Dialogue-Jill {
     transform: scale(1.05);
 }
 
+/* =========================================
+   TEXTES DE DESCRIPTION DES OBJETS
+========================================= */
 .Description-Projet, .Description-CV, .Description-Veille, .Description-Ordi, .Description-Jeu {
     display: none;
     position: absolute;
@@ -231,6 +243,9 @@ body:has(#Btn-Pomodoro:checked) .Conteneur-Dialogue-Jill {
     display: block;
 }
 
+/* =========================================
+   BOUTONS D'INSPECTION D'OBJET
+========================================= */
 .Icone-Examiner {
     position: absolute;
     top: 290px;
@@ -284,6 +299,9 @@ body:has(#Btn-Pomodoro:checked) .Conteneur-Dialogue-Jill {
     left: -8%;
 }
 
+/* =========================================
+   EFFETS CATHODIQUES ET ALLUMAGE
+========================================= */
 .animation-allumage-ecran {
     position: fixed;
     top: 0;
@@ -338,6 +356,9 @@ body:has(#Btn-Pomodoro:checked) .Conteneur-Dialogue-Jill {
     animation: overlay-turn-off 0.6s forwards;
 }
 
+/* =========================================
+   BOUTON FERMETURE EXAMEN
+========================================= */
 .bouton-fermer-ecran {
     position: fixed;
     bottom: 50px;
@@ -389,6 +410,9 @@ body:has(input[name="examen"]:not(#fermer-examen):not(#etat-initial):not(#Btn-Po
     display: none !important;
 }
 
+/* =========================================
+   BOITE DE DIALOGUE JILL
+========================================= */
 .Conteneur-Dialogue-Jill {
     position: absolute;
     opacity: 1;
@@ -446,6 +470,9 @@ body:has(input[name="examen"]:not(#fermer-examen):not(#etat-initial):not(#Btn-Po
     mask-position: center;    
 }
 
+/* =========================================
+   AFFICHAGE DES DOCUMENTS & OBJETS (ZOOM)
+========================================= */
 .Projet-Agrandi, .Jeu-Agrandi {
     display: none;
     opacity: 0;
@@ -540,6 +567,9 @@ body:has(#radio-veille:checked) .Veille-Agrandi {
     animation: verrouillage-affichage 0.1s 0.6s forwards, glitch-apparition 1.3s linear 0.6s forwards;
 }
 
+/* =========================================
+   BOUTONS DE TÉLÉCHARGEMENT PDF
+========================================= */
 .bouton-telecharger-ecran, .bouton-telecharger-ecran-Veille {
     position: fixed;
     top: 10%;
@@ -598,6 +628,9 @@ body:has(#radio-veille:checked) .Veille-Agrandi {
     transition: opacity 0s, visibility 0s; 
 }
 
+/* =========================================
+   PANNEAU CRT LATÉRAL
+========================================= */
 .Panneau-Lateral-CRT {
     display: none;
     opacity: 0;
@@ -676,6 +709,9 @@ body:has(#radio-veille:checked) .Panneau-Lateral-CRT {
     animation: scan-vertical 3s linear infinite;
 }
 
+/* =========================================
+   CARTE INTERACTIVE
+========================================= */
 .Conteneur-Carte {
     display: none;
     position: absolute;
@@ -753,6 +789,9 @@ body:has(#Btn-Carte:checked) .Conteneur-Dialogue-Jill {
     z-index: 4000; 
 }
 
+/* =========================================
+   SÉLECTION DE THÈME ET LECTEUR AUDIO
+========================================= */
 .Panneau-Theme-Zone {
     display: none;
     flex-direction: column;
@@ -901,9 +940,8 @@ body:has(#Btn-Carte:checked) .Panneau-Theme-Zone {
 }
 
 /* =========================================
-   BOUTON SON
+   BOUTON SON GLOBAL
 ========================================= */
-
 .Widget-Audio-Global {
     position: fixed;
     bottom: 20px;
@@ -959,3 +997,43 @@ body:has(#Btn-Carte:checked) .Panneau-Theme-Zone {
     text-shadow: 0 0 5px rgba(0, 255, 65, 0.5);
     letter-spacing: 1px;
 }
+
+/* =========================================
+   LOGIQUE CSS POUR LES DIALOGUES
+========================================= */
+
+body:has(#radio-jill:checked) #nom-contact::after,
+body:has(#radio-bibliotheque:checked) #nom-contact::after { content: "> JILL VALENTINE"; }
+body:has(#radio-eglise:checked) #nom-contact::after { content: "> EMILY GRACE"; }
+body:has(#radio-police:checked) #nom-contact::after { content: "> LEON S. KENNEDY / CLAIRE REDFIELD"; }
+body:has(#radio-usine:checked) #nom-contact::after { content: "> ADA WONG"; }
+
+body:has(#radio-jill:checked) .Texte-Jill::after { content: "Avant de continuer, je devrais inspecter tout ce que j'ai eu ici. Je pourrais y trouver des éléments importants..."; }
+body:has(#radio-eglise:checked) .Texte-Jill::after { content: "La mort n'est qu'un commencement... Pourquoi luttez-vous autant pour l'éviter ?"; }
+body:has(#radio-police:checked) .Texte-Jill::after { content: "Ici Kennedy. La situation est hors de contrôle dans le hall principal. Restez à couvert !"; }
+body:has(#radio-usine:checked) .Texte-Jill::after { content: "Ne te mets pas en travers de mon chemin... Je ne fais que passer pour récupérer ce qui m'appartient."; }
+body:has(#radio-bibliotheque:checked) .Texte-Jill::after { content: "J'ai trouvé un accès sécurisé. Je vais analyser les documents ici pour voir si on peut en tirer quelque chose."; }
+
+body:has(#radio-jill:checked):has(#carte-eglise:hover) .Texte-Jill::after,
+body:has(#radio-bibliotheque:checked):has(#carte-eglise:hover) .Texte-Jill::after { content: "Une vieille église... L'ambiance y est glaciale. Je ferais bien de rester sur mes gardes."; }
+body:has(#radio-jill:checked):has(#carte-police:hover) .Texte-Jill::after,
+body:has(#radio-bibliotheque:checked):has(#carte-police:hover) .Texte-Jill::after { content: "Le commissariat... Leon doit sûrement être à l'intérieur. C'est l'endroit le plus sûr pour le moment."; }
+body:has(#radio-jill:checked):has(#carte-usine:hover) .Texte-Jill::after,
+body:has(#radio-bibliotheque:checked):has(#carte-usine:hover) .Texte-Jill::after { content: "Une usine abandonnée. Le niveau de danger biologique est critique ici. Je dois avancer prudemment."; }
+body:has(#radio-jill:checked):has(#carte-bibliotheque:hover) .Texte-Jill::after,
+body:has(#radio-bibliotheque:checked):has(#carte-bibliotheque:hover) .Texte-Jill::after { content: "La bibliothèque. Un bon endroit pour trouver des informations et planifier la prochaine étape."; }
+
+body:has(#radio-eglise:checked):has(#carte-eglise:hover) .Texte-Jill::after { content: "Notre sanctuaire. La foi est la seule chose qui nous sauvera de la pourriture de ce monde."; }
+body:has(#radio-eglise:checked):has(#carte-police:hover) .Texte-Jill::after { content: "Ces prétendues forces de l'ordre... Leurs armes ne peuvent rien contre la volonté divine."; }
+body:has(#radio-eglise:checked):has(#carte-usine:hover) .Texte-Jill::after { content: "L'industrie des hommes périra. Seule la chair sanctifiée restera."; }
+body:has(#radio-eglise:checked):has(#carte-bibliotheque:hover) .Texte-Jill::after { content: "Des mots vides de sens. La vraie connaissance s'écrit dans le sang."; }
+
+body:has(#radio-police:checked):has(#carte-eglise:hover) .Texte-Jill::after { content: "Un culte qui traîne dans le coin ? Ça me rappelle de très mauvais souvenirs..."; }
+body:has(#radio-police:checked):has(#carte-police:hover) .Texte-Jill::after { content: "Le R.P.D. C'était censé être mon premier jour de boulot... Quel cauchemar."; }
+body:has(#radio-police:checked):has(#carte-usine:hover) .Texte-Jill::after { content: "Si Umbrella est derrière ça, cette usine est l'endroit parfait pour cacher un labo."; }
+body:has(#radio-police:checked):has(#carte-bibliotheque:hover) .Texte-Jill::after { content: "Si Claire est dans les parages, elle cherchera sûrement des infos ici."; }
+
+body:has(#radio-usine:checked):has(#carte-eglise:hover) .Texte-Jill::after { content: "La ferveur religieuse fait d'excellents cobayes, mais de très mauvais associés."; }
+body:has(#radio-usine:checked):has(#carte-police:hover) .Texte-Jill::after { content: "Leon s'en sort bien. Je vais le laisser faire le sale boulot pendant que je cherche ma cible."; }
+body:has(#radio-usine:checked):has(#carte-usine:hover) .Texte-Jill::after { content: "Une façade idéale. L'échantillon doit se trouver dans les sous-sols de ce complexe."; }
+body:has(#radio-usine:checked):has(#carte-bibliotheque:hover) .Texte-Jill::after { content: "Trop exposé. Je préfère opérer dans l'ombre et laisser les autres fouiller la paperasse."; }

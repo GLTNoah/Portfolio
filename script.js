@@ -11,7 +11,6 @@ const conteneurPomodoro = document.querySelector('.Pomodoro-Container');
 const conteneurControles = document.querySelector('.pomodoro-controls');
 const barreProgression = document.getElementById('pomodoro-progress');
 const sonPomodoro = document.getElementById('pomodoro-sound');
-
 const valTravail = document.getElementById('val-work');
 const valPause = document.getElementById('val-break');
 const btnMoinsTravail = document.getElementById('btn-minus-work');
@@ -111,17 +110,11 @@ boutonReset.addEventListener('click', reinitialiserTimer);
 /* =========================================
    VARIABLES CARTE & AUDIO
 ========================================= */
-const dialogueJill = document.querySelector('.Texte-Jill');
 const zonesCarte = document.querySelectorAll('.zone-carte');
-const btnCarte = document.getElementById('Btn-Carte');
 const radiosExamen = document.querySelectorAll('input[name="examen"]');
-
 const fondVideo = document.querySelector('.fond-video');
 const bgMusic = document.getElementById('bg-music');
 const audioFond = document.getElementById('audio-fond');
-const themeTitre = document.getElementById('theme-titre');
-const themeImage = document.getElementById('theme-image');
-const themeDesc = document.getElementById('theme-desc');
 const themeAudioPreview = document.getElementById('theme-audio-preview');
 const conteneurAudioPreview = document.querySelector('.theme-audio-lecteur');
 const btnActiverTheme = document.getElementById('btn-activer-theme');
@@ -132,44 +125,12 @@ const audioTimeDisplay = document.getElementById('audio-time');
 const btnSon = document.getElementById('btn-son');
 const iconeSon = document.getElementById('icon_sound');
 const titreMusiqueActuelle = document.getElementById('titre-musique-actuelle');
-const nomContact = document.getElementById('nom-contact');
+const themeTitre = document.getElementById('theme-titre');
+const themeDesc = document.getElementById('theme-desc');
+const themeImage = document.getElementById('theme-image');
 
 let zoneSelectionnee = null;
-if (themeAudioPreview) themeAudioPreview.volume = 0.05;
-
-let personnageActif = "> JILL VALENTINE";
-let themeActuel = {
-    contact: "> JILL VALENTINE",
-    dialogue: "Avant de continuer, je devrais inspecter tout ce que j'ai eu ici. Je pourrais y trouver des éléments importants..."
-};
-
-// Dictionnaire des dialogues selon le personnage actif
-const dialoguesPersonnages = {
-    "> JILL VALENTINE": {
-        "carte-eglise": "Une vieille église... L'ambiance y est glaciale. Je ferais bien de rester sur mes gardes.",
-        "carte-police": "Le commissariat... Leon doit sûrement être à l'intérieur. C'est l'endroit le plus sûr pour le moment.",
-        "carte-usine": "Une usine abandonnée. Le niveau de danger biologique est critique ici. Je dois avancer prudemment.",
-        "carte-bibliotheque": "La bibliothèque. Un bon endroit pour trouver des informations et planifier la prochaine étape."
-    },
-    "> EMILY GRACE": {
-        "carte-eglise": "Notre sanctuaire. La foi est la seule chose qui nous sauvera de la pourriture de ce monde.",
-        "carte-police": "Ces prétendues forces de l'ordre... Leurs armes ne peuvent rien contre la volonté divine.",
-        "carte-usine": "L'industrie des hommes périra. Seule la chair sanctifiée restera.",
-        "carte-bibliotheque": "Des mots vides de sens. La vraie connaissance s'écrit dans le sang."
-    },
-    "> LEON S. KENNEDY": {
-        "carte-eglise": "Un culte qui traîne dans le coin ? Ça me rappelle de très mauvais souvenirs...",
-        "carte-police": "Le R.P.D. C'était censé être mon premier jour de boulot... Quel cauchemar.",
-        "carte-usine": "Si Umbrella est derrière ça, cette usine est l'endroit parfait pour cacher un labo.",
-        "carte-bibliotheque": "Si Claire est dans les parages, elle cherchera sûrement des infos ici."
-    },
-    "> ADA WONG": {
-        "carte-eglise": "La ferveur religieuse fait d'excellents cobayes, mais de très mauvais associés.",
-        "carte-police": "Leon s'en sort bien. Je vais le laisser faire le sale boulot pendant que je cherche ma cible.",
-        "carte-usine": "Une façade idéale. L'échantillon doit se trouver dans les sous-sols de ce complexe.",
-        "carte-bibliotheque": "Trop exposé. Je préfère opérer dans l'ombre et laisser les autres fouiller la paperasse."
-    }
-};
+if (themeAudioPreview) themeAudioPreview.volume = 0.03;
 
 /* =========================================
    FONCTIONS AUDIO & FORMATAGE
@@ -202,28 +163,12 @@ const formatTime = (time) => {
 };
 
 /* =========================================
-   DIALOGUES JILL & INTERACTIONS CARTE
+   INTERACTIONS CARTE
 ========================================= */
 zonesCarte.forEach(zone => {
     zone.addEventListener('mouseenter', () => {
-        if (nomContact) nomContact.textContent = personnageActif;
-
-        // Cherche le dialogue dans le dictionnaire, sinon utilise celui par défaut
-        if (dialoguesPersonnages[personnageActif] && dialoguesPersonnages[personnageActif][zone.id]) {
-            if (dialogueJill) dialogueJill.textContent = dialoguesPersonnages[personnageActif][zone.id];
-        } else if (dialogueJill && zone.dataset.dialogue) {
-            if (dialogueJill) dialogueJill.textContent = zone.dataset.dialogue;
-        }
-        
         const myAudio = document.getElementById('myaudio');
         if (myAudio) myAudio.play();
-    });
-
-    zone.addEventListener('mouseleave', () => {
-        if (btnCarte && btnCarte.checked) {
-            if (nomContact) nomContact.textContent = personnageActif;
-            if (dialogueJill) dialogueJill.textContent = themeActuel.dialogue;
-        }
     });
 
     zone.addEventListener('click', () => {
@@ -232,9 +177,7 @@ zonesCarte.forEach(zone => {
             desc: zone.dataset.desc ? zone.dataset.desc.replace(/\\n/g, '\n') : '',
             img: zone.dataset.img,
             audio: zone.dataset.audio,
-            video: zone.dataset.video,
-            contact: zone.dataset.contact || "> JILL VALENTINE",
-            dialogueActif: zone.dataset.dialogueActif || ""
+            video: zone.dataset.video
         };
 
         if (themeTitre) themeTitre.textContent = zoneSelectionnee.titre;
@@ -271,16 +214,6 @@ btnActiverTheme.addEventListener('click', () => {
             bgMusic.play();
         }
         if (titreMusiqueActuelle) titreMusiqueActuelle.textContent = formaterTitreMusique(zoneSelectionnee.audio);
-
-        // Mise à jour du personnage aux commandes !
-        personnageActif = zoneSelectionnee.contact;
-        themeActuel = {
-            contact: personnageActif,
-            dialogue: zoneSelectionnee.dialogueActif
-        };
-
-        if (nomContact) nomContact.textContent = themeActuel.contact;
-        if (dialogueJill) dialogueJill.textContent = themeActuel.dialogue;
 
         if (iconeSon) {
             iconeSon.src = "./Image/sound_on.png";

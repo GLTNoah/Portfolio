@@ -24,6 +24,12 @@
     <input type="radio" name="examen" id="Btn-Carte" autocomplete="off" style="display: none;">
     <input type="radio" name="examen" id="Btn-Pomodoro" autocomplete="off" style="display: none;">
 
+    <input type="radio" name="theme-zone" id="radio-jill" checked hidden>
+    <input type="radio" name="theme-zone" id="radio-eglise" hidden>
+    <input type="radio" name="theme-zone" id="radio-police" hidden>
+    <input type="radio" name="theme-zone" id="radio-usine" hidden>
+    <input type="radio" name="theme-zone" id="radio-bibliotheque" hidden>
+
     <div class="animation-allumage-ecran"></div>
     <div class="calque-cathodique"></div>
     <label for="fermer-examen" class="bouton-fermer-ecran">[X] FERMER LE TERMINAL</label>
@@ -174,11 +180,11 @@
 
         <nav class="Conteneur-Dialogue-Jill">
             <div class="Header-Dialogue">
-                <span class="Nom-Contact" id="nom-contact">> JILL VALENTINE</span>
+                <span class="Nom-Contact" id="nom-contact"></span>
                 <span class="Statut-Com">[ EN LIGNE ]</span>
             </div>
             <div class="Enveloppe-Texte-Jill">
-                <p class="Texte-Jill">Avant de continuer, je devrais inspecter tout ce que j'ai eu ici. Je pourrais y trouver des éléments importants...</p>
+                <p class="Texte-Jill"></p>
             </div>
         </nav>
 
@@ -287,52 +293,44 @@
         <div class="Conteneur-Carte">
             <svg version="1.1" viewBox="0 0 1920 1080" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
                 <image href="./svg/Carte-RE.svg" x="0" y="0" width="100%" height="100%" />
-        
+                
                 <polygon class="zone-carte" id="carte-eglise" 
+                    onclick="document.getElementById('radio-eglise').checked = true;"
                     data-titre="ÉGLISE DU VILLAGE" 
                     data-desc="> ZONE HOSTILE\n> ACTIVITÉ CULTISTE DÉTECTÉE" 
                     data-img="./Image/PreviewGrace.png" 
                     data-audio="./son/Foreboding.mp3" 
                     data-video="./vidéo/emily-grace-resident-evil-requiem.mp4" 
-                    data-dialogue="Une vieille église... L'ambiance y est glaciale. Je ferais bien de rester sur mes gardes."
-                    data-contact="> EMILY GRACE"
-                    data-dialogue-actif="La mort n'est qu'un commencement... Pourquoi luttez-vous autant pour l'éviter ?"
                     points="1470,680 1650,590 1800,650 1600,740" />
                 <text class="texte-carte" x="1590" y="680" fill="#ffffff" font-size="24" opacity="0">ÉGLISE</text>
 
                 <polygon class="zone-carte" id="carte-police" 
+                    onclick="document.getElementById('radio-police').checked = true;"
                     data-titre="COMMISSARIAT R.P.D." 
                     data-desc="> EMPLACEMENT SÉCURISÉ\n> PRÉSENCE : L.S. KENNEDY" 
                     data-img="./Image/PreviewLeonClaire.png" 
-                    data-audio="./son/TheFront_Hall.mp3" 
+                    data-audio="./son/The-Front-Hall.mp3" 
                     data-video="./vidéo/leon-and-claire-resident-evil.mp4" 
-                    data-dialogue="Le commissariat... Leon doit sûrement être à l'intérieur. C'est l'endroit le plus sûr pour le moment."
-                    data-contact="> LEON S. KENNEDY"
-                    data-dialogue-actif="Ici Kennedy. La situation est hors de contrôle dans le hall principal. Restez à couvert !"
                     points="530,560 800,410 1080,570 800,710" />
                 <text class="texte-carte" x="850" y="580" fill="#ffffff" font-size="24" opacity="0">COMMISSARIAT</text>
 
                 <polygon class="zone-carte" id="carte-usine" 
+                    onclick="document.getElementById('radio-usine').checked = true;"
                     data-titre="ZONE INDUSTRIELLE" 
                     data-desc="> INSTALLATION ABANDONNÉE\n> DANGER BIOLOGIQUE : ÉLEVÉ" 
                     data-img="./Image/PreviewADA.png" 
-                    data-audio="./son/AdaTheme.mp3" 
+                    data-audio="./son/Uncover.mp3" 
                     data-video="./vidéo/ada-wong-lethal-grace.mp4" 
-                    data-dialogue="Une usine abandonnée. Le niveau de danger biologique est critique ici. Je dois avancer prudemment."
-                    data-contact="> ADA WONG"
-                    data-dialogue-actif="Ne te mets pas en travers de mon chemin... Je ne fais que passer pour récupérer ce qui m'appartient."
-                points="350,230 540,130 770,280 550,380" />
+                    points="350,230 540,130 770,280 550,380" />
                 <text class="texte-carte" x="550" y="230" fill="#ffffff" font-size="24" opacity="0">ZONE INDUSTRIELLE</text>
 
                 <polygon class="zone-carte" id="carte-bibliotheque" 
+                    onclick="document.getElementById('radio-bibliotheque').checked = true;"
                     data-titre="BIBLIOTHEQUE" 
                     data-desc="> LIEU DE CONNAISSANCE\n> PRÉSENCE : JILL VALENTINE" 
                     data-img="./Image/PreviewJill.png" 
                     data-audio="./son/The-City-of-Ruin.mp3"
                     data-video="./vidéo/resident-evil.1920x1080.mp4" 
-                    data-dialogue="La bibliothèque. Un bon endroit pour trouver des informations et planifier la prochaine étape."
-                    data-contact="> JILL VALENTINE"
-                    data-dialogue-actif="J'ai trouvé un accès sécurisé. Je vais analyser les documents ici pour voir si on peut en tirer quelque chose."
                     points="480,780 580,840 700,780 600,720" />
                 <text class="texte-carte" x="590" y="780" fill="#ffffff" font-size="24" opacity="0">BIBLIOTHEQUE</text>
             </svg>
