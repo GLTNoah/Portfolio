@@ -359,7 +359,7 @@
 
     .Conteneur-Dialogue-Jill {
         width: 600px;
-        bottom: 48%;
+        bottom: 58%;
         left: 30%;
     }
 
@@ -466,7 +466,7 @@
     }
 
     body:has(#Btn-Carte:checked) .Conteneur-Dialogue-Jill {
-        bottom: 8% !important;
+        bottom: 18% !important;
         top: auto !important;
         left: 25% !important;
         width: 500px !important;
@@ -498,7 +498,7 @@
     }
 
     .Conteneur-Dialogue-Jill {
-        bottom: 43% !important;
+        bottom: 53% !important;
         top: auto !important;
     }
 
@@ -528,7 +528,7 @@
     }
 
     body:has(#Btn-Carte:checked) .Conteneur-Dialogue-Jill {
-        bottom: 14% !important;
+        bottom: 24% !important;
         top: auto !important;
         left: 25% !important;
         width: 500px !important;
