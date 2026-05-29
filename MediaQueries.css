@@ -684,7 +684,7 @@
    Résolution ciblée : Largeur >= 1900px ET Hauteur >= 1101px.
 ========================================= */
 
-@media (min-width: 1900px) and (min-height: 1101px) {
+@media (min-width: 1900px) and (min-height: 1000px) {
     
     .Panneau-Theme-Zone {
         margin-top: 40px !important;
