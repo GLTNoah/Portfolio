@@ -178,10 +178,6 @@
         white-space: nowrap;
     }
 
-    #emplacement-cv:focus + .Icone-Examiner { 
-        left: 200px;
-    }
-
     #emplacement-jeu:focus + .Icone-Examiner { 
         top: 64vh;   
         width: 16vw; 
