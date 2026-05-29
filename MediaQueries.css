@@ -184,7 +184,7 @@
     }
 
     .Panneau-Theme-Zone { 
-        display: none !important; 
+        top: 20vh;
     }
 }
 
