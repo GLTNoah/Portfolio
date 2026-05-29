@@ -437,7 +437,7 @@
     }
 
     .Panneau-Theme-Zone {
-        margin-top: 95px !important;
+        margin-top: 25px !important;
         padding: 0 30px !important;
         max-height: 70vh !important;
         overflow-y: auto !important;
@@ -677,4 +677,20 @@
         margin: 5px 0 5px 0 !important;
         font-size: 16px !important;
     }
+}
+
+/* =========================================
+   IMPACT : ECRAN 1920 x 1200 (Hauteur Très Grande)
+   Résolution ciblée : Largeur >= 1900px ET Hauteur >= 1101px.
+========================================= */
+
+@media (min-width: 1900px) and (min-height: 1101px) {
+    
+    .Panneau-Theme-Zone {
+        margin-top: 80px !important;
+        max-height: 70vh !important;
+        overflow-y: auto !important;
+    }
+
+
 }
