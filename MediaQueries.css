@@ -1,91 +1,554 @@
 @media (min-width: 1281px) {
-    .Haut-Inventaire { width: 25vw; max-width: none; right: 5vw; top: 0; bottom: 0; }
-    .Conteneur-Carte { width: 55vw; height: 65vh; left: 5vw; top: 5vh; }
-    .CV-Agrandi, .Veille-Agrandi { width: 55vw; height: 80vh; left: 5vw; top: 10vh; padding: 3vw; }
-    .Conteneur-Dialogue-Jill { width: 30vw; bottom: 15vh; left: 25vw; }
-    .Panneau-Lateral-CRT { width: 20vw; right: 5vw; top: 28vh; bottom: 25vh; padding: 1.5vw; }
-    .Pomodoro-Container { width: 55vw; height: 70vh; left: 5vw; top: 10vh; padding: 3vw; }
-    .Grille-Inventaire { gap: 1vw; padding: 1vw; margin-top: 10vh; }
-    #pomodoro-timer { font-size: 8vw; margin: 2vh 0 5vh 0; }
-    .bouton-fermer-ecran, .bouton-telecharger-ecran, .bouton-telecharger-ecran-Veille { font-size: 1.5vw; padding: 1vh 1vw; }
-    .Icone-Examiner { width: 15vw; height: 4vh; top: 30vh; }
+    .Haut-Inventaire { 
+        width: 25vw; 
+        max-width: none; 
+        right: 5vw; 
+        top: 0; 
+        bottom: 0; 
+    }
+    
+    .Conteneur-Carte { 
+        width: 55vw; 
+        height: 65vh; 
+        left: 5vw; 
+        top: 5vh; 
+    }
+    
+    .CV-Agrandi, 
+    .Veille-Agrandi { 
+        width: 55vw; 
+        height: 80vh; 
+        left: 5vw; 
+        top: 10vh; 
+        padding: 3vw; 
+    }
+    
+    .Conteneur-Dialogue-Jill { 
+        width: 30vw; 
+        bottom: 15vh; 
+        left: 25vw; 
+    }
+    
+    .Panneau-Lateral-CRT { 
+        width: 20vw; 
+        right: 5vw; 
+        top: 28vh; 
+        bottom: 25vh; 
+        padding: 1.5vw; 
+    }
+    
+    .Pomodoro-Container { 
+        width: 55vw; 
+        height: 70vh; 
+        left: 5vw; 
+        top: 10vh; 
+        padding: 3vw; 
+    }
+    
+    .Grille-Inventaire { 
+        gap: 1vw; 
+        padding: 1vw; 
+        margin-top: 10vh; 
+    }
+    
+    #pomodoro-timer { 
+        font-size: 8vw; 
+        margin: 2vh 0 5vh 0; 
+    }
+    
+    .bouton-fermer-ecran, 
+    .bouton-telecharger-ecran, 
+    .bouton-telecharger-ecran-Veille { 
+        font-size: 1.5vw; 
+        padding: 1vh 1vw; 
+    }
+
+    .bouton-fermer-ecran { 
+        bottom: 8vh; 
+        right: 8vh;
+    }
+    
+    .bouton-telecharger-ecran, 
+    .bouton-telecharger-ecran-Veille { 
+        top: 8vh; 
+        right: 8vh;
+    }
+
+    .Icone-Examiner { 
+        width: 15vw; 
+        height: 4vh; 
+        top: 30vh; 
+    }
 }
 
 @media (min-width: 1025px) and (max-width: 1280px) {
-    .Haut-Inventaire { width: 30vw; max-width: none; right: 2vw; top: 0; bottom: 0; }
-    .Conteneur-Carte { width: 60vw; height: 60vh; left: 2vw; top: 5vh; }
-    .CV-Agrandi, .Veille-Agrandi { width: 60vw; height: 80vh; left: 2vw; top: 10vh; padding: 2vw; }
-    .Conteneur-Dialogue-Jill { width: 35vw; bottom: 10vh; left: 20vw; }
-    .Panneau-Lateral-CRT { width: 25vw; right: 2vw; top: 28vh; bottom: 25vh; padding: 1vw; }
-    .Pomodoro-Container { width: 60vw; height: 70vh; left: 2vw; top: 10vh; padding: 3vw; }
-    .Grille-Inventaire { gap: 1vw; padding: 1vw; margin-top: 8vh; }
-    #pomodoro-timer { font-size: 10vw; margin: 2vh 0 4vh 0; }
-    .bouton-fermer-ecran, .bouton-telecharger-ecran, .bouton-telecharger-ecran-Veille { font-size: 1.8vw; padding: 1vh 1vw; }
-    .Icone-Examiner { width: 18vw; height: 4vh; top: 35vh; }
+    .Haut-Inventaire { 
+        width: 30vw; 
+        max-width: none; 
+        right: 2vw; 
+        top: 0; 
+        bottom: 0; 
+    }
+    
+    .Conteneur-Carte { 
+        width: 60vw; 
+        height: 60vh; 
+        left: 2vw; 
+        top: 5vh; 
+    }
+    
+    .CV-Agrandi, 
+    .Veille-Agrandi { 
+        width: 60vw; 
+        height: 80vh; 
+        left: 2vw; 
+        top: 10vh; 
+        padding: 2vw; 
+    }
+    
+    .Conteneur-Dialogue-Jill { 
+        width: 35vw; 
+        bottom: 10vh; 
+        left: 20vw; 
+    }
+    
+    .Panneau-Lateral-CRT { 
+        width: 25vw; 
+        right: 2vw; 
+        top: 28vh; 
+        bottom: 25vh; 
+        padding: 1vw; 
+    }
+    
+    .Pomodoro-Container { 
+        width: 60vw; 
+        height: 70vh; 
+        left: 2vw; 
+        top: 10vh; 
+        padding: 3vw; 
+    }
+    
+    .Grille-Inventaire { 
+        gap: 1vw; 
+        padding: 1vw; 
+        margin-top: 8vh; 
+    }
+    
+    #pomodoro-timer { 
+        font-size: 10vw; 
+        margin: 2vh 0 4vh 0; 
+    }
+    
+    .bouton-fermer-ecran, 
+    .bouton-telecharger-ecran, 
+    .bouton-telecharger-ecran-Veille { 
+        font-size: 1.8vw; 
+        padding: 1vh 1vw; 
+    }
+    
+    .Icone-Examiner { 
+        width: 18vw; 
+        height: 4vh; 
+        top: 35vh; 
+    }
 }
 
 @media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
-    .Haut-Inventaire { width: 35vw; max-width: none; right: 2vw; top: 0; bottom: 0; }
-    .Conteneur-Carte { width: 55vw; height: 55vh; left: 2vw; top: 5vh; }
-    .CV-Agrandi, .Veille-Agrandi { width: 55vw; height: 80vh; left: 2vw; top: 10vh; padding: 2vw; }
-    .Conteneur-Dialogue-Jill { width: 40vw; bottom: 5vh; left: 10vw; }
-    .Panneau-Lateral-CRT { width: 30vw; right: 2vw; top: 25vh; bottom: 20vh; padding: 1vw; }
-    .Pomodoro-Container { width: 55vw; height: 70vh; left: 2vw; top: 10vh; padding: 3vw; }
-    .Grille-Inventaire { grid-template-columns: repeat(3, 1fr); gap: 1vw; margin-top: 5vh; }
-    #pomodoro-timer { font-size: 12vw; margin: 2vh 0 3vh 0; }
-    .bouton-fermer-ecran, .bouton-telecharger-ecran, .bouton-telecharger-ecran-Veille { font-size: 2vw; padding: 1vh 1vw; }
-    .Icone-Examiner { width: 20vw; height: 5vh; top: 40vh; }
+    .Haut-Inventaire { 
+        width: 35vw; 
+        max-width: none; 
+        right: 2vw; 
+        top: 0; 
+        bottom: 0; 
+    }
+    
+    .Conteneur-Carte { 
+        width: 55vw; 
+        height: 55vh; 
+        left: 2vw; 
+        top: 5vh; 
+    }
+    
+    .CV-Agrandi, 
+    .Veille-Agrandi { 
+        width: 55vw; 
+        height: 80vh; 
+        left: 2vw; 
+        top: 10vh; 
+        padding: 2vw; 
+    }
+    
+    .Conteneur-Dialogue-Jill { 
+        width: 40vw; 
+        bottom: 5vh; 
+        left: 10vw; 
+    }
+    
+    .Panneau-Lateral-CRT { 
+        width: 30vw; 
+        right: 2vw; 
+        top: 25vh; 
+        bottom: 20vh; 
+        padding: 1vw; 
+    }
+    
+    .Pomodoro-Container { 
+        width: 55vw; 
+        height: 70vh; 
+        left: 2vw; 
+        top: 10vh; 
+        padding: 3vw; 
+    }
+    
+    .Grille-Inventaire { 
+        grid-template-columns: repeat(3, 1fr); 
+        gap: 1vw; 
+        margin-top: 5vh; 
+    }
+    
+    #pomodoro-timer { 
+        font-size: 12vw; 
+        margin: 2vh 0 3vh 0; 
+    }
+    
+    .bouton-fermer-ecran, 
+    .bouton-telecharger-ecran, 
+    .bouton-telecharger-ecran-Veille { 
+        font-size: 2vw; 
+        padding: 1vh 1vw; 
+    }
+    
+    .Icone-Examiner { 
+        width: 20vw; 
+        height: 5vh; 
+        top: 40vh; 
+    }
 }
 
 @media (min-width: 768px) and (max-width: 1024px) and (orientation: portrait) {
-    .Haut-Inventaire { width: 90vw; height: 48vh; top: 50vh; left: 5vw; right: auto; padding-bottom: 2vh; border-radius: 1vw; }
-    .Conteneur-Carte { width: 90vw; height: 40vh; top: 2vh; left: 5vw; }
-    .CV-Agrandi, .Veille-Agrandi { width: 90vw; height: 80vh; left: 5vw; top: 5vh; padding: 3vw; }
-    .Conteneur-Dialogue-Jill { width: 80vw; bottom: 55vh; left: 10vw; transform: none; position: fixed !important; }
-    .Panneau-Lateral-CRT { display: none !important; }
-    .Pomodoro-Container { width: 90vw; height: 40vh; top: 5vh; left: 5vw; padding: 2vw; }
-    .Grille-Inventaire { grid-template-columns: repeat(4, 1fr); gap: 2vw; margin-top: 2vh; padding: 0 2vw; }
-    #pomodoro-timer { font-size: 15vw; margin: 1vh 0; }
-    .bouton-fermer-ecran { bottom: 2vh; left: 5vw; right: auto; font-size: 2.5vw; padding: 1vh 2vw; }
-    .bouton-telecharger-ecran, .bouton-telecharger-ecran-Veille { top: 2vh; left: 5vw; right: auto; font-size: 2.5vw; padding: 1vh 2vw; }
-    .Icone-Examiner { top: 102%; left: 50%; transform: translateX(-50%); width: 40vw; height: 5vh; display: none; }
-    .Haut-Inventaire:has(.Emplacement-Inventaire:focus) .Icone-Examiner { display: flex; }
+    .Haut-Inventaire { 
+        width: 90vw; 
+        height: 48vh; 
+        top: 50vh; 
+        left: 5vw; 
+        right: auto; 
+        padding-bottom: 2vh; 
+        border-radius: 1vw; 
+    }
+    
+    .Conteneur-Carte { 
+        width: 90vw; 
+        height: 40vh; 
+        top: 2vh; 
+        left: 5vw; 
+    }
+    
+    .CV-Agrandi, 
+    .Veille-Agrandi { 
+        width: 90vw; 
+        height: 80vh; 
+        left: 5vw; 
+        top: 5vh; 
+        padding: 3vw; 
+    }
+    
+    .Conteneur-Dialogue-Jill { 
+        width: 80vw; 
+        bottom: 55vh; 
+        left: 10vw; 
+        transform: none; 
+        position: fixed !important; 
+    }
+    
+    .Panneau-Lateral-CRT { 
+        display: none !important; 
+    }
+    
+    .Pomodoro-Container { 
+        width: 90vw; 
+        height: 40vh; 
+        top: 5vh; 
+        left: 5vw; 
+        padding: 2vw; 
+    }
+    
+    .Grille-Inventaire { 
+        grid-template-columns: repeat(4, 1fr); 
+        gap: 2vw; 
+        margin-top: 2vh; 
+        padding: 0 2vw; 
+    }
+    
+    #pomodoro-timer { 
+        font-size: 15vw; 
+        margin: 1vh 0; 
+    }
+    
+    .bouton-fermer-ecran { 
+        bottom: 2vh; 
+        left: 5vw; 
+        right: auto; 
+        font-size: 2.5vw; 
+        padding: 1vh 2vw; 
+    }
+    
+    .bouton-telecharger-ecran, 
+    .bouton-telecharger-ecran-Veille { 
+        top: 2vh; 
+        left: 5vw; 
+        right: auto; 
+        font-size: 2.5vw; 
+        padding: 1vh 2vw; 
+    }
+    
+    .Icone-Examiner { 
+        top: 102%; 
+        left: 50%; 
+        transform: translateX(-50%); 
+        width: 40vw; 
+        height: 5vh; 
+        display: none; 
+    }
+    
+    .Haut-Inventaire:has(.Emplacement-Inventaire:focus) .Icone-Examiner { 
+        display: flex; 
+    }
 }
 
 @media (min-width: 481px) and (max-width: 767px) {
-    .Haut-Inventaire { width: 95vw; height: 48vh; top: 50vh; left: 2.5vw; right: auto; padding-bottom: 2vh; border-radius: 1vw; overflow-y: auto; }
-    .Conteneur-Carte { width: 95vw; height: 40vh; top: 2vh; left: 2.5vw; }
-    .CV-Agrandi, .Veille-Agrandi { width: 95vw; height: 85vh; left: 2.5vw; top: 2vh; padding: 3vw; }
-    .Conteneur-Dialogue-Jill { width: 90vw; bottom: 52vh; left: 5vw; transform: none; position: fixed !important; }
-    .Panneau-Lateral-CRT { display: none !important; }
-    .Pomodoro-Container { width: 95vw; height: 40vh; top: 2vh; left: 2.5vw; padding: 2vw; }
-    .Grille-Inventaire { grid-template-columns: repeat(5, 1fr); gap: 2vw; margin-top: 2vh; padding: 0 2vw; }
-    #pomodoro-timer { font-size: 15vw; margin: 1vh 0; }
-    .bouton-fermer-ecran { bottom: 2vh; left: 50%; right: auto; transform: translateX(-50%); font-size: 3vw; padding: 1vh 2vw; width: max-content; }
-    .bouton-telecharger-ecran, .bouton-telecharger-ecran-Veille { top: 2vh; left: 50%; right: auto; transform: translateX(-50%); font-size: 3vw; padding: 1vh 2vw; width: max-content; }
-    .Icone-Examiner { top: 102%; left: 50%; transform: translateX(-50%); width: 50vw; height: 6vh; display: none; }
-    .Haut-Inventaire:has(.Emplacement-Inventaire:focus) .Icone-Examiner { display: flex; }
-    .Description-Projet, .Description-CV, .Description-Veille, .Description-Ordi, .Description-Jeu { display: none !important; }
+    .Haut-Inventaire { 
+        width: 95vw; 
+        height: 48vh; 
+        top: 50vh; 
+        left: 2.5vw; 
+        right: auto; 
+        padding-bottom: 2vh; 
+        border-radius: 1vw; 
+        overflow-y: auto; 
+    }
+    
+    .Conteneur-Carte { 
+        width: 95vw; 
+        height: 40vh; 
+        top: 2vh; 
+        left: 2.5vw; 
+    }
+    
+    .CV-Agrandi, 
+    .Veille-Agrandi { 
+        width: 95vw; 
+        height: 85vh; 
+        left: 2.5vw; 
+        top: 2vh; 
+        padding: 3vw; 
+    }
+    
+    .Conteneur-Dialogue-Jill { 
+        width: 90vw; 
+        bottom: 52vh; 
+        left: 5vw; 
+        transform: none; 
+        position: fixed !important; 
+    }
+    
+    .Panneau-Lateral-CRT { 
+        display: none !important; 
+    }
+    
+    .Pomodoro-Container { 
+        width: 95vw; 
+        height: 40vh; 
+        top: 2vh; 
+        left: 2.5vw; 
+        padding: 2vw; 
+    }
+    
+    .Grille-Inventaire { 
+        grid-template-columns: repeat(5, 1fr); 
+        gap: 2vw; 
+        margin-top: 2vh; 
+        padding: 0 2vw; 
+    }
+    
+    #pomodoro-timer { 
+        font-size: 15vw; 
+        margin: 1vh 0; 
+    }
+    
+    .bouton-fermer-ecran { 
+        bottom: 2vh; 
+        left: 50%; 
+        right: auto; 
+        transform: translateX(-50%); 
+        font-size: 3vw; 
+        padding: 1vh 2vw; 
+        width: max-content; 
+    }
+    
+    .bouton-telecharger-ecran, 
+    .bouton-telecharger-ecran-Veille { 
+        top: 2vh; 
+        left: 50%; 
+        right: auto; 
+        transform: translateX(-50%); 
+        font-size: 3vw; 
+        padding: 1vh 2vw; 
+        width: max-content; 
+    }
+    
+    .Icone-Examiner { 
+        top: 102%; 
+        left: 50%; 
+        transform: translateX(-50%); 
+        width: 50vw; 
+        height: 6vh; 
+        display: none; 
+    }
+    
+    .Haut-Inventaire:has(.Emplacement-Inventaire:focus) .Icone-Examiner { 
+        display: flex; 
+    }
+    
+    .Description-Projet, 
+    .Description-CV, 
+    .Description-Veille, 
+    .Description-Ordi, 
+    .Description-Jeu { 
+        display: none !important; 
+    }
 }
 
 @media (min-width: 320px) and (max-width: 480px) {
-    .Haut-Inventaire { width: 96vw; height: 55vh; top: 43vh; left: 2vw; right: auto; padding-bottom: 5vh; border-radius: 2vw; overflow-y: auto; }
-    .Barre-Superieure { padding-top: 2vh; gap: 2vw; }
-    .Titre-Principal h1 { font-size: 5vw; }
-    .Bouton-Navigation { font-size: 3vw; }
-    .Conteneur-Carte { width: 96vw; height: 35vh; top: 2vh; left: 2vw; }
-    .CV-Agrandi, .Veille-Agrandi { width: 96vw; height: 85vh; left: 2vw; top: 2vh; padding: 4vw; }
-    .Conteneur-Dialogue-Jill { width: 96vw; bottom: 60vh; left: 2vw; transform: none; position: fixed !important; }
-    .Texte-Jill { font-size: 3.5vw; }
-    .Panneau-Lateral-CRT { display: none !important; }
-    .Pomodoro-Container { width: 96vw; height: 35vh; top: 2vh; left: 2vw; padding: 2vw; }
-    .Grille-Inventaire { grid-template-columns: repeat(4, 1fr); gap: 2vw; margin-top: 2vh; padding: 0 2vw; }
-    #pomodoro-timer { font-size: 20vw; margin: 1vh 0; }
-    #pomodoro-mode { font-size: 8vw; margin-bottom: 2vh; }
-    .bouton-fermer-ecran { bottom: 2vh; left: 50%; right: auto; transform: translateX(-50%); font-size: 4vw; padding: 1.5vh 3vw; width: 90vw; text-align: center; }
-    .bouton-telecharger-ecran, .bouton-telecharger-ecran-Veille { top: 2vh; left: 50%; right: auto; transform: translateX(-50%); font-size: 4vw; padding: 1.5vh 3vw; width: 90vw; text-align: center; }
-    .Icone-Examiner { top: 102%; left: 50%; transform: translateX(-50%); width: 70vw; height: 6vh; display: none; }
-    .Haut-Inventaire:has(.Emplacement-Inventaire:focus) .Icone-Examiner { display: flex; }
-    .Icone-Examiner label { font-size: 4vw; padding: 0; display: flex; justify-content: center; align-items: center; }
-    .Description-Projet, .Description-CV, .Description-Veille, .Description-Ordi, .Description-Jeu { display: none !important; }
+    .Haut-Inventaire { 
+        width: 96vw; 
+        height: 55vh; 
+        top: 43vh; 
+        left: 2vw; 
+        right: auto; 
+        padding-bottom: 5vh; 
+        border-radius: 2vw; 
+        overflow-y: auto; 
+    }
+    
+    .Barre-Superieure { 
+        padding-top: 2vh; 
+        gap: 2vw; 
+    }
+    
+    .Titre-Principal h1 { 
+        font-size: 5vw; 
+    }
+    
+    .Bouton-Navigation { 
+        font-size: 3vw; 
+    }
+    
+    .Conteneur-Carte { 
+        width: 96vw; 
+        height: 35vh; 
+        top: 2vh; 
+        left: 2vw; 
+    }
+    
+    .CV-Agrandi, 
+    .Veille-Agrandi { 
+        width: 96vw; 
+        height: 85vh; 
+        left: 2vw; 
+        top: 2vh; 
+        padding: 4vw; 
+    }
+    
+    .Conteneur-Dialogue-Jill { 
+        width: 96vw; 
+        bottom: 60vh; 
+        left: 2vw; 
+        transform: none; 
+        position: fixed !important; 
+    }
+    
+    .Texte-Jill { 
+        font-size: 3.5vw; 
+    }
+    
+    .Panneau-Lateral-CRT { 
+        display: none !important; 
+    }
+    
+    .Pomodoro-Container { 
+        width: 96vw; 
+        height: 35vh; 
+        top: 2vh; 
+        left: 2vw; 
+        padding: 2vw; 
+    }
+    
+    .Grille-Inventaire { 
+        grid-template-columns: repeat(4, 1fr); 
+        gap: 2vw; 
+        margin-top: 2vh; 
+        padding: 0 2vw; 
+    }
+    
+    #pomodoro-timer { 
+        font-size: 20vw; 
+        margin: 1vh 0; 
+    }
+    
+    #pomodoro-mode { 
+        font-size: 8vw; 
+        margin-bottom: 2vh; 
+    }
+    
+    .bouton-fermer-ecran { 
+        bottom: 2vh; 
+        left: 50%; 
+        right: auto; 
+        transform: translateX(-50%); 
+        font-size: 4vw; 
+        padding: 1.5vh 3vw; 
+        width: 90vw; 
+        text-align: center; 
+    }
+    
+    .bouton-telecharger-ecran, 
+    .bouton-telecharger-ecran-Veille { 
+        top: 2vh; 
+        left: 50%; 
+        right: auto; 
+        transform: translateX(-50%); 
+        font-size: 4vw; 
+        padding: 1.5vh 3vw; 
+        width: 90vw; 
+        text-align: center; 
+    }
+    
+    .Icone-Examiner { 
+        top: 102%; 
+        left: 50%; 
+        transform: translateX(-50%); 
+        width: 70vw; 
+        height: 6vh; 
+        display: none; 
+    }
+    
+    .Haut-Inventaire:has(.Emplacement-Inventaire:focus) .Icone-Examiner { 
+        display: flex; 
+    }
+    
+    .Icone-Examiner label { 
+        font-size: 4vw; 
+        padding: 0; 
+        display: flex; 
+        justify-content: center; 
+        align-items: center; 
+    }
+    
+    .Description-Projet, 
+    .Description-CV, 
+    .Description-Veille, 
+    .Description-Ordi, 
+    .Description-Jeu { 
+        display: none !important; 
+    }
 }
