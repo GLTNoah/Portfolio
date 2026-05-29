@@ -160,7 +160,6 @@
         width: 16vw; 
         height: 4vh; 
         top: 33vh; 
-        left: 2vh;
     }
 
     .Icone-Examiner li {
@@ -179,6 +178,10 @@
         white-space: nowrap;
     }
 
+    #emplacement-cv:focus + .Icone-Examiner { 
+        left: 2vw;
+    }
+    
     #emplacement-jeu:focus + .Icone-Examiner { 
         top: 64vh;   
         width: 16vw; 
