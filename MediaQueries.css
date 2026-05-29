@@ -163,9 +163,9 @@
     }
 
     #emplacement-jeu:focus + .Icone-Examiner { 
-        top: 39.5vh;   
+        top: 59.5vh;   
         height: 4vh; 
-       width: 12vw; 
+        width: 12vw; 
     }
 }
 
