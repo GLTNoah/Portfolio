@@ -79,11 +79,11 @@
     .Icone-Examiner { 
         width: 12vw; 
         height: 4vh; 
-        top: 31vh; 
+        top: 31.5vh; 
     }
 
     #emplacement-jeu:focus + .Icone-Examiner { 
-        top: 59.5vh;   
+        top: 60vh;   
         height: 4vh; 
        width: 12vw; 
     }
@@ -158,13 +158,21 @@
     
     .Icone-Examiner { 
         width: 18vw; 
-        height: 4vh; 
+        height: 5vh; 
         top: 35vh; 
+    }
+
+    .Icone-Examiner label {
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 1.4vw;
     }
 
     #emplacement-jeu:focus + .Icone-Examiner { 
         top: 64vh;   
-        width: 16vw; 
+        width: 18vw; 
     }
 }
 
