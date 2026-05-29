@@ -109,7 +109,7 @@ boutonPause.addEventListener('click', mettreEnPause);
 boutonReset.addEventListener('click', reinitialiserTimer);
 
 /* =========================================
-   VARIABLES CARTE & AUDIO
+   VARIABLES CARTE, AUDIO & THEME
 ========================================= */
 const dialogueJill = document.querySelector('.Texte-Jill');
 const zonesCarte = document.querySelectorAll('.zone-carte');
@@ -201,15 +201,15 @@ const formatTime = (time) => {
 };
 
 /* =========================================
-   DIALOGUES JILL & INTERACTIONS CARTE
+   INTERACTIONS CARTE & DIALOGUES JILL
 ========================================= */
 zonesCarte.forEach(zone => {
     zone.addEventListener('mouseenter', () => {
         if (nomContact) nomContact.textContent = personnageActif;
 
         if (dialogueJill && dialoguesPersonnages[personnageActif]?.[zone.id]) {
-        dialogueJill.textContent = dialoguesPersonnages[personnageActif][zone.id];
-    }
+            dialogueJill.textContent = dialoguesPersonnages[personnageActif][zone.id];
+        }
         
         const myAudio = document.getElementById('myaudio');
         if (myAudio) myAudio.play();
@@ -237,7 +237,8 @@ zonesCarte.forEach(zone => {
             audio: zone.dataset.audio,
             video: zone.dataset.video,
             contact: contactAjuste,
-            dialogueActif: zone.dataset.dialogueActif || zone.dataset.dialogueactif || zone.dataset.dialogue || "" // <-- À SUPPRIMER
+            dialogueActif: zone.dataset.dialogueActif || zone.dataset.dialogueactif || zone.dataset.dialogue || "",
+            theme: zone.dataset.theme || "vert"
         };
 
         if (themeTitre) themeTitre.textContent = zoneSelectionnee.titre;
@@ -261,8 +262,13 @@ zonesCarte.forEach(zone => {
     });
 });
 
+/* =========================================
+   ACTIVATION DU THÈME
+========================================= */
 btnActiverTheme.addEventListener('click', () => {
     if (zoneSelectionnee) {
+        document.body.dataset.theme = zoneSelectionnee.theme;
+
         if (audioFond) audioFond.pause();
         if (themeAudioPreview) themeAudioPreview.pause();
         if (customPlayBtn) customPlayBtn.innerHTML = "[ &#9658; LECTURE ]";
