@@ -1,3 +1,5 @@
+/*ORDI FIXE 1080*/
+
 @media (min-width: 1281px) {
     .Haut-Inventaire { 
         width: 25vw; 
@@ -87,6 +89,8 @@
     }
 }
 
+/*ORDI PORTABLE 1200PX MAX*/
+
 @media (min-width: 1025px) and (max-width: 1280px) {
     .Haut-Inventaire { 
         width: 30vw; 
@@ -156,6 +160,12 @@
         width: 18vw; 
         height: 4vh; 
         top: 35vh; 
+    }
+
+    #emplacement-jeu:focus + .Icone-Examiner { 
+        top: 39.5vh;   
+        height: 4vh; 
+       width: 12vw; 
     }
 }
 
