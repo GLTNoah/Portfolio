@@ -687,10 +687,6 @@
 @media (min-width: 1900px) and (min-height: 1101px) {
     
     .Panneau-Theme-Zone {
-        margin-top: 80px !important;
-        max-height: 70vh !important;
-        overflow-y: auto !important;
+        margin-top: 40px !important;
     }
-
-
 }
