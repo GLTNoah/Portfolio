@@ -121,6 +121,10 @@
         bottom: 40vh; 
         left: 30vw; 
     }
+
+    body:has(#Btn-Carte:checked) .Conteneur-Dialogue-Jill {
+        bottom: 40vh;
+    }   
     
     .Panneau-Lateral-CRT { 
         width: 25vw; 
