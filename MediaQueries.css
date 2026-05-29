@@ -1,691 +1,91 @@
-@import url(./KeyFrames.css);
-
-/* =========================================
-   IMPACT : ÉCRANS ÉTROITS (Mobiles, Tablettes, Fenêtres réduites)
-   Résolution ciblée : Largeur inférieure à 1000px.
-   C'est ici qu'il faut faire des modifications pour l'affichage sur smartphone (ex: iPhone, Android) ou tablette en mode portrait. La vue bascule souvent en colonne et s'adapte pour la navigation tactile.
-========================================= */
-@media (max-width: 999px) {
-    html,
-    body {
-        height: 100% !important;
-        min-height: -webkit-fill-available;
-        overflow-x: hidden;
-    }
-
-    .Haut-Inventaire {
-        right: auto;
-        left: 50%;
-        transform: translateX(-50%);
-        width: 95%;
-        height: auto;
-        top: 2%;
-        bottom: auto;
-        border: 1px solid rgba(255, 255, 255, 0.1);
-        background: linear-gradient(to bottom, rgba(27, 27, 27, 0.9) 10%, rgba(0, 0, 0, 0.9) 15%, transparent 20%),
-                    linear-gradient(to top, rgba(27, 27, 27, 0.9) 10%, rgba(0, 0, 0, 0.9) 15%, transparent 20%);
-        border-radius: 5px;
-        padding-bottom: 100px;
-    }
-
-    .Barre-Superieure {
-        padding: 20px 50px;
-    }
-
-    .Haut-Inventaire h1 {
-        top: 20px;
-        font-size: 16px;
-    }
-
-    .Haut-Inventaire h2 {
-        top: 30px;
-        font-size: 22px;
-    }
-
-    .Grille-Inventaire {
-        margin-top: 10px;
-        grid-template-columns: repeat(4, 1fr);
-        gap: 8px;
-        padding: 0 15px;
-    }
-
-    .Description-Projet,
-    .Description-CV,
-    .Description-Veille,
-    .Description-Jeu,
-    .Description-Ordi {
-        position: absolute;
-        bottom: 15px;
-        left: 0;
-        right: 0;
-        padding: 0 20px;
-        font-size: 14px;
-        display: none;
-    }
-
-    .Icone-Examiner {
-        width: 280px;
-        height: 50px;
-        top: 102% !important;
-        left: 50% !important;
-        transform: translateX(-50%);
-        display: none;
-        background-color: rgba(0, 0, 0, 0.9);
-        border: 1px solid rgba(255, 255, 255, 0.3);
-        justify-content: center;
-        align-items: center;
-    }
-
-    .Icone-Examiner label {
-        font-size: 18px;
-        color: white;
-        text-align: center;
-        white-space: nowrap;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        width: 100%;
-        height: 100%;
-        margin: 0;
-        padding: 0;
-        line-height: 1;
-    }
-
-    .Haut-Inventaire:has(#emplacement-projet:focus) .Description-Projet,
-    .Haut-Inventaire:has(#emplacement-cv:focus) .Description-CV,
-    .Haut-Inventaire:has(#emplacement-veille:focus) .Description-Veille,
-    .Haut-Inventaire:has(#emplacement-jeu:focus) .Description-Jeu {
-        display: block !important;
-    }
-
-    #emplacement-projet:focus + .Icone-Examiner,
-    #emplacement-cv:focus + .Icone-Examiner,
-    #emplacement-veille:focus + .Icone-Examiner,
-    #emplacement-jeu:focus + .Icone-Examiner {
-        display: flex;
-    }
-
-    .animation-allumage-ecran {
-        border-bottom-width: 70px !important;
-        border-radius: 0 !important;
-    }
-
-    .bouton-fermer-ecran {
-        bottom: 13%;
-        right: 15%;
-        font-size: 18px;
-        padding: 5px;
-    }
-
-    main:has(.Emplacement-Inventaire:focus) .Conteneur-Dialogue-Jill {
-        display: none !important;
-    }
-
-    .Conteneur-Dialogue-Jill {
-        display: flex !important;
-        position: fixed !important;
-        width: 75%;
-        left: auto;
-        right: 5%;
-        bottom: 35vh !important;
-        transform: none;
-        z-index: 5000;
-    }
-
-    .Enveloppe-Texte-Jill {
-        min-height: 60px;
-        padding: 10px 15px;
-    }
-
-    .Texte-Jill {
-        font-size: 14px;
-        text-align: left;
-        line-height: 1.2;
-    }
-
-    .Header-Dialogue {
-        font-size: 14px;
-        padding: 4px 10px;
-    }
-
-    .CV-Agrandi,
-    .Veille-Agrandi {
-        left: 50% !important;
-        transform: translateX(-50%) !important;
-        width: 77% !important;
-        top: 15% !important;
-        bottom: 17.5% !important;
-        padding: 15px 12px !important;
-    }
-
-    .En-Tete-CV h1 {
-        font-size: 22px !important;
-        letter-spacing: 1px !important;
-    }
-
-    .En-Tete-CV h2 {
-        font-size: 13px !important;
-    }
-
-    .Section-CV h3 {
-        font-size: 17px !important;
-        margin-bottom: 5px !important;
-    }
-
-    .Section-CV p,
-    .Section-CV li,
-    .Section-Veille p,
-    .Section-Veille li {
-        font-size: 13px !important;
-        margin-bottom: 5px !important;
-        line-height: 1.3 !important;
-    }
-
-    .bouton-telecharger-ecran {
-        top: 7.5% !important;
-        left: 50% !important;
-        right: auto !important;
-        transform: translateX(-50%) !important;
-        font-size: 18px !important;
-        padding: 6px 12px !important;
-        width: max-content !important;
-        max-width: 95% !important;
-        text-align: center !important;
-    }
-
-    .bouton-telecharger-ecran-Veille {
-        top: 7.5% !important;
-        left: 50% !important;
-        right: auto !important;
-        transform: translateX(-50%) !important;
-        font-size: 15px !important;
-        padding: 6px 12px !important;
-        width: max-content !important;
-        max-width: 95% !important;
-        text-align: center !important;
-    }
-
-    .bouton-fermer-ecran {
-        bottom: 9% !important;
-        left: 50% !important;
-        right: auto !important;
-        transform: translateX(-50%) !important;
-        font-size: 15px !important;
-        padding: 6px 12px !important;
-        width: max-content !important;
-        text-align: center !important;
-    }
-
-    .Panneau-Lateral-CRT {
-        display: none !important;
-    }
-
-    .Conteneur-Carte {
-        top: 2% !important;
-        left: 5% !important;
-        width: 90% !important;
-        height: auto !important;
-        aspect-ratio: 16 / 9 !important;
-    }
-
-    body:has(#Btn-Carte:checked) .Haut-Inventaire {
-        top: 45%;
-        padding-bottom: 20px;
-        height: 52%;
-        overflow-y: auto;
-    }
-
-    .Panneau-Theme-Zone {
-        margin-top: 15px;
-        padding: 0 10px;
-    }
-
-    .theme-preview-box {
-        height: 100px;
-    }
-
-    #theme-titre {
-        font-size: 16px;
-        margin: 10px 0 5px 0;
-    }
-
-    .theme-infos {
-        font-size: 14px;
-        margin-bottom: 10px;
-    }
-
-    .theme-audio-lecteur p {
-        font-size: 14px;
-    }
-
-    .theme-audio-lecteur audio {
-        height: 30px;
-    }
-
-    #btn-activer-theme {
-        font-size: 16px;
-        padding: 8px;
-    }
-
-    body:has(#Btn-Carte:checked) .Conteneur-Dialogue-Jill {
-        bottom: 5vh !important;
-        top: auto !important;
-        left: 50% !important;
-        transform: translateX(-50%) !important;
-        width: 90% !important;
-        z-index: 5000;
-    }
+@media (min-width: 1281px) {
+    .Haut-Inventaire { width: 25vw; max-width: none; right: 5vw; top: 0; bottom: 0; }
+    .Conteneur-Carte { width: 55vw; height: 65vh; left: 5vw; top: 5vh; }
+    .CV-Agrandi, .Veille-Agrandi { width: 55vw; height: 80vh; left: 5vw; top: 10vh; padding: 3vw; }
+    .Conteneur-Dialogue-Jill { width: 30vw; bottom: 15vh; left: 25vw; }
+    .Panneau-Lateral-CRT { width: 20vw; right: 5vw; top: 28vh; bottom: 25vh; padding: 1.5vw; }
+    .Pomodoro-Container { width: 55vw; height: 70vh; left: 5vw; top: 10vh; padding: 3vw; }
+    .Grille-Inventaire { gap: 1vw; padding: 1vw; margin-top: 10vh; }
+    #pomodoro-timer { font-size: 8vw; margin: 2vh 0 5vh 0; }
+    .bouton-fermer-ecran, .bouton-telecharger-ecran, .bouton-telecharger-ecran-Veille { font-size: 1.5vw; padding: 1vh 1vw; }
+    .Icone-Examiner { width: 15vw; height: 4vh; top: 30vh; }
 }
 
-/* =========================================
-   IMPACT : ÉCRANS LARGES & DESKTOP (Base pour Ordinateurs)
-   Résolution ciblée : Largeur supérieure ou égale à 1000px.
-   Ceci est la BASE absolue pour tous les ordinateurs de bureau et PC portables. Si vous modifiez un élément ici, cela affectera tous les grands écrans par défaut (
-   sauf si une règle de hauteur plus spécifique ci-dessous vient l'écraser). Utile pour placer vos éléments sur un 1920x1080 ou 1920x1200 en plein écran.
-========================================= */
-@media (min-width: 1000px) {
-    .Haut-Inventaire {
-        max-width: 480px;
-    }
-
-    .Barre-Superieure {
-        gap: 30px;
-        padding-top: 25px;
-    }
-
-    #Label-Carte,
-    #Label-Pomodoro {
-        width: 100px;
-    }
-
-    .Titre-Principal h1 {
-        font-size: 32px;
-        letter-spacing: 3px;
-    }
-
-    .Bouton-Navigation {
-        font-size: 16px;
-        letter-spacing: 2px;
-    }
-
-    .dot-indicateur {
-        width: 25px;
-        height: 3px;
-        margin-top: 10px;
-    }
-
-    .Grille-Inventaire {
-        gap: 15px;
-        padding: 15px;
-        margin-top: 100px;
-    }
-
-    .Description-Projet,
-    .Description-CV,
-    .Description-Veille,
-    .Description-Jeu,
-    .Description-Ordi {
-        font-size: 16px;
-        bottom: 30px;
-    }
-
-    .Description-CV p,
-    .Description-Projet p,
-    .Description-Veille p,
-    .Description-Ordi p,
-    .Description-Jeu p {
-        max-width: 380px;
-    }
-
-    .Icone-Examiner {
-        width: 260px;
-        height: 45px;
-        top: 290px;
-    }
-
-    .Icone-Examiner label {
-        font-size: 20px;
-        padding-left: 45px;
-    }
-
-    #emplacement-jeu:focus + .Icone-Examiner,
-    #emplacement-jeu + .Icone-Examiner:hover,
-    #emplacement-ordi:focus + .Icone-Examiner,
-    #emplacement-ordi + .Icone-Examiner:hover {
-        top: 550px;
-        left: -10%;
-    }
-
-    .bouton-fermer-ecran {
-        bottom: 70px;
-        right: 100px;
-        font-size: 24px;
-        padding: 12px;
-    }
-
-    .Conteneur-Dialogue-Jill {
-        position: fixed !important;
-        width: 500px;
-        bottom: 48vh !important;
-        left: 30%;
-        z-index: 5000;
-    }
-
-    .Texte-Jill {
-        font-size: 22px;
-    }
-
-    .CV-Agrandi,
-    .Veille-Agrandi {
-        width: 55%;
-        left: 12%;
-        padding: 30px;
-    }
-
-    .En-Tete-CV h1,
-    .En-Tete-Veille h1 {
-        font-size: 36px;
-    }
-
-    .En-Tete-CV h2,
-    .En-Tete-Veille h2 {
-        font-size: 18px;
-    }
-
-    .Section-CV h3,
-    .Section-Veille h3 {
-        font-size: 24px;
-    }
-
-    .Section-CV p,
-    .Section-CV li,
-    .Section-Veille p,
-    .Section-Veille li {
-        font-size: 18px;
-    }
-
-    .Panneau-Lateral-CRT {
-        right: 8%;
-        width: 20%;
-        max-width: 320px;
-        padding: 15px;
-    }
-
-    .panneau-header {
-        font-size: 22px;
-    }
-
-    .panneau-contenu p {
-        font-size: 18px;
-    }
-
-    .bouton-telecharger-ecran,
-    .bouton-telecharger-ecran-Veille {
-        top: 10%;
-        right: 8%;
-        font-size: 28px;
-        padding: 8px;
-    }
-
-    .Conteneur-Carte {
-        top: 10% !important;
-        left: 3% !important;
-        width: 75vh !important;
-        max-width: calc(100vw - 550px) !important;
-        height: auto !important;
-        aspect-ratio: 16 / 9 !important;
-    }
-
-    .Panneau-Theme-Zone {
-        margin-top: 25px !important;
-        padding: 0 30px !important;
-        max-height: 70vh !important;
-        overflow-y: auto !important;
-    }
-
-    .theme-preview-box {
-        height: 280px !important;
-        flex-shrink: 0;
-        margin-bottom: 20px;
-    }
-
-    #theme-titre {
-        margin: 15px 0 10px 0 !important;
-        font-size: 22px !important;
-    }
-
-    .theme-infos {
-        font-size: 16px;
-        margin-bottom: 10px;
-    }
-
-    .theme-audio-lecteur p {
-        font-size: 16px;
-    }
-
-    .theme-audio-lecteur audio {
-        height: 30px;
-    }
-
-    #btn-activer-theme {
-        font-size: 18px;
-        padding: 10px;
-        margin-top: 15px;
-    }
-
-    body:has(#Btn-Carte:checked) .Conteneur-Dialogue-Jill {
-        position: fixed !important;
-        bottom: 15vh !important;
-        top: auto !important;
-        left: 25% !important;
-        width: 500px !important;
-    }
+@media (min-width: 1025px) and (max-width: 1280px) {
+    .Haut-Inventaire { width: 30vw; max-width: none; right: 2vw; top: 0; bottom: 0; }
+    .Conteneur-Carte { width: 60vw; height: 60vh; left: 2vw; top: 5vh; }
+    .CV-Agrandi, .Veille-Agrandi { width: 60vw; height: 80vh; left: 2vw; top: 10vh; padding: 2vw; }
+    .Conteneur-Dialogue-Jill { width: 35vw; bottom: 10vh; left: 20vw; }
+    .Panneau-Lateral-CRT { width: 25vw; right: 2vw; top: 28vh; bottom: 25vh; padding: 1vw; }
+    .Pomodoro-Container { width: 60vw; height: 70vh; left: 2vw; top: 10vh; padding: 3vw; }
+    .Grille-Inventaire { gap: 1vw; padding: 1vw; margin-top: 8vh; }
+    #pomodoro-timer { font-size: 10vw; margin: 2vh 0 4vh 0; }
+    .bouton-fermer-ecran, .bouton-telecharger-ecran, .bouton-telecharger-ecran-Veille { font-size: 1.8vw; padding: 1vh 1vw; }
+    .Icone-Examiner { width: 18vw; height: 4vh; top: 35vh; }
 }
 
-/* =========================================
-   IMPACT : ÉCRANS DESKTOP (Hauteur Moyenne - Mode Fenêtré 1080p)
-   Résolution ciblée : Largeur >= 1000px ET Hauteur comprise entre 901px et 1100px.
-   Modifiez cette section pour corriger l'affichage sur un écran de bureau standard (1920x1080) lorsque la fenêtre ne prend pas toute la hauteur (barre des tâches visible, onglets du navigateur imposants, mode fenêtré).
-========================================= */
-@media (min-width: 1000px) and (max-height: 1100px) and (min-height: 901px) {
-    .Haut-Inventaire {
-        max-width: 450px;
-    }
-
-    .Icone-Examiner {
-        top: 320px;
-    }
-
-    #emplacement-jeu:focus + .Icone-Examiner,
-    #emplacement-jeu + .Icone-Examiner:hover,
-    #emplacement-ordi:focus + .Icone-Examiner,
-    #emplacement-ordi + .Icone-Examiner:hover {
-        top: 610px;
-    }
-
-    .bouton-fermer-ecran {
-        bottom: 70px;
-        right: 100px;
-    }
-
-    .Conteneur-Dialogue-Jill {
-        position: fixed !important;
-        width: 600px;
-        bottom: 30vh !important;
-    }
-
-    body:has(#Btn-Carte:checked) .Conteneur-Dialogue-Jill {
-        position: fixed !important;
-        bottom: 20vh !important;
-    }
-
-    .Conteneur-Carte {
-        top: 8% !important;
-        left: 3% !important;
-        width: 80vh !important;
-        max-width: calc(100vw - 550px) !important;
-        height: auto !important;
-        aspect-ratio: 16 / 9 !important;
-    }
-
-    .Panneau-Theme-Zone {
-        margin-top: 85px !important;
-        overflow-y: hidden;
-    }
-
-    .theme-preview-box {
-        height: 260px !important;
-        flex-shrink: 0;
-        margin-bottom: 15px;
-    }
-
-    #theme-titre {
-        margin: 10px 0 5px 0 !important;
-        font-size: 20px !important;
-    }
+@media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
+    .Haut-Inventaire { width: 35vw; max-width: none; right: 2vw; top: 0; bottom: 0; }
+    .Conteneur-Carte { width: 55vw; height: 55vh; left: 2vw; top: 5vh; }
+    .CV-Agrandi, .Veille-Agrandi { width: 55vw; height: 80vh; left: 2vw; top: 10vh; padding: 2vw; }
+    .Conteneur-Dialogue-Jill { width: 40vw; bottom: 5vh; left: 10vw; }
+    .Panneau-Lateral-CRT { width: 30vw; right: 2vw; top: 25vh; bottom: 20vh; padding: 1vw; }
+    .Pomodoro-Container { width: 55vw; height: 70vh; left: 2vw; top: 10vh; padding: 3vw; }
+    .Grille-Inventaire { grid-template-columns: repeat(3, 1fr); gap: 1vw; margin-top: 5vh; }
+    #pomodoro-timer { font-size: 12vw; margin: 2vh 0 3vh 0; }
+    .bouton-fermer-ecran, .bouton-telecharger-ecran, .bouton-telecharger-ecran-Veille { font-size: 2vw; padding: 1vh 1vw; }
+    .Icone-Examiner { width: 20vw; height: 5vh; top: 40vh; }
 }
 
-/* =========================================
-   IMPACT : PC PORTABLES & ÉCRANS AVEC MISE À L'ÉCHELLE (Zoom Windows)
-   Résolution ciblée : Largeur >= 1000px ET Hauteur inférieure ou égale à 900px.
-   C'est ici qu'il faut modifier pour ajuster l'affichage sur les ordinateurs portables (13", 14", 15") qui utilisent souvent un zoom d'affichage Windows (125% ou 150%). 
-   Ce zoom réduit artificiellement la hauteur perçue par le navigateur sous la barre des 900px.
-========================================= */
-@media (min-width: 1000px) and (max-height: 900px) {
-    .Haut-Inventaire {
-        max-width: 450px;
-    }
-
-    .Icone-Examiner {
-        top: 320px;
-    }
-
-    #emplacement-jeu:focus + .Icone-Examiner,
-    #emplacement-jeu + .Icone-Examiner:hover,
-    #emplacement-ordi:focus + .Icone-Examiner,
-    #emplacement-ordi + .Icone-Examiner:hover {
-        top: 610px;
-    }
-
-    .bouton-fermer-ecran {
-        bottom: 70px;
-        right: 100px;
-    }
-
-    .Conteneur-Carte {
-        top: 8% !important;
-        left: 3% !important;
-        width: 80vh !important;
-        max-width: calc(100vw - 550px) !important;
-        height: auto !important;
-        aspect-ratio: 16 / 9 !important;
-    }
-
-    .Panneau-Theme-Zone {
-        margin-top: 25px !important;
-        max-height: 70vh !important;
-        overflow-y: auto !important;
-    }
-
-    .theme-preview-box {
-        height: 260px !important;
-        flex-shrink: 0;
-        margin-bottom: 15px;
-    }
-
-    #theme-titre {
-        margin: 10px 0 5px 0 !important;
-        font-size: 20px !important;
-    }
+@media (min-width: 768px) and (max-width: 1024px) and (orientation: portrait) {
+    .Haut-Inventaire { width: 90vw; height: 48vh; top: 50vh; left: 5vw; right: auto; padding-bottom: 2vh; border-radius: 1vw; }
+    .Conteneur-Carte { width: 90vw; height: 40vh; top: 2vh; left: 5vw; }
+    .CV-Agrandi, .Veille-Agrandi { width: 90vw; height: 80vh; left: 5vw; top: 5vh; padding: 3vw; }
+    .Conteneur-Dialogue-Jill { width: 80vw; bottom: 55vh; left: 10vw; transform: none; position: fixed !important; }
+    .Panneau-Lateral-CRT { display: none !important; }
+    .Pomodoro-Container { width: 90vw; height: 40vh; top: 5vh; left: 5vw; padding: 2vw; }
+    .Grille-Inventaire { grid-template-columns: repeat(4, 1fr); gap: 2vw; margin-top: 2vh; padding: 0 2vw; }
+    #pomodoro-timer { font-size: 15vw; margin: 1vh 0; }
+    .bouton-fermer-ecran { bottom: 2vh; left: 5vw; right: auto; font-size: 2.5vw; padding: 1vh 2vw; }
+    .bouton-telecharger-ecran, .bouton-telecharger-ecran-Veille { top: 2vh; left: 5vw; right: auto; font-size: 2.5vw; padding: 1vh 2vw; }
+    .Icone-Examiner { top: 102%; left: 50%; transform: translateX(-50%); width: 40vw; height: 5vh; display: none; }
+    .Haut-Inventaire:has(.Emplacement-Inventaire:focus) .Icone-Examiner { display: flex; }
 }
 
-/* =========================================
-   IMPACT : ÉCRANS TRÈS ÉCRASÉS EN HAUTEUR
-   Résolution ciblée : Hauteur inférieure ou égale à 700px (peu importe la largeur).
-   Cette section s'active si la fenêtre du navigateur est très fortement réduite en hauteur (fenêtre écrasée, mode paysage sur petit mobile, ou laptop avec un zoom extrême). 
-   Utile pour réduire drastiquement la taille des éléments (comme le timer Pomodoro) et éviter qu'ils ne débordent de l'écran.
-========================================= */
-@media (max-height: 700px) {
-    .Grille-Inventaire {
-        margin-top: 20px !important;
-    }
-
-    .Emplacement-Inventaire {
-        height: 120px !important;
-        width: 120px !important;
-    }
-
-    .Icone-Examiner {
-        top: 230px !important;
-    }
-
-    main #emplacement-jeu:focus + .Icone-Examiner,
-    main #emplacement-jeu + .Icone-Examiner:hover {
-        top: 500px !important;
-    }
-
-    .Pomodoro-Container {
-        padding: 20px !important;
-    }
-
-    #pomodoro-mode {
-        font-size: 32px !important;
-        margin-bottom: 20px !important;
-    }
-
-    #pomodoro-timer {
-        font-size: 100px !important;
-        margin: 10px 0 20px 0 !important;
-    }
-
-    .pomodoro-controls {
-        margin-top: 40px !important;
-        gap: 25px !important;
-    }
-
-    .pomodoro-controls button {
-        font-size: 27px !important;
-        padding: 8px 20px !important;
-    }
-
-    .pomodoro-settings p {
-        font-size: 18px !important;
-    }
-
-    .Conteneur-Carte {
-        top: 4% !important;
-        left: 3% !important;
-        width: 85vh !important;
-        max-width: calc(100vw - 450px) !important;
-        height: auto !important;
-        aspect-ratio: 16 / 9 !important;
-    }
-
-    .Panneau-Theme-Zone {
-        margin-top: 40px !important;
-        max-height: 70vh !important;
-        overflow-y: auto !important;
-    }
-
-    .theme-preview-box {
-        height: 200px !important;
-        flex-shrink: 0;
-        margin-bottom: 10px;
-    }
-
-    #theme-titre {
-        margin: 5px 0 5px 0 !important;
-        font-size: 16px !important;
-    }
+@media (min-width: 481px) and (max-width: 767px) {
+    .Haut-Inventaire { width: 95vw; height: 48vh; top: 50vh; left: 2.5vw; right: auto; padding-bottom: 2vh; border-radius: 1vw; overflow-y: auto; }
+    .Conteneur-Carte { width: 95vw; height: 40vh; top: 2vh; left: 2.5vw; }
+    .CV-Agrandi, .Veille-Agrandi { width: 95vw; height: 85vh; left: 2.5vw; top: 2vh; padding: 3vw; }
+    .Conteneur-Dialogue-Jill { width: 90vw; bottom: 52vh; left: 5vw; transform: none; position: fixed !important; }
+    .Panneau-Lateral-CRT { display: none !important; }
+    .Pomodoro-Container { width: 95vw; height: 40vh; top: 2vh; left: 2.5vw; padding: 2vw; }
+    .Grille-Inventaire { grid-template-columns: repeat(5, 1fr); gap: 2vw; margin-top: 2vh; padding: 0 2vw; }
+    #pomodoro-timer { font-size: 15vw; margin: 1vh 0; }
+    .bouton-fermer-ecran { bottom: 2vh; left: 50%; right: auto; transform: translateX(-50%); font-size: 3vw; padding: 1vh 2vw; width: max-content; }
+    .bouton-telecharger-ecran, .bouton-telecharger-ecran-Veille { top: 2vh; left: 50%; right: auto; transform: translateX(-50%); font-size: 3vw; padding: 1vh 2vw; width: max-content; }
+    .Icone-Examiner { top: 102%; left: 50%; transform: translateX(-50%); width: 50vw; height: 6vh; display: none; }
+    .Haut-Inventaire:has(.Emplacement-Inventaire:focus) .Icone-Examiner { display: flex; }
+    .Description-Projet, .Description-CV, .Description-Veille, .Description-Ordi, .Description-Jeu { display: none !important; }
 }
 
-/* =========================================
-   IMPACT : ECRAN 1920 x 1200 (Hauteur Très Grande)
-   Résolution ciblée : Largeur >= 1900px ET Hauteur >= 1101px.
-========================================= */
-
-@media (min-width: 1900px) and (min-height: 950px) {
-    .Panneau-Theme-Zone {
-        margin-top: 40px !important;
-    }
+@media (min-width: 320px) and (max-width: 480px) {
+    .Haut-Inventaire { width: 96vw; height: 55vh; top: 43vh; left: 2vw; right: auto; padding-bottom: 5vh; border-radius: 2vw; overflow-y: auto; }
+    .Barre-Superieure { padding-top: 2vh; gap: 2vw; }
+    .Titre-Principal h1 { font-size: 5vw; }
+    .Bouton-Navigation { font-size: 3vw; }
+    .Conteneur-Carte { width: 96vw; height: 35vh; top: 2vh; left: 2vw; }
+    .CV-Agrandi, .Veille-Agrandi { width: 96vw; height: 85vh; left: 2vw; top: 2vh; padding: 4vw; }
+    .Conteneur-Dialogue-Jill { width: 96vw; bottom: 60vh; left: 2vw; transform: none; position: fixed !important; }
+    .Texte-Jill { font-size: 3.5vw; }
+    .Panneau-Lateral-CRT { display: none !important; }
+    .Pomodoro-Container { width: 96vw; height: 35vh; top: 2vh; left: 2vw; padding: 2vw; }
+    .Grille-Inventaire { grid-template-columns: repeat(4, 1fr); gap: 2vw; margin-top: 2vh; padding: 0 2vw; }
+    #pomodoro-timer { font-size: 20vw; margin: 1vh 0; }
+    #pomodoro-mode { font-size: 8vw; margin-bottom: 2vh; }
+    .bouton-fermer-ecran { bottom: 2vh; left: 50%; right: auto; transform: translateX(-50%); font-size: 4vw; padding: 1.5vh 3vw; width: 90vw; text-align: center; }
+    .bouton-telecharger-ecran, .bouton-telecharger-ecran-Veille { top: 2vh; left: 50%; right: auto; transform: translateX(-50%); font-size: 4vw; padding: 1.5vh 3vw; width: 90vw; text-align: center; }
+    .Icone-Examiner { top: 102%; left: 50%; transform: translateX(-50%); width: 70vw; height: 6vh; display: none; }
+    .Haut-Inventaire:has(.Emplacement-Inventaire:focus) .Icone-Examiner { display: flex; }
+    .Icone-Examiner label { font-size: 4vw; padding: 0; display: flex; justify-content: center; align-items: center; }
+    .Description-Projet, .Description-CV, .Description-Veille, .Description-Ordi, .Description-Jeu { display: none !important; }
 }
