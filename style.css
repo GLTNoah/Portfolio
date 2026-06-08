@@ -526,7 +526,7 @@ body:has(input[name="examen"]:not(#fermer-examen):not(#etat-initial):not(#Btn-Po
 /* =========================================
    AFFICHAGE DES DOCUMENTS & OBJETS (ZOOM)
 ========================================= */
-.Projet-Agrandi, .Jeu-Agrandi {
+.Jeu-Agrandi {
     display: none;
     opacity: 0;
     position: absolute;
@@ -588,16 +588,35 @@ body:has(input[name="examen"]:not(#fermer-examen):not(#etat-initial):not(#Btn-Po
     flex-direction: column;
 }
 
-.CV-Agrandi::-webkit-scrollbar, .Veille-Agrandi::-webkit-scrollbar {
+.Projet-Agrandi{
+    display: none;
+    opacity: 0;
+    position: absolute;
+    left: 5%;
+    top: 10%;
+    bottom: 10%;
+    width: 55%;
+    background: rgba(var(--rgb-dark-panel), 0.9);
+    border: 2px solid var(--color-primary);
+    box-shadow: 0 0 20px rgba(var(--rgb-primary), 0.2), inset 0 0 20px rgba(var(--rgb-primary), 0.2);
+    z-index: 3000;
+    padding: 30px;
+    color: var(--color-primary);
+    font-family: 'VT323', monospace;
+    overflow-y: auto;
+    flex-direction: column;
+}
+
+.CV-Agrandi::-webkit-scrollbar, .Veille-Agrandi::-webkit-scrollbar,.Projet-Agrandi::-webkit-scrollbar {
     width: 8px;
 }
 
-.CV-Agrandi::-webkit-scrollbar-track, .Veille-Agrandi::-webkit-scrollbar-track {
+.CV-Agrandi::-webkit-scrollbar-track, .Veille-Agrandi::-webkit-scrollbar-track,.Projet-Agrandi::-webkit-scrollbar-track {
     background: rgba(var(--rgb-scroll-track), 0.8);
     border-left: 1px solid var(--color-primary);
 }
 
-.CV-Agrandi::-webkit-scrollbar-thumb, .Veille-Agrandi::-webkit-scrollbar-thumb {
+.CV-Agrandi::-webkit-scrollbar-thumb, .Veille-Agrandi::-webkit-scrollbar-thumb,.Projet-Agrandi::-webkit-scrollbar-thumb {
     background: var(--color-primary);
 }
 
@@ -607,15 +626,16 @@ body:has(input[name="examen"]:not(#fermer-examen):not(#etat-initial):not(#Btn-Po
     margin-bottom: 20px;
 }
 
-.En-Tete-CV h2, .En-Tete-Veille h2 { font-size: 18px; opacity: 0.8; }
-.En-Tete-CV h1, .En-Tete-Veille h1 { font-size: 36px; letter-spacing: 4px; text-shadow: 0 0 8px var(--color-primary); }
+.En-Tete-CV h2, .En-Tete-Veille h2, .En-Tete-Projet h2 { font-size: 18px; opacity: 0.8; }
+.En-Tete-CV h1, .En-Tete-Veille h1, .En-Tete-Projet h1 { font-size: 36px; letter-spacing: 4px; text-shadow: 0 0 8px var(--color-primary); }
 
-.Section-CV, .Section-Veille { margin-bottom: 20px; }
-.Section-CV h3, .Section-Veille h3 { font-size: 24px; margin-bottom: 10px; text-shadow: 0 0 4px var(--color-primary); }
-.Section-CV p, .Section-CV li, .Section-Veille p, .Section-Veille li { font-size: 18px; line-height: 1.5; margin-bottom: 8px; }
+.Section-CV, .Section-Veille, .Section-Projet { margin-bottom: 20px; }
+.Section-CV h3, .Section-Veille h3, .Section-Projet h3 { font-size: 24px; margin-bottom: 10px; text-shadow: 0 0 4px var(--color-primary); }
+.Section-CV p, .Section-CV li, .Section-Veille p, .Section-Veille li, .Section-Projet p, .Section-Projet li { font-size: 18px; line-height: 1.5; margin-bottom: 8px; }
 
 body:has(#radio-cv:checked) .CV-Agrandi,
-body:has(#radio-veille:checked) .Veille-Agrandi {
+body:has(#radio-veille:checked) .Veille-Agrandi,
+body:has(#radio-projet:checked) .Projet-Agrandi {
     display: flex;
     animation: verrouillage-affichage 0.1s 0.6s forwards, glitch-apparition 1.3s linear 0.6s forwards;
 }
@@ -623,7 +643,7 @@ body:has(#radio-veille:checked) .Veille-Agrandi {
 /* =========================================
    BOUTONS DE TÉLÉCHARGEMENT PDF
 ========================================= */
-.bouton-telecharger-ecran, .bouton-telecharger-ecran-Veille {
+.bouton-telecharger-ecran, .bouton-telecharger-ecran-Veille, .bouton-telecharger-ecran-Projet {
     position: fixed;
     top: 10%;
     right: 50px;
@@ -658,7 +678,7 @@ body:has(#radio-veille:checked) .Veille-Agrandi {
     transition: opacity 0s, visibility 0s; 
 }
 
-.bouton-telecharger-ecran:hover, .bouton-telecharger-ecran-Veille:hover {
+.bouton-telecharger-ecran:hover, .bouton-telecharger-ecran-Veille:hover, .bouton-telecharger-ecran-Projet:hover {
     background: rgba(var(--rgb-secondary), 0.15);
     color: var(--color-text-white);
     box-shadow: 0 0 15px var(--color-secondary);
@@ -667,6 +687,13 @@ body:has(#radio-veille:checked) .Veille-Agrandi {
 }
 
 #radio-veille:checked ~ .bouton-telecharger-ecran-Veille {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transition: opacity 0.3s ease 0.6s, visibility 0.3s ease 0.6s;
+}
+
+#radio-projet:checked ~ .bouton-telecharger-ecran-Projet {
     opacity: 1;
     visibility: visible;
     pointer-events: auto;
@@ -705,7 +732,8 @@ body:has(#radio-veille:checked) .Veille-Agrandi {
 }
 
 body:has(#radio-cv:checked) .Panneau-Lateral-CRT,
-body:has(#radio-veille:checked) .Panneau-Lateral-CRT {
+body:has(#radio-veille:checked) .Panneau-Lateral-CRT,
+body:has(#radio-projet:checked) .Panneau-Lateral-CRT {
     display: flex;
     animation: verrouillage-affichage 0.1s 0.6s forwards, glitch-apparition 1.3s linear 0.6s forwards;
 }
