@@ -3,16 +3,103 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Projets</title>
+    <title>Base de Données - Projets</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="MediaQueries.css">
     <link rel="stylesheet" href="KeyFrames.css">
-    <script src="script.js" defer></script>
+    <link rel="stylesheet" href="Projets.css">
+    <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
 </head>
 <body>
-    
+    <input type="radio" name="projet" id="projet-1" autocomplete="off" style="display: none;">
+    <input type="radio" name="projet" id="projet-2" autocomplete="off" style="display: none;">
+    <input type="radio" name="projet" id="projet-3" autocomplete="off" style="display: none;">
 
+    <div class="calque-cathodique" style="visibility: visible; opacity: 0.3; animation: green-flicker 0.1s infinite;"></div>
+    <video class="fond-video" src="./vidéo/resident-evil.1920x1080.mp4" autoplay muted loop></video>
 
+    <div class="Archive-Interface">
+        <header class="Archive-Header">
+            <h1>> ACCRÉDITATION REQUISE... [OK]</h1>
+            <h2>SYS.ARCHIVES // PROJETS_</h2>
+        </header>
+        
+        <div class="Archive-Content">
+            <div class="Grille-Projets">
+                <label for="projet-1" class="carte-projet">
+                    <div class="carte-header">
+                        <span>FICHIER_01</span>
+                        <span>[ EN COURS ]</span>
+                    </div>
+                    <div class="carte-titre">> PORTFOLIO TERMINAL</div>
+                    <div class="carte-tech">[ HTML | CSS | JS | SVG ]</div>
+                </label>
 
+                <label for="projet-2" class="carte-projet">
+                    <div class="carte-header">
+                        <span>FICHIER_02</span>
+                        <span>[ ARCHIVÉ ]</span>
+                    </div>
+                    <div class="carte-titre">> POMODORO</div>
+                    <div class="carte-tech">[ Python | CSS | JS ]</div>
+                </label>
+
+                <label for="projet-3" class="carte-projet">
+                    <div class="carte-header">
+                        <span>FICHIER_03</span>
+                        <span>[ EN COURS ]</span>
+                    </div>
+                    <div class="carte-titre">> APPRENTISSAGE SVG</div>
+                    <div class="carte-tech">[ SVG | CSS | JS ]</div>
+                </label>
+            </div>
+
+            <div class="Details-Projet-Panel">
+                <div class="Panel-Header">LECTURE DU FICHIER...</div>
+                <div class="Panel-Body">
+                    
+                    <div class="Message-Attente">
+                        <p class="clignotant-rapide">> EN ATTENTE DE SÉLECTION D'UNE CIBLE.</p>
+                    </div>
+
+                    <div class="Detail-Contenu" id="detail-1">
+                        <div class="detail-titre">> PORTFOLIO TERMINAL</div>
+                        <div class="carte-tech" style="margin-bottom: 20px;">TECHNOLOGIES DÉTECTÉES : HTML | CSS | JS | SVG</div>
+                        <img class="detail-image" src="./Image/PreviewGrace.png" alt="Aperçu du projet">
+                        <div class="detail-section">
+                            <h3>> RAPPORT DE MISSION</h3>
+                            <p>Interface web immersive inspirée des terminaux informatiques de la fin des années 90 et de l'univers Resident Evil. Utilisation de grilles interactives, d'animations CSS (effets CRT) et de manipulation audio/vidéo en JS.</p>
+                        </div>
+                        <a href="#" class="detail-link" target="_blank">[ EXTRAIRE LES DONNÉES (VOIR LE SITE) ]</a>
+                    </div>
+
+                    <div class="Detail-Contenu" id="detail-2">
+                        <div class="detail-titre">> POMODORO</div>
+                        <div class="carte-tech" style="margin-bottom: 20px;">TECHNOLOGIES DÉTECTÉES : Python | CSS | JS</div>
+                        <img class="detail-image" src="./Image/Pomodoro.png" alt="Aperçu du projet">
+                        <div class="detail-section">
+                            <h3>> RAPPORT DE MISSION</h3>
+                            <p>Application de type Pomodoro pour la gestion du temps et l'augmentation de la productivité. Implémentation d'une interface utilisateur intuitive avec des fonctionnalités de suivi des tâches et de gestion des sessions de travail.</p>
+                        </div>
+                        <a href="#" class="detail-link" target="_blank">[ EXTRAIRE LES DONNÉES (VOIR LE SITE) ]</a>
+                    </div>
+
+                    <div class="Detail-Contenu" id="detail-3">
+                        <div class="detail-titre">> APPRENTISSAGE SVG</div>
+                        <div class="carte-tech" style="margin-bottom: 20px;">TECHNOLOGIES DÉTECTÉES : SVG | CSS | JS</div>
+                        <img class="detail-image" src="./svg/Carte-RE.svg" alt="Aperçu du projet">
+                        <div class="detail-section">
+                            <h3>> RAPPORT DE MISSION</h3>
+                            <p>Exploration et maîtrise des capacités de l'élément SVG pour créer des graphismes vectoriels interactifs. Implémentation de animations et d'effets visuels dans un contexte pédagogique.</p>
+                        </div>
+                        <a href="#" class="detail-link" target="_blank">[ EXTRAIRE LES DONNÉES (VOIR LE SITE) ]</a>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <a href="index.html" class="bouton-retour-accueil">[<] RETOUR À L'ACCUEIL</a>
 </body>
 </html>
