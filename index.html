@@ -16,7 +16,6 @@
 <body>
     <input type="radio" name="examen" id="etat-initial" checked autocomplete="off" style="display: none;">
     <input type="radio" name="examen" id="fermer-examen" autocomplete="off" style="display: none;">
-    <input type="radio" name="examen" id="radio-projet" autocomplete="off" style="display: none;">
     <input type="radio" name="examen" id="radio-cv" autocomplete="off" style="display: none;">
     <input type="radio" name="examen" id="radio-veille" autocomplete="off" style="display: none;">
     <input type="radio" name="examen" id="radio-jeu" autocomplete="off" style="display: none;">
@@ -28,7 +27,6 @@
     <div class="calque-cathodique"></div>
     <label for="fermer-examen" class="bouton-fermer-ecran">[X] FERMER LE TERMINAL</label>
     
-    <a href="Projets.html" class="bouton-acceder-projets">[>] ACCÉDER AUX PROJETS</a>
     <a href="./Documents/CV_GuillotNoah.pdf" download="CV_GuillotNoah.pdf" class="bouton-telecharger-ecran">[X] TÉLÉCHARGER LE CV</a>
     <a href="./Documents/Veille_Algorave.pdf" download="Veille_Algorave.pdf" class="bouton-telecharger-ecran-Veille">[X] TÉLÉCHARGER LA VEILLE</a>
 
@@ -58,7 +56,7 @@
                     <span><img src="./Image/Icone-Projet.png" alt=""></span>
                 </div>
                 <ul class="Icone-Examiner">
-                    <li><label for="radio-projet">Inspecter cet objet ?</label></li>
+                    <li><a href="Projets.html">Accéder aux projets ?</a></li>
                 </ul>
 
                 <div class="Emplacement-Inventaire" id="emplacement-cv" tabindex="0" onmouseenter="document.getElementById('myaudio').play()">
@@ -185,33 +183,6 @@
         </nav>
 
         <nav class="Visualisation-Objet">
-            <div class = "Projet-Agrandi">
-                <div class="En-Tete-Projet">
-                    <h2>DISQUE DUR EXTERNE</h2>
-                    <h1>PROJET EN COURS</h1>
-                </div>
-                <div class="Corps-Projet">
-                    <div class="Section-Projet">
-                        <h3>> DESCRIPTION</h3>
-                        <p>Ce projet consiste à créer une interface interactive inspirée de l'esthétique des terminaux informatiques rétro, combinant des éléments de design CRT et une ambiance immersive pour présenter un portfolio de manière originale.</p>
-                    </div>
-                    <div class="Section-Projet">
-                        <h3>> TECHNOLOGIES UTILISÉES</h3>
-                        <ul>
-                            <li>- HTML & CSS pour la structure et le style de l'interface.</li>
-                            <li>- JavaScript pour les interactions dynamiques et les animations.</li>
-                            <li>- SVG pour la création d'une carte interactive avec des zones cliquables.</li>
-                            <li>- Intégration de médias (audio, vidéo) pour enrichir l'expérience utilisateur.</li>
-                        </ul>
-                    </div>
-                    <div class="Section-Projet">
-                        <h3>> OBJECTIFS</h3>
-                        <p>L'objectif est de démontrer mes compétences en développement web tout en offrant une expérience utilisateur engageante et immersive, mettant en valeur mes projets, mon CV et ma veille technologique de manière innovante.</p>
-                    </div>
-                </div>
-            </div>
-            
-
             <div class="CV-Agrandi">
                 <div class="En-Tete-CV">
                     <h2>DOSSIER PERSONNEL - ACCRÉDITATION SLAM</h2>
@@ -383,4 +354,4 @@
     <audio id="bg-music" oncanplay="this.volume=0.01" loop></audio>
 </body>
 
-</html> 
+</html>
