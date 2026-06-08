@@ -89,20 +89,59 @@ function mettreEnPause() {
 
 function reinitialiserTimer() {
     mettreEnPause();
+    
+    minutesTravail = 25;
+    minutesPause = 5;
+    valTravail.textContent = minutesTravail;
+    valPause.textContent = minutesPause;
+    
     modeTravailActif = true;
     tempsRestant = minutesTravail * 60;
     sessionsTerminees = 0;
+    
     texteMode.textContent = "MODE: TRAVAIL";
     affichageSessions.textContent = "Sessions complétées: 0";
     conteneurPomodoro.classList.remove('pause-mode');
     conteneurControles.classList.remove('pause-mode');
+    
     majAffichage();
 }
 
-btnMoinsTravail.addEventListener('click', () => { minutesTravail = Math.max(1, minutesTravail - 1); valTravail.textContent = minutesTravail; });
-btnPlusTravail.addEventListener('click', () => { minutesTravail = Math.min(60, minutesTravail + 1); valTravail.textContent = minutesTravail; });
-btnMoinsPause.addEventListener('click', () => { minutesPause = Math.max(1, minutesPause - 1); valPause.textContent = minutesPause; });
-btnPlusPause.addEventListener('click', () => { minutesPause = Math.min(30, minutesPause + 1); valPause.textContent = minutesPause; });
+btnMoinsTravail.addEventListener('click', () => { 
+    minutesTravail = Math.max(1, minutesTravail - 1); 
+    valTravail.textContent = minutesTravail; 
+    if (modeTravailActif && intervalleTimer === null) {
+        tempsRestant = minutesTravail * 60;
+        majAffichage();
+    }
+});
+
+btnPlusTravail.addEventListener('click', () => { 
+    minutesTravail = Math.min(60, minutesTravail + 1); 
+    valTravail.textContent = minutesTravail; 
+    if (modeTravailActif && intervalleTimer === null) {
+        tempsRestant = minutesTravail * 60;
+        majAffichage();
+    }
+});
+
+btnMoinsPause.addEventListener('click', () => { 
+    minutesPause = Math.max(1, minutesPause - 1); 
+    valPause.textContent = minutesPause; 
+    if (!modeTravailActif && intervalleTimer === null) {
+        tempsRestant = minutesPause * 60;
+        majAffichage();
+    }
+});
+
+btnPlusPause.addEventListener('click', () => { 
+    minutesPause = Math.min(30, minutesPause + 1); 
+    valPause.textContent = minutesPause; 
+    if (!modeTravailActif && intervalleTimer === null) {
+        tempsRestant = minutesPause * 60;
+        majAffichage();
+    }
+});
 
 boutonStart.addEventListener('click', () => { if (intervalleTimer === null) jouerSon(); demarrerTimer(); });
 boutonPause.addEventListener('click', mettreEnPause);
