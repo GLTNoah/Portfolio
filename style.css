@@ -709,6 +709,54 @@ body:has(#radio-projet:checked) .Projet-Agrandi {
 }
 
 /* =========================================
+   BOUTONS ACCEDER AUX PROJETS
+========================================= */
+
+.bouton-acceder-projets {
+    position: fixed;
+    top: 10%;
+    right: 50px;
+    background: var(--color-btn-bg);
+    color: var(--color-secondary);
+    font-family: 'VT323', monospace;
+    font-size: 26px;
+    border: var(--color-btn-border) 2px solid;
+    box-shadow: 0 0 5px var(--color-btn-shadow-1), 0 0 10px var(--color-btn-shadow-2);
+    padding: 8px 15px;
+    z-index: 5000;
+    cursor: pointer;
+    text-shadow: 0 0 10px var(--color-secondary);
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    text-decoration: none;
+}
+
+#radio-projet:checked ~ .bouton-acceder-projets {
+    display: flex;
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transition: opacity 0.3s ease 0.6s, visibility 0.3s ease 0.6s;
+}
+
+#fermer-examen:checked ~ .bouton-acceder-projets,
+#etat-initial:checked ~ .bouton-acceder-projets {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: opacity 0s, visibility 0s; 
+}
+
+.bouton-acceder-projets:hover {
+    background: rgba(var(--rgb-secondary), 0.15);
+    color: var(--color-text-white);
+    box-shadow: 0 0 15px var(--color-secondary);
+    transform: scale(1.05);
+    transition: background 0.2s, color 0.2s, transform 0.2s, box-shadow 0.2s;
+}
+
+/* =========================================
    PANNEAU CRT LATÉRAL
 ========================================= */
 .Panneau-Lateral-CRT {

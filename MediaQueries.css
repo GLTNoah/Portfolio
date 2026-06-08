@@ -87,6 +87,11 @@
         height: 4vh; 
        width: 12vw; 
     }
+
+    .bouton-acceder-projets {
+        top: 8vh; 
+        right: 8vh;
+    }
 }
 
 /*ORDI PORTABLE 1200PX MAX*/
@@ -189,6 +194,11 @@
 
     .Panneau-Theme-Zone { 
         margin-top: 7vh;
+    }
+
+    .bouton-acceder-projets {
+        font-size: 1.8vw; 
+        padding: 1vh 1vw; 
     }
 }
 
