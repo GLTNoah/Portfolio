@@ -307,6 +307,13 @@ zonesCarte.forEach(zone => {
 btnActiverTheme.addEventListener('click', () => {
     if (zoneSelectionnee) {
         document.body.dataset.theme = zoneSelectionnee.theme;
+        
+        const donneesSauvegarde = {
+            theme: zoneSelectionnee.theme,
+            video: zoneSelectionnee.video,
+            audio: zoneSelectionnee.audio
+        };
+        localStorage.setItem('donnees-survie', JSON.stringify(donneesSauvegarde));
 
         if (audioFond) audioFond.pause();
         if (themeAudioPreview) themeAudioPreview.pause();
@@ -337,16 +344,6 @@ btnActiverTheme.addEventListener('click', () => {
             iconeSon.alt = "Couper le son";
         }
     }
-});
-
-radiosExamen.forEach(radio => {
-    radio.addEventListener('change', () => {
-        if (themeAudioPreview && !themeAudioPreview.paused) {
-            themeAudioPreview.pause();
-            if (customPlayBtn) customPlayBtn.innerHTML = "[ &#9658; LECTURE ]";
-            relancerMusiqueDeFond();
-        }
-    });
 });
 
 /* =========================================
@@ -426,4 +423,40 @@ if (btnSon) {
 /* =========================================
    INITIALISATION
 ========================================= */
+const donneesSauvegardees = localStorage.getItem('donnees-survie');
+
+if (donneesSauvegardees) {
+    try {
+        const data = JSON.parse(donneesSauvegardees);
+        
+        if (data.theme) document.body.dataset.theme = data.theme;
+        
+        if (data.video && fondVideo) {
+            fondVideo.src = data.video;
+        }
+        
+        if (data.audio && bgMusic) {
+            bgMusic.src = data.audio;
+            bgMusic.volume = 0.05;
+            if (titreMusiqueActuelle) {
+                titreMusiqueActuelle.textContent = formaterTitreMusique(data.audio);
+            }
+            if (audioFond) audioFond.pause();
+            
+            if (iconeSon) {
+                iconeSon.src = "./Image/sound_on.png";
+                iconeSon.alt = "Couper le son";
+            }
+
+            bgMusic.play().catch(() => {
+                const activerAuPremierClic = () => {
+                    bgMusic.play();
+                    window.removeEventListener('click', activerAuPremierClic);
+                };
+                window.addEventListener('click', activerAuPremierClic);
+            });
+        }
+    } catch (e) {}
+}
+
 majAffichage();

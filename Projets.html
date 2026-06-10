@@ -9,6 +9,21 @@
     <link rel="stylesheet" href="KeyFrames.css">
     <link rel="stylesheet" href="Projets.css">
     <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const donneesSauvegardees = localStorage.getItem('donnees-survie');
+            if (donneesSauvegardees) {
+                try {
+                    const data = JSON.parse(donneesSauvegardees);
+                    if (data.theme) document.body.dataset.theme = data.theme;
+                    if (data.video) {
+                        const fondVideo = document.querySelector('.fond-video');
+                        if (fondVideo) fondVideo.src = data.video;
+                    }
+                } catch (e) {}
+            }
+        });
+    </script>
 </head>
 <body>
     <input type="radio" name="projet" id="projet-1" autocomplete="off" style="display: none;">
