@@ -172,6 +172,7 @@ const btnSon = document.getElementById('btn-son');
 const iconeSon = document.getElementById('icon_sound');
 const titreMusiqueActuelle = document.getElementById('titre-musique-actuelle');
 const nomContact = document.getElementById('nom-contact');
+const barreVolume = document.getElementById('barre-volume');
 
 let zoneSelectionnee = null;
 if (themeAudioPreview) themeAudioPreview.volume = 0.05;
@@ -238,6 +239,20 @@ const formatTime = (time) => {
     const s = Math.floor(time % 60).toString().padStart(2, '0');
     return `${m}:${s}`;
 };
+
+function changerVolumeGlobal(vol) {
+    if (bgMusic) bgMusic.volume = vol;
+    if (audioFond) audioFond.volume = vol;
+    if (themeAudioPreview) themeAudioPreview.volume = vol;
+}
+
+if (barreVolume) {
+    barreVolume.addEventListener('input', (e) => {
+        const volumeActuel = e.target.value;
+        changerVolumeGlobal(volumeActuel);
+        localStorage.setItem('volume-survie', volumeActuel);
+    });
+}
 
 /* =========================================
    INTERACTIONS CARTE & DIALOGUES JILL
@@ -307,13 +322,6 @@ zonesCarte.forEach(zone => {
 btnActiverTheme.addEventListener('click', () => {
     if (zoneSelectionnee) {
         document.body.dataset.theme = zoneSelectionnee.theme;
-        
-        const donneesSauvegarde = {
-            theme: zoneSelectionnee.theme,
-            video: zoneSelectionnee.video,
-            audio: zoneSelectionnee.audio
-        };
-        localStorage.setItem('donnees-survie', JSON.stringify(donneesSauvegarde));
 
         if (audioFond) audioFond.pause();
         if (themeAudioPreview) themeAudioPreview.pause();
@@ -322,10 +330,10 @@ btnActiverTheme.addEventListener('click', () => {
         if (fondVideo) fondVideo.src = zoneSelectionnee.video;
         if (bgMusic) {
             bgMusic.src = zoneSelectionnee.audio;
-            bgMusic.volume = 0.05;
             bgMusic.play();
         }
         if (titreMusiqueActuelle) titreMusiqueActuelle.textContent = formaterTitreMusique(zoneSelectionnee.audio);
+        
         personnageActif = zoneSelectionnee.contact;
         let dialogueSecours = dialoguesPersonnages[personnageActif] && dialoguesPersonnages[personnageActif][zoneSelectionnee.id] 
                               ? dialoguesPersonnages[personnageActif][zoneSelectionnee.id] 
@@ -336,6 +344,15 @@ btnActiverTheme.addEventListener('click', () => {
             dialogue: zoneSelectionnee.dialogueActif !== "" ? zoneSelectionnee.dialogueActif : dialogueSecours
         };
 
+        const donneesSauvegarde = {
+            theme: zoneSelectionnee.theme,
+            video: zoneSelectionnee.video,
+            audio: zoneSelectionnee.audio,
+            contact: themeActuel.contact,
+            dialogue: themeActuel.dialogue
+        };
+        localStorage.setItem('donnees-survie', JSON.stringify(donneesSauvegarde));
+
         if (nomContact) nomContact.textContent = themeActuel.contact;
         if (dialogueJill) dialogueJill.textContent = themeActuel.dialogue;
 
@@ -344,6 +361,16 @@ btnActiverTheme.addEventListener('click', () => {
             iconeSon.alt = "Couper le son";
         }
     }
+});
+
+radiosExamen.forEach(radio => {
+    radio.addEventListener('change', () => {
+        if (themeAudioPreview && !themeAudioPreview.paused) {
+            themeAudioPreview.pause();
+            if (customPlayBtn) customPlayBtn.innerHTML = "[ &#9658; LECTURE ]";
+            relancerMusiqueDeFond();
+        }
+    });
 });
 
 /* =========================================
@@ -423,8 +450,16 @@ if (btnSon) {
 /* =========================================
    INITIALISATION
 ========================================= */
-const donneesSauvegardees = localStorage.getItem('donnees-survie');
+const volumeSauvegarde = localStorage.getItem('volume-survie');
+if (volumeSauvegarde !== null) {
+    if (barreVolume) barreVolume.value = volumeSauvegarde;
+    changerVolumeGlobal(volumeSauvegarde);
+} else {
+    changerVolumeGlobal(0.05);
+    if (barreVolume) barreVolume.value = 0.05;
+}
 
+const donneesSauvegardees = localStorage.getItem('donnees-survie');
 if (donneesSauvegardees) {
     try {
         const data = JSON.parse(donneesSauvegardees);
@@ -434,10 +469,20 @@ if (donneesSauvegardees) {
         if (data.video && fondVideo) {
             fondVideo.src = data.video;
         }
+
+        if (data.contact) {
+            personnageActif = data.contact;
+            themeActuel.contact = data.contact;
+            if (nomContact) nomContact.textContent = data.contact;
+        }
+
+        if (data.dialogue) {
+            themeActuel.dialogue = data.dialogue;
+            if (dialogueJill) dialogueJill.textContent = data.dialogue;
+        }
         
         if (data.audio && bgMusic) {
             bgMusic.src = data.audio;
-            bgMusic.volume = 0.05;
             if (titreMusiqueActuelle) {
                 titreMusiqueActuelle.textContent = formaterTitreMusique(data.audio);
             }

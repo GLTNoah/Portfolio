@@ -557,31 +557,7 @@ body:has(input[name="examen"]:not(#fermer-examen):not(#etat-initial):not(#Btn-Po
 /* =========================================
    AFFICHAGE DES DOCUMENTS & OBJETS (ZOOM)
 ========================================= */
-.Jeu-Agrandi {
-    display: none;
-    opacity: 0;
-    position: absolute;
-    left: 15%;
-    top: 10%;
-    bottom: 10%;
-    width: 40%;
-    backdrop-filter: blur(15px);
-    -webkit-mask-image: linear-gradient(to right, rgba(var(--rgb-black), 0.2) 5%, var(--color-black) 15%, var(--color-black) 85%, rgba(var(--rgb-black), 0.5) 100%);
-    mask-image: linear-gradient(to right, rgba(var(--rgb-black), 0.2) 5%, var(--color-black) 15%, var(--color-black) 85%, rgba(var(--rgb-black), 0.5) 100%);
-    z-index: 3000;
-}
-
-.Projet-Agrandi img, .Jeu-Agrandi img { 
-    display : flex;
-    position: absolute;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-}
-
-.CV-Agrandi {
+.CV-Agrandi, .Veille-Agrandi {
     display: none;
     opacity: 0;
     position: absolute;
@@ -589,7 +565,8 @@ body:has(input[name="examen"]:not(#fermer-examen):not(#etat-initial):not(#Btn-Po
     top: 10%;
     bottom: 10%;
     width: 55%;
-    background: rgba(var(--rgb-dark-panel), 0.9);
+    /* On augmente légèrement l'opacité du fond pour soulager les calculs sur la vidéo */
+    background: rgba(var(--rgb-dark-panel), 0.95);
     border: 2px solid var(--color-primary);
     box-shadow: 0 0 20px rgba(var(--rgb-primary), 0.2), inset 0 0 20px rgba(var(--rgb-primary), 0.2);
     z-index: 3000;
@@ -598,77 +575,86 @@ body:has(input[name="examen"]:not(#fermer-examen):not(#etat-initial):not(#Btn-Po
     font-family: 'VT323', monospace;
     overflow-y: auto;
     flex-direction: column;
+    /* ACCÉLÉRATION MATÉRIELLE (ANTI-LAG) */
+    will-change: transform, opacity;
+    transform: translateZ(0);
+    backface-visibility: hidden;
 }
 
-.Veille-Agrandi {
-    display: none;
-    opacity: 0;
-    position: absolute;
-    left: 5%;
-    top: 10%;
-    bottom: 10%;
-    width: 55%;
-    background: rgba(var(--rgb-dark-panel), 0.9);
-    border: 2px solid var(--color-primary);
-    box-shadow: 0 0 20px rgba(var(--rgb-primary), 0.2), inset 0 0 20px rgba(var(--rgb-primary), 0.2);
-    z-index: 3000;
-    padding: 30px;
-    color: var(--color-primary);
-    font-family: 'VT323', monospace;
-    overflow-y: auto;
-    flex-direction: column;
-}
-
-.Projet-Agrandi{
-    display: none;
-    opacity: 0;
-    position: absolute;
-    left: 5%;
-    top: 10%;
-    bottom: 10%;
-    width: 55%;
-    background: rgba(var(--rgb-dark-panel), 0.9);
-    border: 2px solid var(--color-primary);
-    box-shadow: 0 0 20px rgba(var(--rgb-primary), 0.2), inset 0 0 20px rgba(var(--rgb-primary), 0.2);
-    z-index: 3000;
-    padding: 30px;
-    color: var(--color-primary);
-    font-family: 'VT323', monospace;
-    overflow-y: auto;
-    flex-direction: column;
-}
-
-.CV-Agrandi::-webkit-scrollbar, .Veille-Agrandi::-webkit-scrollbar,.Projet-Agrandi::-webkit-scrollbar {
+.CV-Agrandi::-webkit-scrollbar, .Veille-Agrandi::-webkit-scrollbar {
     width: 8px;
 }
 
-.CV-Agrandi::-webkit-scrollbar-track, .Veille-Agrandi::-webkit-scrollbar-track,.Projet-Agrandi::-webkit-scrollbar-track {
+.CV-Agrandi::-webkit-scrollbar-track, .Veille-Agrandi::-webkit-scrollbar-track {
     background: rgba(var(--rgb-scroll-track), 0.8);
     border-left: 1px solid var(--color-primary);
 }
 
-.CV-Agrandi::-webkit-scrollbar-thumb, .Veille-Agrandi::-webkit-scrollbar-thumb,.Projet-Agrandi::-webkit-scrollbar-thumb {
+.CV-Agrandi::-webkit-scrollbar-thumb, .Veille-Agrandi::-webkit-scrollbar-thumb {
     background: var(--color-primary);
 }
 
+/* =========================================
+   DESIGN DE L'EN-TÊTE (STYLE DOSSIER SYSTÈME)
+========================================= */
 .En-Tete-CV, .En-Tete-Veille {
-    border-bottom: 2px solid var(--color-primary);
-    padding-bottom: 15px;
-    margin-bottom: 20px;
+    border-bottom: 1px dashed var(--color-primary);
+    margin-bottom: 25px;
+    background: rgba(var(--rgb-primary), 0.05);
+    padding: 15px 20px;
+    border-left: 4px solid var(--color-primary);
+    position: relative;
 }
 
-.En-Tete-CV h2, .En-Tete-Veille h2, .En-Tete-Projet h2 { font-size: 18px; opacity: 0.8; }
-.En-Tete-CV h1, .En-Tete-Veille h1, .En-Tete-Projet h1 { font-size: 36px; letter-spacing: 4px; text-shadow: 0 0 8px var(--color-primary); }
+.En-Tete-CV h2, .En-Tete-Veille h2 { 
+    font-size: 18px; 
+    opacity: 0.7; 
+    letter-spacing: 2px;
+}
 
-.Section-CV, .Section-Veille, .Section-Projet { margin-bottom: 20px; }
-.Section-CV h3, .Section-Veille h3, .Section-Projet h3 { font-size: 24px; margin-bottom: 10px; text-shadow: 0 0 4px var(--color-primary); }
-.Section-CV p, .Section-CV li, .Section-Veille p, .Section-Veille li, .Section-Projet p, .Section-Projet li { font-size: 18px; line-height: 1.5; margin-bottom: 8px; }
+.En-Tete-CV h1, .En-Tete-Veille h1 { 
+    font-size: 38px; 
+    letter-spacing: 5px; 
+    text-shadow: 0 0 10px rgba(var(--rgb-primary), 0.6); 
+    margin-top: 5px;
+}
+
+/* Curseur clignotant terminal */
+.En-Tete-CV h1::after, .En-Tete-Veille h1::after {
+    content: '_';
+    animation: pulse 1s infinite;
+    margin-left: 10px;
+}
+
+/* =========================================
+   DESIGN DES SECTIONS DE DONNÉES
+========================================= */
+.Section-CV, .Section-Veille { 
+    margin-bottom: 25px; 
+    padding-left: 15px;
+    border-left: 1px solid rgba(var(--rgb-primary), 0.2);
+}
+
+.Section-CV h3, .Section-Veille h3 { 
+    font-size: 24px; 
+    margin-bottom: 15px; 
+    text-shadow: 0 0 5px rgba(var(--rgb-primary), 0.4); 
+    display: inline-block;
+    background: rgba(var(--rgb-primary), 0.1);
+    padding: 2px 10px;
+}
+
+.Section-CV p, .Section-CV li, .Section-Veille p, .Section-Veille li { 
+    font-size: 18px; 
+    line-height: 1.6; 
+    margin-bottom: 10px; 
+    color: rgba(255, 255, 255, 0.85);
+}
 
 body:has(#radio-cv:checked) .CV-Agrandi,
-body:has(#radio-veille:checked) .Veille-Agrandi,
-body:has(#radio-projet:checked) .Projet-Agrandi {
+body:has(#radio-veille:checked) .Veille-Agrandi {
     display: flex;
-    animation: verrouillage-affichage 0.1s 0.6s forwards, glitch-apparition 1.3s linear 0.6s forwards;
+    animation: verrouillage-affichage 0.1s 0.6s forwards, glitch-apparition 0.8s linear 0.6s forwards;
 }
 
 /* =========================================
@@ -1156,4 +1142,36 @@ body:has(#Btn-Carte:checked) .Panneau-Theme-Zone {
     color: var(--color-primary);
     text-shadow: 0 0 5px rgba(var(--rgb-primary), 0.5);
     letter-spacing: 1px;
+}
+
+/* =========================================
+   BARRE DE VOLUME
+========================================= */
+.Conteneur-Volume {
+    display: flex;
+    align-items: center;
+    margin-left: 15px;
+    padding-left: 15px;
+    border-left: 1px solid rgba(var(--rgb-primary), 0.3);
+}
+
+#barre-volume {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 100px;
+    height: 4px;
+    background: rgba(var(--rgb-primary), 0.2);
+    outline: none;
+    cursor: pointer;
+}
+
+#barre-volume::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 12px;
+    height: 12px;
+    background: var(--color-primary);
+    box-shadow: 0 0 5px var(--color-primary);
+    cursor: pointer;
+    border-radius: 0;
 }
