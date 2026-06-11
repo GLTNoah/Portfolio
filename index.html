@@ -16,7 +16,6 @@
 <body>
     <input type="radio" name="examen" id="etat-initial" checked autocomplete="off" style="display: none;">
     <input type="radio" name="examen" id="fermer-examen" autocomplete="off" style="display: none;">
-    <input type="radio" name="examen" id="radio-projet" autocomplete="off" style="display: none;">
     <input type="radio" name="examen" id="radio-cv" autocomplete="off" style="display: none;">
     <input type="radio" name="examen" id="radio-veille" autocomplete="off" style="display: none;">
     <input type="radio" name="examen" id="radio-jeu" autocomplete="off" style="display: none;">
@@ -24,15 +23,10 @@
     <input type="radio" name="examen" id="Btn-Carte" autocomplete="off" style="display: none;">
     <input type="radio" name="examen" id="Btn-Pomodoro" autocomplete="off" style="display: none;">
 
-    <input type="radio" name="theme-zone" id="radio-jill" checked hidden>
-    <input type="radio" name="theme-zone" id="radio-eglise" hidden>
-    <input type="radio" name="theme-zone" id="radio-police" hidden>
-    <input type="radio" name="theme-zone" id="radio-usine" hidden>
-    <input type="radio" name="theme-zone" id="radio-bibliotheque" hidden>
-
     <div class="animation-allumage-ecran"></div>
     <div class="calque-cathodique"></div>
     <label for="fermer-examen" class="bouton-fermer-ecran">[X] FERMER LE TERMINAL</label>
+    
     <a href="./Documents/CV_GuillotNoah.pdf" download="CV_GuillotNoah.pdf" class="bouton-telecharger-ecran">[X] TÉLÉCHARGER LE CV</a>
     <a href="./Documents/Veille_Algorave.pdf" download="Veille_Algorave.pdf" class="bouton-telecharger-ecran-Veille">[X] TÉLÉCHARGER LA VEILLE</a>
 
@@ -62,7 +56,7 @@
                     <span><img src="./Image/Icone-Projet.png" alt=""></span>
                 </div>
                 <ul class="Icone-Examiner">
-                    <li><label for="radio-projet">Inspecter cet objet ?</label></li>
+                    <li><a href="Projets.html">Accéder aux projets ?</a></li>
                 </ul>
 
                 <div class="Emplacement-Inventaire" id="emplacement-cv" tabindex="0" onmouseenter="document.getElementById('myaudio').play()">
@@ -189,8 +183,6 @@
         </nav>
 
         <nav class="Visualisation-Objet">
-            <div class="Projet-Agrandi"><span><img src="..." alt=""></span></div>
-            
             <div class="CV-Agrandi">
                 <div class="En-Tete-CV">
                     <h2>DOSSIER PERSONNEL - ACCRÉDITATION SLAM</h2>
@@ -296,6 +288,7 @@
                 
                 <polygon class="zone-carte" id="carte-eglise" 
                     onclick="document.getElementById('radio-eglise').checked = true;"
+                    data-theme="rouge"
                     data-titre="ÉGLISE DU VILLAGE" 
                     data-desc="> ZONE HOSTILE\n> ACTIVITÉ CULTISTE DÉTECTÉE" 
                     data-img="./Image/PreviewGrace.png" 
@@ -307,6 +300,7 @@
 
                 <polygon class="zone-carte" id="carte-police" 
                     onclick="document.getElementById('radio-police').checked = true;"
+                    data-theme="jaune"
                     data-titre="COMMISSARIAT R.P.D." 
                     data-desc="> EMPLACEMENT SÉCURISÉ\n> PRÉSENCE : L.S. KENNEDY" 
                     data-img="./Image/PreviewLeonClaire.png" 
@@ -318,6 +312,7 @@
 
                 <polygon class="zone-carte" id="carte-usine" 
                     onclick="document.getElementById('radio-usine').checked = true;"
+                    data-theme="bleu"
                     data-titre="ZONE INDUSTRIELLE" 
                     data-desc="> INSTALLATION ABANDONNÉE\n> DANGER BIOLOGIQUE : ÉLEVÉ" 
                     data-img="./Image/PreviewADA.png" 
@@ -329,6 +324,7 @@
 
                 <polygon class="zone-carte" id="carte-bibliotheque" 
                     onclick="document.getElementById('radio-bibliotheque').checked = true;"
+                    data-theme="vert"
                     data-titre="BIBLIOTHEQUE" 
                     data-desc="> LIEU DE CONNAISSANCE\n> PRÉSENCE : JILL VALENTINE" 
                     data-img="./Image/PreviewJill.png" 
@@ -359,6 +355,7 @@
     <audio id="pomodoro-sound" src="./son/Son-pomodoro.mp3" oncanplay="this.volume=0.04"></audio>
     <audio id="audio-fond" src="./son/The-City-of-Ruin.mp3" oncanplay="this.volume=0.01" autoplay loop></audio>
     <audio id="bg-music" oncanplay="this.volume=0.01" loop></audio>
+
 </body>
 
 </html>
