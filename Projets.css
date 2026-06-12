@@ -190,44 +190,64 @@ body:has(input[name="projet"]:checked) .Message-Attente {
 .detail-link {
     display: inline-block;
     margin-top: 20px;
-    padding: 10px 20px;
-    background: var(--color-btn-bg);
-    color: var(--color-secondary);
-    border: var(--color-btn-border) 2px solid;
+    background: rgba(var(--rgb-black), 0.8);
+    color: var(--color-primary);
+    font-family: 'VT323', monospace;
+    font-size: 22px;
+    border: 2px solid var(--color-primary);
+    outline: 1px solid rgba(var(--rgb-primary), 0.3);
+    outline-offset: 4px;
+    box-shadow: inset 0 0 10px rgba(var(--rgb-primary), 0.1);
+    padding: 8px 15px;
+    cursor: pointer;
+    text-shadow: 0 0 5px var(--color-primary);
     text-decoration: none;
-    font-size: 20px;
-    transition: all 0.2s;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    transition: all 0.2s ease-out;
 }
 
 .detail-link:hover {
-    background: rgba(var(--rgb-secondary), 0.15);
-    color: var(--color-text-white);
-    box-shadow: 0 0 15px var(--color-secondary);
+    background: var(--color-primary);
+    color: var(--color-black);
+    box-shadow: 0 0 20px rgba(var(--rgb-primary), 0.6);
+    text-shadow: none;
+    outline-offset: 6px;
+    outline-color: var(--color-primary);
+    transform: scale(1.02);
 }
 
 /* =========================================
    BOUTON RETOUR
 ========================================= */
 .bouton-retour-accueil {
-    position: fixed;
-    bottom: 5%;
-    right: 50px;
-    background: var(--color-btn-bg);
-    color: var(--color-secondary);
+    background: rgba(var(--rgb-black), 0.8);
+    color: var(--color-primary);
     font-family: 'VT323', monospace;
-    font-size: 24px;
-    border: var(--color-btn-border) 2px solid;
-    box-shadow: 0 0 5px var(--color-btn-shadow-1), 0 0 10px var(--color-btn-shadow-2);
-    padding: 8px 15px;
+    font-size: 26px;
+    border: 2px solid var(--color-primary);
+    outline: 1px solid rgba(var(--rgb-primary), 0.3);
+    outline-offset: 4px;
+    box-shadow: inset 0 0 10px rgba(var(--rgb-primary), 0.1);
+    padding: 10px 20px;
     z-index: 5000;
     cursor: pointer;
-    text-shadow: 0 0 10px var(--color-secondary);
+    text-shadow: 0 0 5px var(--color-primary);
     text-decoration: none;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    position: fixed;
+    bottom: 50px;
+    right: 50px;
+    transition: all 0.2s ease-out;
 }
 
 .bouton-retour-accueil:hover {
-    background: rgba(var(--rgb-secondary), 0.15);
-    color: var(--color-text-white);
-    box-shadow: 0 0 15px var(--color-secondary);
-    transform: scale(1.05);
+    background: var(--color-primary);
+    color: var(--color-black);
+    box-shadow: 0 0 20px rgba(var(--rgb-primary), 0.6);
+    text-shadow: none;
+    outline-offset: 6px;
+    outline-color: var(--color-primary);
+    transform: scale(1.02);
 }

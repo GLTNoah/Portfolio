@@ -504,4 +504,50 @@ if (donneesSauvegardees) {
     } catch (e) {}
 }
 
+/* =========================================
+    EFFET DU TERMINAL
+========================================= */
+
+const caracteres = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%&*<>";
+
+function effetDechiffrement(element) {
+    const texteFinal = element.getAttribute('data-texte') || element.innerText;
+    element.setAttribute('data-texte', texteFinal);
+    
+    let iteration = 0;
+    clearInterval(element.intervalDechiffrement);
+    
+    element.intervalDechiffrement = setInterval(() => {
+        const block = Math.random() > 0.5 ? "█" : "";
+        
+        element.innerText = texteFinal
+            .split("")
+            .map((lettre, index) => {
+                if (index < iteration) {
+                    return texteFinal[index];
+                }
+                return caracteres[Math.floor(Math.random() * caracteres.length)];
+            })
+            .join("") + block;
+        
+        if (iteration >= texteFinal.length) {
+            element.innerText = texteFinal;
+            clearInterval(element.intervalDechiffrement);
+        }
+        iteration += 1 / 3;
+    }, 30);
+}
+
+document.querySelectorAll('input[name="examen"]').forEach(radio => {
+    radio.addEventListener('change', (e) => {
+        if (e.target.id === 'radio-cv') {
+            const titresCV = document.querySelectorAll('.CV-Agrandi h1, .CV-Agrandi h2, .CV-Agrandi h3');
+            titresCV.forEach(titre => effetDechiffrement(titre));
+        } else if (e.target.id === 'radio-veille') {
+            const titresVeille = document.querySelectorAll('.Veille-Agrandi h1, .Veille-Agrandi h2, .Veille-Agrandi h3');
+            titresVeille.forEach(titre => effetDechiffrement(titre));
+        }
+    });
+});
+
 majAffichage();
