@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SVG Animation</title>
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="../MediaQueries.css">
+    <link rel="stylesheet" href="../KeyFrames.css">
+    
+    <link rel="stylesheet" href="../Projets.css"> 
+    
+    <link rel="stylesheet" href="Article.css"> 
+    
+    <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const donneesSauvegardees = localStorage.getItem('donnees-survie');
+            if (donneesSauvegardees) {
+                try {
+                    const data = JSON.parse(donneesSauvegardees);
+                    if (data.theme) document.body.dataset.theme = data.theme;
+                    if (data.video) {
+                        const fondVideo = document.querySelector('.fond-video');
+                        if (fondVideo) fondVideo.src = "../" + data.video.substring(2);
+                    }
+                } catch (e) {}
+            }
+        });
+    </script>
+</head>
+<body>
+
+    <div class="calque-cathodique" style="visibility: visible; opacity: 0.3; animation: green-flicker 0.1s infinite;"></div>
+    <video class="fond-video" src="../vidéo/resident-evil.1920x1080.mp4" autoplay muted loop></video>
+
+    <div class="Archive-Interface">
+        <header class="Archive-Header">
+            <h1>> STATUT : DÉCLASSIFIÉ  ||  AUTEUR : N. GUILLOT</h1>
+            <h2>SYS.DOSSIER // SVG_ANIMATION</h2>
+        </header>
+        
+        <div class="Archive-Content Article-Contenu-Texte">
+            <section class="Article-Section">
+                <div class="Article-Titre">> OBJECTIF DE LA MISSION</div>
+                <p class="Article-Paragraphe"></p>
+            </section>
+
+            <section class="Article-Section">
+                <div class="Article-Titre">> DÉFIS TECHNIQUES</div>
+                <p class="Article-Paragraphe"></p>
+            </section>
+        </div>
+    </div>
+
+    <a href="../Projets.html" class="bouton-retour-accueil">[<] RETOUR AUX ARCHIVES</a>
+
+</body>
+</html>

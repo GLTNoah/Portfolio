@@ -1,445 +1,138 @@
 /* =========================================
-   VARIABLES GLOBALES & POMODORO
+   VARIABLES GLOBALES
 ========================================= */
-const ecranTimer = document.getElementById('pomodoro-timer');
-const texteMode = document.getElementById('pomodoro-mode');
-const boutonStart = document.getElementById('pomodoro-start');
-const boutonPause = document.getElementById('pomodoro-pause');
-const boutonReset = document.getElementById('pomodoro-reset');
-const affichageSessions = document.getElementById('pomodoro-sessions');
-const conteneurPomodoro = document.querySelector('.Pomodoro-Container');
-const conteneurControles = document.querySelector('.pomodoro-controls');
-const barreProgression = document.getElementById('pomodoro-progress');
-const sonPomodoro = document.getElementById('pomodoro-sound');
-
-const valTravail = document.getElementById('val-work');
-const valPause = document.getElementById('val-break');
-const btnMoinsTravail = document.getElementById('btn-minus-work');
-const btnPlusTravail = document.getElementById('btn-plus-work');
-const btnMoinsPause = document.getElementById('btn-minus-break');
-const btnPlusPause = document.getElementById('btn-plus-break');
-
-let minutesTravail = 25;
-let minutesPause = 5;
-let tempsRestant = minutesTravail * 60;
-let modeTravailActif = true;
-let intervalleTimer = null;
-let sessionsTerminees = 0;
-
-/* =========================================
-   LOGIQUE POMODORO
-========================================= */
-function jouerSon() {
-    if (sonPomodoro) {
-        sonPomodoro.currentTime = 0;
-        sonPomodoro.play();
-    }
-}
-
-function majAffichage() {
-    let minutes = Math.floor(tempsRestant / 60);
-    let secondes = tempsRestant % 60;
-    let affichageMin = minutes < 10 ? "0" + minutes : minutes;
-    let affichageSec = secondes < 10 ? "0" + secondes : secondes;
-
-    ecranTimer.textContent = affichageMin + ":" + affichageSec;
-
-    let tempsTotal = modeTravailActif ? minutesTravail * 60 : minutesPause * 60;
-    let pourcentageProgression = (tempsRestant / tempsTotal) * 100;
-    barreProgression.style.width = pourcentageProgression + "%";
-}
-
-function changerMode() {
-    modeTravailActif = !modeTravailActif;
-    if (modeTravailActif) {
-        tempsRestant = minutesTravail * 60;
-        texteMode.textContent = "MODE: TRAVAIL";
-        conteneurPomodoro.classList.remove('pause-mode');
-        conteneurControles.classList.remove('pause-mode');
-    } else {
-        tempsRestant = minutesPause * 60;
-        texteMode.textContent = "MODE: PAUSE";
-        conteneurPomodoro.classList.add('pause-mode');
-        conteneurControles.classList.add('pause-mode');
-        sessionsTerminees = sessionsTerminees + 1;
-        affichageSessions.textContent = "Sessions complétées: " + sessionsTerminees;
-    }
-    majAffichage();
-}
-
-function demarrerTimer() {
-    if (intervalleTimer !== null) return;
-    intervalleTimer = setInterval(() => {
-        tempsRestant--;
-        majAffichage();
-        if (tempsRestant === 0) {
-            jouerSon();
-            clearInterval(intervalleTimer);
-            intervalleTimer = null;
-            changerMode();
-            demarrerTimer();
-        }
-    }, 1000);
-}
-
-function mettreEnPause() {
-    clearInterval(intervalleTimer);
-    intervalleTimer = null;
-}
-
-function reinitialiserTimer() {
-    mettreEnPause();
-    
-    minutesTravail = 25;
-    minutesPause = 5;
-    valTravail.textContent = minutesTravail;
-    valPause.textContent = minutesPause;
-    
-    modeTravailActif = true;
-    tempsRestant = minutesTravail * 60;
-    sessionsTerminees = 0;
-    
-    texteMode.textContent = "MODE: TRAVAIL";
-    affichageSessions.textContent = "Sessions complétées: 0";
-    conteneurPomodoro.classList.remove('pause-mode');
-    conteneurControles.classList.remove('pause-mode');
-    
-    majAffichage();
-}
-
-btnMoinsTravail.addEventListener('click', () => { 
-    minutesTravail = Math.max(1, minutesTravail - 1); 
-    valTravail.textContent = minutesTravail; 
-    if (modeTravailActif && intervalleTimer === null) {
-        tempsRestant = minutesTravail * 60;
-        majAffichage();
-    }
-});
-
-btnPlusTravail.addEventListener('click', () => { 
-    minutesTravail = Math.min(60, minutesTravail + 1); 
-    valTravail.textContent = minutesTravail; 
-    if (modeTravailActif && intervalleTimer === null) {
-        tempsRestant = minutesTravail * 60;
-        majAffichage();
-    }
-});
-
-btnMoinsPause.addEventListener('click', () => { 
-    minutesPause = Math.max(1, minutesPause - 1); 
-    valPause.textContent = minutesPause; 
-    if (!modeTravailActif && intervalleTimer === null) {
-        tempsRestant = minutesPause * 60;
-        majAffichage();
-    }
-});
-
-btnPlusPause.addEventListener('click', () => { 
-    minutesPause = Math.min(30, minutesPause + 1); 
-    valPause.textContent = minutesPause; 
-    if (!modeTravailActif && intervalleTimer === null) {
-        tempsRestant = minutesPause * 60;
-        majAffichage();
-    }
-});
-
-boutonStart.addEventListener('click', () => { if (intervalleTimer === null) jouerSon(); demarrerTimer(); });
-boutonPause.addEventListener('click', mettreEnPause);
-boutonReset.addEventListener('click', reinitialiserTimer);
-
-/* =========================================
-   VARIABLES CARTE, AUDIO & THEME
-========================================= */
-const dialogueJill = document.querySelector('.Texte-Jill');
-const zonesCarte = document.querySelectorAll('.zone-carte');
-const btnCarte = document.getElementById('Btn-Carte');
-const radiosExamen = document.querySelectorAll('input[name="examen"]');
-
-const fondVideo = document.querySelector('.fond-video');
-const bgMusic = document.getElementById('bg-music');
+const myaudio = document.getElementById('myaudio');
+const pomodoroSound = document.getElementById('pomodoro-sound');
 const audioFond = document.getElementById('audio-fond');
-const themeTitre = document.getElementById('theme-titre');
-const themeImage = document.getElementById('theme-image');
-const themeDesc = document.getElementById('theme-desc');
-const themeAudioPreview = document.getElementById('theme-audio-preview');
-const conteneurAudioPreview = document.querySelector('.theme-audio-lecteur');
-const btnActiverTheme = document.getElementById('btn-activer-theme');
-const customPlayBtn = document.getElementById('custom-play-btn');
-const audioProgressBar = document.getElementById('audio-progress-bar');
-const audioProgressContainer = document.querySelector('.audio-progress-container');
-const audioTimeDisplay = document.getElementById('audio-time');
-const btnSon = document.getElementById('btn-son');
+const bgMusic = document.getElementById('bg-music');
+const barreVolume = document.getElementById('barre-volume');
 const iconeSon = document.getElementById('icon_sound');
+const btnSon = document.getElementById('btn-son');
+const btnActiverTheme = document.getElementById('btn-activer-theme');
+const themeAudioPreview = document.getElementById('theme-audio-preview');
+const customPlayBtn = document.getElementById('custom-play-btn');
+const fondVideo = document.querySelector('.fond-video');
 const titreMusiqueActuelle = document.getElementById('titre-musique-actuelle');
 const nomContact = document.getElementById('nom-contact');
-const barreVolume = document.getElementById('barre-volume');
+const dialogueJill = document.querySelector('.Texte-Jill');
+const zonesCarte = document.querySelectorAll('.zone-carte');
+const audioProgressContainer = document.querySelector('.audio-progress-container');
+const tousLesRadiosExamen = document.querySelectorAll('input[name="examen"]');
+const effetCathodique = document.querySelector('.calque-cathodique');
 
 let zoneSelectionnee = null;
-if (themeAudioPreview) themeAudioPreview.volume = 0.05;
-
-let personnageActif = "> JILL VALENTINE";
-let themeActuel = {
-    contact: "> JILL VALENTINE",
-    dialogue: "Avant de continuer, je devrais inspecter tout ce que j'ai eu ici. Je pourrais y trouver des éléments importants..."
-};
+let themeActuel = {};
+let personnageActif = "";
 
 const dialoguesPersonnages = {
-    "> JILL VALENTINE": {
-        "carte-eglise": "Une vieille église... L'ambiance y est glaciale. Je ferais bien de rester sur mes gardes.",
-        "carte-police": "Le commissariat... Leon doit sûrement être à l'intérieur. C'est l'endroit le plus sûr pour le moment.",
-        "carte-usine": "Une usine abandonnée. Le niveau de danger biologique est critique ici. Je dois avancer prudemment.",
-        "carte-bibliotheque": "La bibliothèque. Un bon endroit pour trouver des informations et planifier la prochaine étape."
+    "JILL VALENTINE": {
+        "carte-bibliotheque": "C'est ici que je suis. Il y a beaucoup d'archives."
     },
-    "> GRACE ASHCROFT": {
-        "carte-eglise": "Je... je pensais qu'on serait en sécurité ici. Mais... l'ambiance est si lourde. Ça me fait peur.",
-        "carte-police": "Toutes ces armes... et ce sang... Vous croyez vraiment qu'il reste quelqu'un pour nous protéger là-bas ?",
-        "carte-usine": "Emily... ça ressemble à l'endroit où ils t'avaient retenue. Tu... tu es vraiment sûre de vouloir y retourner ?",
-        "carte-bibliotheque": "C'est... c'est si calme. On pourrait peut-être juste rester cachés ici un petit moment ?"
+    "ADA WONG": {
+        "carte-usine": "Ne te mets pas en travers de mon chemin."
     },
-    "> LEON S. KENNEDY / CLAIRE REDFIELD": {
-        "carte-eglise": "Encore une histoire de secte... Reste sur tes gardes, Claire cet endroit me rappelle de très mauvais souvenirs...",
-        "carte-police": "On sait tous les deux qu'un commissariat n'est jamais le refuge qu'on espère. Garde ton arme prête, Claire.",
-        "carte-usine": "Une installation abandonnée. Couvre mes arrières, Claire, on va aller voir ce qu'ils cachent là-dedans.",
-        "carte-bibliotheque": "On devrait pouvoir trouver des indices ici. Je sécurise le périmètre pendant que tu fouilles les archives, Claire."
+    "LEON S. KENNEDY / CLAIRE REDFIELD": {
+        "carte-police": "On sécurise le périmètre. Reste sur tes gardes."
     },
-    "> ADA WONG": {
-        "carte-eglise": "La ferveur religieuse fait d'excellents cobayes, mais de très mauvais associés.",
-        "carte-police": "Leon s'en sort bien. Je vais le laisser faire le sale boulot pendant que je cherche ma cible.",
-        "carte-usine": "Une façade idéale. L'échantillon doit se trouver dans les sous-sols de ce complexe.",
-        "carte-bibliotheque": "Trop exposé. Je préfère opérer dans l'ombre et laisser les autres fouiller la paperasse."
+    "GRACE ASHCROFT": {
+        "carte-eglise": "Puisse la grâce vous guider..."
     }
 };
 
 /* =========================================
-   FONCTIONS AUDIO & FORMATAGE
+   INITIALISATION
 ========================================= */
-function relancerMusiqueDeFond() {
-    let srcFond = bgMusic.getAttribute('src') || audioFond.getAttribute('src');
-    if (titreMusiqueActuelle) titreMusiqueActuelle.textContent = formaterTitreMusique(srcFond);
-
-    if (iconeSon && iconeSon.src.includes('sound_off.png')) {
-        return; 
-    }
-
-    if (bgMusic.getAttribute('src')) {
-        bgMusic.play();
-    } else if (audioFond) {
-        audioFond.play();
-    }
-}
-
-function formaterTitreMusique(chemin) {
-    if (!chemin) return "AUCUNE";
-    return chemin.split('/').pop().replace('.mp3', '').replace(/-/g, ' ').toUpperCase();
-}
-
-const formatTime = (time) => {
-    if (isNaN(time)) return "00:00";
-    const m = Math.floor(time / 60).toString().padStart(2, '0');
-    const s = Math.floor(time % 60).toString().padStart(2, '0');
-    return `${m}:${s}`;
-};
-
-function changerVolumeGlobal(vol) {
-    if (bgMusic) bgMusic.volume = vol;
-    if (audioFond) audioFond.volume = vol;
-    if (themeAudioPreview) themeAudioPreview.volume = vol;
-}
-
-if (barreVolume) {
-    barreVolume.addEventListener('input', (e) => {
-        const volumeActuel = e.target.value;
-        changerVolumeGlobal(volumeActuel);
-        localStorage.setItem('volume-survie', volumeActuel);
-    });
-}
-
-/* =========================================
-   INTERACTIONS CARTE & DIALOGUES JILL
-========================================= */
-zonesCarte.forEach(zone => {
-    zone.addEventListener('mouseenter', () => {
-        if (nomContact) nomContact.textContent = personnageActif;
-
-        if (dialogueJill && dialoguesPersonnages[personnageActif]?.[zone.id]) {
-            dialogueJill.textContent = dialoguesPersonnages[personnageActif][zone.id];
+function appliquerVolumeInitial() {
+    if (barreVolume) {
+        const volumeSauvegarde = localStorage.getItem('volume-survie');
+        if (volumeSauvegarde !== null) {
+            barreVolume.value = volumeSauvegarde;
         }
         
-        const myAudio = document.getElementById('myaudio');
-        if (myAudio) myAudio.play();
-    });
-
-    zone.addEventListener('mouseleave', () => {
-        if (btnCarte && btnCarte.checked) {
-            if (nomContact) nomContact.textContent = personnageActif;
-            if (dialogueJill) dialogueJill.textContent = themeActuel.dialogue;
-        }
-    });
-
-    zone.addEventListener('click', () => {
-        let contactBrut = zone.dataset.contact || "> JILL VALENTINE";
-        let contactAjuste = contactBrut.trim().toUpperCase();
-        if (!contactAjuste.startsWith("> ")) {
-            contactAjuste = "> " + contactAjuste;
-        }
-
-        zoneSelectionnee = {
-            id: zone.id,
-            titre: zone.dataset.titre,
-            desc: zone.dataset.desc ? zone.dataset.desc.replace(/\\n/g, '\n') : '',
-            img: zone.dataset.img,
-            audio: zone.dataset.audio,
-            video: zone.dataset.video,
-            contact: contactAjuste,
-            dialogueActif: zone.dataset.dialogueActif || zone.dataset.dialogueactif || zone.dataset.dialogue || "",
-            theme: zone.dataset.theme || "vert"
-        };
-
-        if (themeTitre) themeTitre.textContent = zoneSelectionnee.titre;
-        if (themeDesc) themeDesc.textContent = zoneSelectionnee.desc;
-        if (themeImage) {
-            themeImage.src = zoneSelectionnee.img;
-            themeImage.style.display = "block";
-        }
-        if (themeAudioPreview) {
-            themeAudioPreview.src = zoneSelectionnee.audio;
-            conteneurAudioPreview.style.display = "block";
-        }
-        if (btnActiverTheme) btnActiverTheme.style.display = "block";
-
-        if (customPlayBtn) customPlayBtn.innerHTML = "[ &#9658; LECTURE ]";
-        if (audioProgressBar) audioProgressBar.style.width = "0%";
-        if (audioTimeDisplay) audioTimeDisplay.textContent = "00:00 / 00:00";
-
-        zonesCarte.forEach(c => c.classList.remove('zone-active'));
-        zone.classList.add('zone-active');
-    });
-});
-
-/* =========================================
-   ACTIVATION DU THÈME
-========================================= */
-btnActiverTheme.addEventListener('click', () => {
-    if (zoneSelectionnee) {
-        document.body.dataset.theme = zoneSelectionnee.theme;
-
-        if (audioFond) audioFond.pause();
-        if (themeAudioPreview) themeAudioPreview.pause();
-        if (customPlayBtn) customPlayBtn.innerHTML = "[ &#9658; LECTURE ]";
+        const volumeDemarrage = parseFloat(barreVolume.value);
+        if (myaudio) myaudio.volume = volumeDemarrage * 0.2;
+        if (pomodoroSound) pomodoroSound.volume = volumeDemarrage * 0.4;
+        if (audioFond) audioFond.volume = volumeDemarrage;
+        if (bgMusic) bgMusic.volume = volumeDemarrage;
         
-        if (fondVideo) fondVideo.src = zoneSelectionnee.video;
-        if (bgMusic) {
-            bgMusic.src = zoneSelectionnee.audio;
-            bgMusic.play();
-        }
-        if (titreMusiqueActuelle) titreMusiqueActuelle.textContent = formaterTitreMusique(zoneSelectionnee.audio);
-        
-        personnageActif = zoneSelectionnee.contact;
-        let dialogueSecours = dialoguesPersonnages[personnageActif] && dialoguesPersonnages[personnageActif][zoneSelectionnee.id] 
-                              ? dialoguesPersonnages[personnageActif][zoneSelectionnee.id] 
-                              : "Il faut que je continue l'exploration...";
-
-        themeActuel = {
-            contact: personnageActif,
-            dialogue: zoneSelectionnee.dialogueActif !== "" ? zoneSelectionnee.dialogueActif : dialogueSecours
-        };
-
-        const donneesSauvegarde = {
-            theme: zoneSelectionnee.theme,
-            video: zoneSelectionnee.video,
-            audio: zoneSelectionnee.audio,
-            contact: themeActuel.contact,
-            dialogue: themeActuel.dialogue
-        };
-        localStorage.setItem('donnees-survie', JSON.stringify(donneesSauvegarde));
-
-        if (nomContact) nomContact.textContent = themeActuel.contact;
-        if (dialogueJill) dialogueJill.textContent = themeActuel.dialogue;
-
         if (iconeSon) {
-            iconeSon.src = "./Image/sound_on.png";
-            iconeSon.alt = "Couper le son";
-        }
-    }
-});
-
-radiosExamen.forEach(radio => {
-    radio.addEventListener('change', () => {
-        if (themeAudioPreview && !themeAudioPreview.paused) {
-            themeAudioPreview.pause();
-            if (customPlayBtn) customPlayBtn.innerHTML = "[ &#9658; LECTURE ]";
-            relancerMusiqueDeFond();
-        }
-    });
-});
-
-/* =========================================
-   LECTEUR AUDIO PERSONNALISÉ
-========================================= */
-customPlayBtn.addEventListener('click', () => {
-    if (themeAudioPreview.paused) {
-        const previewFile = themeAudioPreview.getAttribute('src');
-        const bgFile = bgMusic.getAttribute('src');
-        const fondFile = audioFond.getAttribute('src');
-
-        const isBgPlaying = !bgMusic.paused && previewFile === bgFile;
-        const isFondPlaying = !audioFond.paused && previewFile === fondFile;
-
-        if (isBgPlaying || isFondPlaying) {
-            return;
-        }
-
-        if (audioFond) audioFond.pause();
-        if (bgMusic) bgMusic.pause();
-
-        themeAudioPreview.play();
-        customPlayBtn.innerHTML = "[ &#10074;&#10074; PAUSE ]";
-    } else {
-        themeAudioPreview.pause();
-        customPlayBtn.innerHTML = "[ &#9658; LECTURE ]";
-        relancerMusiqueDeFond();
-    }
-});
-
-themeAudioPreview.addEventListener('loadedmetadata', () => {
-    if (audioTimeDisplay) audioTimeDisplay.textContent = `00:00 / ${formatTime(themeAudioPreview.duration)}`;
-});
-
-themeAudioPreview.addEventListener('timeupdate', () => {
-    const current = themeAudioPreview.currentTime;
-    const duration = themeAudioPreview.duration;
-    if (audioProgressBar) audioProgressBar.style.width = (current / duration) * 100 + "%";
-    if (audioTimeDisplay) audioTimeDisplay.textContent = `${formatTime(current)} / ${formatTime(duration)}`;
-});
-
-themeAudioPreview.addEventListener('ended', () => {
-    if (customPlayBtn) customPlayBtn.innerHTML = "[ &#9658; LECTURE ]";
-    if (audioProgressBar) audioProgressBar.style.width = "0%";
-    if (audioTimeDisplay) audioTimeDisplay.textContent = `00:00 / ${formatTime(themeAudioPreview.duration)}`;
-    relancerMusiqueDeFond();
-});
-
-audioProgressContainer.addEventListener('click', (e) => {
-    const rect = audioProgressContainer.getBoundingClientRect();
-    themeAudioPreview.currentTime = ((e.clientX - rect.left) / rect.width) * themeAudioPreview.duration;
-});
-
-/* =========================================
-   BOUTON SON GLOBAL
-========================================= */
-if (btnSon) {
-    btnSon.addEventListener('click', () => {
-        let audioActif = bgMusic.getAttribute('src') ? bgMusic : audioFond;
-
-        if (audioActif.paused) {
-            audioActif.play();
-            if (iconeSon) {
+            if (volumeDemarrage === 0) {
+                iconeSon.src = "./Image/sound_off.png";
+                iconeSon.alt = "Activer le son";
+            } else {
                 iconeSon.src = "./Image/sound_on.png";
                 iconeSon.alt = "Couper le son";
             }
-        } else {
-            audioActif.pause();
-            if (iconeSon) {
+        }
+    }
+}
+
+function appliquerThemeSauvegarde() {
+    const sauvegarde = localStorage.getItem('donnees-survie');
+    if (sauvegarde) {
+        const donnees = JSON.parse(sauvegarde);
+        document.body.dataset.theme = donnees.theme;
+        
+        if (fondVideo) fondVideo.src = donnees.video;
+        if (bgMusic) bgMusic.src = donnees.audio;
+        if (audioFond) audioFond.pause();
+        
+        if (titreMusiqueActuelle) titreMusiqueActuelle.textContent = formaterTitreMusique(donnees.audio);
+        if (nomContact) nomContact.textContent = donnees.contact;
+        if (dialogueJill) dialogueJill.textContent = donnees.dialogue;
+        
+        document.addEventListener('click', () => {
+            if (bgMusic && bgMusic.paused) {
+                bgMusic.play().catch(() => {});
+            }
+        }, { once: true });
+    }
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    appliquerVolumeInitial();
+    appliquerThemeSauvegarde();
+});
+
+/* =========================================
+   GESTION AUDIO ET VOLUME
+========================================= */
+if (barreVolume) {
+    barreVolume.addEventListener('input', (e) => {
+        const volumeActuel = parseFloat(e.target.value);
+        
+        if (myaudio) myaudio.volume = volumeActuel * 0.2;
+        if (pomodoroSound) pomodoroSound.volume = volumeActuel * 0.4;
+        if (audioFond) audioFond.volume = volumeActuel;
+        if (bgMusic) bgMusic.volume = volumeActuel;
+
+        localStorage.setItem('volume-survie', volumeActuel);
+
+        if (iconeSon) {
+            if (volumeActuel === 0) {
+                iconeSon.src = "./Image/sound_off.png";
+                iconeSon.alt = "Activer le son";
+            } else {
+                let audioActif = bgMusic && bgMusic.getAttribute('src') ? bgMusic : audioFond;
+                if (audioActif && !audioActif.paused) {
+                    iconeSon.src = "./Image/sound_on.png";
+                    iconeSon.alt = "Couper le son";
+                }
+            }
+        }
+    });
+}
+
+if (btnSon) {
+    btnSon.addEventListener('click', () => {
+        let audioActif = bgMusic && bgMusic.getAttribute('src') ? bgMusic : audioFond;
+        if (audioActif) {
+            if (audioActif.paused) {
+                audioActif.play();
+                iconeSon.src = "./Image/sound_on.png";
+                iconeSon.alt = "Couper le son";
+            } else {
+                audioActif.pause();
                 iconeSon.src = "./Image/sound_off.png";
                 iconeSon.alt = "Activer le son";
             }
@@ -447,107 +140,285 @@ if (btnSon) {
     });
 }
 
-/* =========================================
-   INITIALISATION
-========================================= */
-const volumeSauvegarde = localStorage.getItem('volume-survie');
-if (volumeSauvegarde !== null) {
-    if (barreVolume) barreVolume.value = volumeSauvegarde;
-    changerVolumeGlobal(volumeSauvegarde);
-} else {
-    changerVolumeGlobal(0.05);
-    if (barreVolume) barreVolume.value = 0.05;
+function formaterTemps(secondes) {
+    const min = Math.floor(secondes / 60) || 0;
+    const sec = Math.floor(secondes % 60) || 0;
+    return `${min < 10 ? '0' : ''}${min}:${sec < 10 ? '0' : ''}${sec}`;
 }
 
-const donneesSauvegardees = localStorage.getItem('donnees-survie');
-if (donneesSauvegardees) {
-    try {
-        const data = JSON.parse(donneesSauvegardees);
-        
-        if (data.theme) document.body.dataset.theme = data.theme;
-        
-        if (data.video && fondVideo) {
-            fondVideo.src = data.video;
-        }
+function formaterTitreMusique(src) {
+    if (!src) return "INCONNU";
+    let nomFichier = src.split('/').pop().split('.')[0];
+    return nomFichier.replace(/-/g, ' ').toUpperCase();
+}
 
-        if (data.contact) {
-            personnageActif = data.contact;
-            themeActuel.contact = data.contact;
-            if (nomContact) nomContact.textContent = data.contact;
+if (customPlayBtn) {
+    customPlayBtn.addEventListener('click', () => {
+        if (themeAudioPreview.paused) {
+            themeAudioPreview.play();
+            customPlayBtn.innerHTML = "[ &#10074;&#10074; PAUSE ]";
+        } else {
+            themeAudioPreview.pause();
+            customPlayBtn.innerHTML = "[ &#9658; LECTURE ]";
         }
+    });
+}
 
-        if (data.dialogue) {
-            themeActuel.dialogue = data.dialogue;
-            if (dialogueJill) dialogueJill.textContent = data.dialogue;
+if (themeAudioPreview) {
+    themeAudioPreview.addEventListener('timeupdate', () => {
+        const act = themeAudioPreview.currentTime;
+        const dur = themeAudioPreview.duration;
+        if (dur) {
+            const pourcent = (act / dur) * 100;
+            document.getElementById('audio-progress-bar').style.width = pourcent + '%';
+            document.getElementById('audio-time').textContent = `${formaterTemps(act)} / ${formaterTemps(dur)}`;
         }
+    });
+}
+
+if (audioProgressContainer) {
+    audioProgressContainer.addEventListener('click', (e) => {
+        const rect = audioProgressContainer.getBoundingClientRect();
+        const pos = (e.clientX - rect.left) / rect.width;
+        themeAudioPreview.currentTime = pos * themeAudioPreview.duration;
+    });
+}
+
+/* =========================================
+   CARTE INTERACTIVE ET THÈMES
+========================================= */
+zonesCarte.forEach(zone => {
+    zone.addEventListener('click', () => {
+        zonesCarte.forEach(z => z.classList.remove('zone-active'));
+        zone.classList.add('zone-active');
+
+        const titre = zone.dataset.titre;
+        const desc = zone.dataset.desc;
+        const img = zone.dataset.img;
+        const audioSrc = zone.dataset.audio;
+
+        document.getElementById('theme-titre').textContent = titre;
+        document.getElementById('theme-desc').textContent = desc.replace(/\\n/g, '\n');
         
-        if (data.audio && bgMusic) {
-            bgMusic.src = data.audio;
-            if (titreMusiqueActuelle) {
-                titreMusiqueActuelle.textContent = formaterTitreMusique(data.audio);
-            }
+        const themeImage = document.getElementById('theme-image');
+        themeImage.src = img;
+        themeImage.style.display = 'block';
+
+        zoneSelectionnee = {
+            id: zone.id,
+            theme: zone.dataset.theme,
+            titre: titre,
+            desc: desc,
+            img: img,
+            audio: audioSrc,
+            video: zone.dataset.video,
+            contact: zone.dataset.contact,
+            dialogueActif: ""
+        };
+
+        themeAudioPreview.src = audioSrc;
+        document.querySelector('.theme-audio-lecteur').style.display = 'block';
+        btnActiverTheme.style.display = 'block';
+        
+        customPlayBtn.innerHTML = "[ &#9658; LECTURE ]";
+        document.getElementById('audio-progress-bar').style.width = '0%';
+        document.getElementById('audio-time').textContent = "00:00 / 00:00";
+    });
+});
+
+if (btnActiverTheme) {
+    btnActiverTheme.addEventListener('click', () => {
+        if (zoneSelectionnee) {
+            document.body.dataset.theme = zoneSelectionnee.theme;
+
             if (audioFond) audioFond.pause();
+            if (themeAudioPreview) themeAudioPreview.pause();
+            if (customPlayBtn) customPlayBtn.innerHTML = "[ &#9658; LECTURE ]";
             
-            if (iconeSon) {
+            if (fondVideo) fondVideo.src = zoneSelectionnee.video;
+            
+            if (bgMusic) {
+                bgMusic.src = zoneSelectionnee.audio;
+                bgMusic.volume = barreVolume ? parseFloat(barreVolume.value) : 0.05;
+                bgMusic.play();
+            }
+            
+            if (titreMusiqueActuelle) titreMusiqueActuelle.textContent = formaterTitreMusique(zoneSelectionnee.audio);
+            
+            personnageActif = zoneSelectionnee.contact;
+            let dialogueSecours = dialoguesPersonnages[personnageActif] && dialoguesPersonnages[personnageActif][zoneSelectionnee.id] 
+                                  ? dialoguesPersonnages[personnageActif][zoneSelectionnee.id] 
+                                  : "Il faut que je continue l'exploration...";
+
+            themeActuel = {
+                contact: personnageActif,
+                dialogue: zoneSelectionnee.dialogueActif !== "" ? zoneSelectionnee.dialogueActif : dialogueSecours
+            };
+
+            const donneesSauvegarde = {
+                theme: zoneSelectionnee.theme,
+                video: zoneSelectionnee.video,
+                audio: zoneSelectionnee.audio,
+                contact: themeActuel.contact,
+                dialogue: themeActuel.dialogue
+            };
+            localStorage.setItem('donnees-survie', JSON.stringify(donneesSauvegarde));
+
+            if (nomContact) nomContact.textContent = themeActuel.contact;
+            if (dialogueJill) dialogueJill.textContent = themeActuel.dialogue;
+
+            if (iconeSon && barreVolume && parseFloat(barreVolume.value) > 0) {
                 iconeSon.src = "./Image/sound_on.png";
                 iconeSon.alt = "Couper le son";
             }
-
-            bgMusic.play().catch(() => {
-                const activerAuPremierClic = () => {
-                    bgMusic.play();
-                    window.removeEventListener('click', activerAuPremierClic);
-                };
-                window.addEventListener('click', activerAuPremierClic);
-            });
         }
-    } catch (e) {}
+    });
 }
 
 /* =========================================
-    EFFET DU TERMINAL
+   ANTI-LAG
 ========================================= */
-
-const caracteres = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%&*<>";
-
-function effetDechiffrement(element) {
-    const texteFinal = element.getAttribute('data-texte') || element.innerText;
-    element.setAttribute('data-texte', texteFinal);
-    
-    let iteration = 0;
-    clearInterval(element.intervalDechiffrement);
-    
-    element.intervalDechiffrement = setInterval(() => {
-        const block = Math.random() > 0.5 ? "█" : "";
-        
-        element.innerText = texteFinal
-            .split("")
-            .map((lettre, index) => {
-                if (index < iteration) {
-                    return texteFinal[index];
-                }
-                return caracteres[Math.floor(Math.random() * caracteres.length)];
-            })
-            .join("") + block;
-        
-        if (iteration >= texteFinal.length) {
-            element.innerText = texteFinal;
-            clearInterval(element.intervalDechiffrement);
-        }
-        iteration += 1 / 3;
-    }, 30);
-}
-
-document.querySelectorAll('input[name="examen"]').forEach(radio => {
+tousLesRadiosExamen.forEach(radio => {
     radio.addEventListener('change', (e) => {
-        if (e.target.id === 'radio-cv') {
-            const titresCV = document.querySelectorAll('.CV-Agrandi h1, .CV-Agrandi h2, .CV-Agrandi h3');
-            titresCV.forEach(titre => effetDechiffrement(titre));
-        } else if (e.target.id === 'radio-veille') {
-            const titresVeille = document.querySelectorAll('.Veille-Agrandi h1, .Veille-Agrandi h2, .Veille-Agrandi h3');
-            titresVeille.forEach(titre => effetDechiffrement(titre));
+        if (e.target.id === 'radio-cv' || e.target.id === 'radio-veille') {
+            if (fondVideo) fondVideo.pause();
+            if (effetCathodique) effetCathodique.style.display = 'none';
+        } else {
+            if (fondVideo && fondVideo.paused) fondVideo.play();
+            if (effetCathodique) effetCathodique.style.display = 'block';
         }
     });
 });
 
-majAffichage();
+/* =========================================
+   LOGIQUE POMODORO
+========================================= */
+let tempsTravail = 25;
+let tempsPause = 5;
+let tempsRestant = tempsTravail * 60;
+let intervalId = null;
+let enPause = false;
+let sessionsCompletees = 0;
+
+const valWork = document.getElementById('val-work');
+const valBreak = document.getElementById('val-break');
+const affichageTimer = document.getElementById('pomodoro-timer');
+const affichageMode = document.getElementById('pomodoro-mode');
+const barreProgression = document.getElementById('pomodoro-progress');
+const affichageSessions = document.getElementById('pomodoro-sessions');
+
+function majAffichagePomodoro() {
+    if (affichageTimer) affichageTimer.textContent = formaterTemps(tempsRestant);
+    if (barreProgression) {
+        const tempsTotal = (enPause ? tempsPause : tempsTravail) * 60;
+        const pourcentage = ((tempsTotal - tempsRestant) / tempsTotal) * 100;
+        barreProgression.style.width = pourcentage + '%';
+    }
+}
+
+const btnPlusWork = document.getElementById('btn-plus-work');
+if (btnPlusWork) {
+    btnPlusWork.addEventListener('click', () => {
+        if (tempsTravail < 60 && !intervalId && !enPause) {
+            tempsTravail++;
+            valWork.textContent = tempsTravail;
+            tempsRestant = tempsTravail * 60;
+            majAffichagePomodoro();
+        }
+    });
+}
+
+const btnMinusWork = document.getElementById('btn-minus-work');
+if (btnMinusWork) {
+    btnMinusWork.addEventListener('click', () => {
+        if (tempsTravail > 1 && !intervalId && !enPause) {
+            tempsTravail--;
+            valWork.textContent = tempsTravail;
+            tempsRestant = tempsTravail * 60;
+            majAffichagePomodoro();
+        }
+    });
+}
+
+const btnPlusBreak = document.getElementById('btn-plus-break');
+if (btnPlusBreak) {
+    btnPlusBreak.addEventListener('click', () => {
+        if (tempsPause < 30 && !intervalId && enPause) {
+            tempsPause++;
+            valBreak.textContent = tempsPause;
+            tempsRestant = tempsPause * 60;
+            majAffichagePomodoro();
+        } else if (tempsPause < 30) {
+            tempsPause++;
+            valBreak.textContent = tempsPause;
+        }
+    });
+}
+
+const btnMinusBreak = document.getElementById('btn-minus-break');
+if (btnMinusBreak) {
+    btnMinusBreak.addEventListener('click', () => {
+        if (tempsPause > 1 && !intervalId && enPause) {
+            tempsPause--;
+            valBreak.textContent = tempsPause;
+            tempsRestant = tempsPause * 60;
+            majAffichagePomodoro();
+        } else if (tempsPause > 1) {
+            tempsPause--;
+            valBreak.textContent = tempsPause;
+        }
+    });
+}
+
+const btnPomodoroStart = document.getElementById('pomodoro-start');
+if (btnPomodoroStart) {
+    btnPomodoroStart.addEventListener('click', () => {
+        if (intervalId) return;
+        intervalId = setInterval(() => {
+            tempsRestant--;
+            majAffichagePomodoro();
+
+            if (tempsRestant <= 0) {
+                if (pomodoroSound) {
+                    pomodoroSound.currentTime = 0;
+                    pomodoroSound.play();
+                }
+                
+                if (!enPause) {
+                    enPause = true;
+                    tempsRestant = tempsPause * 60;
+                    if (affichageMode) affichageMode.textContent = "MODE: PAUSE";
+                    sessionsCompletees++;
+                    if (affichageSessions) affichageSessions.textContent = "Sessions complétées: " + sessionsCompletees;
+                } else {
+                    enPause = false;
+                    tempsRestant = tempsTravail * 60;
+                    if (affichageMode) affichageMode.textContent = "MODE: TRAVAIL";
+                }
+                majAffichagePomodoro();
+            }
+        }, 1000);
+    });
+}
+
+const btnPomodoroPause = document.getElementById('pomodoro-pause');
+if (btnPomodoroPause) {
+    btnPomodoroPause.addEventListener('click', () => {
+        clearInterval(intervalId);
+        intervalId = null;
+    });
+}
+
+const btnPomodoroReset = document.getElementById('pomodoro-reset');
+if (btnPomodoroReset) {
+    btnPomodoroReset.addEventListener('click', () => {
+        clearInterval(intervalId);
+        intervalId = null;
+        enPause = false;
+        tempsRestant = tempsTravail * 60;
+        if (affichageMode) affichageMode.textContent = "MODE: TRAVAIL";
+        majAffichagePomodoro();
+    });
+}
+
+majAffichagePomodoro();

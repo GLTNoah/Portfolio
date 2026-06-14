@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio Article</title>
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="../MediaQueries.css">
+    <link rel="stylesheet" href="../KeyFrames.css">
+    <link rel="stylesheet" href="../Projets.css"> 
+    <link rel="stylesheet" href="Article.css"> 
+    <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const donneesSauvegardees = localStorage.getItem('donnees-survie');
+            if (donneesSauvegardees) {
+                try {
+                    const data = JSON.parse(donneesSauvegardees);
+                    if (data.theme) document.body.dataset.theme = data.theme;
+                    if (data.video) {
+                        const fondVideo = document.querySelector('.fond-video');
+                        if (fondVideo) fondVideo.src = "../" + data.video.substring(2);
+                    }
+                } catch (e) {}
+            }
+
+            let zoomFactor = 1;
+            const root = document.documentElement;
+            
+            document.getElementById('btn-zoom-in').addEventListener('click', () => {
+                if(zoomFactor < 1.6) {
+                    zoomFactor += 0.1;
+                    root.style.setProperty('--zoom-factor', zoomFactor);
+                }
+            });
+
+            document.getElementById('btn-zoom-out').addEventListener('click', () => {
+                if(zoomFactor > 0.8) {
+                    zoomFactor -= 0.1;
+                    root.style.setProperty('--zoom-factor', zoomFactor);
+                }
+            });
+
+            let modeLecture = false;
+            document.getElementById('btn-lecture').addEventListener('click', () => {
+                modeLecture = !modeLecture;
+                if(modeLecture) {
+                    document.body.classList.add('lecture-pure');
+                    document.getElementById('btn-lecture').textContent = "[X] MODE LECTURE";
+                } else {
+                    document.body.classList.remove('lecture-pure');
+                    document.getElementById('btn-lecture').textContent = "[O] MODE LECTURE";
+                }
+            });
+
+            document.getElementById('btn-print').addEventListener('click', () => {
+                window.print();
+            });
+
+            document.getElementById('btn-top').addEventListener('click', () => {
+                document.querySelector('.Document-Wrapper').scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</head>
+<body>
+
+    <div class="calque-cathodique" style="visibility: visible; opacity: 0.3; animation: green-flicker 0.1s infinite;"></div>
+    <video class="fond-video" src="../vidéo/resident-evil.1920x1080.mp4" autoplay muted loop></video>
+
+    <aside class="Panneau-Controles">
+        <div class="Panneau-Titre">SYS.OPTS_</div>
+        
+        <div class="Panneau-Categorie">
+            <span class="Categorie-Titre">> AFFICHAGE</span>
+            <button id="btn-zoom-in" class="Btn-Controle">[+] ZOOM TEXTE</button>
+            <button id="btn-zoom-out" class="Btn-Controle">[-] RÉDUIRE</button>
+            <button id="btn-lecture" class="Btn-Controle">[O] MODE LECTURE</button>
+        </div>
+
+        <div class="Panneau-Categorie">
+            <span class="Categorie-Titre">> EXPORTATION</span>
+            <button id="btn-print" class="Btn-Controle">[P] IMPRIMER</button>
+        </div>
+
+        <div class="Panneau-Categorie">
+            <span class="Categorie-Titre">> NAVIGATION</span>
+            <button id="btn-top" class="Btn-Controle">[^] HAUT DE PAGE</button>
+        </div>
+    </aside>
+
+    <main class="Document-Wrapper">
+        <div class="Document-A4">
+            
+            <header class="Document-Header">
+                <div class="En-Tete-Gauche">
+                    <span>> STATUT : DÉCLASSIFIÉ</span>
+                    <span>> AUTEUR : N. GUILLOT</span>
+                </div>
+                <div class="En-Tete-Droite">
+                    <span>SYS.DOSSIER // PORTFOLIO_TERMINAL</span>
+                </div>
+            </header>
+
+            <hr class="Ligne-Document">
+            
+            <div class="Document-Content">
+                <section class="Article-Section">
+                    <div class="Article-Titre">> LE POINT DE DÉPART : POURQUOI CE PROJET ?</div>
+                    <p class="Article-Paragraphe">Lorsque l'on débute dans le domaine du développement web, on se rend très vite compte que le marché est vaste et qu'il regorge de profils compétents. Dès le départ, mon objectif principal était extrêmement clair : je devais absolument trouver un moyen de me démarquer. Je ne voulais pas me contenter de créer un site classique, lisse, blanc et minimaliste, semblable à des milliers d'autres portfolios que l'on peut croiser sur internet. Je souhaitais concevoir une véritable expérience immersive, un univers unique qui reflète non seulement ma personnalité et mes goûts, mais qui prouve également ma capacité à mener à bien une vision créative complexe.</p>
+                    <p class="Article-Paragraphe">J'ai donc fait le choix audacieux de m'inspirer de l'esthétique si particulière des vieux terminaux informatiques des années 90, en y mêlant l'ambiance sombre et intrigante des jeux vidéo de la saga Resident Evil. C'était un pari risqué car ce type de design demande beaucoup de précision, mais c'était surtout le moyen idéal d'avoir un projet personnel profondément motivant. Dans l'apprentissage de la programmation, la théorie ne suffit pas : on apprend toujours beaucoup plus vite, et de manière beaucoup plus durable, lorsque l'on est passionné par ce que l'on est en train de construire. Ce portfolio est ma vitrine professionnelle. Il ne se contente pas d'afficher une liste de compétences, il prouve concrètement que je maîtrise les bases fondamentales du développement, que je suis capable de structurer un projet de A à Z, d'imaginer une direction artistique cohérente, et surtout, de trouver les solutions techniques nécessaires pour que cette vision prenne vie à l'écran.</p>
+                </section>
+
+                <section class="Article-Section">
+                    <div class="Article-Titre">> LA FONDATION VISUELLE : MAÎTRISER HTML ET CSS</div>
+                    <p class="Article-Paragraphe">La première grande étape de mon apprentissage s'est concentrée sur la maîtrise absolue de la structure de la page avec le langage HTML, puis sur son habillage complet avec le CSS. Pour réussir à donner cet aspect authentique de vieil écran d'ordinateur à mon interface, j'ai dû étudier en profondeur la manière dont on peut manipuler la lumière, les ombres et les couleurs directement dans le code. J'ai par exemple appris à utiliser de manière avancée les propriétés "box-shadow" pour créer l'illusion d'une lueur verte et néon qui émane des fenêtres et des textes. Mais le design ne s'arrête pas à des images fixes : j'ai passé énormément de temps à travailler sur des animations CSS complexes pour recréer virtuellement l'effet d'un tube cathodique. Cela implique de coder un léger clignotement permanent de l'écran, ainsi que le défilement de lignes de balayage subtiles qui parcourent l'image de haut en bas, caractéristiques des moniteurs de l'époque.</p>
+                    <p class="Article-Paragraphe">C'est un travail d'une très grande précision où chaque pixel et chaque opacité comptent pour que l'illusion soit parfaite et ne fatigue pas les yeux de l'utilisateur. Au-delà de ces effets visuels, j'ai également mis en place une architecture CSS moderne basée sur un système de "variables". Cette technique m'a permis de concevoir plusieurs thèmes de couleurs différents, comme le vert classique, un rouge d'alerte ou un bleu industriel. L'énorme avantage de cette méthode est que je n'ai pas besoin de réécrire des centaines de lignes de code pour changer l'apparence du site : il me suffit de modifier une seule de ces variables principales pour que l'intégralité de l'interface, des bordures jusqu'aux textes, s'adapte instantanément à la nouvelle ambiance choisie.</p>
+                </section>
+
+                <section class="Article-Section">
+                    <div class="Article-Titre">> L'INTERACTIVITÉ ET L'EXPLORATION DU FORMAT SVG</div>
+                    <p class="Article-Paragraphe">Pour pousser l'immersion encore plus loin et ajouter une véritable dimension interactive à mon portfolio, j'ai voulu intégrer une carte dynamique permettant de naviguer entre les différentes sections. C'est à ce moment-là que j'ai dû me pencher sur l'étude du format SVG. Contrairement à une image classique de type JPEG ou PNG, qui est composée de minuscules carrés de couleurs et qui devient irrémédiablement floue dès qu'on essaie de zoomer dessus, le SVG est une image dessinée par l'ordinateur à l'aide de formules mathématiques. Cela signifie qu'il reste toujours d'une netteté absolue, peu importe la taille de l'écran.</p>
+                    <p class="Article-Paragraphe">Mais la véritable force du SVG, et la raison pour laquelle je tenais à l'utiliser, c'est que l'on peut interagir avec ses éléments internes directement grâce au code. En étudiant son fonctionnement, j'ai été capable de tracer des zones cliquables très spécifiques sur ma carte, correspondant à des lieux comme l'église ou le commissariat. Ensuite, j'ai pu lier ces zones mathématiques à mon code CSS pour leur demander de se mettre en surbrillance, de changer de couleur ou d'afficher un ciblage rouge lorsque la souris de l'utilisateur passe au-dessus. C'est une technique particulièrement puissante et très utilisée dans la création d'interfaces modernes, que j'ai pris énormément de plaisir à découvrir et à maîtriser pour donner un côté "radar tactique" à ma navigation.</p>
+                </section>
+
+                <section class="Article-Section">
+                    <div class="Article-Titre">> LE DÉFI DU JAVASCRIPT ET L'OPTIMISATION DES PERFORMANCES</div>
+                    <p class="Article-Paragraphe">C'est indiscutablement avec le langage JavaScript que j'ai rencontré le plus de difficultés lors de la création de ce projet, mais c'est également dans ce domaine que j'ai réalisé mes plus grands progrès d'apprentissage. Dans un premier temps, j'avais eu l'idée de tout faire fonctionner uniquement avec du CSS, en utilisant des astuces complexes pour ouvrir les dossiers et naviguer dans les menus. Si le résultat visuel était au rendez-vous, la réalité technique était toute autre : cela demandait beaucoup trop de calculs à l'ordinateur. Entre la vidéo haute définition qui tournait en boucle en arrière-plan, les filtres de lumière superposés et les animations cathodiques constantes, le processeur graphique saturait et le site se mettait à subir de gros ralentissements. J'ai très vite compris qu'il était indispensable d'utiliser le JavaScript, qui agit comme le "cerveau" de la page, pour optimiser les performances de manière intelligente.</p>
+                    <p class="Article-Paragraphe">Le concept que j'ai dû mettre en place était logique mais complexe à coder : il fallait ordonner au navigateur de mettre physiquement la vidéo en pause et de désactiver totalement les effets visuels les plus lourds au moment exact où j'ouvrais un grand dossier textuel, puis de tout relancer de manière invisible à la fermeture de celui-ci. Le JavaScript m'a également été indispensable pour concevoir la partie audio du site, qui est particulièrement riche. J'ai dû coder une barre de volume générale qui contrôle plusieurs pistes sonores en même temps, gérer le changement des musiques en fonction de la zone de la carte sélectionnée, et synchroniser des bruitages spécifiques lors des interactions avec l'interface. Pour réussir à écrire toute cette logique algorithmique sans me perdre, j'ai dû faire preuve de beaucoup de résilience. Je ne compte plus les heures passées à chercher des solutions sur internet, à lire des dizaines de discussions sur des forums de développeurs, ou encore à analyser des tutoriels sur YouTube pour décortiquer le code d'autres programmeurs et comprendre comment ils avaient contourné des problèmes similaires. C'est ce travail de recherche acharné qui m'a permis d'assembler les pièces du puzzle et d'obtenir un site parfaitement fluide.</p>
+                </section>
+
+                <section class="Article-Section">
+                    <div class="Article-Titre">> LA PERSISTANCE DES DONNÉES AVEC LE LOCALSTORAGE</div>
+                    <p class="Article-Paragraphe">Au fil du développement, un nouveau problème majeur s'est présenté à moi : la persistance des données. Sur un site web traditionnel, dès que vous cliquez sur un lien pour changer de page, le navigateur efface tout et recharge une nouvelle page à partir de zéro. Cependant, dans mon univers immersif, ce comportement détruisait totalement l'expérience utilisateur. Si un visiteur avait pris le temps de sélectionner le thème rouge sur la carte et de baisser le volume de la musique parce qu'il le trouvait trop fort, il était inacceptable que ces réglages soient oubliés et que la musique lui hurle à nouveau dans les oreilles en arrivant sur la page de mes projets.</p>
+                    <p class="Article-Paragraphe">Pour contourner cette contrainte technique, j'ai étudié le fonctionnement du "localStorage". Il s'agit d'une petite mémoire intégrée directement dans le navigateur internet de l'utilisateur, qui permet aux développeurs de sauvegarder des informations spécifiques. En apprenant à manipuler cet outil avec JavaScript, j'ai réussi à créer un système de sauvegarde automatique. Désormais, chaque fois que l'utilisateur modifie le volume, choisit une nouvelle ambiance sonore, change la vidéo de fond ou sélectionne un personnage, mon code écrit ces informations dans cette petite mémoire. Ainsi, lors de la transition vers une autre page du portfolio, le site va immédiatement lire ce fichier de sauvegarde avant même d'afficher quoi que ce soit, et va réappliquer instantanément les paramètres choisis. C'est un détail technique qui ne se voit pas à l'écran, mais qui fait toute la différence entre un simple prototype d'étudiant et une application web aboutie, fluide et professionnelle.</p>
+                </section>
+
+                <section class="Article-Section">
+                    <div class="Article-Titre">> BILAN ET COMPÉTENCES ACQUISES</div>
+                    <p class="Article-Paragraphe">Aujourd'hui, lorsque je regarde ce portfolio terminé, je vois bien plus qu'une simple page web regroupant mes travaux ; j'y vois la preuve concrète de ma détermination et de mon évolution. Ce projet démontre de manière indiscutable que je suis capable de m'auto-former face à l'inconnu, de chercher des solutions pertinentes par moi-même lorsqu'un bug complexe me bloque, et surtout, d'avoir le recul nécessaire pour repenser complètement la structure de mon code afin d'en améliorer les performances globales.</p>
+                    <p class="Article-Paragraphe">Je ressors de cette expérience fondatrice avec des bases extrêmement solides en intégration web, une maîtrise approfondie des mécaniques de l'HTML et du CSS, et une très bonne compréhension de la logique algorithmique grâce à la manipulation du JavaScript. Mais l'apprentissage le plus précieux que je tire de ces semaines de travail, c'est la certitude que je suis fait pour ce métier. J'ai découvert qu'en programmation, il existe toujours une solution technique pour contourner un obstacle. Il suffit d'avoir la patience de chercher, la curiosité de comprendre le fonctionnement des technologies, et l'envie constante de s'améliorer.</p>
+                </section>
+            </div>
+
+            <div class="Document-Footer">
+                <a href="../Projets.html" class="bouton-retour-document">[<] RETOUR AUX ARCHIVES</a>
+                <span class="Page-Number">PAGE 1/1 // FIN DE FICHIER_</span>
+            </div>
+
+        </div>
+        <div class="Cale-Bas"></div>
+    </main>
+
+</body>
+</html>
