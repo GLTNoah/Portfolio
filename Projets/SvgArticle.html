@@ -3,15 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SVG Animation</title>
+    <title>Portfolio Article</title>
     <link rel="stylesheet" href="../style.css">
     <link rel="stylesheet" href="../MediaQueries.css">
     <link rel="stylesheet" href="../KeyFrames.css">
-    
     <link rel="stylesheet" href="../Projets.css"> 
-    
     <link rel="stylesheet" href="Article.css"> 
-    
+    <link rel="stylesheet" href="MediaArticle.css">
+
     <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
     <script>
         document.addEventListener('DOMContentLoaded', () => {
@@ -26,6 +25,46 @@
                     }
                 } catch (e) {}
             }
+
+            let zoomFactor = 1;
+            const root = document.documentElement;
+            
+            document.getElementById('btn-zoom-in').addEventListener('click', () => {
+                if(zoomFactor < 1.6) {
+                    zoomFactor += 0.1;
+                    root.style.setProperty('--zoom-factor', zoomFactor);
+                }
+            });
+
+            document.getElementById('btn-zoom-out').addEventListener('click', () => {
+                if(zoomFactor > 0.8) {
+                    zoomFactor -= 0.1;
+                    root.style.setProperty('--zoom-factor', zoomFactor);
+                }
+            });
+
+            let modeLecture = false;
+            document.getElementById('btn-lecture').addEventListener('click', () => {
+                modeLecture = !modeLecture;
+                if(modeLecture) {
+                    document.body.classList.add('lecture-pure');
+                    document.getElementById('btn-lecture').textContent = "[X] MODE LECTURE";
+                } else {
+                    document.body.classList.remove('lecture-pure');
+                    document.getElementById('btn-lecture').textContent = "[O] MODE LECTURE";
+                }
+            });
+
+            document.getElementById('btn-print').addEventListener('click', () => {
+                window.print();
+            });
+
+            document.getElementById('btn-top').addEventListener('click', () => {
+                document.querySelector('.Document-Wrapper').scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
         });
     </script>
 </head>
@@ -34,26 +73,88 @@
     <div class="calque-cathodique" style="visibility: visible; opacity: 0.3; animation: green-flicker 0.1s infinite;"></div>
     <video class="fond-video" src="../vidéo/resident-evil.1920x1080.mp4" autoplay muted loop></video>
 
-    <div class="Archive-Interface">
-        <header class="Archive-Header">
-            <h1>> STATUT : DÉCLASSIFIÉ  ||  AUTEUR : N. GUILLOT</h1>
-            <h2>SYS.DOSSIER // SVG_ANIMATION</h2>
-        </header>
+    <aside class="Panneau-Controles">
+        <div class="Panneau-Titre">SYS.OPTS_</div>
         
-        <div class="Archive-Content Article-Contenu-Texte">
-            <section class="Article-Section">
-                <div class="Article-Titre">> OBJECTIF DE LA MISSION</div>
-                <p class="Article-Paragraphe"></p>
-            </section>
-
-            <section class="Article-Section">
-                <div class="Article-Titre">> DÉFIS TECHNIQUES</div>
-                <p class="Article-Paragraphe"></p>
-            </section>
+        <div class="Panneau-Categorie">
+            <span class="Categorie-Titre">> AFFICHAGE</span>
+            <button id="btn-zoom-in" class="Btn-Controle">[+] ZOOM TEXTE</button>
+            <button id="btn-zoom-out" class="Btn-Controle">[-] RÉDUIRE</button>
+            <button id="btn-lecture" class="Btn-Controle">[O] MODE LECTURE</button>
         </div>
-    </div>
 
-    <a href="../Projets.html" class="bouton-retour-accueil">[<] RETOUR AUX ARCHIVES</a>
+        <div class="Panneau-Categorie">
+            <span class="Categorie-Titre">> EXPORTATION</span>
+            <button id="btn-print" class="Btn-Controle">[P] IMPRIMER</button>
+        </div>
+
+        <div class="Panneau-Categorie">
+            <span class="Categorie-Titre">> NAVIGATION</span>
+            <button id="btn-top" class="Btn-Controle">[^] HAUT DE PAGE</button>
+        </div>
+    </aside>
+
+    <main class="Document-Wrapper">
+        <div class="Document-A4">
+            
+            <header class="Document-Header">
+                <div class="En-Tete-Gauche">
+                    <span>> STATUT : DÉCLASSIFIÉ</span>
+                    <span>> AUTEUR : N. GUILLOT</span>
+                </div>
+                <div class="En-Tete-Droite">
+                    <span>SYS.DOSSIER // SVG APPRENTISSAGE</span>
+                </div>
+            </header>
+
+            <hr class="Ligne-Document">
+            
+            <div class="Document-Content">
+                <section class="Article-Section">
+                    <div class="Article-Titre">></div>
+                    <p class="Article-Paragraphe"></p>
+                    <p class="Article-Paragraphe"></p>
+                </section>
+
+                <section class="Article-Section">
+                    <div class="Article-Titre">></div>
+                    <p class="Article-Paragraphe"></p>
+                    <p class="Article-Paragraphe"></p>
+                </section>
+
+                <section class="Article-Section">
+                    <div class="Article-Titre">></div>
+                    <p class="Article-Paragraphe"></p>
+                    <p class="Article-Paragraphe"></p>
+                </section>
+
+                <section class="Article-Section">
+                    <div class="Article-Titre">></div>
+                    <p class="Article-Paragraphe"></p>
+                    <p class="Article-Paragraphe"></p>
+                </section>
+
+                <section class="Article-Section">
+                    <div class="Article-Titre">></div>
+                    <p class="Article-Paragraphe"></p>
+                    <p class="Article-Paragraphe"></p>
+                </section>
+
+                <section class="Article-Section">
+                    <div class="Article-Titre">></div>
+                    <p class="Article-Paragraphe"></p>
+                    <p class="Article-Paragraphe"></p>
+                </section>
+            </div>
+
+            <div class="Document-Footer">
+                <a href="../Projets.html" class="bouton-retour-document">[<] RETOUR AUX ARCHIVES</a>
+                <span class="Page-Number">PAGE 1/1 // FIN DE FICHIER_</span>
+            </div>
+
+        </div>
+        <div class="Cale-Bas"></div>
+    </main>
 
 </body>
 </html>
