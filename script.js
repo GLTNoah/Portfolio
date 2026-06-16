@@ -388,12 +388,16 @@ if (btnPomodoroStart) {
                     enPause = true;
                     tempsRestant = tempsPause * 60;
                     if (affichageMode) affichageMode.textContent = "MODE: PAUSE";
+                    document.querySelector('.Pomodoro-Container').classList.add('pause-mode');
+                    document.querySelector('.pomodoro-controls').classList.add('pause-mode');
                     sessionsCompletees++;
                     if (affichageSessions) affichageSessions.textContent = "Sessions complétées: " + sessionsCompletees;
                 } else {
                     enPause = false;
                     tempsRestant = tempsTravail * 60;
                     if (affichageMode) affichageMode.textContent = "MODE: TRAVAIL";
+                    document.querySelector('.Pomodoro-Container').classList.remove('pause-mode');
+                    document.querySelector('.pomodoro-controls').classList.remove('pause-mode');
                 }
                 majAffichagePomodoro();
             }
@@ -417,6 +421,8 @@ if (btnPomodoroReset) {
         enPause = false;
         tempsRestant = tempsTravail * 60;
         if (affichageMode) affichageMode.textContent = "MODE: TRAVAIL";
+        document.querySelector('.Pomodoro-Container').classList.remove('pause-mode');
+        document.querySelector('.pomodoro-controls').classList.remove('pause-mode');
         majAffichagePomodoro();
     });
 }

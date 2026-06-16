@@ -1,4 +1,27 @@
 /* =========================================
+   VARIABLES DE THEME PAUSE
+========================================= */
+:root {
+    --color-pause: #00d9ff;
+    --rgb-pause: 0, 217, 255;
+}
+
+body[data-theme="bleu"] {
+    --color-pause: #ff00aa;
+    --rgb-pause: 255, 0, 170;
+}
+
+body[data-theme="jaune"] {
+    --color-pause: #b700ff;
+    --rgb-pause: 183, 0, 255;
+}
+
+body[data-theme="rouge"] {
+    --color-pause: #ffaa00;
+    --rgb-pause: 255, 170, 0;
+}
+
+/* =========================================
    AFFICHAGE DU TIMER 
 ========================================= */
 .Pomodoro-Container {
@@ -8,17 +31,18 @@
     top: 10%;
     bottom: 10%;
     width: 45%; 
-    background: rgba(0, 15, 5, 0.9);
-    border: 2px solid #00ff41;
-    box-shadow: 0 0 20px rgba(0, 255, 65, 0.2), inset 0 0 20px rgba(0, 255, 65, 0.2);
+    background: rgba(var(--rgb-dark-panel), 0.9);
+    border: 2px solid var(--color-primary);
+    box-shadow: 0 0 20px rgba(var(--rgb-primary), 0.2), inset 0 0 20px rgba(var(--rgb-primary), 0.2);
     z-index: 3000;
     padding: 40px;
-    color: #00ff41;
+    color: var(--color-primary);
     font-family: 'VT323', monospace;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     text-align: center;
+    transition: all 0.3s ease;
 }
 
 body:has(#Btn-Pomodoro:checked) .Pomodoro-Container {
@@ -29,13 +53,13 @@ body:has(#Btn-Pomodoro:checked) .Pomodoro-Container {
 #pomodoro-mode {
     font-size: 52px;
     letter-spacing: 5px;
-    text-shadow: 0 0 10px #00ff41;
+    text-shadow: 0 0 10px var(--color-primary);
     margin-bottom: 40px;
 }
 
 #pomodoro-timer {
     font-size: 160px;
-    text-shadow: 0 0 20px #00ff41;
+    text-shadow: 0 0 20px var(--color-primary);
     margin: 20px 0 50px 0;
     line-height: 1;
 }
@@ -43,7 +67,7 @@ body:has(#Btn-Pomodoro:checked) .Pomodoro-Container {
 .pomodoro-progress-bar-container {
     width: 90%;
     height: 20px;
-    border: 2px solid #00ff41;
+    border: 2px solid var(--color-primary);
     margin-bottom: 20px;
     position: relative;
     background: rgba(0, 0, 0, 0.5);
@@ -51,9 +75,9 @@ body:has(#Btn-Pomodoro:checked) .Pomodoro-Container {
 
 #pomodoro-progress {
     height: 100%;
-    background: #00ff41;
+    background: var(--color-primary);
     width: 100%;
-    transition: width 1s linear;
+    transition: width 1s linear, background 0.3s ease;
 }
 
 #pomodoro-sessions {
@@ -79,12 +103,12 @@ body:has(#Btn-Pomodoro:checked) .pomodoro-controls {
 }
 
 .pomodoro-controls button {
-    background: #021a0a;
-    color: #00ff88;
+    background: rgba(var(--rgb-primary), 0.05);
+    color: var(--color-primary);
     font-family: 'VT323', monospace;
     font-size: 38px;
-    border: #076338 2px solid;
-    box-shadow: 0 0 5px #077642, 0 0 10px #0c5533;
+    border: rgba(var(--rgb-primary), 0.5) 2px solid;
+    box-shadow: 0 0 5px rgba(var(--rgb-primary), 0.2), 0 0 10px rgba(var(--rgb-primary), 0.1);
     padding: 15px 40px;
     width: 80%; 
     cursor: pointer;
@@ -92,39 +116,45 @@ body:has(#Btn-Pomodoro:checked) .pomodoro-controls {
 }
 
 .pomodoro-controls button:hover {
-    background: rgba(0, 255, 136, 0.15);
-    color: white;
-    box-shadow: 0 0 15px #00ff88;
+    background: rgba(var(--rgb-primary), 0.15);
+    color: var(--color-text-white);
+    box-shadow: 0 0 15px var(--color-primary);
     transform: scale(1.05);
 }
 
 /* =========================================
-   THÈME PAUSE - CYAN
+   THEME PAUSE DYNAMIQUE
 ========================================= */
 .Pomodoro-Container.pause-mode {
-    border-color: #00d9ff;
-    box-shadow: 0 0 20px rgba(0, 217, 255, 0.2), inset 0 0 20px rgba(0, 217, 255, 0.2);
-    color: #00d9ff;
+    border-color: var(--color-pause);
+    box-shadow: 0 0 20px rgba(var(--rgb-pause), 0.2), inset 0 0 20px rgba(var(--rgb-pause), 0.2);
+    color: var(--color-pause);
 }
 
 .Pomodoro-Container.pause-mode #pomodoro-mode,
 .Pomodoro-Container.pause-mode #pomodoro-timer {
-    text-shadow: 0 0 10px #00d9ff;
+    text-shadow: 0 0 10px var(--color-pause);
 }
 
-.Pomodoro-Container.pause-mode .pomodoro-progress-bar-container { border-color: #00d9ff; }
-.Pomodoro-Container.pause-mode #pomodoro-progress { background: #00d9ff; }
+.Pomodoro-Container.pause-mode .pomodoro-progress-bar-container { 
+    border-color: var(--color-pause); 
+}
+
+.Pomodoro-Container.pause-mode #pomodoro-progress { 
+    background: var(--color-pause); 
+}
 
 .pomodoro-controls.pause-mode button {
-    color: #00d9ff;
-    border-color: #0088aa;
-    box-shadow: 0 0 5px #0088aa;
+    background: rgba(var(--rgb-pause), 0.05);
+    color: var(--color-pause);
+    border-color: rgba(var(--rgb-pause), 0.5);
+    box-shadow: 0 0 5px rgba(var(--rgb-pause), 0.2);
 }
 
 .pomodoro-controls.pause-mode button:hover {
-    background: rgba(0, 217, 255, 0.15);
-    color: white;
-    box-shadow: 0 0 15px #00d9ff;
+    background: rgba(var(--rgb-pause), 0.15);
+    color: var(--color-text-white);
+    box-shadow: 0 0 15px var(--color-pause);
 }
 
 /* =========================================
@@ -136,7 +166,7 @@ body:has(#Btn-Pomodoro:checked) .pomodoro-controls {
     gap: 20px;
     width: 80%;
     margin-top: 10px;
-    border-top: 1px dashed rgba(0, 255, 65, 0.5);
+    border-top: 1px dashed rgba(var(--rgb-primary), 0.5);
     padding-top: 25px;
 }
 
@@ -149,8 +179,8 @@ body:has(#Btn-Pomodoro:checked) .pomodoro-controls {
 
 .pomodoro-settings p {
     font-size: 24px;
-    color: #00ff41;
-    text-shadow: 0 0 5px #00ff41;
+    color: var(--color-primary);
+    text-shadow: 0 0 5px var(--color-primary);
     margin: 0;
 }
 
@@ -162,7 +192,7 @@ body:has(#Btn-Pomodoro:checked) .pomodoro-controls {
 
 .settings-boutons span {
     font-size: 32px;
-    color: white;
+    color: var(--color-text-white);
     min-width: 40px;
     text-align: center;
 }
@@ -174,10 +204,10 @@ body:has(#Btn-Pomodoro:checked) .pomodoro-controls {
 }
 
 .pomodoro-controls.pause-mode .pomodoro-settings-container {
-    border-top-color: rgba(0, 217, 255, 0.5);
+    border-top-color: rgba(var(--rgb-pause), 0.5);
 }
 
 .pomodoro-controls.pause-mode .pomodoro-settings p {
-    color: #00d9ff;
-    text-shadow: 0 0 5px #00d9ff;
+    color: var(--color-pause);
+    text-shadow: 0 0 5px var(--color-pause);
 }
