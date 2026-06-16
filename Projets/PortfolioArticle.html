@@ -65,6 +65,13 @@
                     behavior: 'smooth'
                 });
             });
+
+            document.getElementById('btn-bottom').addEventListener('click', () => {
+                document.querySelector('.Document-Wrapper').scrollTo({
+                    top: document.querySelector('.Document-Wrapper').scrollHeight,                    
+                    behavior: 'smooth'
+                });
+            });
         });
     </script>
 </head>
@@ -91,6 +98,7 @@
         <div class="Panneau-Categorie">
             <span class="Categorie-Titre">> NAVIGATION</span>
             <button id="btn-top" class="Btn-Controle">[^] HAUT DE PAGE</button>
+            <button id="btn-bottom" class="Btn-Controle">[v] BAS DE PAGE</button>
         </div>
     </aside>
 

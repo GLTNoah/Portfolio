@@ -10,7 +10,6 @@
     <link rel="stylesheet" href="../Projets.css"> 
     <link rel="stylesheet" href="Article.css"> 
     <link rel="stylesheet" href="MediaArticle.css">
-
     <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
     <script>
         document.addEventListener('DOMContentLoaded', () => {
@@ -65,6 +64,13 @@
                     behavior: 'smooth'
                 });
             });
+
+            document.getElementById('btn-bottom').addEventListener('click', () => {
+                document.querySelector('.Document-Wrapper').scrollTo({
+                    top: document.querySelector('.Document-Wrapper').scrollHeight,                    
+                    behavior: 'smooth'
+                });
+            });
         });
     </script>
 </head>
@@ -91,6 +97,7 @@
         <div class="Panneau-Categorie">
             <span class="Categorie-Titre">> NAVIGATION</span>
             <button id="btn-top" class="Btn-Controle">[^] HAUT DE PAGE</button>
+            <button id="btn-bottom" class="Btn-Controle">[v] BAS DE PAGE</button>
         </div>
     </aside>
 
@@ -111,39 +118,28 @@
             
             <div class="Document-Content">
                 <section class="Article-Section">
-                    <div class="Article-Titre">></div>
-                    <p class="Article-Paragraphe"></p>
-                    <p class="Article-Paragraphe"></p>
+                    <div class="Article-Titre">> L'ORIGINE : D'UN PROJET SCOLAIRE À UNE INTÉGRATION COMPLÈTE</div>
+                    <p class="Article-Paragraphe">À l'origine, la création de ce chronomètre Pomodoro était un exercice donné dans le cadre de ma formation. L'objectif initial était relativement classique : concevoir une application web capable de gérer des cycles de travail et de pause pour améliorer la productivité. Cependant, une fois le code de base fonctionnel, j'ai pris la décision de ne pas le laisser de côté comme un simple exercice d'école. J'ai voulu pousser la démarche plus loin en l'intégrant directement au cœur de mon portfolio interactif. Cette démarche m'a permis de transformer un projet d'apprentissage standard en une fonctionnalité concrète et utile, tout en me forçant à adapter mon code pour qu'il cohabite parfaitement avec l'environnement complexe de mon terminal des années 90.</p>
                 </section>
 
                 <section class="Article-Section">
-                    <div class="Article-Titre">></div>
-                    <p class="Article-Paragraphe"></p>
-                    <p class="Article-Paragraphe"></p>
+                    <div class="Article-Titre">> L'ADAPTATION GRAPHIQUE ET L'INTERFACE UNIQUE</div>
+                    <p class="Article-Paragraphe">L'intégration de ce chronomètre nécessitait une refonte visuelle totale. La plupart des applications Pomodoro que l'on trouve sur internet utilisent des designs très doux, souvent accompagnés de dessins de tomates pour rappeler le minuteur de cuisine original. Pour mon portfolio, il fallait casser ces codes. J'ai donc entièrement repensé l'interface en utilisant le CSS pour qu'elle s'aligne sur la direction artistique de mon univers. J'ai opté pour une typographie brute de type console, des compteurs numériques imposants et des boutons de contrôle minimalistes. Le défi était de garder l'outil parfaitement lisible et intuitif à utiliser, tout en conservant cette atmosphère sombre, militaire et confidentielle propre au reste de mon site.</p>
                 </section>
 
                 <section class="Article-Section">
-                    <div class="Article-Titre">></div>
-                    <p class="Article-Paragraphe"></p>
-                    <p class="Article-Paragraphe"></p>
+                    <div class="Article-Titre">> LA LOGIQUE ALGORITHMIQUE ET LE JAVASCRIPT</div>
+                    <p class="Article-Paragraphe">Le développement du mécanisme interne du chronomètre a été un excellent entraînement pour renforcer ma logique de programmation en JavaScript. Créer un minuteur demande une grande rigueur dans la manipulation du temps. J'ai dû apprendre à utiliser des fonctions spécifiques comme les intervalles pour demander au navigateur de déduire une seconde de manière régulière et précise. Mais la complexité ne s'arrête pas au simple décompte : il fallait coder toute la logique de transition. Le programme doit savoir exactement quand le temps de travail de vingt-cinq minutes est écoulé, arrêter le compteur, basculer automatiquement sur le temps de pause de cinq minutes, et modifier l'affichage pour prévenir l'utilisateur. La gestion des boutons pour mettre en pause, reprendre ou réinitialiser le cycle complet m'a demandé de structurer mon code proprement pour éviter les bugs.</p>
                 </section>
 
                 <section class="Article-Section">
-                    <div class="Article-Titre">></div>
-                    <p class="Article-Paragraphe"></p>
-                    <p class="Article-Paragraphe"></p>
+                    <div class="Article-Titre">> LES DÉFIS DE L'INTÉGRATION DANS L'ÉCOSYSTÈME</div>
+                    <p class="Article-Paragraphe">Insérer ce projet scolaire dans le portfolio existant a soulevé de nouveaux défis techniques très intéressants. Sur une page web isolée, un minuteur fonctionne sans aucune contrainte extérieure. Mais ici, le chronomètre devait tourner en même temps que la vidéo d'arrière-plan, la musique d'ambiance et les filtres visuels cathodiques de mon interface. J'ai dû veiller à ce que l'exécution de mon code JavaScript n'alourdisse pas la page et ne provoque pas de ralentissements. J'ai également dû m'assurer que le script du Pomodoro n'entre pas en conflit avec les autres scripts du site, comme celui de la sauvegarde des thèmes de couleurs ou du panneau de contrôle latéral. C'était un véritable exercice d'architecture logicielle à mon échelle.</p>
                 </section>
 
                 <section class="Article-Section">
-                    <div class="Article-Titre">></div>
-                    <p class="Article-Paragraphe"></p>
-                    <p class="Article-Paragraphe"></p>
-                </section>
-
-                <section class="Article-Section">
-                    <div class="Article-Titre">></div>
-                    <p class="Article-Paragraphe"></p>
-                    <p class="Article-Paragraphe"></p>
+                    <div class="Article-Titre">> BILAN DE L'OPÉRATION</div>
+                    <p class="Article-Paragraphe">Ce qui ne devait être qu'un exercice d'école s'est transformé en une véritable leçon de développement web global. J'ai pu constater la différence entre coder une petite application isolée et l'intégrer dans un environnement de production plus large. J'ai consolidé mes acquis sur la manipulation du temps en JavaScript, l'utilisation des événements liés aux boutons, et l'adaptation d'un design strict via le CSS. Au final, cette démarche illustre parfaitement ma vision de l'apprentissage : ne jamais se contenter du strict minimum, chercher constamment à réutiliser ses connaissances, et transformer des exercices théoriques en outils pratiques et personnalisés.</p>
                 </section>
             </div>
 
