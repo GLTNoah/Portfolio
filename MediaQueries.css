@@ -80,10 +80,11 @@
         top: 31.5vh; 
     }
 
-    #emplacement-jeu:focus + .Icone-Examiner { 
+    #emplacement-jeu:focus + .Icone-Examiner,
+    #emplacement-jeu + .Icone-Examiner:hover { 
         top: 60vh;   
         height: 4vh; 
-       width: 12vw; 
+        width: 12vw; 
     }
 }
 
@@ -179,7 +180,8 @@
     text-decoration: none;
     }
 
-    #emplacement-jeu:focus + .Icone-Examiner { 
+    #emplacement-jeu:focus + .Icone-Examiner,
+    #emplacement-jeu + .Icone-Examiner:hover { 
         top: 64vh;   
         width: 16vw; 
     }
