@@ -40,32 +40,8 @@ const dialoguesPersonnages = {
 };
 
 /* =========================================
-   INITIALISATION
+   INITIALISATION (THÈMES ET AUDIO)
 ========================================= */
-function appliquerVolumeInitial() {
-    if (barreVolume) {
-        const volumeSauvegarde = localStorage.getItem('volume-survie');
-        if (volumeSauvegarde !== null) {
-            barreVolume.value = volumeSauvegarde;
-        }
-        
-        const volumeDemarrage = parseFloat(barreVolume.value);
-        if (myaudio) myaudio.volume = volumeDemarrage * 0.2;
-        if (pomodoroSound) pomodoroSound.volume = volumeDemarrage * 0.4;
-        if (audioFond) audioFond.volume = volumeDemarrage;
-        if (bgMusic) bgMusic.volume = volumeDemarrage;
-        
-        if (iconeSon) {
-            if (volumeDemarrage === 0) {
-                iconeSon.src = "./Image/sound_off.png";
-                iconeSon.alt = "Activer le son";
-            } else {
-                iconeSon.src = "./Image/sound_on.png";
-                iconeSon.alt = "Couper le son";
-            }
-        }
-    }
-}
 
 function appliquerThemeSauvegarde() {
     const sauvegarde = localStorage.getItem('donnees-survie');
@@ -82,16 +58,53 @@ function appliquerThemeSauvegarde() {
         if (dialogueJill) dialogueJill.textContent = donnees.dialogue;
         
         document.addEventListener('click', () => {
-            if (bgMusic && bgMusic.paused) {
+            const etatPause = localStorage.getItem('music-pause-survie');
+            if (bgMusic && bgMusic.paused && etatPause !== 'true') {
                 bgMusic.play().catch(() => {});
             }
         }, { once: true });
     }
 }
 
+function appliquerVolumeInitial() {
+    if (barreVolume) {
+        const volumeSauvegarde = localStorage.getItem('volume-survie');
+        if (volumeSauvegarde !== null) {
+            barreVolume.value = volumeSauvegarde;
+        }
+        
+        const volumeDemarrage = parseFloat(barreVolume.value);
+        if (myaudio) myaudio.volume = volumeDemarrage * 0.2;
+        if (pomodoroSound) pomodoroSound.volume = volumeDemarrage * 0.4;
+        if (audioFond) audioFond.volume = volumeDemarrage;
+        if (bgMusic) bgMusic.volume = volumeDemarrage;
+        
+        const etatPause = localStorage.getItem('music-pause-survie');
+        let audioActif = bgMusic && bgMusic.getAttribute('src') ? bgMusic : audioFond;
+        
+        if (etatPause === 'true') {
+            if (audioActif) audioActif.pause();
+            if (iconeSon) {
+                iconeSon.src = "./Image/sound_off.png";
+                iconeSon.alt = "Activer le son";
+            }
+        } else {
+            if (iconeSon) {
+                if (volumeDemarrage === 0) {
+                    iconeSon.src = "./Image/sound_off.png";
+                    iconeSon.alt = "Activer le son";
+                } else {
+                    iconeSon.src = "./Image/sound_on.png";
+                    iconeSon.alt = "Couper le son";
+                }
+            }
+        }
+    }
+}
+
 document.addEventListener('DOMContentLoaded', () => {
-    appliquerVolumeInitial();
     appliquerThemeSauvegarde();
+    appliquerVolumeInitial(); 
 });
 
 /* =========================================
@@ -131,10 +144,12 @@ if (btnSon) {
                 audioActif.play();
                 iconeSon.src = "./Image/sound_on.png";
                 iconeSon.alt = "Couper le son";
+                localStorage.setItem('music-pause-survie', 'false');
             } else {
                 audioActif.pause();
                 iconeSon.src = "./Image/sound_off.png";
                 iconeSon.alt = "Activer le son";
+                localStorage.setItem('music-pause-survie', 'true');
             }
         }
     });
@@ -240,7 +255,12 @@ if (btnActiverTheme) {
             if (bgMusic) {
                 bgMusic.src = zoneSelectionnee.audio;
                 bgMusic.volume = barreVolume ? parseFloat(barreVolume.value) : 0.05;
-                bgMusic.play();
+                
+                // Maintien de l'état de pause lors du changement de thème
+                const etatPause = localStorage.getItem('music-pause-survie');
+                if (etatPause !== 'true') {
+                    bgMusic.play();
+                }
             }
             
             if (titreMusiqueActuelle) titreMusiqueActuelle.textContent = formaterTitreMusique(zoneSelectionnee.audio);
@@ -268,8 +288,14 @@ if (btnActiverTheme) {
             if (dialogueJill) dialogueJill.textContent = themeActuel.dialogue;
 
             if (iconeSon && barreVolume && parseFloat(barreVolume.value) > 0) {
-                iconeSon.src = "./Image/sound_on.png";
-                iconeSon.alt = "Couper le son";
+                const etatPause = localStorage.getItem('music-pause-survie');
+                if (etatPause !== 'true') {
+                    iconeSon.src = "./Image/sound_on.png";
+                    iconeSon.alt = "Couper le son";
+                } else {
+                    iconeSon.src = "./Image/sound_off.png";
+                    iconeSon.alt = "Activer le son";
+                }
             }
         }
     });
