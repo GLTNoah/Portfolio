@@ -453,4 +453,22 @@ if (btnPomodoroReset) {
     });
 }
 
+/* =========================================
+   POP UP D'INFORMATION
+========================================= */
+
+const dialogueTheme = document.getElementById('dialogue-theme');
+
+const typeNavigation = performance.getEntriesByType('navigation')[0]?.type;
+
+
+if (typeNavigation === 'reload' || !sessionStorage.getItem('popup-vue')) {
+    dialogueTheme.showModal();
+    sessionStorage.setItem('popup-vue', 'oui');
+}
+
+document.getElementById('dialogue-close').addEventListener('click', () => dialogueTheme.close());
+
+dialogueTheme.addEventListener('cancel', (e) => e.preventDefault());
+
 majAffichagePomodoro();

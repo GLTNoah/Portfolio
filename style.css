@@ -1280,3 +1280,85 @@ body:has(#Btn-Carte:checked) .Panneau-Theme-Zone {
     cursor: pointer;
     border-radius: 0;
 }
+
+/* =========================================
+   POP UP D'INFORMATION
+========================================= */
+
+.dialogue-theme {
+    border: 2px solid var(--color-primary);
+    outline: 1px solid rgba(var(--rgb-primary), 0.3);
+    outline-offset: 4px;
+    padding: 0;
+    margin: auto;
+    width: min(92vw, 560px);
+    max-height: 80vh;
+    background: rgba(var(--rgb-dark-panel), 0.95);
+    box-shadow:
+        0 0 15px rgba(var(--rgb-primary), 0.2),
+        inset 0 0 10px rgba(var(--rgb-primary), 0.2);
+    z-index: 6000;
+    font-family: "VT323", monospace;
+    color: var(--color-text-white);
+}
+
+.dialogue-theme[open] {
+    animation: terminal-boot 0.2s ease-out forwards;
+}
+
+.dialogue-theme::backdrop {
+    background: rgba(var(--rgb-black), 0.75);
+}
+
+.dialogue-header {
+    display: flex;
+    justify-content: space-between;
+    background: rgba(var(--rgb-primary), 0.2);
+    border-bottom: 1px solid var(--color-primary);
+    padding: 5px 15px;
+    color: var(--color-primary);
+    font-size: 18px;
+    letter-spacing: 1px;
+}
+
+.dialogue-statut {
+    animation: pulse 1.5s infinite;
+}
+
+.dialogue-content {
+    padding: 25px 30px;
+    display: flex;
+    align-items: center;
+}
+
+.dialogue-message {
+    font-size: 22px;
+    color: var(--color-text-jill);
+    letter-spacing: 1px;
+    line-height: 1.4;
+    text-shadow: 1px 1px 0px var(--color-black);
+    white-space: pre-line;
+}
+
+.dialogue-close {
+    display: block;
+    margin: 0 20px 20px auto;
+    background: rgba(var(--rgb-black), 0.8);
+    color: var(--color-primary);
+    font-family: "VT323", monospace;
+    font-size: 20px;
+    border: 1px solid var(--color-primary);
+    padding: 6px 16px;
+    cursor: pointer;
+    letter-spacing: 2px;
+    text-shadow: 0 0 5px var(--color-primary);
+    transition: all 0.2s ease-out;
+}
+
+.dialogue-close:hover {
+    background: var(--color-primary);
+    color: var(--color-black);
+    box-shadow: 0 0 20px rgba(var(--rgb-primary), 0.6);
+    text-shadow: none;
+    transform: scale(1.05);
+}
