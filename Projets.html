@@ -9,21 +9,6 @@
     <link rel="stylesheet" href="KeyFrames.css">
     <link rel="stylesheet" href="Projets.css">
     <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const donneesSauvegardees = localStorage.getItem('donnees-survie');
-            if (donneesSauvegardees) {
-                try {
-                    const data = JSON.parse(donneesSauvegardees);
-                    if (data.theme) document.body.dataset.theme = data.theme;
-                    if (data.video) {
-                        const fondVideo = document.querySelector('.fond-video');
-                        if (fondVideo) fondVideo.src = data.video;
-                    }
-                } catch (e) {}
-            }
-        });
-    </script>
 </head>
 <body>
     <input type="radio" name="projet" id="projet-1" autocomplete="off" style="display: none;">
@@ -31,7 +16,7 @@
     <input type="radio" name="projet" id="projet-3" autocomplete="off" style="display: none;">
 
     <div class="calque-cathodique" style="visibility: visible; opacity: 0.3; animation: green-flicker 0.1s infinite;"></div>
-    <video class="fond-video" src="./vidéo/resident-evil.1920x1080.mp4" autoplay muted loop></video>
+    <video class="fond-video" src="./vidéo/resident-evil.1920x1080.mp4" autoplay muted loop playsinline></video>
 
     <div class="Archive-Interface">
         <header class="Archive-Header">
@@ -41,7 +26,7 @@
         
         <div class="Archive-Content">
             <div class="Grille-Projets">
-                <label for="projet-1" class="carte-projet">
+                <label for="projet-1" class="carte-projet" tabindex="0">
                     <div class="carte-header">
                         <span>FICHIER_01</span>
                         <span>[ EN COURS ]</span>
@@ -50,7 +35,7 @@
                     <div class="carte-tech">[ HTML | CSS | JS | SVG ]</div>
                 </label>
 
-                <label for="projet-2" class="carte-projet">
+                <label for="projet-2" class="carte-projet" tabindex="0">
                     <div class="carte-header">
                         <span>FICHIER_02</span>
                         <span>[ ARCHIVÉ ]</span>
@@ -59,7 +44,7 @@
                     <div class="carte-tech">[ Python | CSS | JS ]</div>
                 </label>
 
-                <label for="projet-3" class="carte-projet">
+                <label for="projet-3" class="carte-projet" tabindex="0">
                     <div class="carte-header">
                         <span>FICHIER_03</span>
                         <span>[ EN COURS ]</span>
@@ -80,7 +65,7 @@
                     <div class="Detail-Contenu" id="detail-1">
                         <div class="detail-titre">> PORTFOLIO TERMINAL</div>
                         <div class="carte-tech" style="margin-bottom: 20px;">TECHNOLOGIES DÉTECTÉES : HTML | CSS | JS | SVG</div>
-                        <img class="detail-image" src="./Image/PreviewGrace.png" alt="Aperçu du projet">
+                        <img class="detail-image" src="./Image/PreviewGrace.png" alt="Aperçu du projet" decoding="async">
                         <div class="detail-section">
                             <h3>> RAPPORT DE MISSION</h3>
                             <p>Interface web immersive inspirée des terminaux informatiques de la fin des années 90 et de l'univers Resident Evil. Utilisation de grilles interactives, d'animations CSS (effets CRT) et de manipulation audio/vidéo en JS.</p>
@@ -91,7 +76,7 @@
                     <div class="Detail-Contenu" id="detail-2">
                         <div class="detail-titre">> POMODORO</div>
                         <div class="carte-tech" style="margin-bottom: 20px;">TECHNOLOGIES DÉTECTÉES : Python | CSS | JS</div>
-                        <img class="detail-image" src="./Image/Pomodoro.png" alt="Aperçu du projet">
+                        <img class="detail-image" src="./Image/Pomodoro.png" alt="Aperçu du projet" decoding="async">
                         <div class="detail-section">
                             <h3>> RAPPORT DE MISSION</h3>
                             <p>Application de type Pomodoro pour la gestion du temps et l'augmentation de la productivité. Implémentation d'une interface utilisateur intuitive avec des fonctionnalités de suivi des tâches et de gestion des sessions de travail.</p>
@@ -102,7 +87,7 @@
                     <div class="Detail-Contenu" id="detail-3">
                         <div class="detail-titre">> APPRENTISSAGE SVG</div>
                         <div class="carte-tech" style="margin-bottom: 20px;">TECHNOLOGIES DÉTECTÉES : SVG | CSS | JS</div>
-                        <img class="detail-image" src="./svg/Carte-RE.svg" alt="Aperçu du projet">
+                        <img class="detail-image" src="./svg/Carte-RE.svg" alt="Aperçu du projet" decoding="async" loading="lazy">
                         <div class="detail-section">
                             <h3>> RAPPORT DE MISSION</h3>
                             <p>Exploration et maîtrise des capacités de l'élément SVG pour créer des graphismes vectoriels interactifs. Implémentation de animations et d'effets visuels dans un contexte pédagogique.</p>
@@ -116,5 +101,112 @@
     </div>
 
     <a href="index.html" class="bouton-retour-accueil">[<] RETOUR À L'ACCUEIL</a>
+
+    <audio id="son-ui" src="./son/Son-inventaire.mp3" preload="auto"></audio>
+    <audio id="musique-archive" src="./son/The-City-of-Ruin.mp3" loop preload="metadata"></audio>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            /* =========================================
+               VARIABLES GLOBALES (PROJETS)
+            ========================================= */
+            const fondVideo = document.querySelector('.fond-video');
+            const sonUi = document.getElementById('son-ui');
+            const musiqueArchive = document.getElementById('musique-archive');
+            const cartesProjet = Array.from(document.querySelectorAll('.carte-projet'));
+            const radiosProjet = Array.from(document.querySelectorAll('input[name="projet"]'));
+
+            /* =========================================
+               INITIALISATION THÈME & AUDIO SAUVEGARDÉS
+            ========================================= */
+            const volumeSauvegarde = parseFloat(localStorage.getItem('volume-survie') ?? '0.05');
+            const etatPause = localStorage.getItem('music-pause-survie');
+
+            if (sonUi) sonUi.volume = Math.min(1, volumeSauvegarde * 0.25);
+            if (musiqueArchive) musiqueArchive.volume = volumeSauvegarde;
+
+            const donneesSauvegardees = localStorage.getItem('donnees-survie');
+            if (donneesSauvegardees) {
+                try {
+                    const data = JSON.parse(donneesSauvegardees);
+                    if (data.theme) document.body.dataset.theme = data.theme;
+                    if (data.video && fondVideo) fondVideo.src = data.video;
+                    if (data.audio && musiqueArchive) musiqueArchive.src = data.audio;
+                } catch (e) {}
+            }
+
+            if (musiqueArchive && etatPause !== 'true' && volumeSauvegarde > 0) {
+                musiqueArchive.play().catch(() => {
+                    document.addEventListener('click', () => {
+                        if (musiqueArchive.paused && localStorage.getItem('music-pause-survie') !== 'true') {
+                            musiqueArchive.play().catch(() => {});
+                        }
+                    }, { once: true });
+                });
+            }
+
+            /* =========================================
+               INTERACTIONS SONORES DES DOSSIERS
+            ========================================= */
+            function jouerSonCourt() {
+                if (!sonUi) return;
+                sonUi.currentTime = 0;
+                sonUi.play().catch(() => {});
+            }
+
+            cartesProjet.forEach((carte, index) => {
+                carte.addEventListener('mouseenter', jouerSonCourt);
+                carte.addEventListener('keydown', (e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        radiosProjet[index].checked = true;
+                        jouerSonCourt();
+                    }
+                });
+            });
+
+            /* =========================================
+               NAVIGATION CLAVIER (ÉCHAP & FLÈCHES)
+            ========================================= */
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape') {
+                    const projetActif = radiosProjet.find(r => r.checked);
+                    if (projetActif) {
+                        projetActif.checked = false;
+                        jouerSonCourt();
+                    } else {
+                        window.location.href = 'index.html';
+                    }
+                    return;
+                }
+
+                if (e.key === 'ArrowDown' || e.key === 'ArrowUp') {
+                    e.preventDefault();
+                    const currentIndex = radiosProjet.findIndex(r => r.checked);
+                    let nextIndex = 0;
+                    if (currentIndex !== -1) {
+                        nextIndex = e.key === 'ArrowDown'
+                            ? (currentIndex + 1) % radiosProjet.length
+                            : (currentIndex - 1 + radiosProjet.length) % radiosProjet.length;
+                    }
+                    radiosProjet[nextIndex].checked = true;
+                    cartesProjet[nextIndex].focus();
+                    jouerSonCourt();
+                }
+            });
+
+            /* =========================================
+               OPTIMISATION VIDÉO EN ARRIÈRE-PLAN
+            ========================================= */
+            document.addEventListener('visibilitychange', () => {
+                if (!fondVideo) return;
+                if (document.hidden) {
+                    fondVideo.pause();
+                } else {
+                    fondVideo.play().catch(() => {});
+                }
+            });
+        });
+    </script>
 </body>
 </html>
