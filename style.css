@@ -1363,7 +1363,11 @@
         transform: scale(1.05);
     }
 
-    html,
+/* =========================================
+   OPTIMISATIONS RENDU & ACCÉLÉRATION GPU
+========================================= */
+
+html,
 body {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -1386,6 +1390,10 @@ body::before,
     will-change: transform;
 }
 
+/* =========================================
+   CONFORT LECTURE & SCROLLBAR (CV / VEILLE)
+========================================= */
+
 .CV-Agrandi,
 .Veille-Agrandi {
     scroll-behavior: smooth;
@@ -1394,6 +1402,10 @@ body::before,
     user-select: text;
     -webkit-user-select: text;
 }
+
+/* =========================================
+   MAINTIEN DES DESCRIPTIONS & MENUS D'OBJETS
+========================================= */
 
 .Haut-Inventaire:has(#emplacement-projet:focus) .Description-Projet,
 .Haut-Inventaire:has(#emplacement-projet + .Icone-Examiner:hover) .Description-Projet,
@@ -1427,6 +1439,10 @@ body::before,
     top: 75%;
     left: -8%;
 }
+
+/* =========================================
+   COMPATIBILITÉ CARTE & VOLUME MULTI-NAVIGATEURS
+========================================= */
 
 .Conteneur-Carte .zone-carte.zone-active + .texte-carte {
     opacity: 1;

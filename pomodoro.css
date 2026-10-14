@@ -1,6 +1,7 @@
 /* =========================================
-   VARIABLES DE THEME PAUSE
+   VARIABLES DE THÈME PAUSE
 ========================================= */
+
 :root {
     --color-pause: #00d9ff;
     --rgb-pause: 0, 217, 255;
@@ -22,18 +23,28 @@ body[data-theme="rouge"] {
 }
 
 /* =========================================
-   AFFICHAGE DU TIMER 
+   AFFICHAGE DU TIMER (TERMINAL BIOMÉTRIQUE)
 ========================================= */
+
 .Pomodoro-Container {
     display: none;
     position: absolute;
     left: 5%;
     top: 10%;
     bottom: 10%;
-    width: 45%; 
-    background: rgba(var(--rgb-dark-panel), 0.9);
+    width: 55%;
+    background-color: rgba(var(--rgb-dark-panel), 0.92);
+    background-image:
+        radial-gradient(circle at 50% 50%, rgba(var(--rgb-primary), 0.1) 0%, transparent 70%),
+        linear-gradient(rgba(var(--rgb-primary), 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(var(--rgb-primary), 0.03) 1px, transparent 1px);
+    background-size: 100% 100%, 30px 30px, 30px 30px;
     border: 2px solid var(--color-primary);
-    box-shadow: 0 0 20px rgba(var(--rgb-primary), 0.2), inset 0 0 20px rgba(var(--rgb-primary), 0.2);
+    outline: 1px solid rgba(var(--rgb-primary), 0.25);
+    outline-offset: 5px;
+    box-shadow:
+        0 0 25px rgba(var(--rgb-primary), 0.2),
+        inset 0 0 40px rgba(var(--rgb-black), 0.85);
     z-index: 3000;
     padding: 40px;
     color: var(--color-primary);
@@ -42,172 +53,490 @@ body[data-theme="rouge"] {
     align-items: center;
     justify-content: center;
     text-align: center;
-    transition: all 0.3s ease;
+    overflow: hidden;
+    transform: translateZ(0);
+    backface-visibility: hidden;
+    transition:
+        border-color 0.3s ease,
+        box-shadow 0.3s ease,
+        color 0.3s ease;
+}
+
+.Pomodoro-Container::before {
+    content: "> SYS.CHRONO // UMBRELLA_CORP [TERMINAL_04]";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    padding: 10px 22px;
+    background: rgba(var(--rgb-primary), 0.15);
+    border-bottom: 1px solid var(--color-primary);
+    font-size: 18px;
+    letter-spacing: 3px;
+    text-align: left;
+    color: var(--color-primary);
+    text-shadow: 0 0 5px rgba(var(--rgb-primary), 0.5);
+}
+
+.Pomodoro-Container::after {
+    content: "[ FREQ: 60.0Hz // BIOMETRIC_SYNC: OK ]";
+    position: absolute;
+    bottom: 16px;
+    left: 25px;
+    right: 25px;
+    padding-top: 10px;
+    border-top: 1px dashed rgba(var(--rgb-primary), 0.35);
+    font-size: 16px;
+    letter-spacing: 3px;
+    text-align: right;
+    color: var(--color-primary);
+    opacity: 0.65;
 }
 
 body:has(#Btn-Pomodoro:checked) .Pomodoro-Container {
     display: flex;
-    animation: glitch-apparition 1.3s linear forwards;
+    animation: terminal-boot 0.2s ease-out forwards;
 }
 
+/* =========================================
+   CADRAN DIGITAL & JAUGE DE PROGRESSION
+========================================= */
+
 #pomodoro-mode {
-    font-size: 52px;
-    letter-spacing: 5px;
-    text-shadow: 0 0 10px var(--color-primary);
-    margin-bottom: 40px;
+    order: 1;
+    font-size: 26px;
+    letter-spacing: 6px;
+    text-transform: uppercase;
+    color: var(--color-text-white);
+    background: rgba(var(--rgb-primary), 0.14);
+    border: 1px solid var(--color-primary);
+    box-shadow: 0 0 12px rgba(var(--rgb-primary), 0.25);
+    padding: 6px 28px;
+    margin-bottom: 22px;
+    text-shadow: 0 0 8px var(--color-primary);
 }
 
 #pomodoro-timer {
-    font-size: 160px;
-    text-shadow: 0 0 20px var(--color-primary);
-    margin: 20px 0 50px 0;
+    order: 2;
+    position: relative;
+    font-size: clamp(90px, 11vw, 155px);
+    font-variant-numeric: tabular-nums;
+    letter-spacing: 10px;
     line-height: 1;
+    color: var(--color-text-white);
+    text-shadow:
+        0 0 12px var(--color-primary),
+        0 0 30px rgba(var(--rgb-primary), 0.65);
+    padding: 32px 55px;
+    margin: 0 0 28px 0;
+    background:
+        linear-gradient(to right, var(--color-primary) 3px, transparent 3px) 0 0,
+        linear-gradient(to bottom, var(--color-primary) 3px, transparent 3px) 0 0,
+        linear-gradient(to left, var(--color-primary) 3px, transparent 3px) 100% 0,
+        linear-gradient(to bottom, var(--color-primary) 3px, transparent 3px) 100% 0,
+        linear-gradient(to right, var(--color-primary) 3px, transparent 3px) 0 100%,
+        linear-gradient(to top, var(--color-primary) 3px, transparent 3px) 0 100%,
+        linear-gradient(to left, var(--color-primary) 3px, transparent 3px) 100% 100%,
+        linear-gradient(to top, var(--color-primary) 3px, transparent 3px) 100% 100%;
+    background-repeat: no-repeat;
+    background-size: 20px 20px;
+    background-color: rgba(var(--rgb-black), 0.6);
+    border: 1px solid rgba(var(--rgb-primary), 0.2);
+    box-shadow:
+        inset 0 0 35px rgba(var(--rgb-black), 0.9),
+        0 0 20px rgba(var(--rgb-primary), 0.1);
 }
 
 .pomodoro-progress-bar-container {
-    width: 90%;
-    height: 20px;
+    order: 3;
+    width: 80%;
+    height: 22px;
     border: 2px solid var(--color-primary);
-    margin-bottom: 20px;
+    padding: 3px;
+    margin-bottom: 22px;
     position: relative;
-    background: rgba(0, 0, 0, 0.5);
+    background: rgba(var(--rgb-black), 0.85);
+    box-shadow:
+        0 0 15px rgba(var(--rgb-primary), 0.2),
+        inset 0 0 10px rgba(var(--rgb-black), 0.95);
 }
 
 #pomodoro-progress {
     height: 100%;
-    background: var(--color-primary);
     width: 100%;
-    transition: width 1s linear, background 0.3s ease;
+    background-color: var(--color-primary);
+    background-image: repeating-linear-gradient(
+        90deg,
+        transparent,
+        transparent 12px,
+        rgba(var(--rgb-black), 0.55) 12px,
+        rgba(var(--rgb-black), 0.55) 16px
+    );
+    box-shadow: 0 0 10px var(--color-primary);
+    transition: width 0.3s linear, background-color 0.3s ease;
 }
 
 #pomodoro-sessions {
-    font-size: 28px;
-    opacity: 0.8;
+    order: 4;
+    font-size: 20px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--color-text-white);
+    background: rgba(var(--rgb-primary), 0.08);
+    border: 1px dashed rgba(var(--rgb-primary), 0.5);
+    padding: 6px 22px;
 }
 
 /* =========================================
-   CONTRÔLES DU POMODORO 
+   CONTRÔLES DU POMODORO (CONSOLE LATÉRALE)
 ========================================= */
+
 .pomodoro-controls {
     display: none;
-    flex-direction: column;
-    align-items: center;
-    gap: 30px;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
     width: 100%;
-    margin-top: 100px;
+    padding: 20px 22px;
+    margin-top: 60px;
+    position: relative;
+}
+
+.pomodoro-controls::before {
+    content: "> COMMANDES OPÉRATIONNELLES";
+    grid-column: 1 / -1;
+    font-family: 'VT323', monospace;
+    font-size: 16px;
+    letter-spacing: 2px;
+    color: rgba(var(--rgb-white), 0.65);
+    border-bottom: 1px solid rgba(var(--rgb-white), 0.15);
+    padding-bottom: 6px;
+    margin-bottom: 4px;
+}
+
+.pomodoro-controls::after {
+    content: "MODULE CHRONO\A\ADispositif tactique permettant de séquencer les phases de concentration et de récupération.";
+    white-space: pre-wrap;
+    grid-column: 1 / -1;
+    margin-top: 18px;
+    padding: 14px 16px;
+    background: rgba(var(--rgb-black), 0.55);
+    border: 1px solid rgba(var(--rgb-white), 0.08);
+    border-left: 3px solid var(--color-primary);
+    font-family: "Cinzel", serif;
+    font-size: 13px;
+    line-height: 1.5;
+    color: rgba(var(--rgb-white), 0.85);
+    text-shadow: 1px 1px 2px rgba(var(--rgb-black), 0.8);
 }
 
 body:has(#Btn-Pomodoro:checked) .pomodoro-controls {
-    display: flex;
-    animation: glitch-apparition 0.5s ease forwards;
+    display: grid;
+    animation: glitch-apparition 0.4s ease forwards;
 }
 
-.pomodoro-controls button {
-    background: rgba(var(--rgb-primary), 0.05);
-    color: var(--color-primary);
+#pomodoro-start {
+    grid-column: 1 / -1;
+    position: relative;
+    background:
+        linear-gradient(135deg, rgba(var(--rgb-primary), 0.2) 0%, rgba(var(--rgb-dark-panel), 0.9) 100%);
+    color: var(--color-text-white);
     font-family: 'VT323', monospace;
-    font-size: 38px;
-    border: rgba(var(--rgb-primary), 0.5) 2px solid;
-    box-shadow: 0 0 5px rgba(var(--rgb-primary), 0.2), 0 0 10px rgba(var(--rgb-primary), 0.1);
-    padding: 15px 40px;
-    width: 80%; 
+    font-size: 28px;
+    letter-spacing: 5px;
+    border: 1px solid var(--color-primary);
+    border-left: 4px solid var(--color-primary);
+    box-shadow:
+        0 0 15px rgba(var(--rgb-primary), 0.2),
+        inset 0 0 15px rgba(var(--rgb-primary), 0.12);
+    padding: 14px 20px;
     cursor: pointer;
-    transition: all 0.2s;
+    text-align: center;
+    text-shadow: 0 0 8px var(--color-primary);
+    white-space: nowrap;
+    transition:
+        transform 0.15s ease,
+        background-color 0.15s ease,
+        color 0.15s ease,
+        box-shadow 0.15s ease;
 }
 
-.pomodoro-controls button:hover {
+#pomodoro-start:hover {
+    background: var(--color-primary);
+    color: var(--color-black);
+    text-shadow: none;
+    box-shadow: 0 0 22px rgba(var(--rgb-primary), 0.7);
+    transform: translateY(-2px);
+}
+
+#pomodoro-pause,
+#pomodoro-reset {
+    background: rgba(var(--rgb-grey-panel), 0.55);
+    color: var(--color-text-white);
+    font-family: 'VT323', monospace;
+    font-size: 22px;
+    letter-spacing: 3px;
+    border: 1px solid rgba(var(--rgb-white), 0.2);
+    border-left: 3px solid rgba(var(--rgb-primary), 0.7);
+    box-shadow: inset 0 0 12px rgba(var(--rgb-black), 0.7);
+    padding: 11px 10px;
+    cursor: pointer;
+    text-align: center;
+    white-space: nowrap;
+    transition:
+        transform 0.15s ease,
+        background-color 0.15s ease,
+        border-color 0.15s ease,
+        color 0.15s ease,
+        box-shadow 0.15s ease;
+}
+
+#pomodoro-pause:hover,
+#pomodoro-reset:hover {
     background: rgba(var(--rgb-primary), 0.15);
-    color: var(--color-text-white);
-    box-shadow: 0 0 15px var(--color-primary);
-    transform: scale(1.05);
+    color: var(--color-primary);
+    border-color: var(--color-primary);
+    box-shadow:
+        0 0 12px rgba(var(--rgb-primary), 0.35),
+        inset 0 0 12px rgba(var(--rgb-primary), 0.2);
+    transform: translateY(-2px);
+}
+
+#pomodoro-start:active,
+#pomodoro-pause:active,
+#pomodoro-reset:active {
+    transform: scale(0.98);
 }
 
 /* =========================================
-   THEME PAUSE DYNAMIQUE
+   PARAMÈTRES DU TIMER (MODULES CALIBRATION)
 ========================================= */
-.Pomodoro-Container.pause-mode {
-    border-color: var(--color-pause);
-    box-shadow: 0 0 20px rgba(var(--rgb-pause), 0.2), inset 0 0 20px rgba(var(--rgb-pause), 0.2);
-    color: var(--color-pause);
-}
 
-.Pomodoro-Container.pause-mode #pomodoro-mode,
-.Pomodoro-Container.pause-mode #pomodoro-timer {
-    text-shadow: 0 0 10px var(--color-pause);
-}
-
-.Pomodoro-Container.pause-mode .pomodoro-progress-bar-container { 
-    border-color: var(--color-pause); 
-}
-
-.Pomodoro-Container.pause-mode #pomodoro-progress { 
-    background: var(--color-pause); 
-}
-
-.pomodoro-controls.pause-mode button {
-    background: rgba(var(--rgb-pause), 0.05);
-    color: var(--color-pause);
-    border-color: rgba(var(--rgb-pause), 0.5);
-    box-shadow: 0 0 5px rgba(var(--rgb-pause), 0.2);
-}
-
-.pomodoro-controls.pause-mode button:hover {
-    background: rgba(var(--rgb-pause), 0.15);
-    color: var(--color-text-white);
-    box-shadow: 0 0 15px var(--color-pause);
-}
-
-/* =========================================
-   PARAMÈTRES DU TIMER
-========================================= */
 .pomodoro-settings-container {
+    grid-column: 1 / -1;
     display: flex;
     flex-direction: column;
-    gap: 20px;
-    width: 80%;
-    margin-top: 10px;
-    border-top: 1px dashed rgba(var(--rgb-primary), 0.5);
-    padding-top: 25px;
+    gap: 10px;
+    width: 100%;
+    margin-top: 8px;
+    padding-top: 16px;
+    border-top: 1px dashed rgba(var(--rgb-white), 0.2);
 }
 
 .pomodoro-settings {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     align-items: center;
-    gap: 10px;
+    justify-content: space-between;
+    width: 100%;
+    background: rgba(var(--rgb-grey-panel), 0.45);
+    border: 1px solid rgba(var(--rgb-white), 0.15);
+    border-left: 3px solid rgba(var(--rgb-primary), 0.5);
+    box-shadow: inset 0 0 15px rgba(var(--rgb-black), 0.75);
+    padding: 10px 14px;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.pomodoro-settings:hover {
+    border-color: rgba(var(--rgb-primary), 0.6);
+    border-left-color: var(--color-primary);
+    box-shadow:
+        0 0 10px rgba(var(--rgb-primary), 0.15),
+        inset 0 0 15px rgba(var(--rgb-primary), 0.08);
 }
 
 .pomodoro-settings p {
-    font-size: 24px;
-    color: var(--color-primary);
-    text-shadow: 0 0 5px var(--color-primary);
+    font-family: 'VT323', monospace;
+    font-size: 19px;
+    letter-spacing: 2px;
+    color: rgba(var(--rgb-white), 0.9);
     margin: 0;
+    white-space: nowrap;
 }
 
 .settings-boutons {
     display: flex;
     align-items: center;
-    gap: 15px;
+    gap: 10px;
 }
 
 .settings-boutons span {
-    font-size: 32px;
-    color: var(--color-text-white);
-    min-width: 40px;
+    font-family: 'VT323', monospace;
+    font-size: 28px;
+    font-variant-numeric: tabular-nums;
+    color: var(--color-primary);
+    text-shadow: 0 0 10px rgba(var(--rgb-primary), 0.6);
+    min-width: 34px;
     text-align: center;
+    line-height: 1;
 }
 
 .settings-boutons button {
     width: auto;
-    padding: 5px 15px;
-    font-size: 24px;
+    min-width: 46px;
+    height: 32px;
+    padding: 0 8px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    white-space: nowrap;
+    font-family: 'VT323', monospace;
+    font-size: 18px;
+    letter-spacing: 1px;
+    color: var(--color-text-white);
+    background: rgba(var(--rgb-black), 0.8);
+    border: 1px solid rgba(var(--rgb-primary), 0.45);
+    cursor: pointer;
+    transition:
+        background-color 0.15s ease,
+        color 0.15s ease,
+        border-color 0.15s ease,
+        box-shadow 0.15s ease,
+        transform 0.1s ease;
 }
 
-.pomodoro-controls.pause-mode .pomodoro-settings-container {
-    border-top-color: rgba(var(--rgb-pause), 0.5);
+.settings-boutons button:hover {
+    background: var(--color-primary);
+    color: var(--color-black);
+    border-color: var(--color-primary);
+    box-shadow: 0 0 10px var(--color-primary);
+    transform: scale(1.05);
 }
 
-.pomodoro-controls.pause-mode .pomodoro-settings p {
+.settings-boutons button:active {
+    transform: scale(0.95);
+}
+
+/* =========================================
+   THÈME PAUSE DYNAMIQUE
+========================================= */
+
+.Pomodoro-Container.pause-mode {
+    border-color: var(--color-pause);
+    outline-color: rgba(var(--rgb-pause), 0.25);
+    background-image:
+        radial-gradient(circle at 50% 50%, rgba(var(--rgb-pause), 0.1) 0%, transparent 70%),
+        linear-gradient(rgba(var(--rgb-pause), 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(var(--rgb-pause), 0.03) 1px, transparent 1px);
+    box-shadow:
+        0 0 25px rgba(var(--rgb-pause), 0.2),
+        inset 0 0 40px rgba(var(--rgb-black), 0.85);
     color: var(--color-pause);
-    text-shadow: 0 0 5px var(--color-pause);
+}
+
+.Pomodoro-Container.pause-mode::before {
+    content: "> SYS.CHRONO // RÉCUPÉRATION_BIOMÉTRIQUE [PAUSE]";
+    background: rgba(var(--rgb-pause), 0.15);
+    border-bottom-color: var(--color-pause);
+    color: var(--color-pause);
+    text-shadow: 0 0 5px rgba(var(--rgb-pause), 0.5);
+}
+
+.Pomodoro-Container.pause-mode::after {
+    border-top-color: rgba(var(--rgb-pause), 0.35);
+    color: var(--color-pause);
+}
+
+.Pomodoro-Container.pause-mode #pomodoro-mode {
+    background: rgba(var(--rgb-pause), 0.14);
+    border-color: var(--color-pause);
+    box-shadow: 0 0 12px rgba(var(--rgb-pause), 0.25);
+    text-shadow: 0 0 8px var(--color-pause);
+}
+
+.Pomodoro-Container.pause-mode #pomodoro-timer {
+    text-shadow:
+        0 0 12px var(--color-pause),
+        0 0 30px rgba(var(--rgb-pause), 0.65);
+    background:
+        linear-gradient(to right, var(--color-pause) 3px, transparent 3px) 0 0,
+        linear-gradient(to bottom, var(--color-pause) 3px, transparent 3px) 0 0,
+        linear-gradient(to left, var(--color-pause) 3px, transparent 3px) 100% 0,
+        linear-gradient(to bottom, var(--color-pause) 3px, transparent 3px) 100% 0,
+        linear-gradient(to right, var(--color-pause) 3px, transparent 3px) 0 100%,
+        linear-gradient(to top, var(--color-pause) 3px, transparent 3px) 0 100%,
+        linear-gradient(to left, var(--color-pause) 3px, transparent 3px) 100% 100%,
+        linear-gradient(to top, var(--color-pause) 3px, transparent 3px) 100% 100%;
+    background-repeat: no-repeat;
+    background-size: 20px 20px;
+    background-color: rgba(var(--rgb-black), 0.6);
+    border-color: rgba(var(--rgb-pause), 0.2);
+}
+
+.Pomodoro-Container.pause-mode .pomodoro-progress-bar-container {
+    border-color: var(--color-pause);
+    box-shadow: 0 0 15px rgba(var(--rgb-pause), 0.2);
+}
+
+.Pomodoro-Container.pause-mode #pomodoro-progress {
+    background-color: var(--color-pause);
+    box-shadow: 0 0 10px var(--color-pause);
+}
+
+.Pomodoro-Container.pause-mode #pomodoro-sessions {
+    background: rgba(var(--rgb-pause), 0.08);
+    border-color: rgba(var(--rgb-pause), 0.5);
+}
+
+.pomodoro-controls.pause-mode::after {
+    border-left-color: var(--color-pause);
+}
+
+.pomodoro-controls.pause-mode #pomodoro-start {
+    background:
+        linear-gradient(135deg, rgba(var(--rgb-pause), 0.2) 0%, rgba(var(--rgb-dark-panel), 0.9) 100%);
+    border-color: var(--color-pause);
+    border-left-color: var(--color-pause);
+    box-shadow:
+        0 0 15px rgba(var(--rgb-pause), 0.2),
+        inset 0 0 15px rgba(var(--rgb-pause), 0.12);
+    text-shadow: 0 0 8px var(--color-pause);
+}
+
+.pomodoro-controls.pause-mode #pomodoro-start:hover {
+    background: var(--color-pause);
+    color: var(--color-black);
+    box-shadow: 0 0 22px rgba(var(--rgb-pause), 0.7);
+}
+
+.pomodoro-controls.pause-mode #pomodoro-pause,
+.pomodoro-controls.pause-mode #pomodoro-reset {
+    border-left-color: rgba(var(--rgb-pause), 0.7);
+}
+
+.pomodoro-controls.pause-mode #pomodoro-pause:hover,
+.pomodoro-controls.pause-mode #pomodoro-reset:hover {
+    background: rgba(var(--rgb-pause), 0.15);
+    color: var(--color-pause);
+    border-color: var(--color-pause);
+    box-shadow:
+        0 0 12px rgba(var(--rgb-pause), 0.35),
+        inset 0 0 12px rgba(var(--rgb-pause), 0.2);
+}
+
+.pomodoro-controls.pause-mode .pomodoro-settings {
+    border-left-color: rgba(var(--rgb-pause), 0.5);
+}
+
+.pomodoro-controls.pause-mode .pomodoro-settings:hover {
+    border-color: rgba(var(--rgb-pause), 0.6);
+    border-left-color: var(--color-pause);
+    box-shadow:
+        0 0 10px rgba(var(--rgb-pause), 0.15),
+        inset 0 0 15px rgba(var(--rgb-pause), 0.08);
+}
+
+.pomodoro-controls.pause-mode .settings-boutons span {
+    color: var(--color-pause);
+    text-shadow: 0 0 10px rgba(var(--rgb-pause), 0.6);
+}
+
+.pomodoro-controls.pause-mode .settings-boutons button {
+    border-color: rgba(var(--rgb-pause), 0.45);
+}
+
+.pomodoro-controls.pause-mode .settings-boutons button:hover {
+    background: var(--color-pause);
+    color: var(--color-black);
+    border-color: var(--color-pause);
+    box-shadow: 0 0 10px var(--color-pause);
 }
