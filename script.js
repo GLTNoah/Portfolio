@@ -16,9 +16,11 @@ const titreMusiqueActuelle = document.getElementById('titre-musique-actuelle');
 const nomContact = document.getElementById('nom-contact');
 const dialogueJill = document.querySelector('.Texte-Jill');
 const zonesCarte = document.querySelectorAll('.zone-carte');
+const emplacementsInventaire = document.querySelectorAll('.Emplacement-Inventaire');
 const audioProgressContainer = document.querySelector('.audio-progress-container');
+const audioProgressBar = document.getElementById('audio-progress-bar');
+const audioTime = document.getElementById('audio-time');
 const tousLesRadiosExamen = document.querySelectorAll('input[name="examen"]');
-const effetCathodique = document.querySelector('.calque-cathodique');
 
 let zoneSelectionnee = null;
 let themeActuel = {};
@@ -40,64 +42,84 @@ const dialoguesPersonnages = {
 };
 
 /* =========================================
+   UTILITAIRES AUDIO
+========================================= */
+
+function getAudioPrincipalActif() {
+    return bgMusic && bgMusic.getAttribute('src') ? bgMusic : audioFond;
+}
+
+function jouerSonCourt(audioEl) {
+    if (!audioEl) return;
+    audioEl.currentTime = 0;
+    const playPromise = audioEl.play();
+    if (playPromise !== undefined) {
+        playPromise.catch(() => {});
+    }
+}
+
+/* =========================================
    INITIALISATION (THÈMES ET AUDIO)
 ========================================= */
 
 function appliquerThemeSauvegarde() {
     const sauvegarde = localStorage.getItem('donnees-survie');
     if (sauvegarde) {
-        const donnees = JSON.parse(sauvegarde);
-        document.body.dataset.theme = donnees.theme;
-        
-        if (fondVideo) fondVideo.src = donnees.video;
-        if (bgMusic) bgMusic.src = donnees.audio;
-        if (audioFond) audioFond.pause();
-        
-        if (titreMusiqueActuelle) titreMusiqueActuelle.textContent = formaterTitreMusique(donnees.audio);
-        if (nomContact) nomContact.textContent = donnees.contact;
-        if (dialogueJill) dialogueJill.textContent = donnees.dialogue;
-        
-        document.addEventListener('click', () => {
-            const etatPause = localStorage.getItem('music-pause-survie');
-            if (bgMusic && bgMusic.paused && etatPause !== 'true') {
-                bgMusic.play().catch(() => {});
-            }
-        }, { once: true });
+        try {
+            const donnees = JSON.parse(sauvegarde);
+            document.body.dataset.theme = donnees.theme;
+            
+            if (fondVideo && donnees.video) fondVideo.src = donnees.video;
+            if (bgMusic && donnees.audio) bgMusic.src = donnees.audio;
+            if (audioFond) audioFond.pause();
+            
+            if (titreMusiqueActuelle) titreMusiqueActuelle.textContent = formaterTitreMusique(donnees.audio);
+            if (nomContact) nomContact.textContent = donnees.contact;
+            if (dialogueJill) dialogueJill.textContent = donnees.dialogue;
+            
+            document.addEventListener('click', () => {
+                const etatPause = localStorage.getItem('music-pause-survie');
+                if (bgMusic && bgMusic.paused && etatPause !== 'true' && (!themeAudioPreview || themeAudioPreview.paused)) {
+                    bgMusic.play().catch(() => {});
+                }
+            }, { once: true });
+        } catch (e) {
+            localStorage.removeItem('donnees-survie');
+        }
     }
 }
 
 function appliquerVolumeInitial() {
-    if (barreVolume) {
-        const volumeSauvegarde = localStorage.getItem('volume-survie');
-        if (volumeSauvegarde !== null) {
-            barreVolume.value = volumeSauvegarde;
+    if (!barreVolume) return;
+
+    const volumeSauvegarde = localStorage.getItem('volume-survie');
+    if (volumeSauvegarde !== null) {
+        barreVolume.value = volumeSauvegarde;
+    }
+    
+    const volumeDemarrage = parseFloat(barreVolume.value);
+    if (myaudio) myaudio.volume = Math.min(1, volumeDemarrage * 0.25);
+    if (pomodoroSound) pomodoroSound.volume = Math.min(1, volumeDemarrage * 0.4);
+    if (audioFond) audioFond.volume = volumeDemarrage;
+    if (bgMusic) bgMusic.volume = volumeDemarrage;
+    if (themeAudioPreview) themeAudioPreview.volume = volumeDemarrage;
+    
+    const etatPause = localStorage.getItem('music-pause-survie');
+    const audioActif = getAudioPrincipalActif();
+    
+    if (etatPause === 'true') {
+        if (audioActif) audioActif.pause();
+        if (iconeSon) {
+            iconeSon.src = "./Image/sound_off.png";
+            iconeSon.alt = "Activer le son";
         }
-        
-        const volumeDemarrage = parseFloat(barreVolume.value);
-        if (myaudio) myaudio.volume = volumeDemarrage * 0.2;
-        if (pomodoroSound) pomodoroSound.volume = volumeDemarrage * 0.4;
-        if (audioFond) audioFond.volume = volumeDemarrage;
-        if (bgMusic) bgMusic.volume = volumeDemarrage;
-        
-        const etatPause = localStorage.getItem('music-pause-survie');
-        let audioActif = bgMusic && bgMusic.getAttribute('src') ? bgMusic : audioFond;
-        
-        if (etatPause === 'true') {
-            if (audioActif) audioActif.pause();
-            if (iconeSon) {
-                iconeSon.src = "./Image/sound_off.png";
-                iconeSon.alt = "Activer le son";
-            }
+    } else if (iconeSon) {
+        if (volumeDemarrage === 0) {
+            iconeSon.src = "./Image/sound_off.png";
+            iconeSon.alt = "Activer le son";
         } else {
-            if (iconeSon) {
-                if (volumeDemarrage === 0) {
-                    iconeSon.src = "./Image/sound_off.png";
-                    iconeSon.alt = "Activer le son";
-                } else {
-                    iconeSon.src = "./Image/sound_on.png";
-                    iconeSon.alt = "Couper le son";
-                }
-            }
+            iconeSon.src = "./Image/sound_on.png";
+            iconeSon.alt = "Couper le son";
         }
     }
 }
@@ -108,16 +130,26 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 /* =========================================
+   SONS D'INVENTAIRE SANS LATENCE
+========================================= */
+
+emplacementsInventaire.forEach(slot => {
+    slot.addEventListener('mouseenter', () => jouerSonCourt(myaudio));
+});
+
+/* =========================================
    GESTION AUDIO ET VOLUME
 ========================================= */
+
 if (barreVolume) {
     barreVolume.addEventListener('input', (e) => {
         const volumeActuel = parseFloat(e.target.value);
         
-        if (myaudio) myaudio.volume = volumeActuel * 0.2;
-        if (pomodoroSound) pomodoroSound.volume = volumeActuel * 0.4;
+        if (myaudio) myaudio.volume = Math.min(1, volumeActuel * 0.25);
+        if (pomodoroSound) pomodoroSound.volume = Math.min(1, volumeActuel * 0.4);
         if (audioFond) audioFond.volume = volumeActuel;
         if (bgMusic) bgMusic.volume = volumeActuel;
+        if (themeAudioPreview) themeAudioPreview.volume = volumeActuel;
 
         localStorage.setItem('volume-survie', volumeActuel);
 
@@ -126,7 +158,7 @@ if (barreVolume) {
                 iconeSon.src = "./Image/sound_off.png";
                 iconeSon.alt = "Activer le son";
             } else {
-                let audioActif = bgMusic && bgMusic.getAttribute('src') ? bgMusic : audioFond;
+                const audioActif = getAudioPrincipalActif();
                 if (audioActif && !audioActif.paused) {
                     iconeSon.src = "./Image/sound_on.png";
                     iconeSon.alt = "Couper le son";
@@ -138,10 +170,14 @@ if (barreVolume) {
 
 if (btnSon) {
     btnSon.addEventListener('click', () => {
-        let audioActif = bgMusic && bgMusic.getAttribute('src') ? bgMusic : audioFond;
+        const audioActif = getAudioPrincipalActif();
         if (audioActif) {
             if (audioActif.paused) {
-                audioActif.play();
+                if (themeAudioPreview && !themeAudioPreview.paused) {
+                    themeAudioPreview.pause();
+                    if (customPlayBtn) customPlayBtn.innerHTML = "[ &#9658; LECTURE ]";
+                }
+                audioActif.play().catch(() => {});
                 iconeSon.src = "./Image/sound_on.png";
                 iconeSon.alt = "Couper le son";
                 localStorage.setItem('music-pause-survie', 'false');
@@ -163,38 +199,63 @@ function formaterTemps(secondes) {
 
 function formaterTitreMusique(src) {
     if (!src) return "INCONNU";
-    let nomFichier = src.split('/').pop().split('.')[0];
+    const nomFichier = src.split('/').pop().split('.')[0];
     return nomFichier.replace(/-/g, ' ').toUpperCase();
 }
 
-if (customPlayBtn) {
+if (customPlayBtn && themeAudioPreview) {
     customPlayBtn.addEventListener('click', () => {
+        const audioActif = getAudioPrincipalActif();
         if (themeAudioPreview.paused) {
-            themeAudioPreview.play();
+            if (audioActif && !audioActif.paused) {
+                audioActif.pause();
+            }
+            themeAudioPreview.volume = barreVolume ? parseFloat(barreVolume.value) : 0.05;
+            themeAudioPreview.play().catch(() => {});
             customPlayBtn.innerHTML = "[ &#10074;&#10074; PAUSE ]";
         } else {
             themeAudioPreview.pause();
             customPlayBtn.innerHTML = "[ &#9658; LECTURE ]";
+            const etatPause = localStorage.getItem('music-pause-survie');
+            if (audioActif && etatPause !== 'true') {
+                audioActif.play().catch(() => {});
+            }
+        }
+    });
+
+    themeAudioPreview.addEventListener('ended', () => {
+        customPlayBtn.innerHTML = "[ &#9658; LECTURE ]";
+        const audioActif = getAudioPrincipalActif();
+        const etatPause = localStorage.getItem('music-pause-survie');
+        if (audioActif && etatPause !== 'true') {
+            audioActif.play().catch(() => {});
         }
     });
 }
 
 if (themeAudioPreview) {
+    themeAudioPreview.addEventListener('loadedmetadata', () => {
+        if (audioTime && themeAudioPreview.duration) {
+            audioTime.textContent = `00:00 / ${formaterTemps(themeAudioPreview.duration)}`;
+        }
+    });
+
     themeAudioPreview.addEventListener('timeupdate', () => {
         const act = themeAudioPreview.currentTime;
         const dur = themeAudioPreview.duration;
         if (dur) {
             const pourcent = (act / dur) * 100;
-            document.getElementById('audio-progress-bar').style.width = pourcent + '%';
-            document.getElementById('audio-time').textContent = `${formaterTemps(act)} / ${formaterTemps(dur)}`;
+            if (audioProgressBar) audioProgressBar.style.width = pourcent + '%';
+            if (audioTime) audioTime.textContent = `${formaterTemps(act)} / ${formaterTemps(dur)}`;
         }
     });
 }
 
-if (audioProgressContainer) {
+if (audioProgressContainer && themeAudioPreview) {
     audioProgressContainer.addEventListener('click', (e) => {
+        if (!themeAudioPreview.duration) return;
         const rect = audioProgressContainer.getBoundingClientRect();
-        const pos = (e.clientX - rect.left) / rect.width;
+        const pos = Math.max(0, Math.min(1, (e.clientX - rect.left) / rect.width));
         themeAudioPreview.currentTime = pos * themeAudioPreview.duration;
     });
 }
@@ -202,42 +263,60 @@ if (audioProgressContainer) {
 /* =========================================
    CARTE INTERACTIVE ET THÈMES
 ========================================= */
+
+function selectionnerZoneCarte(zone) {
+    zonesCarte.forEach(z => z.classList.remove('zone-active'));
+    zone.classList.add('zone-active');
+
+    const titre = zone.dataset.titre;
+    const desc = zone.dataset.desc;
+    const img = zone.dataset.img;
+    const audioSrc = zone.dataset.audio;
+
+    document.getElementById('theme-titre').textContent = titre;
+    document.getElementById('theme-desc').textContent = desc.replace(/\\n/g, '\n');
+    
+    const themeImage = document.getElementById('theme-image');
+    themeImage.src = img;
+    themeImage.style.display = 'block';
+
+    zoneSelectionnee = {
+        id: zone.id,
+        theme: zone.dataset.theme,
+        titre: titre,
+        desc: desc,
+        img: img,
+        audio: audioSrc,
+        video: zone.dataset.video,
+        contact: zone.dataset.contact,
+        dialogueActif: ""
+    };
+
+    if (themeAudioPreview && !themeAudioPreview.paused) {
+        themeAudioPreview.pause();
+        const audioActif = getAudioPrincipalActif();
+        const etatPause = localStorage.getItem('music-pause-survie');
+        if (audioActif && etatPause !== 'true') {
+            audioActif.play().catch(() => {});
+        }
+    }
+
+    themeAudioPreview.src = audioSrc;
+    document.querySelector('.theme-audio-lecteur').style.display = 'block';
+    btnActiverTheme.style.display = 'block';
+    
+    customPlayBtn.innerHTML = "[ &#9658; LECTURE ]";
+    if (audioProgressBar) audioProgressBar.style.width = '0%';
+    if (audioTime) audioTime.textContent = "00:00 / 00:00";
+}
+
 zonesCarte.forEach(zone => {
-    zone.addEventListener('click', () => {
-        zonesCarte.forEach(z => z.classList.remove('zone-active'));
-        zone.classList.add('zone-active');
-
-        const titre = zone.dataset.titre;
-        const desc = zone.dataset.desc;
-        const img = zone.dataset.img;
-        const audioSrc = zone.dataset.audio;
-
-        document.getElementById('theme-titre').textContent = titre;
-        document.getElementById('theme-desc').textContent = desc.replace(/\\n/g, '\n');
-        
-        const themeImage = document.getElementById('theme-image');
-        themeImage.src = img;
-        themeImage.style.display = 'block';
-
-        zoneSelectionnee = {
-            id: zone.id,
-            theme: zone.dataset.theme,
-            titre: titre,
-            desc: desc,
-            img: img,
-            audio: audioSrc,
-            video: zone.dataset.video,
-            contact: zone.dataset.contact,
-            dialogueActif: ""
-        };
-
-        themeAudioPreview.src = audioSrc;
-        document.querySelector('.theme-audio-lecteur').style.display = 'block';
-        btnActiverTheme.style.display = 'block';
-        
-        customPlayBtn.innerHTML = "[ &#9658; LECTURE ]";
-        document.getElementById('audio-progress-bar').style.width = '0%';
-        document.getElementById('audio-time').textContent = "00:00 / 00:00";
+    zone.addEventListener('click', () => selectionnerZoneCarte(zone));
+    zone.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            selectionnerZoneCarte(zone);
+        }
     });
 });
 
@@ -256,17 +335,16 @@ if (btnActiverTheme) {
                 bgMusic.src = zoneSelectionnee.audio;
                 bgMusic.volume = barreVolume ? parseFloat(barreVolume.value) : 0.05;
                 
-                // Maintien de l'état de pause lors du changement de thème
                 const etatPause = localStorage.getItem('music-pause-survie');
                 if (etatPause !== 'true') {
-                    bgMusic.play();
+                    bgMusic.play().catch(() => {});
                 }
             }
             
             if (titreMusiqueActuelle) titreMusiqueActuelle.textContent = formaterTitreMusique(zoneSelectionnee.audio);
             
             personnageActif = zoneSelectionnee.contact;
-            let dialogueSecours = dialoguesPersonnages[personnageActif] && dialoguesPersonnages[personnageActif][zoneSelectionnee.id] 
+            const dialogueSecours = dialoguesPersonnages[personnageActif] && dialoguesPersonnages[personnageActif][zoneSelectionnee.id] 
                                   ? dialoguesPersonnages[personnageActif][zoneSelectionnee.id] 
                                   : "Il faut que je continue l'exploration...";
 
@@ -302,27 +380,100 @@ if (btnActiverTheme) {
 }
 
 /* =========================================
-   ANTI-LAG
+   ANTI-LAG & GESTION DES ÉTATS
 ========================================= */
+
 tousLesRadiosExamen.forEach(radio => {
     radio.addEventListener('change', (e) => {
+        // Si on quitte la carte alors qu'un aperçu musical jouait, on le coupe et on relance la musique principale
+        if (e.target.id !== 'Btn-Carte' && themeAudioPreview && !themeAudioPreview.paused) {
+            themeAudioPreview.pause();
+            if (customPlayBtn) customPlayBtn.innerHTML = "[ &#9658; LECTURE ]";
+            const audioActif = getAudioPrincipalActif();
+            const etatPause = localStorage.getItem('music-pause-survie');
+            if (audioActif && etatPause !== 'true') {
+                audioActif.play().catch(() => {});
+            }
+        }
+
+        // Pause de la vidéo de fond pendant l'inspection plein écran pour économiser le GPU
         if (e.target.id === 'radio-cv' || e.target.id === 'radio-veille') {
             if (fondVideo) fondVideo.pause();
-            if (effetCathodique) effetCathodique.style.display = 'none';
         } else {
-            if (fondVideo && fondVideo.paused) fondVideo.play();
-            if (effetCathodique) effetCathodique.style.display = 'block';
+            if (fondVideo && fondVideo.paused && !document.hidden) {
+                fondVideo.play().catch(() => {});
+            }
         }
     });
 });
 
+// Économie de ressources lorsque l'onglet du navigateur est en arrière-plan
+document.addEventListener('visibilitychange', () => {
+    if (!fondVideo) return;
+    const enExamen = document.getElementById('radio-cv')?.checked || document.getElementById('radio-veille')?.checked;
+    if (document.hidden) {
+        fondVideo.pause();
+    } else if (!enExamen) {
+        fondVideo.play().catch(() => {});
+    }
+});
+
 /* =========================================
-   LOGIQUE POMODORO
+   CONFORT CLAVIER (ÉCHAP & FLÈCHES)
 ========================================= */
+
+document.addEventListener('keydown', (e) => {
+    const dialogueTheme = document.getElementById('dialogue-theme');
+    if (e.key === 'Escape') {
+        if (dialogueTheme && dialogueTheme.open) {
+            dialogueTheme.close();
+            return;
+        }
+
+        const radioCv = document.getElementById('radio-cv');
+        const radioVeille = document.getElementById('radio-veille');
+        const fermerExamen = document.getElementById('fermer-examen');
+        const btnCarte = document.getElementById('Btn-Carte');
+        const btnPomodoro = document.getElementById('Btn-Pomodoro');
+        const etatInitial = document.getElementById('etat-initial');
+
+        if ((radioCv && radioCv.checked) || (radioVeille && radioVeille.checked)) {
+            fermerExamen.checked = true;
+            fermerExamen.dispatchEvent(new Event('change'));
+        } else if ((btnCarte && btnCarte.checked) || (btnPomodoro && btnPomodoro.checked)) {
+            etatInitial.checked = true;
+            etatInitial.dispatchEvent(new Event('change'));
+        }
+        return;
+    }
+
+    // Navigation dans la grille d'inventaire avec les flèches du clavier
+    const slots = Array.from(emplacementsInventaire);
+    const indexActuel = slots.indexOf(document.activeElement);
+    if (indexActuel !== -1) {
+        let nouvelIndex = indexActuel;
+        if (e.key === 'ArrowRight') nouvelIndex = (indexActuel + 1) % slots.length;
+        if (e.key === 'ArrowLeft') nouvelIndex = (indexActuel - 1 + slots.length) % slots.length;
+        if (e.key === 'ArrowDown') nouvelIndex = Math.min(indexActuel + 3, slots.length - 1);
+        if (e.key === 'ArrowUp') nouvelIndex = Math.max(indexActuel - 3, 0);
+
+        if (nouvelIndex !== indexActuel) {
+            e.preventDefault();
+            slots[nouvelIndex].focus();
+            jouerSonCourt(myaudio);
+        }
+    }
+});
+
+/* =========================================
+   LOGIQUE POMODORO (SANS DÉRIVE HORAIRE)
+========================================= */
+
 let tempsTravail = 25;
 let tempsPause = 5;
 let tempsRestant = tempsTravail * 60;
 let intervalId = null;
+let finCibleTimestamp = null;
 let enPause = false;
 let sessionsCompletees = 0;
 
@@ -338,7 +489,7 @@ function majAffichagePomodoro() {
     if (barreProgression) {
         const tempsTotal = (enPause ? tempsPause : tempsTravail) * 60;
         const pourcentage = ((tempsTotal - tempsRestant) / tempsTotal) * 100;
-        barreProgression.style.width = pourcentage + '%';
+        barreProgression.style.width = Math.max(0, Math.min(100, pourcentage)) + '%';
     }
 }
 
@@ -400,15 +551,15 @@ const btnPomodoroStart = document.getElementById('pomodoro-start');
 if (btnPomodoroStart) {
     btnPomodoroStart.addEventListener('click', () => {
         if (intervalId) return;
+        finCibleTimestamp = Date.now() + tempsRestant * 1000;
+
         intervalId = setInterval(() => {
-            tempsRestant--;
+            const secondesEcoulees = Math.round((finCibleTimestamp - Date.now()) / 1000);
+            tempsRestant = Math.max(0, secondesEcoulees);
             majAffichagePomodoro();
 
             if (tempsRestant <= 0) {
-                if (pomodoroSound) {
-                    pomodoroSound.currentTime = 0;
-                    pomodoroSound.play();
-                }
+                jouerSonCourt(pomodoroSound);
                 
                 if (!enPause) {
                     enPause = true;
@@ -425,9 +576,10 @@ if (btnPomodoroStart) {
                     document.querySelector('.Pomodoro-Container').classList.remove('pause-mode');
                     document.querySelector('.pomodoro-controls').classList.remove('pause-mode');
                 }
+                finCibleTimestamp = Date.now() + tempsRestant * 1000;
                 majAffichagePomodoro();
             }
-        }, 1000);
+        }, 250);
     });
 }
 
@@ -436,6 +588,7 @@ if (btnPomodoroPause) {
     btnPomodoroPause.addEventListener('click', () => {
         clearInterval(intervalId);
         intervalId = null;
+        finCibleTimestamp = null;
     });
 }
 
@@ -444,6 +597,7 @@ if (btnPomodoroReset) {
     btnPomodoroReset.addEventListener('click', () => {
         clearInterval(intervalId);
         intervalId = null;
+        finCibleTimestamp = null;
         enPause = false;
         tempsRestant = tempsTravail * 60;
         if (affichageMode) affichageMode.textContent = "MODE: TRAVAIL";
@@ -458,17 +612,15 @@ if (btnPomodoroReset) {
 ========================================= */
 
 const dialogueTheme = document.getElementById('dialogue-theme');
-
 const typeNavigation = performance.getEntriesByType('navigation')[0]?.type;
 
+if (dialogueTheme) {
+    if (typeNavigation === 'reload' || !sessionStorage.getItem('popup-vue')) {
+        dialogueTheme.showModal();
+        sessionStorage.setItem('popup-vue', 'oui');
+    }
 
-if (typeNavigation === 'reload' || !sessionStorage.getItem('popup-vue')) {
-    dialogueTheme.showModal();
-    sessionStorage.setItem('popup-vue', 'oui');
+    document.getElementById('dialogue-close')?.addEventListener('click', () => dialogueTheme.close());
 }
-
-document.getElementById('dialogue-close').addEventListener('click', () => dialogueTheme.close());
-
-dialogueTheme.addEventListener('cancel', (e) => e.preventDefault());
 
 majAffichagePomodoro();

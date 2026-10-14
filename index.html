@@ -5,17 +5,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Portfolio</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="MediaQueries.css">
-    <link rel="stylesheet" href="KeyFrames.css">
-    <link rel="stylesheet" href="pomodoro.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="KeyFrames.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="pomodoro.css">
+    <link rel="stylesheet" href="MediaQueries.css">
     <script src="script.js" defer></script>
 </head>
 
 <body>
     <input type="radio" name="examen" id="etat-initial" checked autocomplete="off" style="display: none;">
     <input type="radio" name="examen" id="fermer-examen" autocomplete="off" style="display: none;">
+    <input type="radio" name="examen" id="radio-projet" autocomplete="off" style="display: none;">
     <input type="radio" name="examen" id="radio-jeu" autocomplete="off" style="display: none;">
     <input type="radio" name="examen" id="radio-cv" autocomplete="off" style="display: none;">
     <input type="radio" name="examen" id="radio-veille" autocomplete="off" style="display: none;">
@@ -30,7 +33,7 @@
     <a href="./Documents/CV_GuillotNoah.pdf" download="CV_GuillotNoah.pdf" class="bouton-telecharger-ecran">[X] TÉLÉCHARGER LE CV</a>
     <a href="./Documents/Veille_Algorave.pdf" download="Veille_Algorave.pdf" class="bouton-telecharger-ecran-Veille">[X] TÉLÉCHARGER LA VEILLE</a>
 
-    <video class="fond-video" src="./vidéo/resident-evil.1920x1080.mp4" autoplay muted loop></video>
+    <video class="fond-video" src="./vidéo/resident-evil.1920x1080.mp4" autoplay muted loop playsinline preload="metadata"></video>
 
     <main>
         <dialog class="dialogue-theme" id="dialogue-theme">
@@ -63,40 +66,40 @@
             </header>
 
             <div class="Grille-Inventaire">
-                <div class="Emplacement-Inventaire" id="emplacement-projet" tabindex="0" onmouseenter="document.getElementById('myaudio').play()">
-                    <span><img src="./Image/Icone-Projet.png" alt=""></span>
+                <div class="Emplacement-Inventaire" id="emplacement-projet" tabindex="0">
+                    <span><img src="./Image/Icone-Projet.png" alt="Disque dur Projet" decoding="async"></span>
                 </div>
                 <ul class="Icone-Examiner">
                     <li><a href="Projets.html">Inspecter cet objet ?</a></li>
                 </ul>
 
-                <div class="Emplacement-Inventaire" id="emplacement-cv" tabindex="0" onmouseenter="document.getElementById('myaudio').play()">
-                    <span><img src="./Image/Icone-CV.png" alt=""></span>
+                <div class="Emplacement-Inventaire" id="emplacement-cv" tabindex="0">
+                    <span><img src="./Image/Icone-CV.png" alt="Badge CV" decoding="async"></span>
                 </div>
                 <ul class="Icone-Examiner">
                     <li><label for="radio-cv">Inspecter cet objet ?</label></li>
                 </ul>
 
-                <div class="Emplacement-Inventaire" id="emplacement-veille" tabindex="0" onmouseenter="document.getElementById('myaudio').play()">
-                    <span><img src="./Image/Icone-Veille.png" alt=""></span>
+                <div class="Emplacement-Inventaire" id="emplacement-veille" tabindex="0">
+                    <span><img src="./Image/Icone-Veille.png" alt="Clé USB Veille" decoding="async"></span>
                 </div>
                 <ul class="Icone-Examiner">
                     <li><label for="radio-veille">Inspecter cet objet ?</label></li>
                 </ul>
 
-                <div class="Emplacement-Inventaire vide" tabindex="0" onmouseenter="document.getElementById('myaudio').play()"></div>
-                <div class="Emplacement-Inventaire vide" tabindex="0" onmouseenter="document.getElementById('myaudio').play()"></div>
-                <div class="Emplacement-Inventaire vide" tabindex="0" onmouseenter="document.getElementById('myaudio').play()"></div>
+                <div class="Emplacement-Inventaire vide" tabindex="0"></div>
+                <div class="Emplacement-Inventaire vide" tabindex="0"></div>
+                <div class="Emplacement-Inventaire vide" tabindex="0"></div>
 
-                <div class="Emplacement-Inventaire" id="emplacement-jeu" tabindex="0" onmouseenter="document.getElementById('myaudio').play()">
-                    <span><img src="./Image/Icone-Jeu.png" alt=""></span>
+                <div class="Emplacement-Inventaire" id="emplacement-jeu" tabindex="0">
+                    <span><img src="./Image/Icone-Jeu.png" alt="CD Jeu" decoding="async"></span>
                 </div>
                 <ul class="Icone-Examiner">
                     <li><a href="https://swarmre.noahglt-dev.com/">Inspecter cet objet ?</a></li>
                 </ul>
 
-                <div class="Emplacement-Inventaire" id="emplacement-ordi" tabindex="0" onmouseenter="document.getElementById('myaudio').play()">
-                    <span><img src="./Image/Icone-Ordi.png" alt=""></span>
+                <div class="Emplacement-Inventaire" id="emplacement-ordi" tabindex="0">
+                    <span><img src="./Image/Icone-Ordi.png" alt="Ordinateur" decoding="async"></span>
                 </div>
             </div>
 
@@ -127,7 +130,7 @@
 
             <div class="Panneau-Theme-Zone">
                 <div class="theme-preview-box">
-                    <img id="theme-image" src="" alt="" style="display: none;">
+                    <img id="theme-image" alt="Aperçu de la zone" decoding="async" style="display: none;">
                     <div class="ligne-scan"></div>
                 </div>
                 
@@ -207,7 +210,7 @@
                         <p>Cible : Alternance Développeur Informatique / Gestionnaire BDD</p>
                     </div>
                     <div class="Section-CV">
-                        <h3>> COMPÉTENCES DÉTECTÉES</h3>
+                        <h3>> COMPÉTENCES DÉTECTES</h3>
                         <ul>
                             <li>- HTML / CSS (Création d'interfaces)</li>
                             <li>- SQL (Requêtes, jointures, gestion de bases de données)</li>
@@ -265,7 +268,7 @@
                 </div>
             </div>
 
-            <div class="Jeu-Agrandi"><span><img src="..." alt=""></span></div>
+            <div class="Jeu-Agrandi"><span></span></div>
             
             <div class="Panneau-Lateral-CRT">
                 <div class="panneau-header">SYS.STATUT</div>
@@ -297,8 +300,7 @@
             <svg version="1.1" viewBox="0 0 1920 1080" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
                 <image href="./svg/Carte-RE.svg" x="0" y="0" width="100%" height="100%" />
                 
-                <polygon class="zone-carte" id="carte-eglise" 
-                    onclick="document.getElementById('radio-eglise').checked = true;"
+                <polygon class="zone-carte" id="carte-eglise" tabindex="0"
                     data-theme="rouge"
                     data-titre="ÉGLISE DU VILLAGE" 
                     data-desc="> ZONE HOSTILE\n> ACTIVITÉ CULTISTE DÉTECTÉE" 
@@ -309,8 +311,7 @@
                     points="1470,680 1650,590 1800,650 1600,740" />
                 <text class="texte-carte" x="1590" y="680" fill="#ffffff" font-size="24" opacity="0">ÉGLISE</text>
 
-                <polygon class="zone-carte" id="carte-police" 
-                    onclick="document.getElementById('radio-police').checked = true;"
+                <polygon class="zone-carte" id="carte-police" tabindex="0"
                     data-theme="jaune"
                     data-titre="COMMISSARIAT R.P.D." 
                     data-desc="> EMPLACEMENT SÉCURISÉ\n> PRÉSENCE : L.S. KENNEDY" 
@@ -321,8 +322,7 @@
                     points="530,560 800,410 1080,570 800,710" />
                 <text class="texte-carte" x="850" y="580" fill="#ffffff" font-size="24" opacity="0">COMMISSARIAT</text>
 
-                <polygon class="zone-carte" id="carte-usine" 
-                    onclick="document.getElementById('radio-usine').checked = true;"
+                <polygon class="zone-carte" id="carte-usine" tabindex="0"
                     data-theme="bleu"
                     data-titre="ZONE INDUSTRIELLE" 
                     data-desc="> INSTALLATION ABANDONNÉE\n> DANGER BIOLOGIQUE : ÉLEVÉ" 
@@ -333,8 +333,7 @@
                     points="350,230 540,130 770,280 550,380" />
                 <text class="texte-carte" x="550" y="230" fill="#ffffff" font-size="24" opacity="0">ZONE INDUSTRIELLE</text>
 
-                <polygon class="zone-carte" id="carte-bibliotheque" 
-                    onclick="document.getElementById('radio-bibliotheque').checked = true;"
+                <polygon class="zone-carte" id="carte-bibliotheque" tabindex="0"
                     data-theme="vert"
                     data-titre="BIBLIOTHEQUE" 
                     data-desc="> LIEU DE CONNAISSANCE\n> PRÉSENCE : JILL VALENTINE" 
@@ -349,23 +348,23 @@
 
         <div class="Widget-Audio-Global">
             <button id="btn-son" class="Bouton-Son">
-                <img id="icon_sound" src="./Image/sound_on.png" alt="Couper le son">
+                <img id="icon_sound" src="./Image/sound_on.png" alt="Couper le son" decoding="async">
             </button>
             <div class="Piste-Infos">
                 <span class="label-lecture">LECTURE : </span>
                 <span id="titre-musique-actuelle">THE CITY OF RUIN</span>
             </div>
             <div class="Conteneur-Volume">
-                <input type="range" id="barre-volume" min="0" max="1" step="0.01" value="0.05">
+                <input type="range" id="barre-volume" min="0" max="1" step="0.01" value="0.05" aria-label="Volume sonore">
             </div>
         </div>
 
     </main>
 
-    <audio id="myaudio" src="./son/Son-inventaire.mp3"></audio>
-    <audio id="pomodoro-sound" src="./son/Son-pomodoro.mp3"></audio>
-    <audio id="audio-fond" src="./son/The-City-of-Ruin.mp3" autoplay loop></audio>
-    <audio id="bg-music" loop></audio>
+    <audio id="myaudio" src="./son/Son-inventaire.mp3" preload="auto"></audio>
+    <audio id="pomodoro-sound" src="./son/Son-pomodoro.mp3" preload="auto"></audio>
+    <audio id="audio-fond" src="./son/The-City-of-Ruin.mp3" autoplay loop preload="metadata"></audio>
+    <audio id="bg-music" loop preload="metadata"></audio>
 
 </body>
 
