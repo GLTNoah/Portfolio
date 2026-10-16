@@ -2294,8 +2294,8 @@ body::before,
 
 .lien-mentions {
     position: fixed;
-    left: 24px;
-    bottom: 3px;
+    right: 5vw;
+    bottom: 10px;
     z-index: 10;
     font-family: "Cinzel", serif;
     font-size: 10px;
@@ -2313,6 +2313,7 @@ body::before,
 }
 
 .lien-mentions.lien-mentions-projets {
+    right: auto;
     left: 5vw;
     bottom: 5vh;
     padding: 14px 0;
