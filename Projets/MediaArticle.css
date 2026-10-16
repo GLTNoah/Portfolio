@@ -110,15 +110,16 @@
         color: white; 
     }
     
-    .Article-Paragraphe, 
-    .En-Tete-Gauche, 
-    .En-Tete-Droite { 
-        color: black; 
+    .Article-Paragraphe,
+    .Article-Liste li,
+    .Document-Boot,
+    .Document-Titre,
+    .Document-Meta {
+        color: black;
         text-shadow: none;
     }
-    
-    .Ligne-Document {
-        background: black;
-        box-shadow: none;
+
+    .Document-Titre::after {
+        display: none;
     }
 }

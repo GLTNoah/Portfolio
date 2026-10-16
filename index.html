@@ -16,6 +16,12 @@
 </head>
 
 <body>
+    <script>
+        try {
+            const theme = JSON.parse(localStorage.getItem('donnees-survie'))?.theme;
+            if (theme) document.body.dataset.theme = theme;
+        } catch (e) {}
+    </script>
     <input type="radio" name="examen" id="etat-initial" checked autocomplete="off" style="display: none;">
     <input type="radio" name="examen" id="fermer-examen" autocomplete="off" style="display: none;">
     <input type="radio" name="examen" id="radio-projet" autocomplete="off" style="display: none;">
@@ -28,23 +34,23 @@
 
     <div class="animation-allumage-ecran"></div>
     <div class="calque-cathodique"></div>
-    <label for="fermer-examen" class="bouton-fermer-ecran">[X] FERMER LE TERMINAL</label>
+    <label for="fermer-examen" class="bouton-fermer-ecran">Fermer</label>
     
-    <a href="./Documents/CV_GuillotNoah.pdf" download="CV_GuillotNoah.pdf" class="bouton-telecharger-ecran">[X] TÉLÉCHARGER LE CV</a>
-    <a href="./Documents/Veille_Algorave.pdf" download="Veille_Algorave.pdf" class="bouton-telecharger-ecran-Veille">[X] TÉLÉCHARGER LA VEILLE</a>
+    <a href="./Documents/CV_GuillotNoah.pdf" download="CV_GuillotNoah.pdf" class="bouton-telecharger-ecran">Télécharger le CV</a>
+    <a href="./Documents/Veille_Algorave.pdf" download="Veille_Algorave.pdf" class="bouton-telecharger-ecran-Veille">Télécharger la veille</a>
 
     <video class="fond-video" src="./vidéo/resident-evil.1920x1080.mp4" autoplay muted loop playsinline preload="metadata"></video>
 
     <main>
         <dialog class="dialogue-theme" id="dialogue-theme">
             <div class="dialogue-header">
-                <span class="dialogue-contact" id="dialogue-contact">> CONTACT</span>
-                <span class="dialogue-statut">[ EN LIGNE ]</span>
+                <span class="dialogue-contact" id="dialogue-contact">Contact</span>
+                <span class="dialogue-statut">En ligne</span>
             </div>
             <div class="dialogue-content">
                 <p class="dialogue-message" id="dialogue-message">> Ce portfolio est un chantier permanent. Chaque visite peut être différente de la précédente.</p>
             </div>
-            <button class="dialogue-close" id="dialogue-close">[ X ]</button>
+            <button class="dialogue-close" id="dialogue-close">Fermer</button>
         </dialog>
 
         <nav class="Haut-Inventaire">
@@ -70,21 +76,21 @@
                     <span><img src="./Image/Icone-Projet.png" alt="Disque dur Projet" decoding="async"></span>
                 </div>
                 <ul class="Icone-Examiner">
-                    <li><a href="Projets.html">Inspecter cet objet ?</a></li>
+                    <li><a href="Projets.html">Inspecter</a></li>
                 </ul>
 
                 <div class="Emplacement-Inventaire" id="emplacement-cv" tabindex="0">
                     <span><img src="./Image/Icone-CV.png" alt="Badge CV" decoding="async"></span>
                 </div>
                 <ul class="Icone-Examiner">
-                    <li><label for="radio-cv">Inspecter cet objet ?</label></li>
+                    <li><label for="radio-cv">Inspecter</label></li>
                 </ul>
 
                 <div class="Emplacement-Inventaire" id="emplacement-veille" tabindex="0">
                     <span><img src="./Image/Icone-Veille.png" alt="Clé USB Veille" decoding="async"></span>
                 </div>
                 <ul class="Icone-Examiner">
-                    <li><label for="radio-veille">Inspecter cet objet ?</label></li>
+                    <li><label for="radio-veille">Inspecter</label></li>
                 </ul>
 
                 <div class="Emplacement-Inventaire vide" tabindex="0"></div>
@@ -95,7 +101,7 @@
                     <span><img src="./Image/Icone-Jeu.png" alt="CD Jeu" decoding="async"></span>
                 </div>
                 <ul class="Icone-Examiner">
-                    <li><a href="https://swarmre.noahglt-dev.com/">Inspecter cet objet ?</a></li>
+                    <li><a href="https://swarmre.noahglt-dev.com/">Inspecter</a></li>
                 </ul>
 
                 <div class="Emplacement-Inventaire" id="emplacement-ordi" tabindex="0">
@@ -104,25 +110,25 @@
             </div>
 
             <div class="pomodoro-controls">
-                <button id="pomodoro-start">[ START ]</button>
-                <button id="pomodoro-pause">[ PAUSE ]</button>
-                <button id="pomodoro-reset">[ RESET ]</button>
+                <button id="pomodoro-start"><span class="icone-bouton" aria-hidden="true">&#9654;</span>Démarrer</button>
+                <button id="pomodoro-pause"><span class="icone-bouton" aria-hidden="true">&#10074;&#10074;</span>Pause</button>
+                <button id="pomodoro-reset"><span class="icone-bouton" aria-hidden="true">&#8634;</span>Réinitialiser</button>
                 
                 <div class="pomodoro-settings-container">
                     <div class="pomodoro-settings">
                         <p>TRAVAIL (MIN)</p>
                         <div class="settings-boutons">
-                            <button id="btn-minus-work">[ - ]</button>
+                            <button id="btn-minus-work" aria-label="Retirer une minute de travail">&minus;</button>
                             <span id="val-work">25</span>
-                            <button id="btn-plus-work">[ + ]</button>
+                            <button id="btn-plus-work" aria-label="Ajouter une minute de travail">+</button>
                         </div>
                     </div>
                     <div class="pomodoro-settings">
                         <p>PAUSE (MIN)</p>
                         <div class="settings-boutons">
-                            <button id="btn-minus-break">[ - ]</button>
+                            <button id="btn-minus-break" aria-label="Retirer une minute de pause">&minus;</button>
                             <span id="val-break">5</span>
-                            <button id="btn-plus-break">[ + ]</button>
+                            <button id="btn-plus-break" aria-label="Ajouter une minute de pause">+</button>
                         </div>
                     </div>
                 </div>
@@ -141,10 +147,10 @@
                 </div>
                 
                 <div class="theme-audio-lecteur" style="display: none;">
-                    <p>> PISTE AUDIO</p>
+                    <p>Piste audio</p>
                     <audio id="theme-audio-preview" preload="metadata"></audio>
                     <div class="custom-audio-player">
-                        <button id="custom-play-btn">[ &#9658; LECTURE ]</button>
+                        <button id="custom-play-btn"><span class="icone-bouton" aria-hidden="true">&#9654;</span>Lecture</button>
                         <div class="audio-progress-container">
                             <div id="audio-progress-bar"></div>
                         </div>
@@ -152,7 +158,7 @@
                     </div>
                 </div>
                 
-                <button id="btn-activer-theme" style="display: none;">[ INITIER LA SÉQUENCE ]</button>
+                <button id="btn-activer-theme" style="display: none;"><span class="icone-bouton" aria-hidden="true">&#9654;</span>Initier la séquence</button>
             </div>
 
             <div class="Description-Projet">
@@ -188,8 +194,8 @@
 
         <nav class="Conteneur-Dialogue-Jill">
             <div class="Header-Dialogue">
-                <span class="Nom-Contact" id="nom-contact">> JILL VALENTINE</span>
-                <span class="Statut-Com">[ EN LIGNE ]</span>
+                <span class="Nom-Contact" id="nom-contact">Jill Valentine</span>
+                <span class="Statut-Com">En ligne</span>
             </div>
             <div class="Enveloppe-Texte-Jill">
                 <p class="Texte-Jill">Avant de continuer, je devrais inspecter tout ce que j'ai eu ici. Je pourrais y trouver des éléments importants...</p>
@@ -204,13 +210,13 @@
                 </div>
                 <div class="Corps-CV">
                     <div class="Section-CV">
-                        <h3>> IDENTIFICATION</h3>
+                        <h3>IDENTIFICATION</h3>
                         <p>Âge : 22 ans | Localisation : Toulouse</p>
                         <p>Contact : nghuillot@gmail.com | 06.11.84.39.65</p>
                         <p>Cible : Alternance Développeur Informatique / Gestionnaire BDD</p>
                     </div>
                     <div class="Section-CV">
-                        <h3>> COMPÉTENCES DÉTECTES</h3>
+                        <h3>COMPÉTENCES DÉTECTES</h3>
                         <ul>
                             <li>- HTML / CSS (Création d'interfaces)</li>
                             <li>- SQL (Requêtes, jointures, gestion de bases de données)</li>
@@ -220,20 +226,20 @@
                         </ul>
                     </div>
                     <div class="Section-CV">
-                        <h3>> HISTORIQUE OPÉRATIONNEL</h3>
+                        <h3>HISTORIQUE OPÉRATIONNEL</h3>
                         <p>[DEPUIS OCT. 2025] Alternance Technicien Support (Glassytech) - Maintenance, logistique, conseil.</p>
                         <p>[DEPUIS 2024] Auto-Entrepreneur (S&N Store) - E-commerce & Community Management.</p>
                         <p>[2019 - 2024] Éducateur de Tennis & Membre du Bureau (TC Saint-Martory).</p>
                     </div>
                     <div class="Section-CV">
-                        <h3>> ARCHIVES DE FORMATION</h3>
+                        <h3>ARCHIVES DE FORMATION</h3>
                         <p>[DEPUIS 2025] BTS SIO Option SLAM (IRIS-Médiaschool)</p>
                         <p>[DEPUIS 2025] Licence de Psychologie (Univ. Jean Jaurès)</p>
                         <p>[2023] DEUG de Psychologie</p>
                         <p>[2021] CQP Tennis & Baccalauréat STMG</p>
                     </div>
                     <div class="Section-CV">
-                        <h3>> PROTOCOLES COMPLÉMENTAIRES</h3>
+                        <h3>PROTOCOLES COMPLÉMENTAIRES</h3>
                         <p>Adaptabilité | Rigueur et minutie | Profil autodidacte.</p>
                     </div>
                 </div>
@@ -246,12 +252,12 @@
                 </div>
                 <div class="Corps-Veille">
                     <div class="Section-Veille">
-                        <h3>> SUJET D'ÉTUDE</h3>
+                        <h3>SUJET D'ÉTUDE</h3>
                         <p>Sujet : L'ALGORAVE - Le Live Coding comme performance logicielle</p>
                         <p>L'Algorave consiste à créer de la musique et des visuels en direct uniquement en écrivant du code informatique. Le code n'est plus caché, il est projeté publiquement sur un mur, transformant la programmation en une performance artistique spontanée et dynamique. Cette pratique pousse à reconsidérer la solidité et la résilience des systèmes, car le code devient une matière vivante modifiable en temps réel sans jamais tolérer d'interruption de service.</p>
                     </div>
                     <div class="Section-Veille">
-                        <h3>> SOURCES ET OUTILS</h3>
+                        <h3>SOURCES ET OUTILS</h3>
                         <ul>
                             <li>- Feedly pour regrouper les flux RSS (ex: TOPLAP) et surveiller les dépôts GitHub.</li>
                             <li>- Alertes Google configurées sur les mots-clés 'Live Coding' et 'Algorave'.</li>
@@ -260,7 +266,7 @@
                         </ul>
                     </div>
                     <div class="Section-Veille">
-                        <h3>> RAPPORTS ET ARTICLES</h3>
+                        <h3>RAPPORTS ET ARTICLES</h3>
                         <p>[2024] TOPLAP : Portail mondial incontournable du live coding.</p>
                         <p>[2024] IRCAM : Recherches sur le son et l'intelligence artificielle.</p>
                         <p>[2023] ACM Digital Library : Études techniques sur la collaboration distribuée.</p>
@@ -271,18 +277,28 @@
             <div class="Jeu-Agrandi"><span></span></div>
             
             <div class="Panneau-Lateral-CRT">
+                <div class="panneau-header">INDEX</div>
+                <ol class="sommaire-doc" id="sommaire-doc"></ol>
+
                 <div class="panneau-header">SYS.STATUT</div>
                 <div class="panneau-contenu">
                     <p>CONNEXION... <span class="clignotant-rapide">[OK]</span></p>
-                    <p>DÉCRYPTAGE... <span class="clignotant-rapide">[OK]</span></p>
                     <div class="barre-chargement-crt"><div class="progression-crt"></div></div>
-                    <br>
-                    <p>> CPU : OPTIMAL</p>
-                    <p>> MEM : 640K</p>
-                    <p>> UPLINK : SÉCURISÉ</p>
+                    <p>> HEURE SYS. : <span id="horloge-sys">--:--:--</span></p>
+                    <p>> SESSION : <span id="session-sys">00:00:00</span></p>
+                    <p>> ACCÈS : NIVEAU 3</p>
                 </div>
-                <div class="grille-radar">
-                    <div class="ligne-scan"></div>
+                <div class="grille-radar moniteur-ecg">
+                    <div class="ecg-entete">
+                        <span>CONDITION</span>
+                        <span class="ecg-etat">FINE</span>
+                    </div>
+                    <svg class="ecg-svg" viewBox="0 0 200 60" preserveAspectRatio="none" aria-hidden="true">
+                        <g class="ecg-trace">
+                            <path d="M0 40 H30 L35 36 L40 40 H48 L52 46 L57 8 L62 52 L66 40 H74 L82 32 L90 40 H130 L135 36 L140 40 H148 L152 46 L157 8 L162 52 L166 40 H174 L182 32 L190 40 H230 L235 36 L240 40 H248 L252 46 L257 8 L262 52 L266 40 H274 L282 32 L290 40 H330 L335 36 L340 40 H348 L352 46 L357 8 L362 52 L366 40 H374 L382 32 L390 40 H400"/>
+                        </g>
+                    </svg>
+                    <div class="ecg-pied"><span class="ecg-coeur">&#9829;</span> <span id="ecg-bpm">72</span> BPM</div>
                 </div>
             </div>
         </nav>

@@ -11,6 +11,12 @@
     <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
 </head>
 <body>
+    <script>
+        try {
+            const theme = JSON.parse(localStorage.getItem('donnees-survie'))?.theme;
+            if (theme) document.body.dataset.theme = theme;
+        } catch (e) {}
+    </script>
     <input type="radio" name="projet" id="projet-1" autocomplete="off" style="display: none;">
     <input type="radio" name="projet" id="projet-2" autocomplete="off" style="display: none;">
     <input type="radio" name="projet" id="projet-3" autocomplete="off" style="display: none;">
@@ -21,7 +27,7 @@
     <div class="Archive-Interface">
         <header class="Archive-Header">
             <h1>> ACCRÉDITATION REQUISE... [OK]</h1>
-            <h2>SYS.ARCHIVES // PROJETS_</h2>
+            <h2>SYS.ARCHIVES // PROJETS</h2>
         </header>
         
         <div class="Archive-Content">
@@ -31,7 +37,7 @@
                         <span>FICHIER_01</span>
                         <span>[ EN COURS ]</span>
                     </div>
-                    <div class="carte-titre">> PORTFOLIO TERMINAL</div>
+                    <div class="carte-titre">PORTFOLIO TERMINAL</div>
                     <div class="carte-tech">[ HTML | CSS | JS | SVG ]</div>
                 </label>
 
@@ -40,7 +46,7 @@
                         <span>FICHIER_02</span>
                         <span>[ ARCHIVÉ ]</span>
                     </div>
-                    <div class="carte-titre">> POMODORO</div>
+                    <div class="carte-titre">POMODORO</div>
                     <div class="carte-tech">[ Python | CSS | JS ]</div>
                 </label>
 
@@ -49,7 +55,7 @@
                         <span>FICHIER_03</span>
                         <span>[ EN COURS ]</span>
                     </div>
-                    <div class="carte-titre">> APPRENTISSAGE SVG</div>
+                    <div class="carte-titre">APPRENTISSAGE SVG</div>
                     <div class="carte-tech">[ SVG | CSS | JS ]</div>
                 </label>
             </div>
@@ -63,36 +69,36 @@
                     </div>
 
                     <div class="Detail-Contenu" id="detail-1">
-                        <div class="detail-titre">> PORTFOLIO TERMINAL</div>
+                        <div class="detail-titre">PORTFOLIO TERMINAL</div>
                         <div class="carte-tech" style="margin-bottom: 20px;">TECHNOLOGIES DÉTECTÉES : HTML | CSS | JS | SVG</div>
                         <img class="detail-image" src="./Image/PreviewGrace.png" alt="Aperçu du projet" decoding="async">
                         <div class="detail-section">
-                            <h3>> RAPPORT DE MISSION</h3>
+                            <h3>RAPPORT DE MISSION</h3>
                             <p>Interface web immersive inspirée des terminaux informatiques de la fin des années 90 et de l'univers Resident Evil. Utilisation de grilles interactives, d'animations CSS (effets CRT) et de manipulation audio/vidéo en JS.</p>
                         </div>
-                        <a href="Projets/PortfolioArticle.html" class="detail-link">[ EXTRAIRE LES DONNÉES ]</a>
+                        <a href="Projets/Article.html?id=portfolio" class="detail-link">Extraire les données</a>
                     </div>
 
                     <div class="Detail-Contenu" id="detail-2">
-                        <div class="detail-titre">> POMODORO</div>
+                        <div class="detail-titre">POMODORO</div>
                         <div class="carte-tech" style="margin-bottom: 20px;">TECHNOLOGIES DÉTECTÉES : Python | CSS | JS</div>
                         <img class="detail-image" src="./Image/Pomodoro.png" alt="Aperçu du projet" decoding="async">
                         <div class="detail-section">
-                            <h3>> RAPPORT DE MISSION</h3>
+                            <h3>RAPPORT DE MISSION</h3>
                             <p>Application de type Pomodoro pour la gestion du temps et l'augmentation de la productivité. Implémentation d'une interface utilisateur intuitive avec des fonctionnalités de suivi des tâches et de gestion des sessions de travail.</p>
                         </div>
-                        <a href="Projets/PomodoroArticle.html" class="detail-link">[ EXTRAIRE LES DONNÉES ]</a>
+                        <a href="Projets/Article.html?id=pomodoro" class="detail-link">Extraire les données</a>
                     </div>
 
                     <div class="Detail-Contenu" id="detail-3">
-                        <div class="detail-titre">> APPRENTISSAGE SVG</div>
+                        <div class="detail-titre">APPRENTISSAGE SVG</div>
                         <div class="carte-tech" style="margin-bottom: 20px;">TECHNOLOGIES DÉTECTÉES : SVG | CSS | JS</div>
                         <img class="detail-image" src="./svg/Carte-RE.svg" alt="Aperçu du projet" decoding="async" loading="lazy">
                         <div class="detail-section">
-                            <h3>> RAPPORT DE MISSION</h3>
+                            <h3>RAPPORT DE MISSION</h3>
                             <p>Exploration et maîtrise des capacités de l'élément SVG pour créer des graphismes vectoriels interactifs. Implémentation de animations et d'effets visuels dans un contexte pédagogique.</p>
                         </div>
-                        <a href="Projets/SvgArticle.html" class="detail-link">[ EXTRAIRE LES DONNÉES ]</a>
+                        <a href="Projets/Article.html?id=svg" class="detail-link">Extraire les données</a>
                     </div>
 
                 </div>
@@ -100,7 +106,7 @@
         </div>
     </div>
 
-    <a href="index.html" class="bouton-retour-accueil">[<] RETOUR À L'ACCUEIL</a>
+    <a href="index.html" class="bouton-retour-accueil">Retour à l'accueil</a>
 
     <audio id="son-ui" src="./son/Son-inventaire.mp3" preload="auto"></audio>
     <audio id="musique-archive" src="./son/The-City-of-Ruin.mp3" loop preload="metadata"></audio>
@@ -148,8 +154,14 @@
             /* =========================================
                INTERACTIONS SONORES DES DOSSIERS
             ========================================= */
+            const DELAI_SON_SURVOL = 150;
+            let derniereLecture = -Infinity;
+
             function jouerSonCourt() {
                 if (!sonUi) return;
+                const maintenant = performance.now();
+                if (maintenant - derniereLecture < DELAI_SON_SURVOL) return;
+                derniereLecture = maintenant;
                 sonUi.currentTime = 0;
                 sonUi.play().catch(() => {});
             }

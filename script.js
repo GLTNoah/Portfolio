@@ -49,14 +49,22 @@ function getAudioPrincipalActif() {
     return bgMusic && bgMusic.getAttribute('src') ? bgMusic : audioFond;
 }
 
-function jouerSonCourt(audioEl) {
+const derniereLectureSon = new WeakMap();
+
+function jouerSonCourt(audioEl, delaiMin = 0) {
     if (!audioEl) return;
+    const maintenant = performance.now();
+    if (maintenant - (derniereLectureSon.get(audioEl) ?? -Infinity) < delaiMin) return;
+    derniereLectureSon.set(audioEl, maintenant);
     audioEl.currentTime = 0;
     const playPromise = audioEl.play();
     if (playPromise !== undefined) {
         playPromise.catch(() => {});
     }
 }
+
+const TEXTE_LECTURE = '<span class="icone-bouton" aria-hidden="true">&#9654;</span>Lecture';
+const TEXTE_PAUSE = '<span class="icone-bouton" aria-hidden="true">&#10074;&#10074;</span>Pause';
 
 /* =========================================
    INITIALISATION (THÈMES ET AUDIO)
@@ -133,8 +141,29 @@ document.addEventListener('DOMContentLoaded', () => {
    SONS D'INVENTAIRE SANS LATENCE
 ========================================= */
 
+const DELAI_SON_SURVOL = 150;
+
 emplacementsInventaire.forEach(slot => {
-    slot.addEventListener('mouseenter', () => jouerSonCourt(myaudio));
+    slot.addEventListener('mouseenter', () => jouerSonCourt(myaudio, DELAI_SON_SURVOL));
+
+    const actionInspecter = slot.nextElementSibling?.classList.contains('Icone-Examiner')
+        ? slot.nextElementSibling.querySelector('a, label')
+        : null;
+    if (!actionInspecter) return;
+
+    let etaitSelectionne = false;
+    slot.addEventListener('pointerdown', () => {
+        etaitSelectionne = document.activeElement === slot;
+    });
+    slot.addEventListener('click', () => {
+        if (etaitSelectionne) actionInspecter.click();
+    });
+    slot.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') {
+            e.preventDefault();
+            actionInspecter.click();
+        }
+    });
 });
 
 /* =========================================
@@ -175,7 +204,7 @@ if (btnSon) {
             if (audioActif.paused) {
                 if (themeAudioPreview && !themeAudioPreview.paused) {
                     themeAudioPreview.pause();
-                    if (customPlayBtn) customPlayBtn.innerHTML = "[ &#9658; LECTURE ]";
+                    if (customPlayBtn) customPlayBtn.innerHTML = TEXTE_LECTURE;
                 }
                 audioActif.play().catch(() => {});
                 iconeSon.src = "./Image/sound_on.png";
@@ -212,10 +241,10 @@ if (customPlayBtn && themeAudioPreview) {
             }
             themeAudioPreview.volume = barreVolume ? parseFloat(barreVolume.value) : 0.05;
             themeAudioPreview.play().catch(() => {});
-            customPlayBtn.innerHTML = "[ &#10074;&#10074; PAUSE ]";
+            customPlayBtn.innerHTML = TEXTE_PAUSE;
         } else {
             themeAudioPreview.pause();
-            customPlayBtn.innerHTML = "[ &#9658; LECTURE ]";
+            customPlayBtn.innerHTML = TEXTE_LECTURE;
             const etatPause = localStorage.getItem('music-pause-survie');
             if (audioActif && etatPause !== 'true') {
                 audioActif.play().catch(() => {});
@@ -224,7 +253,7 @@ if (customPlayBtn && themeAudioPreview) {
     });
 
     themeAudioPreview.addEventListener('ended', () => {
-        customPlayBtn.innerHTML = "[ &#9658; LECTURE ]";
+        customPlayBtn.innerHTML = TEXTE_LECTURE;
         const audioActif = getAudioPrincipalActif();
         const etatPause = localStorage.getItem('music-pause-survie');
         if (audioActif && etatPause !== 'true') {
@@ -303,9 +332,9 @@ function selectionnerZoneCarte(zone) {
 
     themeAudioPreview.src = audioSrc;
     document.querySelector('.theme-audio-lecteur').style.display = 'block';
-    btnActiverTheme.style.display = 'block';
+    btnActiverTheme.style.display = 'flex';
     
-    customPlayBtn.innerHTML = "[ &#9658; LECTURE ]";
+    customPlayBtn.innerHTML = TEXTE_LECTURE;
     if (audioProgressBar) audioProgressBar.style.width = '0%';
     if (audioTime) audioTime.textContent = "00:00 / 00:00";
 }
@@ -327,7 +356,7 @@ if (btnActiverTheme) {
 
             if (audioFond) audioFond.pause();
             if (themeAudioPreview) themeAudioPreview.pause();
-            if (customPlayBtn) customPlayBtn.innerHTML = "[ &#9658; LECTURE ]";
+            if (customPlayBtn) customPlayBtn.innerHTML = TEXTE_LECTURE;
             
             if (fondVideo) fondVideo.src = zoneSelectionnee.video;
             
@@ -385,10 +414,9 @@ if (btnActiverTheme) {
 
 tousLesRadiosExamen.forEach(radio => {
     radio.addEventListener('change', (e) => {
-        // Si on quitte la carte alors qu'un aperçu musical jouait, on le coupe et on relance la musique principale
         if (e.target.id !== 'Btn-Carte' && themeAudioPreview && !themeAudioPreview.paused) {
             themeAudioPreview.pause();
-            if (customPlayBtn) customPlayBtn.innerHTML = "[ &#9658; LECTURE ]";
+            if (customPlayBtn) customPlayBtn.innerHTML = TEXTE_LECTURE;
             const audioActif = getAudioPrincipalActif();
             const etatPause = localStorage.getItem('music-pause-survie');
             if (audioActif && etatPause !== 'true') {
@@ -396,7 +424,6 @@ tousLesRadiosExamen.forEach(radio => {
             }
         }
 
-        // Pause de la vidéo de fond pendant l'inspection plein écran pour économiser le GPU
         if (e.target.id === 'radio-cv' || e.target.id === 'radio-veille') {
             if (fondVideo) fondVideo.pause();
         } else {
@@ -407,7 +434,6 @@ tousLesRadiosExamen.forEach(radio => {
     });
 });
 
-// Économie de ressources lorsque l'onglet du navigateur est en arrière-plan
 document.addEventListener('visibilitychange', () => {
     if (!fondVideo) return;
     const enExamen = document.getElementById('radio-cv')?.checked || document.getElementById('radio-veille')?.checked;
@@ -447,7 +473,19 @@ document.addEventListener('keydown', (e) => {
         return;
     }
 
-    // Navigation dans la grille d'inventaire avec les flèches du clavier
+    const touche = e.key.toLowerCase();
+    if ((touche === 'a' || touche === 'e') && !(dialogueTheme && dialogueTheme.open)) {
+        const onglets = ['Btn-Carte', 'etat-initial', 'Btn-Pomodoro'].map(id => document.getElementById(id));
+        const indexOnglet = onglets.findIndex(onglet => onglet && onglet.checked);
+        const ongletSuivant = onglets[indexOnglet + (touche === 'e' ? 1 : -1)];
+        if (indexOnglet !== -1 && ongletSuivant) {
+            ongletSuivant.checked = true;
+            ongletSuivant.dispatchEvent(new Event('change'));
+            jouerSonCourt(myaudio);
+        }
+        return;
+    }
+
     const slots = Array.from(emplacementsInventaire);
     const indexActuel = slots.indexOf(document.activeElement);
     if (indexActuel !== -1) {
@@ -624,3 +662,93 @@ if (dialogueTheme) {
 }
 
 majAffichagePomodoro();
+/* =========================================
+   PANNEAU SYS.STATUT (HORLOGE, SESSION, ECG)
+========================================= */
+
+const horlogeSys = document.getElementById('horloge-sys');
+const sessionSys = document.getElementById('session-sys');
+const ecgBpm = document.getElementById('ecg-bpm');
+
+const deuxChiffres = (n) => String(n).padStart(2, '0');
+
+function majPanneauStatut() {
+    const maintenant = new Date();
+    if (horlogeSys) {
+        horlogeSys.textContent = `${deuxChiffres(maintenant.getHours())}:${deuxChiffres(maintenant.getMinutes())}:${deuxChiffres(maintenant.getSeconds())}`;
+    }
+    if (sessionSys) {
+        const secondes = Math.floor(performance.now() / 1000);
+        sessionSys.textContent = `${deuxChiffres(Math.floor(secondes / 3600))}:${deuxChiffres(Math.floor(secondes / 60) % 60)}:${deuxChiffres(secondes % 60)}`;
+    }
+}
+
+if (horlogeSys || sessionSys) {
+    majPanneauStatut();
+    setInterval(majPanneauStatut, 1000);
+}
+
+if (ecgBpm) {
+    setInterval(() => {
+        ecgBpm.textContent = 70 + Math.floor(Math.random() * 5);
+    }, 2500);
+}
+
+/* =========================================
+   INDEX DU DOCUMENT OUVERT (CV / VEILLE)
+========================================= */
+
+const sommaireDoc = document.getElementById('sommaire-doc');
+const documentsInspectables = {
+    'radio-cv': document.querySelector('.CV-Agrandi'),
+    'radio-veille': document.querySelector('.Veille-Agrandi')
+};
+
+function positionDansDoc(titre, doc) {
+    return titre.getBoundingClientRect().top - doc.getBoundingClientRect().top + doc.scrollTop;
+}
+
+function marquerSectionActive(indexActif) {
+    sommaireDoc.querySelectorAll('button').forEach((bouton, i) => bouton.classList.toggle('actif', i === indexActif));
+}
+
+function majSectionActive(doc) {
+    const titres = doc.querySelectorAll('h3');
+    const enBas = doc.scrollTop > 0 && doc.scrollTop + doc.clientHeight >= doc.scrollHeight - 2;
+    let indexActif = 0;
+    titres.forEach((titre, i) => {
+        if (positionDansDoc(titre, doc) - 60 <= doc.scrollTop) indexActif = i;
+    });
+    if (enBas) indexActif = titres.length - 1;
+    marquerSectionActive(indexActif);
+}
+
+function construireSommaire(doc) {
+    sommaireDoc.replaceChildren();
+    doc.querySelectorAll('h3').forEach((titre, i) => {
+        const bouton = document.createElement('button');
+        bouton.type = 'button';
+        const numero = document.createElement('span');
+        numero.textContent = deuxChiffres(i + 1);
+        bouton.append(numero, titre.textContent.trim());
+        bouton.addEventListener('click', () => {
+            doc.scrollTo({ top: positionDansDoc(titre, doc) - 20, behavior: 'smooth' });
+        });
+        const ligne = document.createElement('li');
+        ligne.append(bouton);
+        sommaireDoc.append(ligne);
+    });
+    doc.scrollTop = 0;
+    marquerSectionActive(0);
+}
+
+if (sommaireDoc) {
+    Object.entries(documentsInspectables).forEach(([idRadio, doc]) => {
+        const radio = document.getElementById(idRadio);
+        if (!radio || !doc) return;
+        radio.addEventListener('change', () => {
+            if (radio.checked) construireSommaire(doc);
+        });
+        doc.addEventListener('scroll', () => majSectionActive(doc), { passive: true });
+    });
+}

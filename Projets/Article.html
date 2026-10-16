@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Archives - Article</title>
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="../MediaQueries.css">
+    <link rel="stylesheet" href="../KeyFrames.css">
+    <link rel="stylesheet" href="Article.css">
+    <link rel="stylesheet" href="MediaArticle.css">
+    <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
+</head>
+<body>
+    <script>
+        try {
+            const theme = JSON.parse(localStorage.getItem('donnees-survie'))?.theme;
+            if (theme) document.body.dataset.theme = theme;
+        } catch (e) {}
+    </script>
+
+    <div class="calque-cathodique" style="visibility: visible; opacity: 0.3;"></div>
+    <video class="fond-video" src="../vidéo/resident-evil.1920x1080.mp4" autoplay muted loop playsinline></video>
+
+    <aside class="Panneau-Controles">
+        <div class="panneau-header">INDEX</div>
+        <ol class="sommaire-doc" id="sommaire-article"></ol>
+
+        <div class="panneau-header">OPTIONS</div>
+        <ol class="sommaire-doc">
+            <li><button type="button" id="btn-zoom-in"><span>+</span>Agrandir le texte</button></li>
+            <li><button type="button" id="btn-zoom-out"><span>-</span>Réduire le texte</button></li>
+            <li><button type="button" id="btn-lecture"><span>&#9680;</span>Mode lecture</button></li>
+            <li><button type="button" id="btn-print"><span>&#9113;</span>Imprimer</button></li>
+            <li><button type="button" id="btn-top"><span>&#9650;</span>Haut de page</button></li>
+            <li><button type="button" id="btn-bottom"><span>&#9660;</span>Bas de page</button></li>
+        </ol>
+    </aside>
+
+    <main class="Document-Wrapper">
+        <article class="Document-A4">
+            <header class="Document-Header">
+                <p class="Document-Boot">UMBRELLA CORP.  //  ARCHIVES  //  <span id="article-dossier"></span></p>
+                <h1 class="Document-Titre" id="article-titre"></h1>
+                <p class="Document-Meta">
+                    STATUT : <span id="article-statut"></span>
+                    &nbsp;//&nbsp; AUTEUR : <span id="article-auteur"></span>
+                </p>
+            </header>
+
+            <div class="Document-Content" id="article-contenu"></div>
+
+            <footer class="Document-Footer">
+                <a href="../Projets.html" class="bouton-retour-document">Retour aux archives</a>
+                <span class="Page-Number">FIN DE FICHIER</span>
+            </footer>
+        </article>
+        <div class="Cale-Bas"></div>
+    </main>
+
+    <script src="articles.js"></script>
+    <script src="article.js"></script>
+</body>
+</html>
