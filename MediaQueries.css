@@ -315,9 +315,6 @@
         display: none; 
     }
     
-    .Haut-Inventaire:has(.Emplacement-Inventaire:focus) .Icone-Examiner { 
-        display: flex; 
-    }
 }
 
 @media (min-width: 481px) and (max-width: 767px) {
@@ -411,9 +408,6 @@
         display: none; 
     }
     
-    .Haut-Inventaire:has(.Emplacement-Inventaire:focus) .Icone-Examiner { 
-        display: flex; 
-    }
     
     .Description-Projet, 
     .Description-CV, 
@@ -539,9 +533,6 @@
         display: none; 
     }
     
-    .Haut-Inventaire:has(.Emplacement-Inventaire:focus) .Icone-Examiner { 
-        display: flex; 
-    }
     
     .Icone-Examiner label, .Icone-Examiner a {
     padding: 0;
@@ -613,5 +604,138 @@
 
     .bouton-fermer-ecran {
         bottom: 10vh;
+    }
+}
+
+/* =========================================
+   AJUSTEMENTS MOBILES (NOUVELLE DA)
+========================================= */
+
+@media (max-width: 1024px) and (orientation: portrait) {
+    /* Grille à 4 colonnes : la barre « Inspecter » s'affiche pleine
+       largeur sous la grille, au lieu d'être accrochée à une case */
+    .Grille-Inventaire .Icone-Examiner {
+        grid-area: auto;
+        grid-column: 1 / -1;
+        order: 1;
+        position: static;
+        width: 100%;
+        height: auto;
+        transform: none;
+        margin-top: 4px;
+    }
+
+    .Grille-Inventaire .Icone-Examiner label,
+    .Grille-Inventaire .Icone-Examiner a {
+        padding: 12px 14px;
+        font-size: 13px;
+    }
+
+    .Description-Projet,
+    .Description-CV,
+    .Description-Veille,
+    .Description-Ordi,
+    .Description-Jeu {
+        position: static;
+        margin: 18px 24px 0;
+    }
+
+    .Haut-Inventaire {
+        padding-bottom: 80px;
+    }
+}
+
+@media (max-width: 767px) {
+    .Barre-Superieure {
+        padding: 2vh 10px 0;
+    }
+
+    #Label-Carte::before,
+    #Label-Pomodoro::after {
+        display: none;
+    }
+
+    #Label-Carte,
+    #Label-Pomodoro,
+    #Label-Etat-Initial {
+        padding: 8px 6px 12px;
+    }
+
+    .Titre-Principal h1,
+    .Bouton-Navigation span:not(.dot-indicateur) {
+        font-size: 11px;
+        letter-spacing: 2px;
+    }
+
+    #etat-initial:checked ~ main #Label-Etat-Initial h1,
+    #Btn-Carte:checked ~ main #Label-Carte span:not(.dot-indicateur),
+    #Btn-Pomodoro:checked ~ main #Label-Pomodoro span:not(.dot-indicateur) {
+        font-size: 15px;
+    }
+
+    .Haut-Inventaire {
+        padding-bottom: 80px;
+    }
+
+    .Icone-Examiner label,
+    .Icone-Examiner a {
+        font-size: 12px;
+    }
+
+    .Widget-Audio-Global {
+        left: 10px;
+        right: 10px;
+        bottom: 10px;
+        gap: 10px;
+        padding: 4px 12px 4px 0;
+    }
+
+    .label-lecture {
+        display: none;
+    }
+
+    .Piste-Infos {
+        min-width: 0;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .Conteneur-Volume {
+        margin-left: auto;
+        padding-left: 10px;
+    }
+
+    #barre-volume {
+        width: 70px;
+    }
+
+    body:has(#Btn-Carte:checked) .Conteneur-Dialogue-Jill {
+        display: none !important;
+    }
+
+    .Panneau-Theme-Zone {
+        margin-top: 3vh;
+    }
+
+    .CV-Agrandi,
+    .Veille-Agrandi,
+    .Contact-Agrandi {
+        top: 10vh;
+        height: 77vh;
+    }
+
+    .Pomodoro-Container::before,
+    .Pomodoro-Container::after {
+        display: none;
+    }
+
+    #pomodoro-mode {
+        font-size: 5vw;
+    }
+
+    .Conteneur-Carte::before {
+        content: "PLAN TACTIQUE  //  RACCOON CITY";
+        font-size: 12px;
+        left: 16px;
     }
 }
