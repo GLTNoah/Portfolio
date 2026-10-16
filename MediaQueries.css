@@ -739,19 +739,3 @@
         left: 16px;
     }
 }
-
-/* =========================================
-   INVENTAIRE : DESCRIPTION SOUS LA GRILLE (GRANDS ÉCRANS)
-========================================= */
-
-@media (min-width: 1025px), (min-width: 768px) and (orientation: landscape) {
-    .Description-Projet,
-    .Description-CV,
-    .Description-Veille,
-    .Description-Ordi,
-    .Description-Jeu {
-        position: static;
-        align-self: stretch;
-        margin: 30px 15px 0;
-    }
-}
