@@ -64,7 +64,7 @@
     font-size: 15px;
     letter-spacing: 2px;
     white-space: pre-wrap;
-    color: rgba(var(--rgb-primary), 0.55);
+    color: rgba(var(--rgb-primary), 0.78);
 }
 
 .Document-Titre {
@@ -224,7 +224,7 @@ body.lecture-pure .Article-Liste li {
 .Page-Number {
     font-size: 18px;
     letter-spacing: 2px;
-    color: rgba(var(--rgb-primary), 0.5);
+    color: rgba(var(--rgb-primary), 0.75);
 }
 
 .bouton-retour-document {

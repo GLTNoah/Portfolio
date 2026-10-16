@@ -338,7 +338,7 @@
         letter-spacing: 4px;
         text-transform: uppercase;
         white-space: nowrap;
-        color: rgba(var(--rgb-white), 0.38);
+        color: rgba(var(--rgb-white), 0.6);
         transition:
             color 0.3s ease,
             font-size 0.3s ease,
@@ -438,7 +438,7 @@
         left: 15px;
         font-family: "Cinzel", serif;
         font-weight: 700;
-        color: rgba(var(--rgb-white), 0.4);
+        color: rgba(var(--rgb-white), 0.62);
     }
 
     .Grille-Inventaire::after {
@@ -1284,7 +1284,7 @@
         margin-bottom: 16px;
         font-size: 15px;
         letter-spacing: 2px;
-        color: rgba(var(--rgb-primary), 0.55);
+        color: rgba(var(--rgb-primary), 0.78);
     }
 
     .En-Tete-CV,
@@ -1494,7 +1494,7 @@
     }
 
     .sommaire-doc button span {
-        color: rgba(var(--rgb-primary), 0.5);
+        color: rgba(var(--rgb-primary), 0.75);
     }
 
     .sommaire-doc button:is(:hover, :focus-visible) {
@@ -1863,7 +1863,7 @@
         font-weight: 700;
         letter-spacing: 4px;
         text-transform: uppercase;
-        color: rgba(var(--rgb-white), 0.4);
+        color: rgba(var(--rgb-white), 0.62);
         margin-bottom: 8px;
     }
 
@@ -2281,4 +2281,28 @@ body::before,
     cursor: pointer;
     border-radius: 0;
     border: none;
+}
+/* =========================================
+   ACCESSIBILITÉ : MOUVEMENTS RÉDUITS
+========================================= */
+
+@media (prefers-reduced-motion: reduce) {
+    @view-transition {
+        navigation: none;
+    }
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        animation-delay: 0s !important;
+        transition-duration: 0.01ms !important;
+        transition-delay: 0s !important;
+        scroll-behavior: auto !important;
+    }
+
+    .Conteneur-Dialogue-Jill {
+        animation: none !important;
+    }
 }

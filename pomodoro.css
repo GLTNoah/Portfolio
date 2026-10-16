@@ -56,7 +56,7 @@ body[data-theme="rouge"] {
     font-size: 15px;
     letter-spacing: 2px;
     text-align: left;
-    color: rgba(var(--rgb-primary), 0.55);
+    color: rgba(var(--rgb-primary), 0.78);
 }
 
 .Pomodoro-Container::after {
@@ -70,7 +70,7 @@ body[data-theme="rouge"] {
     font-size: 15px;
     letter-spacing: 2px;
     text-align: right;
-    color: rgba(var(--rgb-primary), 0.45);
+    color: rgba(var(--rgb-primary), 0.72);
 }
 
 body:has(#Btn-Pomodoro:checked) .Pomodoro-Container {
@@ -169,7 +169,7 @@ body:has(#Btn-Pomodoro:checked) .Pomodoro-Container {
     font-weight: 700;
     letter-spacing: 4px;
     text-transform: uppercase;
-    color: rgba(var(--rgb-white), 0.4);
+    color: rgba(var(--rgb-white), 0.62);
 }
 
 .pomodoro-controls::before {
