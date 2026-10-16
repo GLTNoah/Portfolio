@@ -232,25 +232,25 @@
                 rgba(0, 0, 0, 0.6) 100%
             ),
 
+            url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0.05 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E") 0 0 / 160px 160px,
             radial-gradient(
-                ellipse 26% 32% at 76% 44%,
-                rgba(var(--rgb-primary), 0.13) 0%,
-                transparent 75%
-            ),
-            radial-gradient(
-                ellipse 48% 60% at 76% 46%,
-                rgba(var(--rgb-primary), 0.07) 0%,
-                transparent 70%
+                circle 520px at 75% 42%,
+                rgba(var(--rgb-primary), 0.15) 0%,
+                rgba(var(--rgb-primary), 0.1) 22%,
+                rgba(var(--rgb-primary), 0.055) 45%,
+                rgba(var(--rgb-primary), 0.022) 68%,
+                rgba(var(--rgb-primary), 0.006) 86%,
+                transparent 100%
             ),
             linear-gradient(
                 to left,
-                rgba(0, 0, 0, 0.93) 0%,
-                rgba(0, 0, 0, 0.86) 52%,
-                rgba(0, 0, 0, 0.6) 66%,
-                rgba(0, 0, 0, 0.25) 82%,
+                rgba(2, 2, 2, 0.96) 0%,
+                rgba(2, 2, 2, 0.92) 52%,
+                rgba(2, 2, 2, 0.66) 66%,
+                rgba(2, 2, 2, 0.28) 82%,
                 transparent 100%
             );
-        backdrop-filter: blur(10px) saturate(0.6);
+        backdrop-filter: blur(10px) brightness(0.7) saturate(0.4);
         -webkit-mask-image: linear-gradient(to left, #000 55%, transparent 100%);
         mask-image: linear-gradient(to left, #000 55%, transparent 100%);
         z-index: -1;
