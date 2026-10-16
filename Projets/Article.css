@@ -230,19 +230,7 @@ body.lecture-pure .Article-Liste li {
 .bouton-retour-document {
     display: inline-flex;
     align-items: center;
-    background:
-        linear-gradient(
-            90deg,
-            rgba(var(--rgb-white), 0.18) 0%,
-            rgba(var(--rgb-white), 0.04) 70%,
-            transparent 100%
-        ) top left / 100% 1px no-repeat,
-        linear-gradient(
-            90deg,
-            rgba(var(--rgb-primary), 0.24) 0%,
-            rgba(14, 14, 14, 0.95) 50%,
-            rgba(4, 4, 4, 0.95) 100%
-        );
+    background: var(--degrade-bouton);
     color: rgba(var(--rgb-white), 0.88);
     font-family: "Cinzel", serif;
     font-size: 14px;
@@ -261,19 +249,7 @@ body.lecture-pure .Article-Liste li {
 }
 
 .bouton-retour-document:is(:hover, :focus-visible) {
-    background:
-        linear-gradient(
-            90deg,
-            rgba(var(--rgb-white), 0.22) 0%,
-            rgba(var(--rgb-white), 0.05) 70%,
-            transparent 100%
-        ) top left / 100% 1px no-repeat,
-        linear-gradient(
-            90deg,
-            rgba(var(--rgb-primary), 0.45) 0%,
-            rgba(var(--rgb-primary), 0.12) 55%,
-            rgba(6, 6, 6, 0.95) 100%
-        );
+    background: var(--degrade-bouton-survol);
     color: var(--color-text-white);
     outline: none;
 }

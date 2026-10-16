@@ -154,7 +154,7 @@
     ::-webkit-scrollbar {
     width: 8px;
     height: 8px;
-    background: rgba(var(--rgb-scroll-track), 0.8);
+    background: rgba(var(--rgb-black), 0.6);
     }
 
     ::-webkit-scrollbar-thumb {
