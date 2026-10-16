@@ -829,8 +829,11 @@
     #emplacement-veille + .Icone-Examiner:hover,
     #emplacement-veille + .Icone-Examiner:focus-within,
     .Grille-Inventaire:not(:has(.Emplacement-Inventaire:not(.vide):hover:not(:focus))) #emplacement-jeu:focus + .Icone-Examiner,
+    .Grille-Inventaire:not(:has(.Emplacement-Inventaire:not(.vide):hover:not(:focus))) #emplacement-ordi:focus + .Icone-Examiner,
     #emplacement-jeu + .Icone-Examiner:hover,
-    #emplacement-jeu + .Icone-Examiner:focus-within {
+    #emplacement-ordi + .Icone-Examiner:hover,
+    #emplacement-jeu + .Icone-Examiner:focus-within,
+    #emplacement-ordi + .Icone-Examiner:focus-within {
         display: flex;
     }
 
@@ -839,6 +842,7 @@
         #emplacement-cv + .Icone-Examiner { grid-area: 1 / 2 / 2 / 3; }
         #emplacement-veille + .Icone-Examiner { grid-area: 1 / 3 / 2 / 4; }
         #emplacement-jeu + .Icone-Examiner { grid-area: 3 / 1 / 4 / 2; }
+        #emplacement-ordi + .Icone-Examiner { grid-area: 3 / 2 / 4 / 3; }
 
         .Icone-Examiner {
             top: auto;
@@ -881,6 +885,7 @@
     #radio-projet:checked ~ .animation-allumage-ecran,
     #radio-cv:checked ~ .animation-allumage-ecran,
     #radio-veille:checked ~ .animation-allumage-ecran,
+    #radio-ordi:checked ~ .animation-allumage-ecran,
     #radio-jeu:checked ~ .animation-allumage-ecran {
         display: block;
         animation: fade-ecran-allumage 0.3s ease-out forwards;
@@ -918,6 +923,7 @@
     #radio-projet:checked ~ .calque-cathodique,
     #radio-cv:checked ~ .calque-cathodique,
     #radio-veille:checked ~ .calque-cathodique,
+    #radio-ordi:checked ~ .calque-cathodique,
     #radio-jeu:checked ~ .calque-cathodique {
         visibility: visible;
         opacity: 0.3;
@@ -1000,6 +1006,7 @@
     #radio-projet:checked ~ .bouton-fermer-ecran,
     #radio-cv:checked ~ .bouton-fermer-ecran,
     #radio-veille:checked ~ .bouton-fermer-ecran,
+    #radio-ordi:checked ~ .bouton-fermer-ecran,
     #radio-jeu:checked ~ .bouton-fermer-ecran {
         opacity: 1;
         visibility: visible;
@@ -1186,6 +1193,7 @@
 
     .CV-Agrandi,
     .Veille-Agrandi,
+    .Contact-Agrandi,
     .Panneau-Lateral-CRT,
     .Pomodoro-Container,
     .Archive-Interface,
@@ -1233,7 +1241,8 @@
     }
 
     .CV-Agrandi,
-    .Veille-Agrandi {
+    .Veille-Agrandi,
+    .Contact-Agrandi {
         display: none;
         opacity: 0;
         position: absolute;
@@ -1251,17 +1260,20 @@
     }
 
     .CV-Agrandi::-webkit-scrollbar,
-    .Veille-Agrandi::-webkit-scrollbar {
+    .Veille-Agrandi::-webkit-scrollbar,
+    .Contact-Agrandi::-webkit-scrollbar {
         width: 6px;
     }
 
     .CV-Agrandi::-webkit-scrollbar-track,
-    .Veille-Agrandi::-webkit-scrollbar-track {
+    .Veille-Agrandi::-webkit-scrollbar-track,
+    .Contact-Agrandi::-webkit-scrollbar-track {
         background: transparent;
     }
 
     .CV-Agrandi::-webkit-scrollbar-thumb,
-    .Veille-Agrandi::-webkit-scrollbar-thumb {
+    .Veille-Agrandi::-webkit-scrollbar-thumb,
+    .Contact-Agrandi::-webkit-scrollbar-thumb {
         background: rgba(var(--rgb-primary), 0.5);
     }
 
@@ -1334,6 +1346,18 @@
         margin-bottom: 12px;
     }
 
+    .Contact-Agrandi a {
+        color: var(--color-secondary);
+        text-decoration: none;
+        border-bottom: 1px dashed rgba(var(--rgb-primary), 0.6);
+        transition: background 0.2s ease;
+    }
+
+    .Contact-Agrandi a:is(:hover, :focus-visible) {
+        background: rgba(var(--rgb-primary), 0.2);
+        outline: none;
+    }
+
     .Section-CV p,
     .Section-CV li,
     .Section-Veille p,
@@ -1344,7 +1368,8 @@
     }
 
     body:has(#radio-cv:checked) .CV-Agrandi,
-    body:has(#radio-veille:checked) .Veille-Agrandi {
+    body:has(#radio-veille:checked) .Veille-Agrandi,
+    body:has(#radio-ordi:checked) .Contact-Agrandi {
         display: flex;
         animation: terminal-boot 0.2s ease-out forwards;
     }
@@ -1354,27 +1379,34 @@
     ========================================= */
 
     body:has(#radio-cv:checked) .En-Tete-CV h1,
-    body:has(#radio-veille:checked) .En-Tete-Veille h1 {
+    body:has(#radio-veille:checked) .En-Tete-Veille h1,
+    body:has(#radio-ordi:checked) .En-Tete-Veille h1 {
         animation: frappe-terminal 0.5s steps(18) 0.15s both;
     }
 
     body:has(#radio-cv:checked) .Section-CV,
     body:has(#radio-veille:checked) .Section-Veille,
-    body:has(:is(#radio-cv, #radio-veille):checked) .sommaire-doc li,
-    body:has(:is(#radio-cv, #radio-veille):checked) .panneau-contenu > * {
+    body:has(#radio-ordi:checked) .Section-Veille,
+    body:has(:is(#radio-cv, #radio-veille, #radio-ordi):checked) .sommaire-doc li,
+    body:has(:is(#radio-cv, #radio-veille, #radio-ordi):checked) .panneau-contenu > * {
         animation: description-apparition 0.3s ease-out both;
     }
 
     body:has(#radio-cv:checked) .Section-CV:nth-child(1),
-    body:has(#radio-veille:checked) .Section-Veille:nth-child(1) { animation-delay: 0.35s; }
+    body:has(#radio-veille:checked) .Section-Veille:nth-child(1),
+    body:has(#radio-ordi:checked) .Section-Veille:nth-child(1) { animation-delay: 0.35s; }
     body:has(#radio-cv:checked) .Section-CV:nth-child(2),
-    body:has(#radio-veille:checked) .Section-Veille:nth-child(2) { animation-delay: 0.43s; }
+    body:has(#radio-veille:checked) .Section-Veille:nth-child(2),
+    body:has(#radio-ordi:checked) .Section-Veille:nth-child(2) { animation-delay: 0.43s; }
     body:has(#radio-cv:checked) .Section-CV:nth-child(3),
-    body:has(#radio-veille:checked) .Section-Veille:nth-child(3) { animation-delay: 0.51s; }
+    body:has(#radio-veille:checked) .Section-Veille:nth-child(3),
+    body:has(#radio-ordi:checked) .Section-Veille:nth-child(3) { animation-delay: 0.51s; }
     body:has(#radio-cv:checked) .Section-CV:nth-child(4),
-    body:has(#radio-veille:checked) .Section-Veille:nth-child(4) { animation-delay: 0.59s; }
+    body:has(#radio-veille:checked) .Section-Veille:nth-child(4),
+    body:has(#radio-ordi:checked) .Section-Veille:nth-child(4) { animation-delay: 0.59s; }
     body:has(#radio-cv:checked) .Section-CV:nth-child(n + 5),
-    body:has(#radio-veille:checked) .Section-Veille:nth-child(n + 5) { animation-delay: 0.67s; }
+    body:has(#radio-veille:checked) .Section-Veille:nth-child(n + 5),
+    body:has(#radio-ordi:checked) .Section-Veille:nth-child(n + 5) { animation-delay: 0.67s; }
 
     .sommaire-doc li:nth-child(1),
     .panneau-contenu > :nth-child(1) { animation-delay: 0.2s; }
@@ -1411,6 +1443,7 @@
 
     body:has(#radio-cv:checked) .Panneau-Lateral-CRT,
     body:has(#radio-veille:checked) .Panneau-Lateral-CRT,
+    body:has(#radio-ordi:checked) .Panneau-Lateral-CRT,
     body:has(#radio-projet:checked) .Panneau-Lateral-CRT {
         display: flex;
         animation: terminal-boot 0.25s ease-out 0.05s both;
@@ -2162,7 +2195,8 @@ body::before,
 ========================================= */
 
 .CV-Agrandi,
-.Veille-Agrandi {
+.Veille-Agrandi,
+.Contact-Agrandi {
     scroll-behavior: smooth;
     scrollbar-width: thin;
     scrollbar-color: rgba(var(--rgb-primary), 0.5) transparent;
@@ -2182,7 +2216,8 @@ body::before,
 .Haut-Inventaire:has(#emplacement-veille + .Icone-Examiner:hover) .Description-Veille,
 .Haut-Inventaire:not(:has(.Emplacement-Inventaire:not(.vide):hover:not(:focus))):has(#emplacement-ordi:focus) .Description-Ordi,
 .Haut-Inventaire:not(:has(.Emplacement-Inventaire:not(.vide):hover:not(:focus))):has(#emplacement-jeu:focus) .Description-Jeu,
-.Haut-Inventaire:has(#emplacement-jeu + .Icone-Examiner:hover) .Description-Jeu {
+.Haut-Inventaire:has(#emplacement-jeu + .Icone-Examiner:hover) .Description-Jeu,
+.Haut-Inventaire:has(#emplacement-ordi + .Icone-Examiner:hover) .Description-Ordi {
     display: block;
 }
 

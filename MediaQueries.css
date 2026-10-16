@@ -15,7 +15,8 @@
     }
     
     .CV-Agrandi, 
-    .Veille-Agrandi { 
+    .Veille-Agrandi,
+    .Contact-Agrandi { 
         width: 55vw; 
         height: 80vh; 
         left: 5vw; 
@@ -93,7 +94,8 @@
     }
     
     .CV-Agrandi, 
-    .Veille-Agrandi { 
+    .Veille-Agrandi,
+    .Contact-Agrandi { 
         width: 60vw; 
         height: 80vh; 
         left: 2vw; 
@@ -177,7 +179,8 @@
     }
     
     .CV-Agrandi, 
-    .Veille-Agrandi { 
+    .Veille-Agrandi,
+    .Contact-Agrandi { 
         width: 55vw; 
         height: 80vh; 
         left: 2vw; 
@@ -245,7 +248,8 @@
     }
     
     .CV-Agrandi, 
-    .Veille-Agrandi { 
+    .Veille-Agrandi,
+    .Contact-Agrandi { 
         width: 90vw; 
         height: 80vh; 
         left: 5vw; 
@@ -336,7 +340,8 @@
     }
     
     .CV-Agrandi, 
-    .Veille-Agrandi { 
+    .Veille-Agrandi,
+    .Contact-Agrandi { 
         width: 95vw; 
         height: 85vh; 
         left: 2.5vw; 
@@ -452,7 +457,8 @@
     }
     
     .CV-Agrandi, 
-    .Veille-Agrandi { 
+    .Veille-Agrandi,
+    .Contact-Agrandi { 
         width: 96vw; 
         height: 85vh; 
         left: 2vw; 
@@ -563,7 +569,8 @@
 
 @media (min-width: 1025px), (min-width: 768px) and (orientation: landscape) {
     .CV-Agrandi,
-    .Veille-Agrandi {
+    .Veille-Agrandi,
+    .Contact-Agrandi {
         left: 6vw;
         right: 29.5vw;
         width: auto;

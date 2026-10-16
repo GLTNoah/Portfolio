@@ -424,7 +424,7 @@ tousLesRadiosExamen.forEach(radio => {
             }
         }
 
-        if (e.target.id === 'radio-cv' || e.target.id === 'radio-veille') {
+        if (['radio-cv', 'radio-veille', 'radio-ordi'].includes(e.target.id)) {
             if (fondVideo) fondVideo.pause();
         } else {
             if (fondVideo && fondVideo.paused && !document.hidden) {
@@ -436,7 +436,7 @@ tousLesRadiosExamen.forEach(radio => {
 
 document.addEventListener('visibilitychange', () => {
     if (!fondVideo) return;
-    const enExamen = document.getElementById('radio-cv')?.checked || document.getElementById('radio-veille')?.checked;
+    const enExamen = ['radio-cv', 'radio-veille', 'radio-ordi'].some(id => document.getElementById(id)?.checked);
     if (document.hidden) {
         fondVideo.pause();
     } else if (!enExamen) {
@@ -458,12 +458,13 @@ document.addEventListener('keydown', (e) => {
 
         const radioCv = document.getElementById('radio-cv');
         const radioVeille = document.getElementById('radio-veille');
+        const radioOrdi = document.getElementById('radio-ordi');
         const fermerExamen = document.getElementById('fermer-examen');
         const btnCarte = document.getElementById('Btn-Carte');
         const btnPomodoro = document.getElementById('Btn-Pomodoro');
         const etatInitial = document.getElementById('etat-initial');
 
-        if ((radioCv && radioCv.checked) || (radioVeille && radioVeille.checked)) {
+        if ([radioCv, radioVeille, radioOrdi].some(radio => radio?.checked)) {
             fermerExamen.checked = true;
             fermerExamen.dispatchEvent(new Event('change'));
         } else if ((btnCarte && btnCarte.checked) || (btnPomodoro && btnPomodoro.checked)) {
@@ -701,7 +702,8 @@ if (ecgBpm) {
 const sommaireDoc = document.getElementById('sommaire-doc');
 const documentsInspectables = {
     'radio-cv': document.querySelector('.CV-Agrandi'),
-    'radio-veille': document.querySelector('.Veille-Agrandi')
+    'radio-veille': document.querySelector('.Veille-Agrandi'),
+    'radio-ordi': document.querySelector('.Contact-Agrandi')
 };
 
 function positionDansDoc(titre, doc) {
