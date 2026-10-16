@@ -484,22 +484,21 @@
     .Emplacement-Inventaire {
         counter-increment: cases;
         aspect-ratio: 1 / 1;
-        border: 1px solid rgba(var(--rgb-white), 0.2);
+        border: 1px solid rgba(var(--rgb-white), 0.1);
         background:
             radial-gradient(
                 circle at 50% 48%,
-                rgba(var(--rgb-white), 0.08) 0%,
+                rgba(var(--rgb-white), 0.04) 0%,
                 transparent 62%
             ),
             linear-gradient(
                 to bottom,
-                rgba(40, 40, 40, 0.92) 0%,
-                rgba(24, 24, 24, 0.92) 100%
+                rgba(20, 20, 20, 0.72) 0%,
+                rgba(10, 10, 10, 0.78) 100%
             );
         box-shadow:
-            inset 0 1px 0 rgba(var(--rgb-white), 0.07),
-            inset 0 0 24px rgba(var(--rgb-black), 0.45),
-            0 2px 6px rgba(var(--rgb-black), 0.5);
+            inset 0 1px 0 rgba(var(--rgb-white), 0.04),
+            inset 0 0 20px rgba(var(--rgb-black), 0.4);
         transition:
             border-color 0.2s ease,
             background 0.2s ease,
@@ -642,22 +641,21 @@
 
     .Emplacement-Inventaire:not(.vide):is(:hover, :has(+ .Icone-Examiner:hover)),
     .Grille-Inventaire:not(:has(.Emplacement-Inventaire:not(.vide):hover:not(:focus))) .Emplacement-Inventaire:not(.vide):focus {
-        border-color: var(--color-primary);
+        border-color: rgba(var(--rgb-primary), 0.65);
         background:
             radial-gradient(
                 circle at 50% 48%,
-                rgba(var(--rgb-primary), 0.28) 0%,
+                rgba(var(--rgb-primary), 0.18) 0%,
                 transparent 65%
             ),
             linear-gradient(
                 to bottom,
-                rgba(44, 40, 40, 0.94) 0%,
-                rgba(26, 24, 24, 0.94) 100%
+                rgba(22, 20, 20, 0.78) 0%,
+                rgba(11, 10, 10, 0.82) 100%
             );
         box-shadow:
-            inset 0 1px 0 rgba(var(--rgb-white), 0.09),
-            inset 0 0 0 1px rgba(var(--rgb-primary), 0.35),
-            0 0 14px rgba(var(--rgb-primary), 0.35);
+            inset 0 1px 0 rgba(var(--rgb-white), 0.05),
+            0 0 10px rgba(var(--rgb-primary), 0.18);
     }
 
     .Emplacement-Inventaire:not(.vide):is(:hover, :has(+ .Icone-Examiner:hover)) img,
@@ -668,8 +666,8 @@
     }
 
     .Emplacement-Inventaire.vide {
-        background: rgba(18, 18, 18, 0.8);
-        border: 1px solid rgba(var(--rgb-white), 0.09);
+        background: rgba(8, 8, 8, 0.6);
+        border: 1px solid rgba(var(--rgb-white), 0.05);
         box-shadow: none;
         cursor: default;
     }
