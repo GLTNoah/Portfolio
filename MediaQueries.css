@@ -739,3 +739,33 @@
         left: 16px;
     }
 }
+
+/* =========================================
+   INVENTAIRE : APERÇU DE L'OBJET SÉLECTIONNÉ
+========================================= */
+
+@media (min-width: 1025px) and (min-height: 820px) {
+    .Description-Projet { --apercu: url(./Image/Icone-Projet.png); }
+    .Description-CV { --apercu: url(./Image/Icone-CV.png); }
+    .Description-Veille { --apercu: url(./Image/Icone-Veille.png); }
+    .Description-Ordi { --apercu: url(./Image/Icone-Ordi.png); }
+    .Description-Jeu { --apercu: url(./Image/Icone-Jeu.png); }
+
+    .Description-Projet::before,
+    .Description-CV::before,
+    .Description-Veille::before,
+    .Description-Ordi::before,
+    .Description-Jeu::before {
+        content: "";
+        display: block;
+        height: clamp(120px, 18vh, 230px);
+        margin: 0 0 22px;
+        background:
+            var(--apercu) center / contain no-repeat,
+            radial-gradient(ellipse 45% 12% at 50% 92%, rgba(var(--rgb-black), 0.85), transparent 70%),
+            radial-gradient(circle at 50% 50%, rgba(var(--rgb-primary), 0.14), transparent 62%);
+        filter: drop-shadow(0 14px 14px rgba(var(--rgb-black), 0.8));
+        transform: perspective(700px) rotateX(8deg) rotateY(-12deg);
+        animation: apercu-objet 0.35s ease-out both;
+    }
+}

@@ -72,3 +72,8 @@
     from { clip-path: inset(0 100% 0 0); }
     to { clip-path: inset(0 0 0 0); }
 }
+
+@keyframes apercu-objet {
+    from { opacity: 0; translate: 0 10px; scale: 0.94; }
+    to { opacity: 1; translate: 0 0; scale: 1; }
+}
