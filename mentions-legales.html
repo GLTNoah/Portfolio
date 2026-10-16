@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mentions légales - Noah Guillot</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="MediaQueries.css">
+    <link rel="stylesheet" href="KeyFrames.css">
+    <link rel="stylesheet" href="Projets/Article.css">
+    <link rel="stylesheet" href="Projets/MediaArticle.css">
+</head>
+<body class="page-legale">
+    <script>
+        try {
+            const donnees = JSON.parse(localStorage.getItem('donnees-survie'));
+            if (donnees?.theme) document.body.dataset.theme = donnees.theme;
+        } catch (e) {}
+    </script>
+
+    <div class="calque-cathodique" style="visibility: visible; opacity: 0.3;"></div>
+    <video class="fond-video" src="./vidéo/resident-evil.1920x1080.mp4" autoplay muted loop playsinline></video>
+
+    <main class="Document-Wrapper">
+        <article class="Document-A4">
+            <header class="Document-Header">
+                <p class="Document-Boot">UMBRELLA CORP.  //  ARCHIVES  //  DOCUMENT RÉGLEMENTAIRE</p>
+                <h1 class="Document-Titre">Mentions légales</h1>
+                <p class="Document-Meta">MISE À JOUR : OCTOBRE 2026</p>
+            </header>
+
+            <div class="Document-Content">
+                <section class="Article-Section">
+                    <h2 class="Article-Titre">Éditeur du site</h2>
+                    <p class="Article-Paragraphe">Ce site est un portfolio personnel, édité à titre non professionnel par <strong>Noah Guillot</strong>, particulier résidant à Toulouse (France).</p>
+                    <p class="Article-Paragraphe">Directeur de la publication : Noah Guillot.<br>Contact : <a class="lien-legal" href="mailto:nhguillot@gmail.com">nhguillot@gmail.com</a></p>
+                </section>
+
+                <section class="Article-Section">
+                    <h2 class="Article-Titre">Hébergement</h2>
+                    <p class="Article-Paragraphe"><strong>Hostinger International Ltd</strong><br>61 Lordou Vironos, 6023 Larnaca, Chypre<br>Site : <a class="lien-legal" href="https://www.hostinger.fr" target="_blank" rel="noopener">www.hostinger.fr</a></p>
+                </section>
+
+                <section class="Article-Section">
+                    <h2 class="Article-Titre">Données personnelles</h2>
+                    <p class="Article-Paragraphe">Ce site ne collecte aucune donnée personnelle : il ne contient ni formulaire, ni outil de mesure d'audience, ni publicité, et ne dépose aucun cookie.</p>
+                    <p class="Article-Paragraphe">Pour retenir vos préférences d'affichage (lieu et couleurs choisis, vidéo de fond, volume et mise en pause de la musique), le site utilise le stockage local de votre navigateur (<em>localStorage</em>). Ces informations restent sur votre appareil, ne sont jamais transmises, et peuvent être effacées à tout moment en vidant les données du site dans votre navigateur.</p>
+                    <p class="Article-Paragraphe">Toutes les polices et ressources sont hébergées sur ce site : aucune requête n'est envoyée à des services tiers lors de votre visite, hormis les liens externes que vous choisissez d'ouvrir.</p>
+                    <p class="Article-Paragraphe">Si vous me contactez par e-mail, votre message n'est utilisé que pour vous répondre. Conformément au RGPD, vous pouvez demander l'accès à ces échanges ou leur suppression à l'adresse ci-dessus.</p>
+                </section>
+
+                <section class="Article-Section">
+                    <h2 class="Article-Titre">Propriété intellectuelle et crédits</h2>
+                    <p class="Article-Paragraphe">Le code, les textes et la mise en page de ce site sont la propriété de Noah Guillot, sauf mention contraire.</p>
+                    <p class="Article-Paragraphe">Ce portfolio est un <strong>hommage non commercial</strong> à la saga Resident Evil. Il n'est ni affilié, ni approuvé, ni sponsorisé par Capcom.</p>
+                    <ul class="Article-Liste">
+                        <li>Resident Evil, Umbrella Corporation, ses personnages et ses lieux sont des marques et créations de © CAPCOM CO., LTD. Tous droits réservés.</li>
+                        <li>Musiques : « The City of Ruin », « The Front Hall », « Foreboding » et « Uncover », issues des bandes originales de la saga Resident Evil © CAPCOM CO., LTD.</li>
+                        <li>Fonds animés et illustrations des personnages : créations de leurs auteurs respectifs, utilisées à titre d'hommage.</li>
+                        <li>Polices : Cinzel (Natanael Gama) et VT323 (Peter Hull), sous licence SIL Open Font License.</li>
+                    </ul>
+                    <p class="Article-Paragraphe">Si vous êtes titulaire de droits sur l'un de ces contenus et souhaitez son retrait, écrivez-moi : il sera retiré rapidement.</p>
+                </section>
+            </div>
+
+            <footer class="Document-Footer">
+                <a href="index.html" class="bouton-retour-document">Retour à l'accueil</a>
+                <span class="Page-Number">FIN DE FICHIER</span>
+            </footer>
+        </article>
+        <div class="Cale-Bas"></div>
+    </main>
+
+    <script>
+        try {
+            const video = JSON.parse(localStorage.getItem('donnees-survie'))?.video;
+            const fondVideo = document.querySelector('.fond-video');
+            if (video && fondVideo) fondVideo.src = video;
+        } catch (e) {}
+    </script>
+</body>
+</html>
