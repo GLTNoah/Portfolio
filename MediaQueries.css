@@ -751,6 +751,19 @@
     .Description-Ordi { --apercu: url(./Image/Icone-Ordi.png); }
     .Description-Jeu { --apercu: url(./Image/Icone-Jeu.png); }
 
+    .Grille-Inventaire {
+        padding-left: 30px;
+        padding-right: 30px;
+    }
+
+    .Grille-Inventaire::before {
+        left: 30px;
+    }
+
+    .Grille-Inventaire::after {
+        right: 30px;
+    }
+
     .Description-Projet::before,
     .Description-CV::before,
     .Description-Veille::before,
@@ -759,7 +772,7 @@
         content: "";
         display: block;
         height: clamp(120px, 18vh, 230px);
-        margin: 0 0 22px;
+        margin: 0 0 44px;
         background:
             var(--apercu) center / contain no-repeat,
             radial-gradient(ellipse 45% 12% at 50% 92%, rgba(var(--rgb-black), 0.85), transparent 70%),
