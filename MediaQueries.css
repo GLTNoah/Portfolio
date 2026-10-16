@@ -764,6 +764,16 @@
         right: 30px;
     }
 
+    .Description-Projet,
+    .Description-CV,
+    .Description-Veille,
+    .Description-Ordi,
+    .Description-Jeu {
+        --hauteur-apercu: clamp(120px, 18vh, 230px);
+        text-align: center;
+    }
+
+    /* Socle : halo de la couleur du lieu, anneau au sol et ombre */
     .Description-Projet::before,
     .Description-CV::before,
     .Description-Veille::before,
@@ -771,14 +781,66 @@
     .Description-Jeu::before {
         content: "";
         display: block;
-        height: clamp(120px, 18vh, 230px);
-        margin: 0 0 44px;
+        height: var(--hauteur-apercu);
+        margin: 0 auto 40px;
+        max-width: 340px;
         background:
-            var(--apercu) center / contain no-repeat,
-            radial-gradient(ellipse 45% 12% at 50% 92%, rgba(var(--rgb-black), 0.85), transparent 70%),
-            radial-gradient(circle at 50% 50%, rgba(var(--rgb-primary), 0.14), transparent 62%);
-        filter: drop-shadow(0 14px 14px rgba(var(--rgb-black), 0.8));
-        transform: perspective(700px) rotateX(8deg) rotateY(-12deg);
+            radial-gradient(closest-side, rgba(var(--rgb-black), 0.9), transparent) 50% 100% / 55% 22px no-repeat,
+            radial-gradient(closest-side, transparent 78%, rgba(var(--rgb-primary), 0.28) 88%, transparent 98%) 50% calc(100% - 2px) / 62% 26px no-repeat,
+            radial-gradient(closest-side, rgba(var(--rgb-primary), 0.2), rgba(var(--rgb-primary), 0.06) 60%, transparent) 50% 55% / 85% 100% no-repeat;
         animation: apercu-objet 0.35s ease-out both;
+    }
+
+    /* L'objet, qui flotte doucement au-dessus du socle */
+    .Description-Projet::after,
+    .Description-CV::after,
+    .Description-Veille::after,
+    .Description-Ordi::after,
+    .Description-Jeu::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        margin: 0 auto;
+        width: min(78%, 280px);
+        height: calc(var(--hauteur-apercu) - 26px);
+        background: var(--apercu) center / contain no-repeat;
+        filter: drop-shadow(0 16px 12px rgba(var(--rgb-black), 0.75));
+        animation:
+            apercu-objet 0.35s ease-out both,
+            apercu-flottement 4s ease-in-out 0.35s infinite;
+    }
+
+    .Description-Projet h3::before,
+    .Description-CV h3::before,
+    .Description-Veille h3::before,
+    .Description-Ordi h3::before,
+    .Description-Jeu h3::before {
+        text-align: center;
+    }
+
+    .Description-Projet hr,
+    .Description-CV hr,
+    .Description-Veille hr,
+    .Description-Ordi hr,
+    .Description-Jeu hr {
+        margin: 10px auto 12px;
+        background: linear-gradient(
+            90deg,
+            transparent 0%,
+            rgba(var(--rgb-white), 0.18) 25%,
+            rgba(var(--rgb-primary), 0.7) 50%,
+            rgba(var(--rgb-white), 0.18) 75%,
+            transparent 100%
+        );
+    }
+
+    .Description-Projet p,
+    .Description-CV p,
+    .Description-Veille p,
+    .Description-Ordi p,
+    .Description-Jeu p {
+        margin: 0 auto;
     }
 }
