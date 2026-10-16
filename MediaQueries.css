@@ -741,28 +741,17 @@
 }
 
 /* =========================================
-   INVENTAIRE : GRILLE ET DESCRIPTION GROUPÉES (GRANDS ÉCRANS)
+   INVENTAIRE : DESCRIPTION SOUS LA GRILLE (GRANDS ÉCRANS)
 ========================================= */
 
 @media (min-width: 1025px), (min-width: 768px) and (orientation: landscape) {
-    .Grille-Inventaire {
-        margin-top: auto;
-        gap: 14px;
-    }
-
     .Description-Projet,
     .Description-CV,
     .Description-Veille,
     .Description-Ordi,
-    .Description-Jeu,
-    .Description-Vide {
+    .Description-Jeu {
         position: static;
         align-self: stretch;
-        min-height: 150px;
-        margin: 26px 15px auto;
-    }
-
-    body:not(:has(#Btn-Carte:checked, #Btn-Pomodoro:checked)) .Haut-Inventaire:not(:has(.Emplacement-Inventaire:not(.vide):is(:hover, :focus), .Icone-Examiner:hover)) .Description-Vide {
-        display: block;
+        margin: 30px 15px 0;
     }
 }
