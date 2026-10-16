@@ -590,6 +590,7 @@ const btnPomodoroStart = document.getElementById('pomodoro-start');
 if (btnPomodoroStart) {
     btnPomodoroStart.addEventListener('click', () => {
         if (intervalId) return;
+        if (!enPause) poursuiteActive = true;
         finCibleTimestamp = Date.now() + tempsRestant * 1000;
 
         intervalId = setInterval(() => {
@@ -608,8 +609,13 @@ if (btnPomodoroStart) {
                     document.querySelector('.pomodoro-controls').classList.add('pause-mode');
                     sessionsCompletees++;
                     if (affichageSessions) affichageSessions.textContent = "Sessions complétées: " + sessionsCompletees;
+                    poursuiteActive = false;
+                    ecartPoursuivant = 1;
+                    messageTemporaire('Vous lui avez échappé. Salle sûre atteinte.', 'sur');
                 } else {
                     enPause = false;
+                    poursuiteActive = true;
+                    ecartPoursuivant = 1;
                     tempsRestant = tempsTravail * 60;
                     if (affichageMode) affichageMode.textContent = "MODE: TRAVAIL";
                     document.querySelector('.Pomodoro-Container').classList.remove('pause-mode');
@@ -631,6 +637,84 @@ if (btnPomodoroPause) {
     });
 }
 
+/* =========================================
+   POURSUIVANT (MR. X)
+========================================= */
+
+const DUREE_RATTRAPAGE = 90;
+const DUREE_RECUPERATION = 60;
+const ECART_MAX = 22;
+
+const poursuite = document.getElementById('poursuite');
+const statutPoursuite = document.getElementById('poursuite-statut');
+const conteneurPomodoro = document.querySelector('.Pomodoro-Container');
+let ecartPoursuivant = 1;
+let poursuiteActive = false;
+let dernierTick = Date.now();
+let minuteurMessage = null;
+
+function afficherStatut(texte, niveau) {
+    if (!statutPoursuite) return;
+    statutPoursuite.textContent = texte;
+    statutPoursuite.dataset.niveau = niveau;
+}
+
+function majPoursuite() {
+    if (!poursuite || !conteneurPomodoro) return;
+    const tempsTotal = (enPause ? tempsPause : tempsTravail) * 60;
+    const progression = Math.max(0, Math.min(100, ((tempsTotal - tempsRestant) / tempsTotal) * 100));
+    poursuite.style.setProperty('--joueur', progression + '%');
+    poursuite.style.setProperty('--poursuivant', Math.max(0, progression - ecartPoursuivant * ECART_MAX) + '%');
+
+    const danger = poursuiteActive && !enPause && ecartPoursuivant < 0.3;
+    conteneurPomodoro.classList.toggle('menace-danger', danger);
+    if (minuteurMessage) return;
+
+    if (enPause) afficherStatut('Salle sûre. Il ne peut pas entrer.', 'sur');
+    else if (!poursuiteActive) afficherStatut('Menace détectée. Démarrez pour fuir.', 'calme');
+    else if (danger) afficherStatut('Il est juste derrière vous !', 'danger');
+    else if (ecartPoursuivant < 0.65) afficherStatut('Des pas résonnent. Il se rapproche...', 'alerte');
+    else afficherStatut('Vous gardez vos distances.', 'calme');
+}
+
+function messageTemporaire(texte, niveau) {
+    clearTimeout(minuteurMessage);
+    afficherStatut(texte, niveau);
+    minuteurMessage = setTimeout(() => {
+        minuteurMessage = null;
+        majPoursuite();
+    }, 4000);
+}
+
+function rattrape() {
+    clearInterval(intervalId);
+    intervalId = null;
+    finCibleTimestamp = null;
+    poursuiteActive = false;
+    ecartPoursuivant = 1;
+    tempsRestant = tempsTravail * 60;
+    jouerSonCourt(pomodoroSound);
+    if (conteneurPomodoro) {
+        conteneurPomodoro.classList.remove('rattrape');
+        void conteneurPomodoro.offsetWidth;
+        conteneurPomodoro.classList.add('rattrape');
+    }
+    majAffichagePomodoro();
+    messageTemporaire('Il vous a rattrapé. La séance recommence.', 'danger');
+}
+
+setInterval(() => {
+    const maintenant = Date.now();
+    const dt = (maintenant - dernierTick) / 1000;
+    dernierTick = maintenant;
+    if (poursuiteActive && !enPause) {
+        if (intervalId) ecartPoursuivant = Math.min(1, ecartPoursuivant + dt / DUREE_RECUPERATION);
+        else ecartPoursuivant -= dt / DUREE_RATTRAPAGE;
+        if (ecartPoursuivant <= 0) rattrape();
+    }
+    majPoursuite();
+}, 250);
+
 const btnPomodoroReset = document.getElementById('pomodoro-reset');
 if (btnPomodoroReset) {
     btnPomodoroReset.addEventListener('click', () => {
@@ -638,6 +722,8 @@ if (btnPomodoroReset) {
         intervalId = null;
         finCibleTimestamp = null;
         enPause = false;
+        poursuiteActive = false;
+        ecartPoursuivant = 1;
         tempsRestant = tempsTravail * 60;
         if (affichageMode) affichageMode.textContent = "MODE: TRAVAIL";
         document.querySelector('.Pomodoro-Container').classList.remove('pause-mode');
