@@ -484,21 +484,8 @@
     .Emplacement-Inventaire {
         counter-increment: cases;
         aspect-ratio: 1 / 1;
-        border: 1px solid rgba(var(--rgb-white), 0.06);
-        background:
-            linear-gradient(
-                90deg,
-                transparent 0%,
-                rgba(var(--rgb-primary), 0.55) 50%,
-                transparent 100%
-            ) bottom / 100% 1px no-repeat,
-            linear-gradient(
-                to top,
-                rgba(var(--rgb-primary), 0.1) 0%,
-                rgba(var(--rgb-primary), 0.02) 45%,
-                transparent 75%
-            ),
-            rgba(var(--rgb-black), 0.45);
+        border: 1px solid rgba(var(--rgb-white), 0.2);
+        background: rgba(34, 34, 34, 0.88);
         box-shadow: none;
         transition:
             border-color 0.2s ease,
@@ -642,22 +629,11 @@
 
     .Emplacement-Inventaire:not(.vide):is(:hover, :has(+ .Icone-Examiner:hover)),
     .Grille-Inventaire:not(:has(.Emplacement-Inventaire:not(.vide):hover:not(:focus))) .Emplacement-Inventaire:not(.vide):focus {
-        border-color: rgba(var(--rgb-primary), 0.3);
+        border-color: var(--color-primary);
         background:
-            linear-gradient(
-                90deg,
-                transparent 0%,
-                var(--color-primary) 50%,
-                transparent 100%
-            ) bottom / 100% 2px no-repeat,
-            linear-gradient(
-                to top,
-                rgba(var(--rgb-primary), 0.32) 0%,
-                rgba(var(--rgb-primary), 0.1) 50%,
-                transparent 90%
-            ),
-            rgba(var(--rgb-black), 0.45);
-        box-shadow: 0 6px 18px -8px rgba(var(--rgb-primary), 0.6);
+            linear-gradient(rgba(var(--rgb-primary), 0.14), rgba(var(--rgb-primary), 0.14)),
+            rgba(34, 34, 34, 0.88);
+        box-shadow: none;
     }
 
     .Emplacement-Inventaire:not(.vide):is(:hover, :has(+ .Icone-Examiner:hover)) img,
@@ -668,8 +644,8 @@
     }
 
     .Emplacement-Inventaire.vide {
-        background: rgba(var(--rgb-black), 0.35);
-        border: 1px solid rgba(var(--rgb-white), 0.035);
+        background: rgba(18, 18, 18, 0.8);
+        border: 1px solid rgba(var(--rgb-white), 0.09);
         box-shadow: none;
         cursor: default;
     }
