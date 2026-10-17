@@ -454,7 +454,15 @@ function ouvrirCoffre() {
         if (i < rubans) case_.className = 'plein';
         grille.append(case_);
     }
-    panneauCoffre.append(titre, grille, ligne, sous);
+    const liste = document.createElement('ul');
+    liste.className = 'salle-coffre-recompenses';
+    RECOMPENSES.forEach((r) => {
+        const li = document.createElement('li');
+        li.className = rubans >= r.seuil ? 'obtenu' : '';
+        li.textContent = `${rubans >= r.seuil ? '▸' : '·'} ${r.nom} — ${r.seuil} ruban${r.seuil > 1 ? 's' : ''}`;
+        liste.append(li);
+    });
+    panneauCoffre.append(titre, grille, ligne, sous, liste);
     panneauCoffre.hidden = false;
 }
 
@@ -489,6 +497,7 @@ ecranJeu.addEventListener('mousemove', (ev) => {
 });
 ecranJeu.addEventListener('mouseleave', () => { survol = null; });
 ecranJeu.addEventListener('click', (ev) => {
+    contexteAudio();
     if (!panneauCoffre.hidden) { panneauCoffre.hidden = true; return; }
     const point = versScene(ev);
     const o = objetSous(point);
@@ -521,7 +530,9 @@ function miseAJour(dt) {
         sessionsVues = sessionsCompletees;
         rubans++;
         try { localStorage.setItem(CLE_RUBANS, rubans); } catch (e) {}
-        message("Séance terminée. +1 ruban d'encre dans le coffre.", 5000);
+        const nouvelle = RECOMPENSES.find((r) => r.seuil === rubans);
+        dessinerRecompenses();
+        message(nouvelle ? `+1 ruban d'encre. Débloqué : ${nouvelle.nom} !` : "Séance terminée. +1 ruban d'encre dans le coffre.", 6000);
     }
 
     // Quand le chrono tourne, Jill va d'elle-même au bon endroit
@@ -555,6 +566,147 @@ function miseAJour(dt) {
         else infoSalle.textContent = intervalId ? 'Séance en cours.' : 'Cliquez sur un objet pour agir, sur le sol pour vous arrêter.';
     }
 }
+
+/* ---------- SONS (synthétisés, aucun fichier audio) ---------- */
+let audioCtx = null;
+function contexteAudio() {
+    const AC = window.AudioContext || window.webkitAudioContext;
+    if (!AC) return null;
+    if (!audioCtx) audioCtx = new AC();
+    if (audioCtx.state === 'suspended') audioCtx.resume();
+    return audioCtx;
+}
+function volumeEffets() {
+    const barre = document.getElementById('barre-volume');
+    const v = barre ? parseFloat(barre.value) : 0.05;
+    return Math.min(1, v * 6) * 0.35;
+}
+// Court bruit filtré : base des pas, des touches et des cliquetis
+function bruit(duree, frequence, q, force, type = 'bandpass') {
+    const ctx = audioCtx;
+    const volume = volumeEffets() * force;
+    if (!ctx || volume <= 0) return;
+    const tampon = ctx.createBuffer(1, Math.ceil(ctx.sampleRate * duree), ctx.sampleRate);
+    const donnees = tampon.getChannelData(0);
+    for (let i = 0; i < donnees.length; i++) donnees[i] = Math.random() * 2 - 1;
+    const source = ctx.createBufferSource();
+    source.buffer = tampon;
+    const filtre = ctx.createBiquadFilter();
+    filtre.type = type; filtre.frequency.value = frequence; filtre.Q.value = q;
+    const gain = ctx.createGain();
+    gain.gain.setValueAtTime(volume, ctx.currentTime);
+    gain.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + duree);
+    source.connect(filtre).connect(gain).connect(ctx.destination);
+    source.start();
+}
+function sonnette() {
+    const ctx = audioCtx;
+    const volume = volumeEffets() * 0.5;
+    if (!ctx || volume <= 0) return;
+    const osc = ctx.createOscillator(), gain = ctx.createGain();
+    osc.type = 'sine'; osc.frequency.value = 2100;
+    gain.gain.setValueAtTime(volume, ctx.currentTime);
+    gain.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + 0.7);
+    osc.connect(gain).connect(ctx.destination);
+    osc.start(); osc.stop(ctx.currentTime + 0.7);
+}
+const sonPas = () => { bruit(0.08, 160, 0.8, 1, 'lowpass'); bruit(0.02, 2200, 2, 0.12); };
+const sonTouche = () => { bruit(0.025, 3000, 3, 0.45); bruit(0.05, 700, 2, 0.35); };
+const sonClavier = () => bruit(0.02, 4200, 4, 0.22);
+
+// Frappe par rafales : quelques secondes de frappe, puis un temps de réflexion
+const frappe = { prochain: 0, finRafale: 0, touches: 0 };
+function sonsAction(t) {
+    if (!audioCtx || jill.etat !== 'action' || document.hidden) return;
+    const id = jill.objet && jill.objet.id;
+    if (id !== 'machine' && id !== 'bureau') return;
+    if (t > frappe.finRafale + 5000 + Math.random() * 4000) frappe.finRafale = t + 3000 + Math.random() * 3000;
+    if (t > frappe.finRafale || t < frappe.prochain) return;
+    if (id === 'machine') {
+        sonTouche();
+        if (++frappe.touches % 28 === 0) sonnette();
+        frappe.prochain = t + 110 + Math.random() * 170;
+    } else {
+        sonClavier();
+        frappe.prochain = t + 70 + Math.random() * 130;
+    }
+}
+let derniereImageMarche = -1;
+function sonsMarche(n) {
+    if (n !== derniereImageMarche && (n === 0 || n === 3)) sonPas();
+    derniereImageMarche = n;
+}
+
+/* ---------- HORLOGE MURALE (heure réelle) ---------- */
+function avecContexte(ctx, dessin) {
+    const ancien = c;
+    c = ctx;
+    dessin();
+    c = ancien;
+}
+function horloge() {
+    const cx = 36, cz = 42.5, r = 4.5;
+    const cercle = (rayon) => Array.from({ length: 16 }, (_, k) => [cx + Math.cos(k * Math.PI / 8) * rayon, 0, cz + Math.sin(k * Math.PI / 8) * rayon]);
+    poly(cercle(r + 1), '#2a1c10');
+    poly(cercle(r), '#cfc6ae');
+    const maintenant = new Date();
+    const aiguille = (angle, longueur, col) => {
+        const [x0, y0] = P(cx, 0, cz);
+        const [x1, y1] = P(cx + Math.sin(angle) * longueur, 0, cz + Math.cos(angle) * longueur);
+        const pas = Math.ceil(Math.max(Math.abs(x1 - x0), Math.abs(y1 - y0)));
+        for (let k = 0; k <= pas; k++) px(x0 + (x1 - x0) * k / pas, y0 + (y1 - y0) * k / pas, col);
+    };
+    aiguille((maintenant.getHours() % 12 + maintenant.getMinutes() / 60) * Math.PI / 6, r * 0.55, '#1a120a');
+    aiguille(maintenant.getMinutes() * Math.PI / 30, r * 0.85, '#1a120a');
+    aiguille(maintenant.getSeconds() * Math.PI / 30, r * 0.85, '#a01818');
+}
+
+/* ---------- RÉCOMPENSES DÉBLOQUÉES PAR LES RUBANS ---------- */
+const RECOMPENSES = [
+    { seuil: 1, nom: 'Affiche Umbrella' },
+    { seuil: 3, nom: 'Caisses de munitions' },
+    { seuil: 6, nom: 'Plaque des S.T.A.R.S.' },
+];
+const calqueRecompenses = document.createElement('canvas');
+calqueRecompenses.width = 320; calqueRecompenses.height = 192;
+let caissesPosees = false;
+function dessinerRecompenses() {
+    const g = calqueRecompenses.getContext('2d');
+    g.clearRect(0, 0, 320, 192);
+    avecContexte(g, () => {
+        if (rubans >= 1) {
+            // Affiche Umbrella sur le mur droit
+            murD(61, 22, 18, 21, '#060504');
+            murD(62, 23, 16, 19, '#d8d0bc');
+            for (let k = 0; k < 8; k++) {
+                const a1 = k * Math.PI / 4, a2 = (k + 1) * Math.PI / 4;
+                poly([[70, 0, 34], [70 + Math.cos(a1) * 6.5, 0, 34 + Math.sin(a1) * 6.5], [70 + Math.cos(a2) * 6.5, 0, 34 + Math.sin(a2) * 6.5]], k % 2 ? '#f0ece4' : '#b01c1c');
+            }
+            murD(63, 24.5, 14, 2, '#b01c1c');
+        }
+        if (rubans >= 3) {
+            // Caisses de munitions empilées contre le mur gauche
+            ombreSol(57, 3, 11, 9);
+            boite(57, 3, 0, 11, 9, 6, ['#5a5a3a', '#44442a', '#30301e']);
+            boite(58, 4, 6, 9, 7, 5, ['#6a6a44', '#50502e', '#3a3a22']);
+            poly([[59, 12, 2], [66, 12, 2], [66, 12, 3.5], [59, 12, 3.5]], '#c8b060');
+            poly([[60, 11, 8], [65, 11, 8], [65, 11, 9.2], [60, 11, 9.2]], '#c8b060');
+        }
+        if (rubans >= 6) {
+            // Plaque des S.T.A.R.S. sur le mur gauche, au-dessus de l'étagère
+            murG(40, 38, 14, 9, '#060504');
+            murG(41, 39, 12, 7, '#8a6c24');
+            murG(42, 40, 10, 5, '#24345e');
+            const [ex, ey] = P(0, 47, 42.5);
+            [[0, -1], [-1, 0], [0, 0], [1, 0], [0, 1]].forEach(([dx, dy]) => px(ex + dx, ey + dy, '#f0d070'));
+        }
+    });
+    if (rubans >= 3 && !caissesPosees) {
+        OBSTACLES.push([57, 3, 11, 9]);
+        caissesPosees = true;
+    }
+}
+dessinerRecompenses();
 
 /* ---------- RENDU ---------- */
 // Cycle de marche en 6 images. Chaque jambe (moitié gauche / droite du bas du
@@ -615,6 +767,7 @@ function dessinerJillScene(t) {
         const n = Math.floor(t / 95) % CYCLE.length;
         image = MARCHES[nom][n];
         saut = REBOND[n];
+        sonsMarche(n);
     } else if (jill.etat === 'action') saut = Math.floor(t / 420) % 2;
 
     const compagnon = COMPAGNON_PAR_THEME[themeActif()];
@@ -706,7 +859,10 @@ function boucle(t) {
     if (conteneurPomo.offsetParent !== null) {
         ctxJeu.clearRect(0, 0, 320, 192);
         ctxJeu.drawImage(decorCanvas, 0, 0);
+        avecContexte(ctxJeu, horloge);
+        ctxJeu.drawImage(calqueRecompenses, 0, 0);
         effets(t);
+        sonsAction(t);
         dessinerJillScene(t);
         ctxJeu.drawImage(ambianceCanvas, 0, 0);
         teinteTheme();

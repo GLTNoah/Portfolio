@@ -537,3 +537,18 @@ body:has(.Pomodoro-Container.pause-mode) .salle-hud {
 body:has(#Btn-Pomodoro:checked) .pomodoro-controls {
     display: none;
 }
+
+.salle-coffre-recompenses {
+    list-style: none;
+    margin-top: 12px;
+    padding-top: 10px;
+    border-top: 1px solid rgba(var(--rgb-white), 0.12);
+    text-align: left;
+    font-size: 16px;
+    letter-spacing: 1px;
+    color: rgba(var(--rgb-white), 0.45);
+}
+
+.salle-coffre-recompenses li.obtenu {
+    color: var(--color-secondary);
+}
