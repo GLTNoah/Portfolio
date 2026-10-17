@@ -8,8 +8,8 @@
 }
 
 body[data-theme="bleu"] {
-    --color-pause: #f08a3c;
-    --rgb-pause: 240, 138, 60;
+    --color-pause: #f2d43c;
+    --rgb-pause: 242, 212, 60;
 }
 
 body[data-theme="jaune"] {
