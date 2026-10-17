@@ -878,3 +878,41 @@
         height: 74vh;
     }
 }
+
+/* =========================================
+   SALLE DE SAUVEGARDE : TÉLÉPHONE ET TABLETTE EN PORTRAIT
+========================================= */
+
+@media (max-width: 767px), (max-width: 1024px) and (orientation: portrait) {
+    .Pomodoro-Container {
+        padding: 34px 10px 30px;
+    }
+
+    .salle-info {
+        white-space: normal;
+        width: 92%;
+        text-align: center;
+        font-size: 13px;
+        letter-spacing: 1px;
+    }
+
+    .salle-hud {
+        margin-top: 2vh;
+        gap: 10px;
+    }
+
+    /* Le rappel des objets est remplacé par la bulle d'information au toucher */
+    .salle-hud-aide,
+    .salle-hud-titre:not(:first-child) {
+        display: none;
+    }
+
+    .Pomodoro-Container::before,
+    .Pomodoro-Container::after {
+        display: none;
+    }
+
+    .salle-hud #pomodoro-timer {
+        font-size: clamp(56px, 16vw, 90px);
+    }
+}
