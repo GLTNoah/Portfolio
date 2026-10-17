@@ -331,3 +331,135 @@ body:has(#Btn-Pomodoro:checked) .pomodoro-controls {
     --color-primary: var(--color-pause);
     --rgb-primary: var(--rgb-pause);
 }
+
+/* =========================================
+   SALLE DE SAUVEGARDE (PIXEL ART)
+========================================= */
+
+.Pomodoro-Container {
+    padding: 58px 30px 56px;
+    justify-content: flex-start;
+    align-items: stretch;
+}
+
+.salle-ecran {
+    position: relative;
+    flex: 1;
+    min-height: 0;
+}
+
+#salle-sauvegarde {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    image-rendering: pixelated;
+}
+
+.salle-info {
+    position: absolute;
+    top: 8px;
+    left: 50%;
+    translate: -50% 0;
+    padding: 4px 12px;
+    background: rgba(var(--rgb-black), 0.7);
+    border-left: 2px solid var(--color-primary);
+    font-size: 17px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    white-space: nowrap;
+    color: var(--color-secondary);
+    pointer-events: none;
+}
+
+.salle-coffre {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    translate: -50% -50%;
+    min-width: 260px;
+    padding: 18px 22px;
+    background: var(--degrade-bouton);
+    border-left: 3px solid var(--color-primary);
+    box-shadow: 0 20px 50px rgba(var(--rgb-black), 0.8);
+    text-align: center;
+}
+
+.salle-coffre[hidden] {
+    display: none;
+}
+
+.salle-coffre h3 {
+    font-family: "Cinzel", serif;
+    font-size: 14px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--color-text-white);
+    margin-bottom: 12px;
+}
+
+.salle-coffre p {
+    font-size: 18px;
+    letter-spacing: 1px;
+    color: rgba(var(--rgb-white), 0.85);
+}
+
+.salle-coffre .salle-coffre-note {
+    font-size: 15px;
+    color: rgba(var(--rgb-primary), 0.75);
+}
+
+.salle-coffre-grille {
+    display: grid;
+    grid-template-columns: repeat(4, 30px);
+    gap: 6px;
+    justify-content: center;
+    margin-bottom: 12px;
+}
+
+.salle-coffre-grille span {
+    height: 30px;
+    background: rgba(var(--rgb-black), 0.5);
+    border: 1px solid rgba(var(--rgb-white), 0.12);
+}
+
+.salle-coffre-grille span.plein {
+    background:
+        radial-gradient(circle at 35% 50%, #0c0c0c 0 3px, transparent 4px),
+        radial-gradient(circle at 65% 50%, #0c0c0c 0 3px, transparent 4px),
+        #2a2a2c;
+    border-color: rgba(var(--rgb-primary), 0.6);
+    box-shadow: 0 0 8px rgba(var(--rgb-primary), 0.3);
+}
+
+.salle-hud {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 26px;
+    margin-top: 14px;
+}
+
+.salle-hud > * {
+    margin: 0;
+}
+
+.salle-hud #pomodoro-mode {
+    font-size: 17px;
+    letter-spacing: 3px;
+    padding: 0 10px;
+}
+
+.salle-hud #pomodoro-timer {
+    font-size: 54px;
+    letter-spacing: 6px;
+}
+
+.salle-hud .pomodoro-progress-bar-container {
+    width: 200px;
+    height: 14px;
+}
+
+.salle-hud #pomodoro-sessions {
+    font-size: 17px;
+}

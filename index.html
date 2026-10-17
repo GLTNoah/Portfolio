@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="pomodoro.css">
     <link rel="stylesheet" href="MediaQueries.css">
     <script src="script.js" defer></script>
+    <script src="salle.js" defer></script>
 </head>
 
 <body>
@@ -329,12 +330,19 @@
         </nav>
 
         <div class="Pomodoro-Container">
-            <h2 id="pomodoro-mode">MODE: TRAVAIL</h2>
-            <div class="pomodoro-progress-bar-container">
-                <div id="pomodoro-progress"></div>
+            <div class="salle-ecran">
+                <canvas id="salle-sauvegarde" width="320" height="192" aria-label="Salle de sauvegarde : cliquez sur un objet pour lancer une séance"></canvas>
+                <p class="salle-info" id="salle-info">Cliquez sur un objet de la salle pour agir.</p>
+                <div class="salle-coffre" id="salle-coffre" hidden></div>
             </div>
-            <div id="pomodoro-timer">25:00</div>
-            <div id="pomodoro-sessions">Sessions complétées: 0</div>
+            <div class="salle-hud">
+                <h2 id="pomodoro-mode">MODE: TRAVAIL</h2>
+                <div id="pomodoro-timer">25:00</div>
+                <div class="pomodoro-progress-bar-container">
+                    <div id="pomodoro-progress"></div>
+                </div>
+                <div id="pomodoro-sessions">Sessions complétées: 0</div>
+            </div>
         </div>
 
         <div class="Conteneur-Carte">
