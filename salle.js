@@ -242,10 +242,10 @@ const conteneurPomo = document.querySelector('.Pomodoro-Container');
 const controlesPomo = document.querySelector('.pomodoro-controls');
 
 const OBJETS = [
-    { id: 'machine', nom: 'Machine à écrire', action: 'Rédiger', type: 'travail', boite: [62, 52, 0, 26, 18, 28], place: [76, 82] },
-    { id: 'bureau', nom: 'Ordinateur', action: 'Coder', type: 'travail', boite: [18, 2, 0, 36, 16, 28], place: [36, 30] },
-    { id: 'etagere', nom: 'Étagère', action: 'Réviser', type: 'travail', boite: [2, 26, 0, 11, 44, 36], place: [24, 50] },
-    { id: 'herbes', nom: 'Herbes vertes', action: 'Se soigner', type: 'pause', boite: [16, 84, 0, 8, 26, 14], place: [34, 98] },
+    { id: 'machine', nom: 'Machine à écrire', action: 'Rédiger', type: 'travail', duree: 25, boite: [62, 52, 0, 26, 18, 28], place: [76, 82] },
+    { id: 'bureau', nom: 'Ordinateur', action: 'Coder', type: 'travail', duree: 45, boite: [18, 2, 0, 36, 16, 28], place: [36, 30] },
+    { id: 'etagere', nom: 'Étagère', action: 'Réviser', type: 'travail', duree: 15, boite: [2, 26, 0, 11, 44, 36], place: [24, 50] },
+    { id: 'herbes', nom: 'Herbes vertes', action: 'Se soigner', type: 'pause', duree: 5, boite: [16, 84, 0, 8, 26, 14], place: [34, 98] },
     { id: 'coffre', nom: 'Coffre', action: 'Ouvrir', type: 'coffre', boite: [118, 3, 0, 28, 14, 14], place: [132, 30] },
 ];
 OBJETS.forEach((o) => {
@@ -295,10 +295,17 @@ function basculerMode(versPause) {
     controlesPomo.classList.toggle('pause-mode', enPause);
 }
 
+// Chaque activité a sa propre durée. Recliquer sur la même activité
+// après une pause reprend là où on s'était arrêté.
+let activiteEnCours = null;
 function demarrerAction(o) {
     const versPause = o.type === 'pause';
     arreterChrono();
+    if (versPause) tempsPause = o.duree; else tempsTravail = o.duree;
+    const reprise = activiteEnCours === o && versPause === enPause && tempsRestant > 0;
     if (versPause !== enPause) basculerMode(versPause);
+    else if (!reprise) tempsRestant = o.duree * 60;
+    activiteEnCours = o;
     majAffichagePomodoro();
     btnPomodoroStart.click();
 }
@@ -359,8 +366,7 @@ function objetSous([x, y]) {
 }
 function texteObjet(o) {
     if (o.type === 'coffre') return `${o.nom.toUpperCase()} — ${rubans} ruban(s) d'encre`;
-    const duree = o.type === 'pause' ? tempsPause : tempsTravail;
-    return `${o.nom.toUpperCase()} — ${o.action} (${duree} min)`;
+    return `${o.nom.toUpperCase()} — ${o.action} (${o.duree} min)`;
 }
 
 ecranJeu.addEventListener('mousemove', (ev) => {
