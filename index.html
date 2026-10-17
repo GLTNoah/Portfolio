@@ -110,6 +110,23 @@
                 </ul>
             </div>
 
+            <section class="salle-hud" aria-label="Séance en cours">
+                <p class="salle-hud-titre">Séance</p>
+                <h2 id="pomodoro-mode">MODE: TRAVAIL</h2>
+                <div id="pomodoro-timer">25:00</div>
+                <div class="pomodoro-progress-bar-container">
+                    <div id="pomodoro-progress"></div>
+                </div>
+                <div id="pomodoro-sessions">Sessions complétées: 0</div>
+                <p class="salle-hud-titre">Dans la salle</p>
+                <ul class="salle-hud-aide">
+                    <li><span>Machine à écrire · Ordinateur · Étagère</span>Travail</li>
+                    <li><span>Herbes vertes</span>Pause</li>
+                    <li><span>Coffre</span>Rubans d'encre</li>
+                    <li><span>Sol</span>Mettre en pause</li>
+                </ul>
+            </section>
+
             <div class="pomodoro-controls">
                 <button id="pomodoro-start"><span class="icone-bouton" aria-hidden="true">&#9654;</span>Démarrer</button>
                 <button id="pomodoro-pause"><span class="icone-bouton" aria-hidden="true">&#10074;&#10074;</span>Pause</button>
@@ -334,14 +351,6 @@
                 <canvas id="salle-sauvegarde" width="320" height="192" aria-label="Salle de sauvegarde : cliquez sur un objet pour lancer une séance"></canvas>
                 <p class="salle-info" id="salle-info">Cliquez sur un objet de la salle pour agir.</p>
                 <div class="salle-coffre" id="salle-coffre" hidden></div>
-            </div>
-            <div class="salle-hud">
-                <h2 id="pomodoro-mode">MODE: TRAVAIL</h2>
-                <div id="pomodoro-timer">25:00</div>
-                <div class="pomodoro-progress-bar-container">
-                    <div id="pomodoro-progress"></div>
-                </div>
-                <div id="pomodoro-sessions">Sessions complétées: 0</div>
             </div>
         </div>
 

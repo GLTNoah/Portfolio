@@ -432,36 +432,104 @@ body:has(#Btn-Pomodoro:checked) .pomodoro-controls {
     box-shadow: 0 0 8px rgba(var(--rgb-primary), 0.3);
 }
 
+/* Panneau de séance dans la colonne de droite (onglet Pomodoro) */
 .salle-hud {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 26px;
-    margin-top: 14px;
+    display: none;
+    flex-direction: column;
+    gap: 14px;
+    width: 100%;
+    padding: 20px 22px;
+    margin-top: 60px;
+    font-family: "VT323", monospace;
 }
 
-.salle-hud > * {
-    margin: 0;
+body:has(#Btn-Pomodoro:checked) .salle-hud {
+    display: flex;
+    animation: glitch-apparition 0.4s ease forwards;
+}
+
+body:has(.Pomodoro-Container.pause-mode) .salle-hud {
+    --color-primary: var(--color-pause);
+    --rgb-primary: var(--rgb-pause);
+    --color-secondary: var(--color-pause);
+}
+
+.salle-hud-titre {
+    font-family: "Cinzel", serif;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: rgba(var(--rgb-white), 0.62);
+    padding-bottom: 6px;
+    border-bottom: 1px solid rgba(var(--rgb-white), 0.12);
+}
+
+.salle-hud-titre:not(:first-child) {
+    margin-top: 18px;
+}
+
+.salle-hud > *,
+.salle-hud #pomodoro-mode,
+.salle-hud #pomodoro-timer,
+.salle-hud .pomodoro-progress-bar-container,
+.salle-hud #pomodoro-sessions {
+    order: 0;
 }
 
 .salle-hud #pomodoro-mode {
-    font-size: 17px;
-    letter-spacing: 3px;
-    padding: 0 10px;
+    align-self: flex-start;
+    margin: 4px 0 0;
+    font-size: 18px;
+    letter-spacing: 4px;
+    padding: 0 12px;
 }
 
 .salle-hud #pomodoro-timer {
-    font-size: 54px;
-    letter-spacing: 6px;
+    margin: 0;
+    font-size: clamp(72px, 6.2vw, 110px);
+    letter-spacing: 8px;
+    line-height: 1;
 }
 
 .salle-hud .pomodoro-progress-bar-container {
-    width: 200px;
-    height: 14px;
+    width: 100%;
+    height: 16px;
+    margin: 0;
 }
 
 .salle-hud #pomodoro-sessions {
+    font-size: 18px;
+    text-align: left;
+}
+
+.salle-hud-aide {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.salle-hud-aide li {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 8px 12px;
+    background: linear-gradient(90deg, rgba(var(--rgb-primary), 0.1), rgba(var(--rgb-black), 0.5) 70%);
+    border-left: 2px solid rgba(var(--rgb-primary), 0.5);
     font-size: 17px;
+    letter-spacing: 1px;
+    color: var(--color-secondary);
+}
+
+.salle-hud-aide li span {
+    font-family: "Cinzel", serif;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: rgba(var(--rgb-white), 0.75);
+    align-self: center;
 }
 
 /* La salle se pilote seule : panneau de commandes masqué
