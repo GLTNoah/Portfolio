@@ -208,8 +208,8 @@ c = ambianceCanvas.getContext('2d');
 c.fillStyle = 'rgba(10, 30, 28, 0.28)'; c.fillRect(0, 0, 320, 192);
 // Lumière chaude de l'ampoule
 const lampe = c.createRadialGradient(ax, ay + 18, 2, ax, ay + 18, 70);
-lampe.addColorStop(0, 'rgba(255, 210, 140, 0.26)');
-lampe.addColorStop(0.5, 'rgba(255, 180, 110, 0.06)');
+lampe.addColorStop(0, 'rgba(255, 210, 140, 0.13)');
+lampe.addColorStop(0.5, 'rgba(255, 180, 110, 0.03)');
 lampe.addColorStop(1, 'rgba(0, 0, 0, 0)');
 c.fillStyle = lampe; c.fillRect(0, 0, 320, 192);
 // Lueur de l'écran
@@ -224,7 +224,7 @@ ombre.addColorStop(0.6, 'rgba(0, 0, 0, 0.45)');
 ombre.addColorStop(1, 'rgba(0, 0, 0, 0.88)');
 c.fillStyle = ombre; c.fillRect(0, 0, 320, 192);
 // Poussière dans la lumière
-for (let k = 0; k < 40; k++) px(ax - 30 + alea() * 60, ay + 4 + alea() * 50, 'rgba(255, 230, 190, 0.25)');
+for (let k = 0; k < 40; k++) px(ax - 30 + alea() * 60, ay + 4 + alea() * 50, 'rgba(255, 230, 190, 0.12)');
 // Grain
 for (let k = 0; k < 1400; k++) px(alea() * 320, alea() * 192, alea() > 0.5 ? 'rgba(255,255,255,0.025)' : 'rgba(0,0,0,0.12)');
 
@@ -535,7 +535,7 @@ function teinteTheme() {
     ctxJeu.fillStyle = `rgba(${rgb}, 0.12)`;
     ctxJeu.fillRect(0, 0, 320, 192);
     const halo = ctxJeu.createRadialGradient(ax, ay + 18, 4, ax, ay + 18, 90);
-    halo.addColorStop(0, `rgba(${rgb}, 0.14)`);
+    halo.addColorStop(0, `rgba(${rgb}, 0.07)`);
     halo.addColorStop(1, `rgba(${rgb}, 0)`);
     ctxJeu.fillStyle = halo;
     ctxJeu.fillRect(0, 0, 320, 192);
