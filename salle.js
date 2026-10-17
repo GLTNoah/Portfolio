@@ -207,9 +207,9 @@ c = ambianceCanvas.getContext('2d');
 // Teinte froide générale
 c.fillStyle = 'rgba(10, 30, 28, 0.28)'; c.fillRect(0, 0, 320, 192);
 // Lumière chaude de l'ampoule
-const lampe = c.createRadialGradient(ax, ay + 18, 2, ax, ay + 18, 70);
+const lampe = c.createRadialGradient(ax, ay + 18, 2, ax, ay + 18, 46);
 lampe.addColorStop(0, 'rgba(255, 210, 140, 0.13)');
-lampe.addColorStop(0.5, 'rgba(255, 180, 110, 0.03)');
+lampe.addColorStop(0.5, 'rgba(255, 180, 110, 0.04)');
 lampe.addColorStop(1, 'rgba(0, 0, 0, 0)');
 c.fillStyle = lampe; c.fillRect(0, 0, 320, 192);
 // Lueur de l'écran
@@ -218,10 +218,11 @@ const ecran = c.createRadialGradient(ex, ey, 1, ex, ey, 20);
 ecran.addColorStop(0, 'rgba(60, 220, 106, 0.14)'); ecran.addColorStop(1, 'rgba(60, 220, 106, 0)');
 c.fillStyle = ecran; c.fillRect(0, 0, 320, 192);
 // Vignettage lourd
-const ombre = c.createRadialGradient(ax, 100, 40, ax, 100, 190);
+const ombre = c.createRadialGradient(ax, ay + 22, 18, ax, ay + 22, 150);
 ombre.addColorStop(0, 'rgba(0, 0, 0, 0)');
-ombre.addColorStop(0.6, 'rgba(0, 0, 0, 0.45)');
-ombre.addColorStop(1, 'rgba(0, 0, 0, 0.88)');
+ombre.addColorStop(0.35, 'rgba(0, 0, 0, 0.35)');
+ombre.addColorStop(0.7, 'rgba(0, 0, 0, 0.72)');
+ombre.addColorStop(1, 'rgba(0, 0, 0, 0.92)');
 c.fillStyle = ombre; c.fillRect(0, 0, 320, 192);
 // Poussière dans la lumière
 for (let k = 0; k < 40; k++) px(ax - 30 + alea() * 60, ay + 4 + alea() * 50, 'rgba(255, 230, 190, 0.12)');
@@ -277,9 +278,86 @@ function message(texte, duree = 4000) {
     messageJusqua = performance.now() + duree;
 }
 
+/* ---------- COLLISIONS ---------- */
+// Emprise au sol des meubles (x, y, largeur, profondeur), élargie de la taille du personnage
+const MARGE = 4;
+const OBSTACLES = [
+    [18, 2, 36, 16],     // bureau
+    [2, 26, 11, 44],     // étagère
+    [118, 3, 28, 14],    // coffre
+    [62, 52, 26, 18],    // table de la machine à écrire
+    [16, 84, 8, 8], [16, 102, 8, 8],   // herbes
+    [100, 98, 30, 12],   // corps sous le drap
+];
+const CASE = 2, NX = Math.ceil(W / CASE), NY = Math.ceil(D / CASE);
+function libre(x, y) {
+    if (x < 5 || y < 5 || x > W - 3 || y > D - 3) return false;
+    const comp = COMPAGNON_PAR_THEME[themeActif()];
+    if (comp && Math.hypot(x - comp.x, y - comp.y) < 7) return false;
+    return !OBSTACLES.some(([ox, oy, ow, od]) => x > ox - MARGE && x < ox + ow + MARGE && y > oy - MARGE && y < oy + od + MARGE);
+}
+// Case libre la plus proche (si la destination tombe dans un meuble)
+function plusProcheLibre(x, y) {
+    for (let r = 0; r < 40; r += 1) for (let a = 0; a < 16; a++) {
+        const px2 = x + Math.cos(a * Math.PI / 8) * r, py2 = y + Math.sin(a * Math.PI / 8) * r;
+        if (libre(px2, py2)) return { x: px2, y: py2 };
+    }
+    return { x, y };
+}
+// A* sur une grille de 2 unités, déplacements en 8 directions
+function chemin(depart, arrivee) {
+    const cle = (i, j) => j * NX + i;
+    const si = Math.round(depart.x / CASE), sj = Math.round(depart.y / CASE);
+    const ai = Math.round(arrivee.x / CASE), aj = Math.round(arrivee.y / CASE);
+    const g = new Map([[cle(si, sj), 0]]), parent = new Map(), ouverts = [[0, si, sj]], fermes = new Set();
+    const h = (i, j) => Math.hypot(i - ai, j - aj);
+    while (ouverts.length) {
+        ouverts.sort((a, b) => a[0] - b[0]);
+        const [, i, j] = ouverts.shift();
+        const k = cle(i, j);
+        if (fermes.has(k)) continue;
+        fermes.add(k);
+        if (i === ai && j === aj) {
+            const pts = [arrivee];
+            let c2 = parent.get(k);
+            while (c2 !== undefined && c2 !== cle(si, sj)) { pts.unshift({ x: (c2 % NX) * CASE, y: Math.floor(c2 / NX) * CASE }); c2 = parent.get(c2); }
+            // Simplifie : on saute les points intermédiaires quand la ligne droite est libre
+            const lisse = [];
+            let courant = depart;
+            for (let n = 0; n < pts.length; n++) {
+                const suivant = pts[n + 1];
+                if (!suivant || !ligneLibre(courant, suivant)) { lisse.push(pts[n]); courant = pts[n]; }
+            }
+            return lisse;
+        }
+        for (let di = -1; di <= 1; di++) for (let dj = -1; dj <= 1; dj++) {
+            if (!di && !dj) continue;
+            const ni = i + di, nj = j + dj;
+            if (ni < 0 || nj < 0 || ni >= NX || nj >= NY || fermes.has(cle(ni, nj))) continue;
+            if (!libre(ni * CASE, nj * CASE) && !(ni === ai && nj === aj)) continue;
+            const ng = g.get(k) + Math.hypot(di, dj);
+            if (ng < (g.get(cle(ni, nj)) ?? Infinity)) {
+                g.set(cle(ni, nj), ng); parent.set(cle(ni, nj), k);
+                ouverts.push([ng + h(ni, nj), ni, nj]);
+            }
+        }
+    }
+    return [arrivee];
+}
+function ligneLibre(a, b) {
+    const n = Math.ceil(Math.hypot(b.x - a.x, b.y - a.y));
+    for (let k = 1; k < n; k++) if (!libre(a.x + (b.x - a.x) * k / n, a.y + (b.y - a.y) * k / n)) return false;
+    return true;
+}
+function partirVers(point) {
+    const cible = libre(point.x, point.y) ? point : plusProcheLibre(point.x, point.y);
+    jill.cible = cible;
+    jill.chemin = chemin({ x: jill.x, y: jill.y }, cible);
+}
+
 function aller(o, lancer) {
     jill.objet = o;
-    jill.cible = { x: o.place[0], y: o.place[1] };
+    partirVers({ x: o.place[0], y: o.place[1] });
     jill.lancer = lancer;
     jill.etat = 'marche';
 }
@@ -386,7 +464,7 @@ ecranJeu.addEventListener('click', (ev) => {
         if (!sol) return;
         arreterChrono();
         jill.objet = null;
-        jill.cible = sol;
+        partirVers(sol);
         jill.lancer = false;
         jill.etat = 'marche';
         message('Séance en pause.', 2000);
@@ -420,10 +498,15 @@ function miseAJour(dt) {
     }
 
     if (jill.cible) {
-        const dx = jill.cible.x - jill.x, dy = jill.cible.y - jill.y;
+        const etape = (jill.chemin && jill.chemin[0]) || jill.cible;
+        const dx = etape.x - jill.x, dy = etape.y - jill.y;
         const dist = Math.hypot(dx, dy);
         const pas = 42 * dt;
-        if (dist <= pas) { jill.x = jill.cible.x; jill.y = jill.cible.y; arrivee(); }
+        if (dist <= pas) {
+            jill.x = etape.x; jill.y = etape.y;
+            if (jill.chemin && jill.chemin.length > 1) jill.chemin.shift();
+            else { jill.chemin = null; arrivee(); }
+        }
         else {
             jill.x += dx / dist * pas; jill.y += dy / dist * pas;
             const ecranDx = dx - dy;
@@ -556,9 +639,13 @@ function teinteTheme() {
     ctxJeu.closePath();
     ctxJeu.clip();
     ctxJeu.globalCompositeOperation = 'source-atop';
-    ctxJeu.fillStyle = `rgba(${rgb}, 0.12)`;
+    const voile = ctxJeu.createRadialGradient(ax, ay + 22, 10, ax, ay + 22, 130);
+    voile.addColorStop(0, `rgba(${rgb}, 0.13)`);
+    voile.addColorStop(0.6, `rgba(${rgb}, 0.04)`);
+    voile.addColorStop(1, `rgba(${rgb}, 0)`);
+    ctxJeu.fillStyle = voile;
     ctxJeu.fillRect(0, 0, 320, 192);
-    const halo = ctxJeu.createRadialGradient(ax, ay + 18, 4, ax, ay + 18, 90);
+    const halo = ctxJeu.createRadialGradient(ax, ay + 18, 4, ax, ay + 18, 50);
     halo.addColorStop(0, `rgba(${rgb}, 0.07)`);
     halo.addColorStop(1, `rgba(${rgb}, 0)`);
     ctxJeu.fillStyle = halo;
