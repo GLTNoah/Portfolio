@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex">
+    <meta name="theme-color" content="#0a0a0a">
+    <link rel="icon" href="/Image/favicon.svg" type="image/svg+xml">
+    <title>Zone inaccessible - Noah Guillot</title>
+    <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" href="/MediaQueries.css">
+    <link rel="stylesheet" href="/KeyFrames.css">
+    <link rel="stylesheet" href="/Projets/Article.css">
+    <style>
+        .page-404 .Document-A4 { max-width: 760px; min-height: 0; margin-top: 18vh; text-align: center; }
+        .page-404 .Document-Header { text-align: center; }
+        .page-404 .code-erreur { font-family: "VT323", monospace; font-size: 120px; line-height: 1; color: var(--color-secondary); text-shadow: 0 0 14px rgba(var(--rgb-primary), 0.8), 0 0 40px rgba(var(--rgb-primary), 0.35); }
+        .page-404 .Document-Footer { justify-content: center; }
+    </style>
+</head>
+<body class="page-404">
+    <script>
+        try {
+            const donnees = JSON.parse(localStorage.getItem('donnees-survie'));
+            if (donnees?.theme) document.body.dataset.theme = donnees.theme;
+        } catch (e) {}
+    </script>
+
+    <div class="calque-cathodique" style="visibility: visible; opacity: 0.3;"></div>
+    <video class="fond-video" src="/vid%C3%A9o/resident-evil.1920x1080.mp4" autoplay muted loop playsinline></video>
+
+    <main class="Document-Wrapper">
+        <article class="Document-A4">
+            <header class="Document-Header">
+                <p class="Document-Boot">UMBRELLA CORP.  //  PLAN TACTIQUE  //  ERREUR DE NAVIGATION</p>
+                <p class="code-erreur">404</p>
+                <h1 class="Document-Titre">Zone inaccessible</h1>
+            </header>
+            <div class="Document-Content">
+                <p class="Article-Paragraphe">Cette porte est verrouillée, ou la pièce que vous cherchez n'existe pas. Il vous faudra une autre clé.</p>
+                <p class="Article-Paragraphe">Retournez à la salle principale pour reprendre l'exploration.</p>
+            </div>
+            <footer class="Document-Footer">
+                <a href="/" class="bouton-retour-document">Retour à l'accueil</a>
+            </footer>
+        </article>
+    </main>
+</body>
+</html>
