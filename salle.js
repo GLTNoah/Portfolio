@@ -306,6 +306,7 @@ function demarrerAction(o) {
 function arrivee() {
     const o = jill.objet;
     jill.cible = null;
+    if (!o) { jill.etat = 'repos'; return; }
     if (o.type === 'coffre') {
         jill.etat = 'repos';
         ouvrirCoffre();
@@ -343,6 +344,13 @@ function versScene(ev) {
     const decalX = (r.width - 320 * echelle) / 2, decalY = (r.height - 192 * echelle) / 2;
     return [(ev.clientX - r.left - decalX) / echelle, (ev.clientY - r.top - decalY) / echelle];
 }
+// Point de l'écran -> position au sol (inverse de la projection), si c'est dans la pièce
+function versSol([x, y]) {
+    const a = x - OX, b = (y - OY) * 2;
+    const mx = (a + b) / 2, my = (b - a) / 2;
+    if (mx < 6 || my < 22 || mx > W - 4 || my > D - 4) return null;
+    return { x: mx, y: my };
+}
 // Plus un objet est proche du joueur (x + y grands), plus il passe devant
 const profondeur = (o) => o.boite[0] + o.boite[3] + o.boite[1] + o.boite[4];
 function objetSous([x, y]) {
@@ -362,8 +370,19 @@ ecranJeu.addEventListener('mousemove', (ev) => {
 ecranJeu.addEventListener('mouseleave', () => { survol = null; });
 ecranJeu.addEventListener('click', (ev) => {
     if (!panneauCoffre.hidden) { panneauCoffre.hidden = true; return; }
-    const o = objetSous(versScene(ev));
-    if (!o) return;
+    const point = versScene(ev);
+    const o = objetSous(point);
+    if (!o) {
+        const sol = versSol(point);
+        if (!sol) return;
+        arreterChrono();
+        jill.objet = null;
+        jill.cible = sol;
+        jill.lancer = false;
+        jill.etat = 'marche';
+        message('Séance en pause.', 2000);
+        return;
+    }
     jouerSonCourt(myaudio);
     if (o.type !== 'coffre') {
         arreterChrono();
@@ -408,19 +427,41 @@ function miseAJour(dt) {
     if (performance.now() > messageJusqua) {
         if (survol) infoSalle.textContent = texteObjet(survol);
         else if (jill.etat === 'action') infoSalle.textContent = `${jill.objet.action}... ${enPause ? 'Récupération en cours.' : 'Concentration.'}`;
-        else infoSalle.textContent = 'Cliquez sur un objet de la salle pour agir.';
+        else infoSalle.textContent = intervalId ? 'Séance en cours.' : 'Cliquez sur un objet pour agir, sur le sol pour vous arrêter.';
     }
 }
 
 /* ---------- RENDU ---------- */
+// Cycle de marche en 4 images : pas gauche, passage, pas droit, passage.
+// Les jambes (lignes 21 et plus) sont séparées en deux : sur un pas elles s'écartent
+// et le pied qui avance se lève d'un pixel.
+const DEBUT_JAMBES = 21, MILIEU = 8;
+function imageMarche(ecart, piedLeve) {
+    const image = JILL.map((l, j) => (j < DEBUT_JAMBES ? l.slice() : l.map(() => null)));
+    for (let j = DEBUT_JAMBES; j < JILL.length; j++) {
+        JILL[j].forEach((col, i) => {
+            if (!col) return;
+            const jambe = i <= MILIEU ? -1 : 1;
+            const ni = i + ecart * jambe * (j >= JILL.length - 6 ? 2 : 1);
+            const nj = j - (jambe === piedLeve ? 1 : 0);
+            if (ni >= 0 && ni < image[nj].length && nj >= DEBUT_JAMBES - 1) image[nj][ni] = col;
+        });
+    }
+    return image;
+}
+const MARCHE = [imageMarche(1, -1), imageMarche(0, 0), imageMarche(1, 1), imageMarche(0, 0)];
+
 function dessinerJillScene(t) {
     const [sx, sy] = P(jill.x, jill.y, 0);
-    let saut = 0;
-    if (jill.etat === 'marche') saut = Math.floor(t / 120) % 2;
-    else if (jill.etat === 'action') saut = Math.floor(t / 420) % 2;
+    let saut = 0, image = JILL;
+    if (jill.etat === 'marche') {
+        const n = Math.floor(t / 125) % 4;
+        image = MARCHE[n];
+        saut = n % 2;
+    } else if (jill.etat === 'action') saut = Math.floor(t / 420) % 2;
     ctxJeu.fillStyle = 'rgba(0,0,0,0.5)';
     ctxJeu.fillRect(Math.round(sx) - 6, Math.round(sy) - 1, 13, 2);
-    JILL.forEach((l, j) => l.forEach((col, i) => {
+    image.forEach((l, j) => l.forEach((col, i) => {
         if (!col) return;
         const xi = jill.regard > 0 ? l.length - 1 - i : i;
         ctxJeu.fillStyle = col;
@@ -474,7 +515,7 @@ setInterval(() => {
     const dt = Math.min(1, (t - dernierInstant) / 1000);
     dernierInstant = t;
     miseAJour(dt);
-}, 50);
+}, 16);
 
 // Dessin : seulement quand l'écran est visible
 function boucle(t) {

@@ -463,3 +463,9 @@ body:has(#Btn-Pomodoro:checked) .pomodoro-controls {
 .salle-hud #pomodoro-sessions {
     font-size: 17px;
 }
+
+/* La salle se pilote seule : panneau de commandes masqué
+   (conservé dans la page, la salle s'appuie sur ses boutons) */
+body:has(#Btn-Pomodoro:checked) .pomodoro-controls {
+    display: none;
+}
