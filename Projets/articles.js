@@ -60,30 +60,41 @@ Je ressors de cette expérience fondatrice avec des bases extrêmement solides e
     },
 
     pomodoro: {
-        titre: "Pomodoro",
-        dossier: "SYS.DOSSIER // POMODORO PROJET",
+        titre: "Pomodoro : la salle de sauvegarde",
+        dossier: "SYS.DOSSIER // POMODORO_SALLE_DE_SAUVEGARDE",
         statut: "DÉCLASSIFIÉ",
         auteur: "N. GUILLOT",
         contenu: `
-## L'origine : d'un projet scolaire à une intégration complète
+## Le point de départ : un exercice d'école
 
-À l'origine, la création de ce chronomètre Pomodoro était un exercice donné dans le cadre de ma formation. L'objectif initial était relativement classique : concevoir une application web capable de gérer des cycles de travail et de pause pour améliorer la productivité. Cependant, une fois le code de base fonctionnel, j'ai pris la décision de ne pas le laisser de côté comme un simple exercice d'école. J'ai voulu pousser la démarche plus loin en l'intégrant directement au cœur de mon portfolio interactif. Cette démarche m'a permis de transformer un projet d'apprentissage standard en une fonctionnalité concrète et utile, tout en me forçant à adapter mon code pour qu'il cohabite parfaitement avec l'environnement complexe de mon terminal des années 90.
+À l'origine, ce Pomodoro était un exercice de ma formation : un minuteur qui alterne des phases de travail et de pause pour aider à rester concentré. La méthode est simple et efficace, mais l'outil lui-même était banal : un gros chiffre, trois boutons, et rien qui donne envie d'y revenir. Je l'avais d'abord intégré tel quel à mon portfolio, habillé aux couleurs du terminal. Il fonctionnait, mais il restait un corps étranger dans un site entièrement pensé comme un jeu vidéo.
 
-## L'adaptation graphique et l'interface unique
+Je me suis donc posé une question : et si le Pomodoro n'était pas une application qu'on regarde, mais un endroit où l'on se rend ? Dans la saga Resident Evil, il existe un lieu que tous les joueurs connaissent : la salle de sauvegarde. C'est la pièce calme, éclairée par une seule lampe, où l'on souffle entre deux zones dangereuses, où l'on range ses objets dans un coffre et où l'on enregistre sa progression à la machine à écrire. C'est exactement l'esprit du Pomodoro : un sas de concentration.
 
-L'intégration de ce chronomètre nécessitait une refonte visuelle totale. La plupart des applications Pomodoro que l'on trouve sur internet utilisent des designs très doux, souvent accompagnés de dessins de tomates pour rappeler le minuteur de cuisine original. Pour mon portfolio, il fallait casser ces codes. J'ai donc entièrement repensé l'interface en utilisant le CSS pour qu'elle s'aligne sur la direction artistique de mon univers. J'ai opté pour une typographie brute de type console, des compteurs numériques imposants et des boutons de contrôle minimalistes. Le défi était de garder l'outil parfaitement lisible et intuitif à utiliser, tout en conservant cette atmosphère sombre, militaire et confidentielle propre au reste de mon site.
+## Le principe : chaque objet est une activité
 
-## La logique algorithmique et le JavaScript
+Le minuteur s'est transformé en une petite scène en pixel art que l'on pilote à la souris. On clique sur un objet de la pièce, le personnage marche jusqu'à lui, et l'action lance le chronomètre. Chaque objet correspond à une activité, avec sa propre durée :
 
-Le développement du mécanisme interne du chronomètre a été un excellent entraînement pour renforcer ma logique de programmation en JavaScript. Créer un minuteur demande une grande rigueur dans la manipulation du temps. J'ai dû apprendre à utiliser des fonctions spécifiques comme les intervalles pour demander au navigateur de déduire une seconde de manière régulière et précise. Mais la complexité ne s'arrête pas au simple décompte : il fallait coder toute la logique de transition. Le programme doit savoir exactement quand le temps de travail de vingt-cinq minutes est écoulé, arrêter le compteur, basculer automatiquement sur le temps de pause de cinq minutes, et modifier l'affichage pour prévenir l'utilisateur. La gestion des boutons pour mettre en pause, reprendre ou réinitialiser le cycle complet m'a demandé de structurer mon code proprement pour éviter les bugs.
+- la machine à écrire pour rédiger, pendant 25 minutes ;
+- l'ordinateur pour coder, pendant 45 minutes ;
+- l'étagère pour réviser, pendant 15 minutes ;
+- les herbes vertes pour faire une pause de 5 minutes, comme lorsqu'on se soigne dans le jeu.
 
-## Les défis de l'intégration dans l'écosystème
+Cliquer sur le sol arrête la séance, et le personnage s'y déplace. Recliquer ensuite sur la même activité reprend le chronomètre là où il s'était arrêté. À la fin d'une séance de travail, le personnage part de lui-même se soigner aux herbes, et un ruban d'encre est ajouté dans le coffre : c'est la récompense, qui reste enregistrée d'une visite à l'autre.
 
-Insérer ce projet scolaire dans le portfolio existant a soulevé de nouveaux défis techniques très intéressants. Sur une page web isolée, un minuteur fonctionne sans aucune contrainte extérieure. Mais ici, le chronomètre devait tourner en même temps que la vidéo d'arrière-plan, la musique d'ambiance et les filtres visuels cathodiques de mon interface. J'ai dû veiller à ce que l'exécution de mon code JavaScript n'alourdisse pas la page et ne provoque pas de ralentissements. J'ai également dû m'assurer que le script du Pomodoro n'entre pas en conflit avec les autres scripts du site, comme celui de la sauvegarde des thèmes de couleurs ou du panneau de contrôle latéral. C'était un véritable exercice d'architecture logicielle à mon échelle.
+## Un décor dessiné entièrement en code
+
+Je n'utilise aucune image pour la pièce : tout est dessiné par le navigateur, pixel par pixel, dans un élément appelé canvas. Les murs, le parquet, le coffre cerclé de métal, la fenêtre condamnée ou la traînée de sang sont décrits par de petites fonctions qui tracent des volumes. Le rendu est ensuite agrandi sans lissage pour garder l'aspect pixel art. L'ambiance compte autant que la mécanique : une seule ampoule éclaire la machine à écrire, le reste de la pièce plonge dans la pénombre, et la couleur du lieu choisi sur la carte teinte légèrement la lumière.
+
+Le personnage change lui aussi selon le lieu : Jill à la bibliothèque, Leon au commissariat (avec Claire qui attend dans la salle), Ada dans la zone industrielle et Grace à l'église. Leurs sprites ont été convertis en grilles de couleurs à partir de références, puis je génère leur animation de marche automatiquement en déplaçant les jambes pixel par pixel.
+
+## Ce que ce projet m'a appris
+
+Transformer un minuteur en mini-jeu m'a obligé à aborder des notions que je n'aurais jamais rencontrées autrement. Il a fallu comprendre la projection isométrique pour placer des objets en fausse 3D, écrire un algorithme de recherche de chemin pour que le personnage contourne les meubles au lieu de les traverser, et séparer la logique du jeu de son affichage pour garder un chronomètre juste même quand l'onglet n'est pas visible. Chacune de ces notions fait l'objet d'une fiche technique dans les archives.
 
 ## Bilan de l'opération
 
-Ce qui ne devait être qu'un exercice d'école s'est transformé en une véritable leçon de développement web global. J'ai pu constater la différence entre coder une petite application isolée et l'intégrer dans un environnement de production plus large. J'ai consolidé mes acquis sur la manipulation du temps en JavaScript, l'utilisation des événements liés aux boutons, et l'adaptation d'un design strict via le CSS. Au final, cette démarche illustre parfaitement ma vision de l'apprentissage : ne jamais se contenter du strict minimum, chercher constamment à réutiliser ses connaissances, et transformer des exercices théoriques en outils pratiques et personnalisés.
+Ce projet résume bien ma façon d'apprendre : partir d'un exercice simple, puis le pousser jusqu'à ce qu'il pose de vrais problèmes à résoudre. Le Pomodoro est toujours un outil de concentration utilisable au quotidien, mais il est devenu la partie la plus vivante du portfolio, et celle qui m'a fait le plus progresser en JavaScript.
 `
     },
 
@@ -117,5 +128,136 @@ L'étape finale, et de loin la plus complexe sur le plan algorithmique, a consis
 
 L'intégration et la manipulation avancée de cette carte SVG interactive a été l'un des défis techniques les plus stimulants de la création de ce portfolio. Ce composant spécifique m'a permis de démystifier complètement l'utilisation des images vectorielles dans le développement web moderne. J'ai concrètement appris qu'une image ne doit pas forcément être un élément passif et décoratif sur une page, mais qu'elle peut devenir le cœur même de la navigation et de l'interactivité d'une application web. Ce travail méticuleux m'a demandé de la rigueur mathématique pour le tracé exact des zones géométriques, de la créativité pour concevoir l'habillage visuel réactif en CSS, et une forte logique de programmation pour gérer la synchronisation des événements en JavaScript. Au final, le résultat dépasse mes attentes de départ : j'ai réussi à construire une interface de navigation atypique, totalement immersive, et techniquement très robuste, qui démontre ma capacité à lier un design ambitieux à un développement front-end exigeant.
 `
-    }
+    },
+
+    theme: {
+        titre: "Fiche : les variables CSS et les thèmes",
+        dossier: "SYS.FICHE // VARIABLES_CSS",
+        statut: "DÉCLASSIFIÉ",
+        auteur: "N. GUILLOT",
+        contenu: `
+## Le problème : une couleur répétée partout
+
+Sur ce portfolio, chaque lieu de la carte change la couleur de toute l'interface : vert pour la bibliothèque, ambre pour le commissariat, bleu pour la zone industrielle, rouge pour l'église. Au début, chaque couleur était écrite directement dans des dizaines de règles CSS. Changer de thème aurait voulu dire réécrire toutes ces règles, une par une.
+
+## La solution : nommer ses couleurs une seule fois
+
+Le CSS permet de créer des variables, aussi appelées propriétés personnalisées. On donne un nom à une valeur, par exemple --color-primary, et partout dans le code on écrit var(--color-primary) au lieu de la couleur elle-même. Le jour où l'on change la valeur de la variable, toutes les règles qui l'utilisent suivent automatiquement.
+
+Pour les thèmes, je redéfinis simplement ces variables selon un attribut posé sur la page. Quand on choisit l'église sur la carte, le JavaScript écrit data-theme="rouge" sur la balise body, et une règle CSS dit : pour un body rouge, la couleur principale vaut tel rouge. Il n'y a rien d'autre à faire : boutons, bordures, chronomètre et lueurs changent tous ensemble.
+
+## Des variables pour les couleurs semi-transparentes
+
+Une couleur seule ne suffit pas toujours. Pour les halos et les fondus, j'ai besoin de la même teinte avec plus ou moins de transparence. J'ai donc aussi stocké les trois composantes rouge, vert et bleu dans une variable, par exemple --rgb-primary, que j'utilise dans rgba(var(--rgb-primary), 0.3). La même teinte peut ainsi être pleine sur un bouton et presque invisible dans un reflet.
+
+## Aller plus loin : une variable peut en remplacer une autre
+
+En pause, l'interface du Pomodoro prend une couleur différente. Plutôt que de réécrire toutes ses règles, je redéfinis localement la couleur principale pour qu'elle pointe vers la couleur de pause. Tous les éléments à l'intérieur basculent d'un coup. C'est ce qui rend le système si puissant : on ne touche jamais aux composants, seulement aux valeurs qu'ils consultent.
+
+## Ce qu'il faut retenir
+
+- une variable CSS se déclare avec deux tirets et se lit avec var() ;
+- elle se transmet aux éléments enfants, et peut être redéfinie localement ;
+- changer un thème revient à changer quelques valeurs, pas des centaines de règles.
+`
+    },
+
+    pixelart: {
+        titre: "Fiche : dessiner en pixel art avec le canvas",
+        dossier: "SYS.FICHE // CANVAS_ISOMETRIE",
+        statut: "DÉCLASSIFIÉ",
+        auteur: "N. GUILLOT",
+        contenu: `
+## Le canvas : une feuille blanche programmable
+
+L'élément canvas est une zone de la page dans laquelle on peut dessiner pixel par pixel avec du JavaScript. Contrairement au HTML, il n'y a pas d'éléments à styliser : on donne des ordres comme « remplis ce rectangle de telle couleur ». La salle de sauvegarde du Pomodoro est dessinée ainsi, dans une image de seulement 320 pixels de large, ensuite agrandie à l'écran.
+
+## Garder les pixels nets
+
+Agrandir une petite image la rend normalement floue, car le navigateur lisse les transitions entre les couleurs. Pour le pixel art, on veut l'inverse : des carrés bien nets. Une seule règle CSS suffit, image-rendering: pixelated, qui demande au navigateur d'agrandir chaque pixel en un bloc franc, sans lissage.
+
+## La fausse 3D : la projection isométrique
+
+La pièce est vue en diagonale, comme dans beaucoup de jeux de gestion. On appelle cela la vue isométrique. Le principe est de décrire chaque objet dans un petit monde en trois dimensions, avec une largeur, une profondeur et une hauteur, puis de le convertir en position sur l'écran avec une formule très simple. Avancer vers la droite dans le monde déplace le point vers la droite et un peu vers le bas à l'écran ; avancer en profondeur le déplace vers la gauche et vers le bas ; monter le fait remonter.
+
+Avec cette formule, dessiner un meuble revient à dessiner trois faces : le dessus le plus clair, une face moyenne et une face sombre. Ces trois nuances suffisent à donner l'impression de volume et d'éclairage.
+
+## Des personnages en grilles de couleurs
+
+Chaque personnage est stocké comme une grille de couleurs : une liste de lignes, chaque case contenant une couleur ou rien. Pour l'afficher, il suffit de parcourir la grille et de dessiner un carré par case. Le même principe permet de le retourner pour qu'il regarde dans le sens de sa marche, ou de créer son animation en décalant les pixels de ses jambes d'une image à l'autre.
+
+## Ce qu'il faut retenir
+
+- le canvas dessine des pixels avec du JavaScript, sans éléments HTML ;
+- image-rendering: pixelated garde le pixel art net à l'agrandissement ;
+- la vue isométrique transforme des coordonnées 3D en position à l'écran ;
+- un sprite peut n'être qu'un tableau de couleurs.
+`
+    },
+
+    chemin: {
+        titre: "Fiche : trouver son chemin avec l'algorithme A*",
+        dossier: "SYS.FICHE // PATHFINDING",
+        statut: "DÉCLASSIFIÉ",
+        auteur: "N. GUILLOT",
+        contenu: `
+## Le problème : le personnage traversait les meubles
+
+Dans la première version de la salle de sauvegarde, le personnage marchait en ligne droite vers l'objet cliqué. C'était simple, mais il passait à travers l'ordinateur ou la table de la machine à écrire. Pour qu'il les contourne, il fallait qu'il sache planifier un trajet : c'est ce qu'on appelle la recherche de chemin.
+
+## Découper le sol en cases
+
+La première étape consiste à transformer la pièce en quadrillage, un peu comme une feuille à petits carreaux. Chaque case est soit libre, soit occupée par un meuble. Pour éviter que le personnage frôle les objets, chaque meuble est légèrement élargi : une marge invisible l'entoure.
+
+## L'idée d'A* : explorer d'abord les pistes prometteuses
+
+L'algorithme A* (prononcé « A étoile ») part de la case du personnage et explore ses voisines, puis les voisines de ses voisines, jusqu'à atteindre la destination. Son astuce est de ne pas explorer au hasard. Pour chaque case, il additionne deux choses : la distance déjà parcourue depuis le départ, et une estimation de la distance qui reste jusqu'à l'arrivée, à vol d'oiseau. Il explore toujours en priorité la case dont ce total est le plus petit.
+
+Résultat : il avance naturellement vers la destination, et ne s'écarte que lorsqu'un obstacle l'y oblige. Quand il atteint enfin la case d'arrivée, il remonte le chemin à l'envers, case par case, pour reconstituer le trajet complet.
+
+## Rendre la marche naturelle
+
+Un trajet case par case donne une marche en escalier, peu naturelle. J'ai donc ajouté une étape de simplification : tant que la ligne droite entre deux points du trajet ne traverse aucun meuble, on supprime les points intermédiaires. Le personnage marche ainsi en ligne droite dès que c'est possible, et ne change de direction qu'aux coins des obstacles. Si l'on clique directement sur un meuble, la destination est ramenée au point libre le plus proche.
+
+## Ce qu'il faut retenir
+
+- la recherche de chemin commence par découper l'espace en cases libres ou occupées ;
+- A* explore en priorité les cases qui semblent le plus proches du but ;
+- on simplifie ensuite le trajet pour une marche fluide.
+`
+    },
+
+    boucle: {
+        titre: "Fiche : la boucle de jeu et la mesure du temps",
+        dossier: "SYS.FICHE // BOUCLE_DE_JEU",
+        statut: "DÉCLASSIFIÉ",
+        auteur: "N. GUILLOT",
+        contenu: `
+## Un minuteur qui dérive
+
+Pour compter le temps, le réflexe de débutant est d'enlever une seconde à chaque tic d'un minuteur JavaScript. Le problème, c'est que ces tics ne sont pas garantis : si l'ordinateur est occupé ou si l'onglet passe en arrière-plan, le navigateur les retarde ou les espace. Au bout de vingt-cinq minutes, le chronomètre peut avoir plusieurs secondes de retard.
+
+## La solution : se fier à l'horloge, pas aux tics
+
+Au lieu de compter les tics, je note l'heure exacte à laquelle la séance doit se terminer. À chaque mise à jour, je calcule simplement le temps restant entre maintenant et cette heure de fin. Même si une mise à jour arrive en retard, l'affichage reste juste, car il repose sur l'horloge de l'ordinateur.
+
+## Séparer la logique et l'affichage
+
+La salle de sauvegarde est un petit jeu, et comme tous les jeux elle tourne en boucle : à chaque instant, on met à jour l'état du monde (où est le personnage, combien de temps reste-t-il), puis on le dessine. J'ai séparé ces deux étapes.
+
+- la logique tourne avec un minuteur régulier, environ soixante fois par seconde, et continue même quand l'onglet est caché : une séance qui se termine en arrière-plan est bien comptée ;
+- le dessin utilise requestAnimationFrame, une fonction du navigateur qui affiche une image juste avant chaque rafraîchissement de l'écran. Elle se met automatiquement en pause quand la page n'est pas visible, ce qui économise la batterie.
+
+## Le temps écoulé entre deux images
+
+Pour que le personnage marche à la même vitesse sur un ordinateur rapide et sur un ordinateur lent, je ne le déplace pas d'une distance fixe à chaque image. Je mesure le temps écoulé depuis la mise à jour précédente et je multiplie la vitesse par ce temps. C'est la notion de delta time, utilisée dans tous les moteurs de jeu.
+
+## Ce qu'il faut retenir
+
+- pour mesurer le temps, on compare des heures plutôt que de compter des tics ;
+- la logique et l'affichage d'un jeu gagnent à être séparés ;
+- requestAnimationFrame dessine au rythme de l'écran ;
+- multiplier la vitesse par le temps écoulé rend le mouvement indépendant de la machine.
+`
+    },
 };

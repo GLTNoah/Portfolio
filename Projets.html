@@ -19,6 +19,10 @@
     <input type="radio" name="projet" id="projet-1" autocomplete="off" style="display: none;">
     <input type="radio" name="projet" id="projet-2" autocomplete="off" style="display: none;">
     <input type="radio" name="projet" id="projet-3" autocomplete="off" style="display: none;">
+    <input type="radio" name="projet" id="projet-4" autocomplete="off" style="display: none;">
+    <input type="radio" name="projet" id="projet-5" autocomplete="off" style="display: none;">
+    <input type="radio" name="projet" id="projet-6" autocomplete="off" style="display: none;">
+    <input type="radio" name="projet" id="projet-7" autocomplete="off" style="display: none;">
 
     <div class="calque-cathodique" style="visibility: visible; opacity: 0.3; animation: green-flicker 0.1s infinite;"></div>
     <video class="fond-video" src="./vidéo/resident-evil.1920x1080.mp4" autoplay muted loop playsinline></video>
@@ -43,10 +47,10 @@
                 <label for="projet-2" class="carte-projet" tabindex="0">
                     <div class="carte-header">
                         <span>FICHIER_02</span>
-                        <span>[ ARCHIVÉ ]</span>
+                        <span>[ EN COURS ]</span>
                     </div>
-                    <div class="carte-titre">POMODORO</div>
-                    <div class="carte-tech">[ Python | CSS | JS ]</div>
+                    <div class="carte-titre">POMODORO : SALLE DE SAUVEGARDE</div>
+                    <div class="carte-tech">[ JS | CANVAS | CSS ]</div>
                 </label>
 
                 <label for="projet-3" class="carte-projet" tabindex="0">
@@ -56,6 +60,42 @@
                     </div>
                     <div class="carte-titre">APPRENTISSAGE SVG</div>
                     <div class="carte-tech">[ SVG | CSS | JS ]</div>
+                </label>
+
+                <label for="projet-4" class="carte-projet" tabindex="0">
+                    <div class="carte-header">
+                        <span>FICHE_01</span>
+                        <span>[ TECHNIQUE ]</span>
+                    </div>
+                    <div class="carte-titre">VARIABLES CSS & THÈMES</div>
+                    <div class="carte-tech">[ CSS ]</div>
+                </label>
+
+                <label for="projet-5" class="carte-projet" tabindex="0">
+                    <div class="carte-header">
+                        <span>FICHE_02</span>
+                        <span>[ TECHNIQUE ]</span>
+                    </div>
+                    <div class="carte-titre">PIXEL ART & CANVAS</div>
+                    <div class="carte-tech">[ CANVAS | JS ]</div>
+                </label>
+
+                <label for="projet-6" class="carte-projet" tabindex="0">
+                    <div class="carte-header">
+                        <span>FICHE_03</span>
+                        <span>[ TECHNIQUE ]</span>
+                    </div>
+                    <div class="carte-titre">RECHERCHE DE CHEMIN A*</div>
+                    <div class="carte-tech">[ JS | ALGORITHMIQUE ]</div>
+                </label>
+
+                <label for="projet-7" class="carte-projet" tabindex="0">
+                    <div class="carte-header">
+                        <span>FICHE_04</span>
+                        <span>[ TECHNIQUE ]</span>
+                    </div>
+                    <div class="carte-titre">BOUCLE DE JEU & TEMPS</div>
+                    <div class="carte-tech">[ JS ]</div>
                 </label>
             </div>
 
@@ -79,12 +119,12 @@
                     </div>
 
                     <div class="Detail-Contenu" id="detail-2">
-                        <div class="detail-titre">POMODORO</div>
-                        <div class="carte-tech" style="margin-bottom: 20px;">TECHNOLOGIES DÉTECTÉES : Python | CSS | JS</div>
-                        <img class="detail-image" src="./Image/Pomodoro.png" alt="Aperçu du projet" decoding="async">
+                        <div class="detail-titre">POMODORO : SALLE DE SAUVEGARDE</div>
+                        <div class="carte-tech" style="margin-bottom: 20px;">TECHNOLOGIES DÉTECTÉES : JS | CANVAS | CSS</div>
+                        <img class="detail-image" src="./Image/PreviewSalle.png" alt="Aperçu de la salle de sauvegarde" decoding="async">
                         <div class="detail-section">
                             <h3>RAPPORT DE MISSION</h3>
-                            <p>Application de type Pomodoro pour la gestion du temps et l'augmentation de la productivité. Implémentation d'une interface utilisateur intuitive avec des fonctionnalités de suivi des tâches et de gestion des sessions de travail.</p>
+                            <p>Un minuteur Pomodoro transformé en salle de sauvegarde jouable en pixel art. On clique un objet, le personnage s'y rend et l'activité lance le chronomètre : rédiger, coder, réviser ou se soigner. Chaque séance terminée rapporte un ruban d'encre.</p>
                         </div>
                         <a href="Projets/Article.html?id=pomodoro" class="detail-link">Extraire les données</a>
                     </div>
@@ -98,6 +138,46 @@
                             <p>Exploration et maîtrise des capacités de l'élément SVG pour créer des graphismes vectoriels interactifs. Implémentation de animations et d'effets visuels dans un contexte pédagogique.</p>
                         </div>
                         <a href="Projets/Article.html?id=svg" class="detail-link">Extraire les données</a>
+                    </div>
+
+                    <div class="Detail-Contenu" id="detail-4">
+                        <div class="detail-titre">VARIABLES CSS & THÈMES</div>
+                        <div class="carte-tech" style="margin-bottom: 20px;">FICHE TECHNIQUE : CSS</div>
+                        <div class="detail-section">
+                            <h3>RÉSUMÉ</h3>
+                            <p>Comment une poignée de variables CSS permet de changer la couleur de tout le site en un seul geste, selon le lieu choisi sur la carte.</p>
+                        </div>
+                        <a href="Projets/Article.html?id=theme" class="detail-link">Lire la fiche</a>
+                    </div>
+
+                    <div class="Detail-Contenu" id="detail-5">
+                        <div class="detail-titre">PIXEL ART & CANVAS</div>
+                        <div class="carte-tech" style="margin-bottom: 20px;">FICHE TECHNIQUE : CANVAS | JS</div>
+                        <div class="detail-section">
+                            <h3>RÉSUMÉ</h3>
+                            <p>Dessiner une pièce en fausse 3D pixel par pixel : l'élément canvas, la projection isométrique et les sprites en grilles de couleurs.</p>
+                        </div>
+                        <a href="Projets/Article.html?id=pixelart" class="detail-link">Lire la fiche</a>
+                    </div>
+
+                    <div class="Detail-Contenu" id="detail-6">
+                        <div class="detail-titre">RECHERCHE DE CHEMIN A*</div>
+                        <div class="carte-tech" style="margin-bottom: 20px;">FICHE TECHNIQUE : JS | ALGORITHMIQUE</div>
+                        <div class="detail-section">
+                            <h3>RÉSUMÉ</h3>
+                            <p>L'algorithme qui permet au personnage de contourner les meubles au lieu de les traverser, expliqué simplement.</p>
+                        </div>
+                        <a href="Projets/Article.html?id=chemin" class="detail-link">Lire la fiche</a>
+                    </div>
+
+                    <div class="Detail-Contenu" id="detail-7">
+                        <div class="detail-titre">BOUCLE DE JEU & TEMPS</div>
+                        <div class="carte-tech" style="margin-bottom: 20px;">FICHE TECHNIQUE : JS</div>
+                        <div class="detail-section">
+                            <h3>RÉSUMÉ</h3>
+                            <p>Pourquoi un chronomètre dérive, comment le rendre exact, et comment un jeu sépare sa logique de son affichage.</p>
+                        </div>
+                        <a href="Projets/Article.html?id=boucle" class="detail-link">Lire la fiche</a>
                     </div>
 
                 </div>

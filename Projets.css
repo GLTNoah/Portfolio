@@ -98,7 +98,11 @@
 .carte-projet:is(:hover, :focus-visible),
 body:has(#projet-1:checked) label[for="projet-1"],
 body:has(#projet-2:checked) label[for="projet-2"],
-body:has(#projet-3:checked) label[for="projet-3"] {
+body:has(#projet-3:checked) label[for="projet-3"],
+body:has(#projet-4:checked) label[for="projet-4"],
+body:has(#projet-5:checked) label[for="projet-5"],
+body:has(#projet-6:checked) label[for="projet-6"],
+body:has(#projet-7:checked) label[for="projet-7"] {
     background: linear-gradient(
         90deg,
         rgba(var(--rgb-primary), 0.2) 0%,
@@ -109,7 +113,11 @@ body:has(#projet-3:checked) label[for="projet-3"] {
 
 body:has(#projet-1:checked) label[for="projet-1"] .carte-titre::before,
 body:has(#projet-2:checked) label[for="projet-2"] .carte-titre::before,
-body:has(#projet-3:checked) label[for="projet-3"] .carte-titre::before {
+body:has(#projet-3:checked) label[for="projet-3"] .carte-titre::before,
+body:has(#projet-4:checked) label[for="projet-4"] .carte-titre::before,
+body:has(#projet-5:checked) label[for="projet-5"] .carte-titre::before,
+body:has(#projet-6:checked) label[for="projet-6"] .carte-titre::before,
+body:has(#projet-7:checked) label[for="projet-7"] .carte-titre::before {
     content: "\25B8  ";
     color: var(--color-primary);
 }
@@ -176,7 +184,11 @@ body:has(#projet-3:checked) label[for="projet-3"] .carte-titre::before {
 
 body:has(#projet-1:checked) #detail-1,
 body:has(#projet-2:checked) #detail-2,
-body:has(#projet-3:checked) #detail-3 {
+body:has(#projet-3:checked) #detail-3,
+body:has(#projet-4:checked) #detail-4,
+body:has(#projet-5:checked) #detail-5,
+body:has(#projet-6:checked) #detail-6,
+body:has(#projet-7:checked) #detail-7 {
     display: block;
     animation: glitch-apparition 0.5s ease forwards;
 }
