@@ -207,7 +207,7 @@ c = ambianceCanvas.getContext('2d');
 // Teinte froide générale
 c.fillStyle = 'rgba(10, 30, 28, 0.28)'; c.fillRect(0, 0, 320, 192);
 // Lumière chaude de l'ampoule
-const lampe = c.createRadialGradient(ax, ay + 18, 2, ax, ay + 18, 46);
+const lampe = c.createRadialGradient(ax, ay + 22, 2, ax, ay + 22, 32);
 lampe.addColorStop(0, 'rgba(255, 210, 140, 0.13)');
 lampe.addColorStop(0.5, 'rgba(255, 180, 110, 0.04)');
 lampe.addColorStop(1, 'rgba(0, 0, 0, 0)');
@@ -218,11 +218,11 @@ const ecran = c.createRadialGradient(ex, ey, 1, ex, ey, 20);
 ecran.addColorStop(0, 'rgba(60, 220, 106, 0.14)'); ecran.addColorStop(1, 'rgba(60, 220, 106, 0)');
 c.fillStyle = ecran; c.fillRect(0, 0, 320, 192);
 // Vignettage lourd
-const ombre = c.createRadialGradient(ax, ay + 22, 18, ax, ay + 22, 150);
+const ombre = c.createRadialGradient(ax, ay + 24, 14, ax, ay + 24, 150);
 ombre.addColorStop(0, 'rgba(0, 0, 0, 0)');
-ombre.addColorStop(0.35, 'rgba(0, 0, 0, 0.35)');
-ombre.addColorStop(0.7, 'rgba(0, 0, 0, 0.72)');
-ombre.addColorStop(1, 'rgba(0, 0, 0, 0.92)');
+ombre.addColorStop(0.2, 'rgba(0, 0, 0, 0.4)');
+ombre.addColorStop(0.55, 'rgba(0, 0, 0, 0.62)');
+ombre.addColorStop(1, 'rgba(0, 0, 0, 0.88)');
 c.fillStyle = ombre; c.fillRect(0, 0, 320, 192);
 // Poussière dans la lumière
 for (let k = 0; k < 40; k++) px(ax - 30 + alea() * 60, ay + 4 + alea() * 50, 'rgba(255, 230, 190, 0.12)');
@@ -639,13 +639,13 @@ function teinteTheme() {
     ctxJeu.closePath();
     ctxJeu.clip();
     ctxJeu.globalCompositeOperation = 'source-atop';
-    const voile = ctxJeu.createRadialGradient(ax, ay + 22, 10, ax, ay + 22, 130);
+    const voile = ctxJeu.createRadialGradient(ax, ay + 22, 6, ax, ay + 22, 60);
     voile.addColorStop(0, `rgba(${rgb}, 0.13)`);
     voile.addColorStop(0.6, `rgba(${rgb}, 0.04)`);
     voile.addColorStop(1, `rgba(${rgb}, 0)`);
     ctxJeu.fillStyle = voile;
     ctxJeu.fillRect(0, 0, 320, 192);
-    const halo = ctxJeu.createRadialGradient(ax, ay + 18, 4, ax, ay + 18, 50);
+    const halo = ctxJeu.createRadialGradient(ax, ay + 22, 3, ax, ay + 22, 30);
     halo.addColorStop(0, `rgba(${rgb}, 0.07)`);
     halo.addColorStop(1, `rgba(${rgb}, 0)`);
     ctxJeu.fillStyle = halo;
