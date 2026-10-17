@@ -3,23 +3,23 @@
 ========================================= */
 
 :root {
-    --color-pause: #5ac8d8;
-    --rgb-pause: 90, 200, 216;
+    --color-pause: #e0609e;
+    --rgb-pause: 224, 96, 158;
 }
 
 body[data-theme="bleu"] {
-    --color-pause: #e0a24a;
-    --rgb-pause: 224, 162, 74;
+    --color-pause: #f08a3c;
+    --rgb-pause: 240, 138, 60;
 }
 
 body[data-theme="jaune"] {
-    --color-pause: #7aa6e6;
-    --rgb-pause: 122, 166, 230;
+    --color-pause: #a07ae8;
+    --rgb-pause: 160, 122, 232;
 }
 
 body[data-theme="rouge"] {
-    --color-pause: #c9a46a;
-    --rgb-pause: 201, 164, 106;
+    --color-pause: #44d0d8;
+    --rgb-pause: 68, 208, 216;
 }
 
 /* =========================================
