@@ -146,14 +146,36 @@ boite(4, 30, 1, 5, 10, 7, ['#b8b098', '#8a8270', '#6a6252']);
 boite(4, 44, 1, 5, 5, 8, ['#4a5a3a', '#3a4a2a', '#2a3a1e']); boite(4, 52, 1, 5, 5, 6, ['#5a2420', '#4a1c1a', '#3a1412']);
 boite(4, 61, 25, 5, 6, 6, ['#6a5a3a', '#4a3e28', '#3a3020']);
 
-// Coffre à objets
-ombreSol(118, 3, 28, 14);
-boite(118, 3, 0, 28, 14, 14, ['#5e3e22', '#46301a', '#2e1f10']);
-[122, 130, 138].forEach((x) => poly([[x, 17, 0], [x + 2, 17, 0], [x + 2, 17, 14], [x, 17, 14]], '#48484c'));
-poly([[122, 3, 14], [124, 3, 14], [124, 17, 14], [122, 17, 14]], '#5a5a60');
-poly([[130, 3, 14], [132, 3, 14], [132, 17, 14], [130, 17, 14]], '#5a5a60');
-poly([[138, 3, 14], [140, 3, 14], [140, 17, 14], [138, 17, 14]], '#5a5a60');
-poly([[130, 17, 7], [132, 17, 7], [132, 17, 10], [130, 17, 10]], '#c8a040');
+// Coffre à objets (« item box » de RE) : caisse en bois cerclée de métal,
+// couvercle bombé, planches, coins renforcés, sangles et serrure
+ombreSol(117, 2, 30, 16);
+boite(118, 3, 0, 28, 14, 11, ['#5a3a1e', '#4a2e16', '#33200e']);
+// Planches et veinures des faces
+[3, 6, 9].forEach((z) => {
+    poly([[118, 17, z], [146, 17, z], [146, 17, z + 0.6], [118, 17, z + 0.6]], '#2a1a0c');
+    poly([[146, 3, z], [146, 17, z], [146, 17, z + 0.6], [146, 3, z + 0.6]], '#1e1208');
+});
+[126, 134].forEach((x) => poly([[x, 17, 0], [x + 0.6, 17, 0], [x + 0.6, 17, 11], [x, 17, 11]], '#2a1a0c'));
+// Couvercle légèrement débordant, avec un joint sombre
+boite(117, 2, 11, 30, 16, 5, ['#6e4826', '#553818', '#3a2610']);
+poly([[117, 18, 11], [147, 18, 11], [147, 18, 11.8], [117, 18, 11.8]], '#120a04');
+[121, 128, 135, 142].forEach((x) => poly([[x, 2, 16], [x + 0.6, 2, 16], [x + 0.6, 18, 16], [x, 18, 16]], '#4a3018'));
+// Coins renforcés
+const coin = '#5c5c62', coinSombre = '#3a3a40';
+[[117, 120], [144, 147]].forEach(([x0, x1]) => poly([[x0, 18, 0], [x1, 18, 0], [x1, 18, 16], [x0, 18, 16]], coin));
+[[2, 5], [15, 18]].forEach(([y0, y1]) => poly([[147, y0, 0], [147, y1, 0], [147, y1, 16], [147, y0, 16]], coinSombre));
+// Sangles métalliques sur le dessus et la face
+[[123, 125], [139, 141]].forEach(([x0, x1]) => {
+    poly([[x0, 2, 16], [x1, 2, 16], [x1, 18, 16], [x0, 18, 16]], '#6a6a70');
+    poly([[x0, 18, 0], [x1, 18, 0], [x1, 18, 16], [x0, 18, 16]], '#4c4c52');
+});
+// Rivets
+[[118.5, 14], [145.5, 14], [118.5, 2], [145.5, 2], [124, 13], [140, 13]].forEach(([x, z]) => { const [rx, ry] = P(x, 18, z); px(rx, ry, '#a8a8b0'); });
+// Serrure dorée et trou de clé
+poly([[129, 18, 8], [135, 18, 8], [135, 18, 14], [129, 18, 14]], '#070504');
+poly([[129.6, 18, 8.6], [134.4, 18, 8.6], [134.4, 18, 13.4], [129.6, 18, 13.4]], '#c09030');
+poly([[129.6, 18, 13], [134.4, 18, 13], [134.4, 18, 13.4], [129.6, 18, 13.4]], '#f0d070');
+poly([[131.6, 18, 9.6], [132.4, 18, 9.6], [132.4, 18, 11.6], [131.6, 18, 11.6]], '#1a1004');
 
 // Table + machine à écrire
 ombreSol(62, 52, 26, 18);
@@ -176,12 +198,23 @@ boite(70, 76, 0, 10, 6, 6, ['#4a3020', '#33210f', '#24170b']);
 
 // Herbes vertes
 function herbe(x, y) {
-    ombreSol(x, y, 8, 8);
-    boite(x, y, 0, 8, 8, 6, ['#6a4628', '#4a2e18', '#33200f']);
-    sol(x + 1, y + 1, 6, 6, '#1e1208');
-    const [sx, sy] = P(x + 4, y + 4, 8);
-    const f = [[0, -5], [-1, -4], [1, -4], [-3, -3], [3, -3], [-2, -2], [2, -2], [-4, -1], [4, -1], [-1, -1], [1, -1], [0, -2], [-3, 0], [3, 0], [0, 0], [-1, -3], [1, -3], [-2, -4], [2, -4]];
-    f.forEach(([dx, dy], i) => px(sx + dx, sy + dy, i % 4 === 0 ? '#2a5a22' : i % 3 ? '#4a8a36' : '#6ab04a'));
+    // Pot en terre cuite avec rebord, comme dans les salles de sauvegarde
+    ombreSol(x - 1, y - 1, 10, 10);
+    boite(x, y, 0, 8, 8, 6, ['#8a4a2a', '#6e3820', '#4e2614']);
+    boite(x - 0.5, y - 0.5, 6, 9, 9, 1.5, ['#a05a34', '#7e4428', '#5a2e18']);
+    sol(x + 0.5, y + 0.5, 7, 7, '#1e1208');
+    poly([[x, y + 8, 2], [x + 8, y + 8, 2], [x + 8, y + 8, 2.6], [x, y + 8, 2.6]], '#5a2e18');
+    // Herbe verte : trois tiges et feuilles en éventail
+    const [sx, sy] = P(x + 4, y + 4, 7.5);
+    const sombre = '#24501c', moyen = '#3e7a2c', clair = '#68b048', reflet = '#9ad070';
+    const feuilles = [
+        [0, -1, sombre], [0, -2, sombre], [-1, -3, moyen], [1, -3, moyen], [0, -4, moyen],
+        [-2, -4, moyen], [2, -4, moyen], [-3, -5, clair], [3, -5, clair], [-2, -6, clair], [2, -6, clair],
+        [-1, -6, moyen], [1, -6, moyen], [0, -7, clair], [-1, -8, reflet], [1, -8, clair], [0, -6, sombre],
+        [-4, -3, moyen], [4, -3, moyen], [-5, -4, sombre], [5, -4, sombre], [-3, -2, sombre], [3, -2, sombre],
+        [-2, -2, moyen], [2, -2, moyen], [-1, -5, reflet], [1, -4, clair],
+    ];
+    feuilles.forEach(([dx, dy, col]) => px(sx + dx, sy + dy, col));
 }
 herbe(16, 84); herbe(16, 102);
 
@@ -524,25 +557,41 @@ function miseAJour(dt) {
 }
 
 /* ---------- RENDU ---------- */
-// Cycle de marche en 4 images : pas gauche, passage, pas droit, passage.
-// Les jambes (dernier tiers du sprite) sont séparées en deux : sur un pas elles
-// s'écartent et le pied qui avance se lève d'un pixel.
-function imageMarche(sprite, ecart, piedLeve) {
+// Cycle de marche en 6 images. Chaque jambe (moitié gauche / droite du bas du
+// sprite) avance ou recule indépendamment ; les pieds bougent deux fois plus que
+// les cuisses, le pied qui passe se lève, et le buste penche vers l'avant.
+// [décalage jambe avant, décalage jambe arrière, lève avant, lève arrière]
+const CYCLE = [
+    [-2, 2, 0, 0],   // contact : jambes écartées
+    [-1, 1, 0, 1],   // appui : le pied arrière décolle
+    [0, 0, 0, 1],    // passage : jambes réunies, corps haut
+    [1, -1, 0, 0],   // contact opposé : jambes croisées
+    [0, 0, 1, 0],    // passage : le pied avant décolle
+    [-1, 1, 0, 0],   // retour vers le contact
+];
+const REBOND = [0, 1, 1, 0, 1, 0];
+function imageMarche(sprite, [avant, arriere, leveAvant, leveArriere]) {
     const debut = Math.round(sprite.length * 0.66), milieu = Math.floor(sprite[0].length / 2) - 1;
-    const image = sprite.map((l, j) => (j < debut ? l.slice() : l.map(() => null)));
+    const largeur = sprite[0].length;
+    const image = sprite.map((l, j) => {
+        if (j >= debut) return l.map(() => null);
+        const ligne = l.map(() => null);
+        l.forEach((col, i) => { if (col && i - 1 >= 0) ligne[i - 1] = col; });   // buste penché
+        return ligne;
+    });
     for (let j = debut; j < sprite.length; j++) {
+        const facteur = j >= sprite.length - 6 ? 1 : 0.5;
         sprite[j].forEach((col, i) => {
             if (!col) return;
-            const jambe = i <= milieu ? -1 : 1;
-            const ni = i + ecart * jambe * (j >= sprite.length - 6 ? 2 : 1);
-            const nj = j - (jambe === piedLeve ? 1 : 0);
-            if (ni >= 0 && ni < image[nj].length && nj >= debut - 1) image[nj][ni] = col;
+            const estAvant = i <= milieu;
+            const ni = i + Math.round((estAvant ? avant : arriere) * facteur);
+            const nj = j - ((estAvant ? leveAvant : leveArriere) && j >= sprite.length - 3 ? 1 : 0);
+            if (ni >= 0 && ni < largeur && image[nj][ni] === null) image[nj][ni] = col;
         });
     }
     return image;
 }
-const MARCHES = Object.fromEntries(Object.entries(SPRITES).map(([nom, sp]) =>
-    [nom, [imageMarche(sp, 1, -1), imageMarche(sp, 0, 0), imageMarche(sp, 1, 1), imageMarche(sp, 0, 0)]]));
+const MARCHES = Object.fromEntries(Object.entries(SPRITES).map(([nom, sp]) => [nom, CYCLE.map((pose) => imageMarche(sp, pose))]));
 
 const themeActif = () => document.body.dataset.theme || 'vert';
 
@@ -563,9 +612,9 @@ function dessinerJillScene(t) {
     const nom = PERSO_PAR_THEME[themeActif()] || 'jill';
     let saut = 0, image = SPRITES[nom];
     if (jill.etat === 'marche') {
-        const n = Math.floor(t / 125) % 4;
+        const n = Math.floor(t / 95) % CYCLE.length;
         image = MARCHES[nom][n];
-        saut = n % 2;
+        saut = REBOND[n];
     } else if (jill.etat === 'action') saut = Math.floor(t / 420) % 2;
 
     const compagnon = COMPAGNON_PAR_THEME[themeActif()];
