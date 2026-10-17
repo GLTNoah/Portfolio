@@ -706,7 +706,7 @@
     }
 
     #barre-volume {
-        width: 70px;
+        width: 90px;
     }
 
     body:has(#Btn-Carte:checked) .Conteneur-Dialogue-Jill {

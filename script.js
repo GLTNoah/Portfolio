@@ -76,15 +76,15 @@ function appliquerThemeSauvegarde() {
         try {
             const donnees = JSON.parse(sauvegarde);
             document.body.dataset.theme = donnees.theme;
-            
+
             if (fondVideo && donnees.video) fondVideo.src = donnees.video;
             if (bgMusic && donnees.audio) bgMusic.src = donnees.audio;
             if (audioFond) audioFond.pause();
-            
+
             if (titreMusiqueActuelle) titreMusiqueActuelle.textContent = formaterTitreMusique(donnees.audio);
             if (nomContact) nomContact.textContent = donnees.contact;
             if (dialogueJill) dialogueJill.textContent = donnees.dialogue;
-            
+
             document.addEventListener('click', () => {
                 const etatPause = localStorage.getItem('music-pause-survie');
                 if (bgMusic && bgMusic.paused && etatPause !== 'true' && (!themeAudioPreview || themeAudioPreview.paused)) {
@@ -97,24 +97,35 @@ function appliquerThemeSauvegarde() {
     }
 }
 
+// Le curseur suit une courbe au carré : l'oreille perçoit le volume de façon
+// logarithmique, la moitié de la barre donne donc un niveau modéré
+const VOLUME_MAX = 0.5;
+const volumeMusique = (curseur) => curseur * curseur * VOLUME_MAX;
+
+function appliquerVolume(curseur) {
+    const v = volumeMusique(curseur);
+    if (myaudio) myaudio.volume = Math.min(1, v * 0.6);
+    if (pomodoroSound) pomodoroSound.volume = Math.min(1, v * 1.2);
+    if (audioFond) audioFond.volume = v;
+    if (bgMusic) bgMusic.volume = v;
+    if (themeAudioPreview) themeAudioPreview.volume = v;
+}
+
 function appliquerVolumeInitial() {
     if (!barreVolume) return;
 
-    const volumeSauvegarde = localStorage.getItem('volume-survie');
+    const volumeSauvegarde = localStorage.getItem('volume-curseur');
     if (volumeSauvegarde !== null) {
         barreVolume.value = volumeSauvegarde;
     }
-    
+
     const volumeDemarrage = parseFloat(barreVolume.value);
-    if (myaudio) myaudio.volume = Math.min(1, volumeDemarrage * 0.25);
-    if (pomodoroSound) pomodoroSound.volume = Math.min(1, volumeDemarrage * 0.4);
-    if (audioFond) audioFond.volume = volumeDemarrage;
-    if (bgMusic) bgMusic.volume = volumeDemarrage;
-    if (themeAudioPreview) themeAudioPreview.volume = volumeDemarrage;
-    
+    appliquerVolume(volumeDemarrage);
+    barreVolume.style.setProperty('--rempli', volumeDemarrage * 100 + '%');
+
     const etatPause = localStorage.getItem('music-pause-survie');
     const audioActif = getAudioPrincipalActif();
-    
+
     if (etatPause === 'true') {
         if (audioActif) audioActif.pause();
         if (iconeSon) {
@@ -134,7 +145,7 @@ function appliquerVolumeInitial() {
 
 document.addEventListener('DOMContentLoaded', () => {
     appliquerThemeSauvegarde();
-    appliquerVolumeInitial(); 
+    appliquerVolumeInitial();
 });
 
 /* =========================================
@@ -173,14 +184,9 @@ emplacementsInventaire.forEach(slot => {
 if (barreVolume) {
     barreVolume.addEventListener('input', (e) => {
         const volumeActuel = parseFloat(e.target.value);
-        
-        if (myaudio) myaudio.volume = Math.min(1, volumeActuel * 0.25);
-        if (pomodoroSound) pomodoroSound.volume = Math.min(1, volumeActuel * 0.4);
-        if (audioFond) audioFond.volume = volumeActuel;
-        if (bgMusic) bgMusic.volume = volumeActuel;
-        if (themeAudioPreview) themeAudioPreview.volume = volumeActuel;
-
-        localStorage.setItem('volume-survie', volumeActuel);
+        appliquerVolume(volumeActuel);
+        barreVolume.style.setProperty('--rempli', volumeActuel * 100 + '%');
+        localStorage.setItem('volume-curseur', volumeActuel);
 
         if (iconeSon) {
             if (volumeActuel === 0) {
@@ -195,6 +201,16 @@ if (barreVolume) {
             }
         }
     });
+}
+
+const widgetAudio = document.querySelector('.Widget-Audio-Global');
+if (widgetAudio && barreVolume) {
+    widgetAudio.addEventListener('wheel', (e) => {
+        e.preventDefault();
+        const pas = e.deltaY < 0 ? 0.05 : -0.05;
+        barreVolume.value = Math.min(1, Math.max(0, parseFloat(barreVolume.value) + pas)).toFixed(2);
+        barreVolume.dispatchEvent(new Event('input'));
+    }, { passive: false });
 }
 
 if (btnSon) {
@@ -239,7 +255,7 @@ if (customPlayBtn && themeAudioPreview) {
             if (audioActif && !audioActif.paused) {
                 audioActif.pause();
             }
-            themeAudioPreview.volume = barreVolume ? parseFloat(barreVolume.value) : 0.05;
+            themeAudioPreview.volume = volumeMusique(barreVolume ? parseFloat(barreVolume.value) : 0.3);
             themeAudioPreview.play().catch(() => {});
             customPlayBtn.innerHTML = TEXTE_PAUSE;
         } else {
@@ -304,7 +320,7 @@ function selectionnerZoneCarte(zone) {
 
     document.getElementById('theme-titre').textContent = titre;
     document.getElementById('theme-desc').textContent = desc.replace(/\\n/g, '\n');
-    
+
     const themeImage = document.getElementById('theme-image');
     themeImage.src = img;
     themeImage.style.display = 'block';
@@ -333,7 +349,7 @@ function selectionnerZoneCarte(zone) {
     themeAudioPreview.src = audioSrc;
     document.querySelector('.theme-audio-lecteur').style.display = 'block';
     btnActiverTheme.style.display = 'flex';
-    
+
     customPlayBtn.innerHTML = TEXTE_LECTURE;
     if (audioProgressBar) audioProgressBar.style.width = '0%';
     if (audioTime) audioTime.textContent = "00:00 / 00:00";
@@ -357,24 +373,24 @@ if (btnActiverTheme) {
             if (audioFond) audioFond.pause();
             if (themeAudioPreview) themeAudioPreview.pause();
             if (customPlayBtn) customPlayBtn.innerHTML = TEXTE_LECTURE;
-            
+
             if (fondVideo) fondVideo.src = zoneSelectionnee.video;
-            
+
             if (bgMusic) {
                 bgMusic.src = zoneSelectionnee.audio;
-                bgMusic.volume = barreVolume ? parseFloat(barreVolume.value) : 0.05;
-                
+                bgMusic.volume = volumeMusique(barreVolume ? parseFloat(barreVolume.value) : 0.3);
+
                 const etatPause = localStorage.getItem('music-pause-survie');
                 if (etatPause !== 'true') {
                     bgMusic.play().catch(() => {});
                 }
             }
-            
+
             if (titreMusiqueActuelle) titreMusiqueActuelle.textContent = formaterTitreMusique(zoneSelectionnee.audio);
-            
+
             personnageActif = zoneSelectionnee.contact;
-            const dialogueSecours = dialoguesPersonnages[personnageActif] && dialoguesPersonnages[personnageActif][zoneSelectionnee.id] 
-                                  ? dialoguesPersonnages[personnageActif][zoneSelectionnee.id] 
+            const dialogueSecours = dialoguesPersonnages[personnageActif] && dialoguesPersonnages[personnageActif][zoneSelectionnee.id]
+                                  ? dialoguesPersonnages[personnageActif][zoneSelectionnee.id]
                                   : "Il faut que je continue l'exploration...";
 
             themeActuel = {
@@ -599,7 +615,7 @@ if (btnPomodoroStart) {
 
             if (tempsRestant <= 0) {
                 jouerSonCourt(pomodoroSound);
-                
+
                 if (!enPause) {
                     enPause = true;
                     tempsRestant = tempsPause * 60;

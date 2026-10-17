@@ -578,8 +578,8 @@ function contexteAudio() {
 }
 function volumeEffets() {
     const barre = document.getElementById('barre-volume');
-    const v = barre ? parseFloat(barre.value) : 0.05;
-    return Math.min(1, v * 6) * 0.35;
+    const v = barre ? parseFloat(barre.value) : 0.3;
+    return v * v * 0.6;
 }
 // Court bruit filtré : base des pas, des touches et des cliquetis
 function bruit(duree, frequence, q, force, type = 'bandpass') {

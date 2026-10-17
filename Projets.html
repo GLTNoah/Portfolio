@@ -221,10 +221,11 @@
             /* =========================================
                INITIALISATION THÈME & AUDIO SAUVEGARDÉS
             ========================================= */
-            const volumeSauvegarde = parseFloat(localStorage.getItem('volume-survie') ?? '0.05');
+            const curseur = parseFloat(localStorage.getItem('volume-curseur') ?? '0.3');
+            const volumeSauvegarde = curseur * curseur * 0.5;
             const etatPause = localStorage.getItem('music-pause-survie');
 
-            if (sonUi) sonUi.volume = Math.min(1, volumeSauvegarde * 0.25);
+            if (sonUi) sonUi.volume = Math.min(1, volumeSauvegarde * 0.6);
             if (musiqueArchive) musiqueArchive.volume = volumeSauvegarde;
 
             const donneesSauvegardees = localStorage.getItem('donnees-survie');
