@@ -212,7 +212,8 @@ body:has(input[name="projet"]:checked) .Message-Attente {
     display: block;
     width: 100%;
     height: 220px;
-    object-fit: cover;
+    object-fit: contain;
+    background: #000;
     margin: 16px 0;
     border: 1px solid rgba(var(--rgb-primary), 0.3);
     filter: saturate(0.75) brightness(0.9);
