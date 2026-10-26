@@ -751,11 +751,36 @@
         position: absolute;
         top: 50%;
         left: 50%;
+<<<<<<< Updated upstream
         width: 4px;
         height: 4px;
         border-radius: 50%;
         background: rgba(var(--rgb-white), 0.08);
         transform: translate(-50%, -50%);
+=======
+        width: 142%;
+        height: 2px;
+        background: rgba(var(--rgb-white), 0.15);
+        transform-origin: center;
+    }
+
+    .Emplacement-Inventaire.vide::before {
+        transform: translate(-50%, -50%) rotate(45deg);
+    }
+
+    .Emplacement-Inventaire.vide::after {
+        transform: translate(-50%, -50%) rotate(-45deg);
+    }
+
+    #emplacement-veille:hover,
+    #emplacement-cv:hover,
+    #emplacement-projet:hover,
+    #emplacement-ordi:hover {
+        border-color: var(--color-primary);
+        background: rgba(var(--rgb-primary), 0.1);
+        box-shadow: inset 0 0 15px rgba(var(--rgb-primary), 0.2);
+        transform: scale(1.05);
+>>>>>>> Stashed changes
     }
 
     /* =========================================
@@ -765,8 +790,7 @@
     .Description-Projet,
     .Description-CV,
     .Description-Veille,
-    .Description-Ordi,
-    .Description-Jeu {
+    .Description-Ordi {
         display: none;
         position: absolute;
         bottom: 32px;
@@ -807,8 +831,7 @@
     .Description-Projet hr,
     .Description-CV hr,
     .Description-Veille hr,
-    .Description-Ordi hr,
-    .Description-Jeu hr {
+    .Description-Ordi hr {
         border: 0;
         height: 1px;
         max-width: 340px;
@@ -824,6 +847,7 @@
     .Description-CV p,
     .Description-Projet p,
     .Description-Veille p,
+<<<<<<< Updated upstream
     .Description-Ordi p,
     .Description-Jeu p {
         max-width: 340px;
@@ -831,13 +855,16 @@
         line-height: 1.65;
         letter-spacing: 0.5px;
         color: rgba(var(--rgb-white), 0.72);
+=======
+    .Description-Ordi p {
+        max-width: 320px;
+>>>>>>> Stashed changes
     }
 
     .Haut-Inventaire:has(#emplacement-projet:hover) .Description-Projet,
     .Haut-Inventaire:has(#emplacement-cv:hover) .Description-CV,
     .Haut-Inventaire:has(#emplacement-veille:hover) .Description-Veille,
-    .Haut-Inventaire:has(#emplacement-ordi:hover) .Description-Ordi,
-    .Haut-Inventaire:has(#emplacement-jeu:hover) .Description-Jeu {
+    .Haut-Inventaire:has(#emplacement-ordi:hover) .Description-Ordi {
         display: block;
     }
 
@@ -925,6 +952,7 @@
         #emplacement-jeu + .Icone-Examiner { grid-area: 3 / 1 / 4 / 2; }
         #emplacement-ordi + .Icone-Examiner { grid-area: 3 / 2 / 4 / 3; }
 
+<<<<<<< Updated upstream
         .Icone-Examiner {
             top: auto;
             bottom: 0;
@@ -932,6 +960,12 @@
             right: 0;
             width: auto;
         }
+=======
+    #emplacement-veille:focus + .Icone-Examiner,
+    #emplacement-veille + .Icone-Examiner:hover {
+        display: flex;
+        left: 62%;
+>>>>>>> Stashed changes
     }
 
     /* =========================================
@@ -964,9 +998,13 @@
 
     #radio-projet:checked ~ .animation-allumage-ecran,
     #radio-cv:checked ~ .animation-allumage-ecran,
+<<<<<<< Updated upstream
     #radio-veille:checked ~ .animation-allumage-ecran,
     #radio-ordi:checked ~ .animation-allumage-ecran,
     #radio-jeu:checked ~ .animation-allumage-ecran {
+=======
+    #radio-veille:checked ~ .animation-allumage-ecran {
+>>>>>>> Stashed changes
         display: block;
         animation: fade-ecran-allumage 0.3s ease-out forwards;
     }
@@ -1002,9 +1040,13 @@
 
     #radio-projet:checked ~ .calque-cathodique,
     #radio-cv:checked ~ .calque-cathodique,
+<<<<<<< Updated upstream
     #radio-veille:checked ~ .calque-cathodique,
     #radio-ordi:checked ~ .calque-cathodique,
     #radio-jeu:checked ~ .calque-cathodique {
+=======
+    #radio-veille:checked ~ .calque-cathodique {
+>>>>>>> Stashed changes
         visibility: visible;
         opacity: 0.3;
     }
@@ -1061,9 +1103,13 @@
 
     #radio-projet:checked ~ .bouton-fermer-ecran,
     #radio-cv:checked ~ .bouton-fermer-ecran,
+<<<<<<< Updated upstream
     #radio-veille:checked ~ .bouton-fermer-ecran,
     #radio-ordi:checked ~ .bouton-fermer-ecran,
     #radio-jeu:checked ~ .bouton-fermer-ecran {
+=======
+    #radio-veille:checked ~ .bouton-fermer-ecran {
+>>>>>>> Stashed changes
         opacity: 1;
         visibility: visible;
         pointer-events: auto;
@@ -2332,6 +2378,7 @@ body::before,
 .Haut-Inventaire:has(#emplacement-cv + .Icone-Examiner:hover) .Description-CV,
 .Haut-Inventaire:not(:has(.Emplacement-Inventaire:not(.vide):hover:not(:focus))):has(#emplacement-veille:focus) .Description-Veille,
 .Haut-Inventaire:has(#emplacement-veille + .Icone-Examiner:hover) .Description-Veille,
+<<<<<<< Updated upstream
 .Haut-Inventaire:not(:has(.Emplacement-Inventaire:not(.vide):hover:not(:focus))):has(#emplacement-ordi:focus) .Description-Ordi,
 .Haut-Inventaire:not(:has(.Emplacement-Inventaire:not(.vide):hover:not(:focus))):has(#emplacement-jeu:focus) .Description-Jeu,
 .Haut-Inventaire:has(#emplacement-jeu + .Icone-Examiner:hover) .Description-Jeu,
@@ -2339,6 +2386,27 @@ body::before,
     display: block;
 }
 
+=======
+.Haut-Inventaire:has(#emplacement-ordi:focus) .Description-Ordi {
+    display: block;
+}
+
+#emplacement-projet + .Icone-Examiner:focus-within {
+    display: flex;
+    left: -8%;
+}
+
+#emplacement-cv + .Icone-Examiner:focus-within {
+    display: flex;
+    left: 27%;
+}
+
+#emplacement-veille + .Icone-Examiner:focus-within {
+    display: flex;
+    left: 62%;
+}
+
+>>>>>>> Stashed changes
 /* =========================================
    COMPATIBILITÉ CARTE & VOLUME MULTI-NAVIGATEURS
 ========================================= */
